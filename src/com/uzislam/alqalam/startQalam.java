@@ -1,4 +1,4 @@
-package com.android.alqalam;
+package com.uzislam.alqalam;
 
 import android.app.Activity;
 import android.os.Bundle;
