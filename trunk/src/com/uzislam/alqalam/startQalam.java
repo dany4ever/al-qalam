@@ -1,5 +1,6 @@
 package com.uzislam.alqalam;
 
+import com.uzislam.alqalam.R;
 import android.app.Activity;
 import android.os.Bundle;
 
