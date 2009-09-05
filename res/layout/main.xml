@@ -3,10 +3,41 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+    android:id="@+id/mainview"
+    android:gravity="center_vertical|center_horizontal"  >
+	<ImageView android:id="@+id/splashimage"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="fill_parent" 
+    	android:src="@drawable/frontpage"  />
+    
+    <ImageView android:id="@+id/imgQuran"
+    	android:layout_width="200px" 
+    	android:layout_height="50px" 
+    	android:src="@drawable/quran"
+    	android:layout_margin="2px"     />
+    
+    <ImageView android:id="@+id/imgBukhari"
+    	android:layout_width="200px" 
+    	android:layout_height="50px" 
+    	android:src="@drawable/bukhari"
+    	android:layout_margin="2px"     />
+    	
+    <ImageView android:id="@+id/imgMuslim"
+    	android:layout_width="200px" 
+    	android:layout_height="50px" 
+    	android:src="@drawable/muslim" 
+    	android:layout_margin="2px"   />	   
+
+	<ImageView android:id="@+id/imgTirmidi"
+    	android:layout_width="200px" 
+    	android:layout_height="50px" 
+    	android:src="@drawable/tirmidi"
+    	android:layout_margin="2px"    />
+    	
+	<ImageView android:id="@+id/imgAbudovud"
+    	android:layout_width="200px" 
+    	android:layout_height="50px" 
+    	android:src="@drawable/abudavud"
+    	android:layout_margin="2px"      />
+    	
 </LinearLayout>
