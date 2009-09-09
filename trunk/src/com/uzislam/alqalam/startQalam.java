@@ -2,6 +2,7 @@ package com.uzislam.alqalam;
 
 import com.uzislam.alqalam.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class startQalam extends Activity {
 	
@@ -55,42 +55,28 @@ public class startQalam extends Activity {
 	 		imgQuran.setClickable(true);
 	 		imgQuran.setOnClickListener(new OnClickListener() {
 	    		public void onClick(View v) {
-    				imgQuran.setAlpha(80);
+	    			 startActivity(new Intent(startQalam.this, QuranActivity.class));
 	    		}
 	        });
 	        
 	        final ImageView imgBukhari = (ImageView) findViewById(R.id.imgBukhari);
 	        imgBukhari.setVisibility(View.VISIBLE);
-	        imgBukhari.setOnClickListener(new OnClickListener() {
-	    		public void onClick(View v) {
-    				imgBukhari.setAlpha(80);
-	    		}
-		        });
+	        imgBukhari.setAlpha(80);
+	    	
 	        
 	        final ImageView imgMuslim = (ImageView) findViewById(R.id.imgMuslim);
 	        imgMuslim.setVisibility(View.VISIBLE);
-	        imgMuslim.setOnClickListener(new OnClickListener() {
-	    		public void onClick(View v) {
-	    			imgMuslim.setAlpha(80);
-	    		}
-		        });
-	        
+	        imgMuslim.setAlpha(80);
+	    		        
 	        final ImageView imgTirmidi = (ImageView) findViewById(R.id.imgTirmidi);
 	        imgTirmidi.setVisibility(View.VISIBLE);
-	        imgTirmidi.setOnClickListener(new OnClickListener() {
-	    		public void onClick(View v) {
-	    			imgTirmidi.setAlpha(80);
-	    		}
-		        });
-	        
+	        imgTirmidi.setAlpha(80);
+	    		        
 	        final ImageView imgAbudavud  = (ImageView) findViewById(R.id.imgAbudovud);
 	        imgAbudavud.setVisibility(View.VISIBLE);
-	        imgAbudavud.setOnClickListener(new OnClickListener() {
-	    		public void onClick(View v) {
-	    			imgAbudavud.setAlpha(80);
-	    		}
-		        });
+	    	imgAbudavud.setAlpha(80);
 	 	   }
+	 	   
 	};   
     
 }

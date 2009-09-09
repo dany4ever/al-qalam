@@ -8,7 +8,13 @@
 package com.uzislam.alqalam;
 
 public final class R {
+    public static final class array {
+        public static final int SurahTitle=0x7f050000;
+    }
     public static final class attr {
+    }
+    public static final class color {
+        public static final int darkred=0x7f060000;
     }
     public static final class drawable {
         public static final int abudavud=0x7f020000;
@@ -16,25 +22,37 @@ public final class R {
         public static final int bukhari=0x7f020002;
         public static final int frontpage=0x7f020003;
         public static final int icon=0x7f020004;
-        public static final int logo=0x7f020005;
-        public static final int muslim=0x7f020006;
-        public static final int quran=0x7f020007;
-        public static final int tirmidi=0x7f020008;
+        public static final int index_sound=0x7f020005;
+        public static final int index_sound_get=0x7f020006;
+        public static final int index_sound_playing=0x7f020007;
+        public static final int indexbg=0x7f020008;
+        public static final int logo=0x7f020009;
+        public static final int muslim=0x7f02000a;
+        public static final int quran=0x7f02000b;
+        public static final int tirmidi=0x7f02000c;
     }
     public static final class id {
-        public static final int imgAbudovud=0x7f050006;
-        public static final int imgBukhari=0x7f050003;
-        public static final int imgMuslim=0x7f050004;
-        public static final int imgQuran=0x7f050002;
-        public static final int imgTirmidi=0x7f050005;
-        public static final int mainview=0x7f050000;
-        public static final int splashimage=0x7f050001;
+        public static final int QuranView=0x7f070007;
+        public static final int SurahList=0x7f070008;
+        public static final int imgAbudovud=0x7f070006;
+        public static final int imgBukhari=0x7f070003;
+        public static final int imgMuslim=0x7f070004;
+        public static final int imgQuran=0x7f070002;
+        public static final int imgTirmidi=0x7f070005;
+        public static final int mainview=0x7f070000;
+        public static final int splashimage=0x7f070001;
+        public static final int srAyats=0x7f07000c;
+        public static final int srDown=0x7f070009;
+        public static final int srOrder=0x7f07000a;
+        public static final int srPlace=0x7f07000d;
+        public static final int srTitle=0x7f07000b;
     }
     public static final class layout {
         public static final int main=0x7f030000;
+        public static final int quran=0x7f030001;
+        public static final int surahrow=0x7f030002;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int hello=0x7f040000;
+        public static final int app_name=0x7f040000;
     }
 }
