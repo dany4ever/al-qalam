@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="SurahTitle">
- 		<item name="001">Фотиха</item>
+ 		<item name="001">Фотиҳа</item>
 		<item name="002">Бақара</item>
 		<item name="003">Оли Имрон</item>
 		<item name="004">Нисо</item>
@@ -28,10 +28,10 @@
 		<item name="025">Фурқон</item>
 		<item name="026">Шуаро</item>
 		<item name="027">Намл</item>
-		<item name="028">Қасас</item>
+		<item name="028">Қасос</item>
 		<item name="029">Анкабут</item>
 		<item name="030">Рум</item>
-		<item name="031">Лу?мон</item>
+		<item name="031">Луқмон</item>
 		<item name="032">Сажда</item>
 		<item name="033">Азҳоб</item>
 		<item name="034">Сабаъ</item>
@@ -51,25 +51,25 @@
 		<item name="048">Фатҳ</item>
 		<item name="049">Ҳужурот</item>
 		<item name="050">Қоф</item>
-		<item name="051">Ваз-зариёт</item>
+		<item name="051">Ваз-зориёт</item>
 		<item name="052">Тур</item>
 		<item name="053">Нажм</item>
 		<item name="054">Қамар</item>
-		<item name="055">Роҳман</item>
+		<item name="055">Раҳмон</item>
 		<item name="056">Воқеа</item>
 		<item name="057">Ҳадид</item>
-		<item name="058">Мужадала</item>
+		<item name="058">Мужодала</item>
 		<item name="059">Ҳашр</item>
 		<item name="060">Мумтаҳана</item>
 		<item name="061">Саф</item>
 		<item name="062">Жумъа</item>
-		<item name="063">Мунафиқун</item>
+		<item name="063">Мунофиқун</item>
 		<item name="064">Тағобун</item>
 		<item name="065">Талоқ</item>
 		<item name="066">Таҳрим</item>
 		<item name="067">Мулк</item>
 		<item name="068">Қалам</item>
-		<item name="069">Ал-Хакка</item>
+		<item name="069">Ал-Хаққа</item>
 		<item name="070">Маориж</item>
 		<item name="071">Нуҳ</item>
 		<item name="072">Жин</item>
@@ -84,7 +84,7 @@
 		<item name="081">Таквир</item>
 		<item name="082">Инфитор</item>
 		<item name="083">Мутаффифун</item>
-		<item name="084">Иншикок</item>
+		<item name="084">Иншиқоқ</item>
 		<item name="085">Буруж</item>
 		<item name="086">Ториқ</item>
 		<item name="087">Аъло</item>
@@ -100,9 +100,9 @@
 		<item name="097">Қадр</item>
 		<item name="098">Баййина</item>
 		<item name="099">Залзала</item>
-		<item name="100">Адиёт</item>
+		<item name="100">Одиёт</item>
 		<item name="101">Қориа</item>
-		<item name="102">Такасур</item>
+		<item name="102">Такосур</item>
 		<item name="103">Аср</item>
 		<item name="104">Ҳумаза</item>
 		<item name="105">Фил</item>
@@ -114,6 +114,6 @@
 		<item name="111">Масад</item>
 		<item name="112">Ихлос</item>
 		<item name="113">Фалақ</item>
-		<item name="114">Нас</item>
+		<item name="114">Нос</item>
 </string-array>
 </resources>

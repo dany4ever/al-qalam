@@ -33,6 +33,7 @@ public class QuranActivity extends Activity {
         public EfficientAdapter(Context context) {
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); //LayoutInflater.from(context);
           
+           
             // Icons bound to the rows.
             mIconGet = BitmapFactory.decodeResource(context.getResources(), R.drawable.index_sound_get);
             mIconSound = BitmapFactory.decodeResource(context.getResources(), R.drawable.index_sound);
@@ -73,6 +74,7 @@ public class QuranActivity extends Activity {
             } else {
             	vHolder = (ViewHolder) convertView.getTag();
             }
+                       
             srOrder = position + 1;
             vHolder.SurahTitle.setText(SURAHS[position]); //SURAHS[position]);
             vHolder.SurahOrder.setText(srOrder+"");
@@ -99,6 +101,7 @@ public class QuranActivity extends Activity {
         SURAHS = getResources().getStringArray(R.array.SurahTitle);
         SurahList = (ListView)findViewById(R.id.SurahList);
         SurahList.setAdapter(new EfficientAdapter(this));
+        SurahList.setCacheColorHint(00000000); 
         SurahList.setDivider(null);
       
  	}
