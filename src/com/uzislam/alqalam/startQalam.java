@@ -43,6 +43,8 @@ public class startQalam extends Activity {
         
         aqHandler = new Handler ();
         aqHandler.postDelayed(Splash, 2500);
+        
+        
     }
     
     private Runnable Splash = new Runnable() {
@@ -76,7 +78,6 @@ public class startQalam extends Activity {
 	        imgAbudavud.setVisibility(View.VISIBLE);
 	    	imgAbudavud.setAlpha(80);
 	 	   }
-	 	   
 	};   
     
 }

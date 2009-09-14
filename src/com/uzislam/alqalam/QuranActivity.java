@@ -6,14 +6,17 @@ import android.view.Window;
 import android.widget.ListView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class QuranActivity extends Activity {
 	private ListView SurahList; 
@@ -60,7 +63,7 @@ public class QuranActivity extends Activity {
             
             
             if (convertView == null) {        
-            	convertView = mInflater.inflate(R.layout.surahrow, null);
+            	convertView = mInflater.inflate(R.layout.surahindex, null);
 
             	vHolder = new ViewHolder();
                 
@@ -103,8 +106,15 @@ public class QuranActivity extends Activity {
         SurahList.setAdapter(new EfficientAdapter(this));
         SurahList.setCacheColorHint(00000000); 
         SurahList.setDivider(null);
-      
+        
+        SurahList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					final int arg2, long arg3) {
+					startActivity(new Intent(QuranActivity.this, SuraActivity.class));
+			}
+        });
  	}
-	
 	
 }
