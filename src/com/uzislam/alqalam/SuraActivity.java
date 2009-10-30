@@ -10,11 +10,13 @@ import android.view.Window;
 import android.widget.ListView;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,8 +78,6 @@ public class SuraActivity extends Activity {
             ViewHolder vHolder;
             int srOrder;
 
-            Toast.makeText(mycontext, "Get View Called", Toast.LENGTH_SHORT);	
-            
             if (convertView == null) {        
             	convertView = mInflater.inflate(R.layout.ayat, null);
 
@@ -87,8 +87,12 @@ public class SuraActivity extends Activity {
             	vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.uzbekText);
             	vHolder.AyatArabic = (ImageView) convertView.findViewById(R.id.arabicText);
             	vHolder.AyatSpImg = (ImageView) convertView.findViewById(R.id.spcImg);
+            	
+            	vHolder.AyatNumber.setTextColor(Color.DKGRAY);
+            	vHolder.AyatUzbek.setTextColor(Color.DKGRAY);
                                 
                 convertView.setTag(vHolder);
+                
             } else {
             	vHolder = (ViewHolder) convertView.getTag();
             }
@@ -97,6 +101,10 @@ public class SuraActivity extends Activity {
             vHolder.AyatNumber.setText(srOrder+"");
             vHolder.AyatUzbek.setText(AYATS[position]);        
             vHolder.AyatArabic.setImageBitmap(mArabicText);
+           
+            
+            LinearLayout AyatGroup = (LinearLayout) convertView.findViewById(R.id.ayatGroup);
+            
             
             /*
 			ImageView	 AyatBismillah = (ImageView) convertView.findViewById(R.id.Bismillah);;
