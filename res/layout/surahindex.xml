@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ 	android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"  >
+    
+	<ImageView
+		android:layout_width="35px"
+		android:layout_height="35px" 
+		android:id="@+id/srDown"
+		android:src="@drawable/index_sound_get" />
+		
+	<TextView android:id="@+id/srOrder"
+		android:layout_width="50px"
+		android:layout_height="35px"
+		android:text = "1"
+		android:textStyle="normal"
+		android:gravity="center"
+		android:textColor="@color/darkred" />
+		
+	<TextView android:id="@+id/srTitle"
+		android:text="Фотиха" 
+    	android:textStyle="bold"
+		android:layout_height="35px"
+		android:layout_width="132px" 
+		android:gravity="center"
+		android:textColor="@color/darkred"  />
+
+	 <TextView android:id="@+id/srAyats"
+		android:layout_width="58px"
+		android:layout_height="35px"
+		android:text = "7"
+		android:textStyle="normal"
+		android:gravity="center"
+		android:textColor="@color/darkred" />
+    	
+     <ImageView android:id="@+id/srPlace"
+		android:layout_width="45px"
+		android:layout_height="35px"  />
+
+</LinearLayout>
+
+		
