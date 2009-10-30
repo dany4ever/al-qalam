@@ -112,7 +112,9 @@ public class QuranActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					final int arg2, long arg3) {
-					startActivity(new Intent(QuranActivity.this, SuraActivity.class));
+					Intent quranIntent = new Intent(QuranActivity.this, SuraActivity.class);
+					quranIntent.putExtra("sNumber", arg2);
+					startActivity(quranIntent);
 			}
         });
  	}
