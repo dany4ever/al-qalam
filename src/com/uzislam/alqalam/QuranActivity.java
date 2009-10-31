@@ -36,7 +36,6 @@ public class QuranActivity extends Activity {
         public EfficientAdapter(Context context) {
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); //LayoutInflater.from(context);
           
-           
             // Icons bound to the rows.
             mIconGet = BitmapFactory.decodeResource(context.getResources(), R.drawable.index_sound_get);
             mIconSound = BitmapFactory.decodeResource(context.getResources(), R.drawable.index_sound);
