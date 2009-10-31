@@ -9,21 +9,18 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.ListView;
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SuraActivity extends Activity {
-	private ListView AyatList; 
-	
-	static int surahNumber = 0;
+	private static ListView AyatList; 
+	private static int surahNumber = 0;
 	 
 	static int[] SURAHAYATS = new int[] {7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,
 		34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,
@@ -47,17 +44,14 @@ public class SuraActivity extends Activity {
 		R.drawable.sname_105, R.drawable.sname_106, R.drawable.sname_107, R.drawable.sname_108, R.drawable.sname_109, R.drawable.sname_110, 
 		R.drawable.sname_111, R.drawable.sname_112, R.drawable.sname_113, R.drawable.sname_114};
 	
-	static String [] AYATS ; 
+	static  String [] AYATS ; 
+	static  String [] AYATSARABIC;
 	
 	private static class EfficientAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
-        private Bitmap mArabicText;
-        private Bitmap mSpecialIcon;
-        Context mycontext;
-          
+                  
         public EfficientAdapter(Context context) {
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); //LayoutInflater.from(context);
-            mycontext = context;
         }
 
         public int getCount() {
@@ -69,10 +63,12 @@ public class SuraActivity extends Activity {
             return position;
         }
 
-        public long getItemId(int position) {
-            return position;
-        }
-        
+        @Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+                
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder vHolder;
@@ -86,7 +82,7 @@ public class SuraActivity extends Activity {
             	vHolder.AyatNumber = (TextView) convertView.findViewById(R.id.ayaNumber);
             	vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.uzbekText);
             	vHolder.AyatArabic = (ImageView) convertView.findViewById(R.id.arabicText);
-            	vHolder.AyatSpImg = (ImageView) convertView.findViewById(R.id.spcImg);
+            	//vHolder.AyatSpImg = (ImageView) convertView.findViewById(R.id.spcImg);
             	
             	vHolder.AyatNumber.setTextColor(Color.DKGRAY);
             	vHolder.AyatUzbek.setTextColor(Color.DKGRAY);
@@ -100,17 +96,12 @@ public class SuraActivity extends Activity {
             srOrder = position + 1;
             vHolder.AyatNumber.setText(srOrder+"");
             vHolder.AyatUzbek.setText(AYATS[position]);        
-            vHolder.AyatArabic.setImageBitmap(mArabicText);
-           
+            vHolder.AyatArabic.setImageBitmap(BitmapFactory.decodeFile(AYATSARABIC[position]));       
             
-            LinearLayout AyatGroup = (LinearLayout) convertView.findViewById(R.id.ayatGroup);
-            
-            
-            /*
-			ImageView	 AyatBismillah = (ImageView) convertView.findViewById(R.id.Bismillah);;
-            if (position == 0) AyatBismillah.setImageResource(R.drawable.bismillah);
-            */
-            
+           	ImageView	AyatBismillah = (ImageView) convertView.findViewById(R.id.Bismillah);
+            AyatBismillah.setImageResource(R.drawable.bismillah);
+        
+              
             //vHolder.AyatSpImg.setImageBitmap(mSpecialIcon); 
             
             return convertView;
@@ -120,9 +111,10 @@ public class SuraActivity extends Activity {
         	TextView 	 AyatNumber;
         	TextView 	 AyatUzbek;
             ImageView 	 AyatArabic;
-            ImageView 	 AyatSpImg;
+            //ImageView 	 AyatSpImg;
        }
-        
+
+		
     }
 	
 	@Override
@@ -140,6 +132,7 @@ public class SuraActivity extends Activity {
         String sfn = "uzbek/" + (surahNumber + 1) + ".dat";
        
         AYATS = new String[SURAHAYATS[surahNumber]];
+        AYATSARABIC = new String [SURAHAYATS[surahNumber]];
         
         readFiletoString(sfn);
         
@@ -166,10 +159,26 @@ public class SuraActivity extends Activity {
 		
 		int  	index = 0;
 		String  line = "";
-	
+		String  SNM, ANM;
+		
+		if (surahNumber+1 < 10 )
+			SNM = "00"+(surahNumber+1);
+		else if (surahNumber+1 < 100 )
+			SNM = "0"+(surahNumber+1);
+		else 
+			SNM = ""+(surahNumber+1);
+		
 		try {
 			while((line = dis.readLine()) != null) {
+				if (index < 10 )
+					ANM = "00"+index;
+				else if (index < 100)
+					ANM = "0"+index;
+				else 
+					ANM = ""+index;
+				
 				AYATS[index] = line;
+				AYATSARABIC[index]  = "/sdcard/alQalam/arabic/"+(surahNumber+1)+"/"+SNM+ANM+".gdw";
 				index++;				
 			}
 		}

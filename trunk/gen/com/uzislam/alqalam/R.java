@@ -156,30 +156,31 @@ public final class R {
         public static final int tirmidi=0x7f020087;
     }
     public static final class id {
-        public static final int AyaList=0x7f070013;
+        public static final int AyaList=0x7f070014;
         public static final int Bismillah=0x7f070003;
-        public static final int QuranView=0x7f07000d;
-        public static final int SurahList=0x7f07000e;
+        public static final int QuranView=0x7f07000e;
+        public static final int SurahList=0x7f07000f;
         public static final int arabicText=0x7f070004;
         public static final int ayaNumber=0x7f070000;
         public static final int ayatGroup=0x7f070002;
-        public static final int headerImg=0x7f07000f;
-        public static final int headerImgLeft=0x7f070010;
-        public static final int headerImgRight=0x7f070012;
-        public static final int imgAbudovud=0x7f07000c;
-        public static final int imgBukhari=0x7f070009;
-        public static final int imgMuslim=0x7f07000a;
-        public static final int imgQuran=0x7f070008;
-        public static final int imgTirmidi=0x7f07000b;
-        public static final int mainview=0x7f070006;
+        public static final int extraText=0x7f070006;
+        public static final int headerImg=0x7f070010;
+        public static final int headerImgLeft=0x7f070011;
+        public static final int headerImgRight=0x7f070013;
+        public static final int imgAbudovud=0x7f07000d;
+        public static final int imgBukhari=0x7f07000a;
+        public static final int imgMuslim=0x7f07000b;
+        public static final int imgQuran=0x7f070009;
+        public static final int imgTirmidi=0x7f07000c;
+        public static final int mainview=0x7f070007;
         public static final int spcImg=0x7f070001;
-        public static final int splashimage=0x7f070007;
-        public static final int srAyats=0x7f070017;
-        public static final int srDown=0x7f070014;
-        public static final int srOrder=0x7f070015;
-        public static final int srPlace=0x7f070018;
-        public static final int srTitle=0x7f070016;
-        public static final int suraName=0x7f070011;
+        public static final int splashimage=0x7f070008;
+        public static final int srAyats=0x7f070018;
+        public static final int srDown=0x7f070015;
+        public static final int srOrder=0x7f070016;
+        public static final int srPlace=0x7f070019;
+        public static final int srTitle=0x7f070017;
+        public static final int suraName=0x7f070012;
         public static final int uzbekText=0x7f070005;
     }
     public static final class layout {

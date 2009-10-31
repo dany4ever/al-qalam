@@ -4,15 +4,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal|center_vertical"
-    android:paddingTop="10px" >
+    android:paddingTop="10px"  >
     
     <LinearLayout android:orientation="vertical"
-    	android:layout_width="60px"
+    	android:layout_width="57px"
     	android:layout_height="fill_parent"
    		android:gravity="center_horizontal"  >
 
     	<TextView android:id="@+id/ayaNumber" 
-    		android:layout_width="60px" 
+    		android:layout_width="57px" 
     		android:layout_height="45px"
     		android:background="@drawable/ayah"
     		android:text="1"
@@ -41,6 +41,17 @@
     	<TextView android:id="@+id/uzbekText" 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content"
-    		android:gravity="left" />
+    		android:gravity="left"
+    		android:padding="10px"  />
+    	
+    	<TextView android:id="@+id/extraText" 
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content"
+    		android:gravity="left"
+    		android:padding="10px"  />
+    		
+    	<View android:layout_width="fill_parent"
+			  android:layout_height="1dip"
+			 android:background="#FF9966" />
     </LinearLayout>
 </LinearLayout>
