@@ -95,7 +95,7 @@ public class SuraActivity extends Activity {
             	vHolder = (ViewHolder) convertView.getTag();
             }
 
-            if (surahNumber != 0) {
+            if (!(surahNumber == 0 || surahNumber == 8)) {
             	ImageView	AyatBismillah = (ImageView) convertView.findViewById(R.id.Bismillah);
             	AyatBismillah.setImageResource(SRH[position]);
             }
