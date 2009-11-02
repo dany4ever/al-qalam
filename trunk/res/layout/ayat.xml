@@ -30,7 +30,7 @@
    		android:gravity="left|center_vertical" 
    		android:id="@+id/ayatGroup">
    		
-   		<ImageView android:id="@+id/Bismillah" 
+   		 <ImageView android:id="@+id/Bismillah" 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" />
     		
@@ -43,13 +43,7 @@
     		android:layout_height="wrap_content"
     		android:gravity="left"
     		android:padding="10px"  />
-    	
-    	<TextView android:id="@+id/extraText" 
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content"
-    		android:gravity="left"
-    		android:padding="10px"  />
-    		
+
     	<View android:layout_width="fill_parent"
 			  android:layout_height="1dip"
 			 android:background="#FF9966" />
