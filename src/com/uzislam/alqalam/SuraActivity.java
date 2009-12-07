@@ -3,22 +3,20 @@ package com.uzislam.alqalam;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ListView;
-import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class SuraActivity extends Activity {
+<<<<<<< .mine
+	private static ListView		AyatList; 
+	private static  String []	AYATS ; 
+	private static  String []	AYATSARABIC;
+	private static int			surahNumber = 0;
+=======
 	private static ListView AyatList; 
 	private static int surahNumber = 0;
 	
@@ -117,44 +115,57 @@ public class SuraActivity extends Activity {
             //ImageView 	 AyatSpImg;
        }
 
+>>>>>>> .r43
 		
-    }
-	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-                
+       
+        setContentView(R.layout.surah);
+        
         Bundle extras = getIntent().getExtras();
         
         if (extras != null) {
         	surahNumber = extras.getInt("sNumber");
         }
         
-        // file link to Uzbek translation (in assets)
+        // Set chapter image title 
+        ImageView 		surahTitle = (ImageView) findViewById(R.id.suraName);
+        surahTitle.setImageResource(CONSTANTS.SurahTitles[surahNumber]);
+            	
+        // create string arrays for verses
+        AYATS = new String[CONSTANTS.SurahNumberOfAyats[surahNumber]];
+        AYATSARABIC = new String [CONSTANTS.SurahNumberOfAyats[surahNumber]];
+        
+        // get file link to Uzbek translation (in assets)
         String surahFileLink = "uzbek/" + (surahNumber + 1) + ".txt";
        
-        // create string arrays for ayats
-        AYATS = new String[SURAHAYATS[surahNumber]];
-        AYATSARABIC = new String [SURAHAYATS[surahNumber]];
-       
-        // set bismillah image only for first row
-        SRH = new int[SURAHAYATS[surahNumber]];
-        SRH[0] = R.drawable.bismillah;
-        
         // reads string from file and puts AYATS array, and reads image  to put AYATSARABIC
         readFileToArray(surahFileLink);
+                // create new chapter adapter
+        SurahAdapter		surahAdapter = new SurahAdapter(this); 	
+        AyatIconifiedText	ait;
+        Drawable 			iconBismillah = getResources().getDrawable(R.drawable.bismillah);
         
-        setContentView(R.layout.surah);
+        for (int i=0; i < CONSTANTS.SurahNumberOfAyats[surahNumber] ; i++) {
+        	
+        	ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], null, null, false);
+        	
+        	// check if BISMILLAH must be shown 
+        	if (i == 0 && surahNumber != 0 && surahNumber != 8)  
+        	     ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], null, iconBismillah, false);
         
-        AyatList = (ListView)findViewById(R.id.AyaList);
-        AyatList.setAdapter(new EfficientAdapter(this));
+        	surahAdapter.addItem(ait);
+        }
+        
+        // make verses appear in list view
+        AyatList = (ListView)findViewById(R.id.AyaList);     
+        AyatList.setAdapter(surahAdapter);
         AyatList.setCacheColorHint(00000000); 
         AyatList.setDivider(null);
                 
-        ImageView surahTitle = (ImageView) findViewById(R.id.suraName);
-        surahTitle.setImageResource(SUHRAHTITLES[surahNumber]);
+       ;
  	}
 	
 	public void readFileToArray(String SurahFileName) {
