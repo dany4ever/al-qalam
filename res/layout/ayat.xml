@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/ayatRoot"
  	android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -11,15 +12,15 @@
     	android:layout_height="fill_parent"
    		android:gravity="center_horizontal"  >
 
-    	<TextView android:id="@+id/ayaNumber" 
+    	<TextView android:id="@+id/ayatOrder" 
     		android:layout_width="57px" 
     		android:layout_height="45px"
     		android:background="@drawable/ayah"
     		android:text="1"
-    		android:color="@color/darkblack"
+    		android:color="#000000"
     		android:gravity="center_horizontal|center_vertical" />
     		
-    	<ImageView android:id="@+id/spcImg" 
+    	<ImageView android:id="@+id/ayatSpecialImage" 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" />
     	
@@ -30,19 +31,20 @@
    		android:gravity="left|center_vertical" 
    		android:id="@+id/ayatGroup">
    		
-   		 <ImageView android:id="@+id/Bismillah" 
+   		 <ImageView android:id="@+id/ayatBismillah" 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" />
     		
-		<ImageView android:id="@+id/arabicText" 
+		<ImageView android:id="@+id/ayatArabicText" 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content"  />
     		
-    	<TextView android:id="@+id/uzbekText" 
+    	<TextView android:id="@+id/ayatUzbekText" 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content"
     		android:gravity="left"
-    		android:padding="10px"  />
+    		android:padding="10px"
+    		android:color="#000000"  />
 
     	<View android:layout_width="fill_parent"
 			  android:layout_height="1dip"
