@@ -7,14 +7,16 @@ public class QuranIconifiedText {
 	private String		surahTitle = null;
 	private int			surahOrder = 0;
 	private int			surahNumberOfAyats = 0;
+	private boolean		surahIsDownloaded = false;
 	private Drawable	surahState = null;
 	private Drawable	surahRevelationPlace = null;
 		
-	public QuranIconifiedText(long _id, String _title, int _order, int _numberOfAyats, Drawable _state, Drawable _place) {
+	public QuranIconifiedText(long _id, String _title, int _order, int _numberOfAyats, boolean _downloaded ,Drawable _state, Drawable _place) {
 		this.id = _id;
 		this.surahTitle = _title;
 		this.surahOrder = _order;
 		this.surahNumberOfAyats = _numberOfAyats;
+		this.surahIsDownloaded = _downloaded;
 		this.surahState = _state;
 		this.surahRevelationPlace = _place;
 	}
@@ -43,6 +45,10 @@ public class QuranIconifiedText {
 		this.surahRevelationPlace = _place;
 	}
 	
+	public void setSurahIsDownloaded(boolean _downloaded) {
+		this.surahIsDownloaded = _downloaded;
+	}
+	
 	public long getId () {
 		return this.id;
 	}
@@ -59,6 +65,10 @@ public class QuranIconifiedText {
 		return this.surahNumberOfAyats ;
 	}
 
+	public boolean getSurahIsDownloaded() {
+		return this.surahIsDownloaded;
+	}
+	
 	public Drawable getSurahState() {
 		return this.surahState;
 	}

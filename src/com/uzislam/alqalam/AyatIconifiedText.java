@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 public class AyatIconifiedText {
 	private long		id = -1 ;
 	private int			ayatOrder = 0;
-	private String	ayatArabicText = null;
+	private String		ayatArabicText = null;
 	private String		ayatUzbekText = null;
 	private Drawable	ayatBismillah = null;
 	private Drawable	ayatSpecialImage = null;

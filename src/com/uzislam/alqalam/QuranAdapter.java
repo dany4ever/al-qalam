@@ -38,7 +38,7 @@ public class QuranAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		 ViewHolder vHolder;
                
-         if (convertView == null) {        
+         if (convertView == null) {
          	convertView = mInflater.inflate(R.layout.surahindex, null);
 
          	vHolder = new ViewHolder();
@@ -60,15 +60,23 @@ public class QuranAdapter extends BaseAdapter {
        	 vHolder.SurahDwnState.setImageDrawable(mItems.get(position).getSurahState());
          vHolder.SurahPlace.setImageDrawable(mItems.get(position).getSurahRevelationPlace());
          
+         if (mItems.get(position).getSurahIsDownloaded() == false) {
+        	 vHolder.SurahTitle.setTextColor(R.color.lightblack);
+        	 vHolder.SurahOrder.setTextColor(R.color.lightblack);
+        	 vHolder.SurahAyats.setTextColor(R.color.lightblack);
+        	 
+         }
+
+        	 
          return convertView;
 	}
 	
      static class ViewHolder {
-         TextView 	SurahTitle;
-         TextView 	SurahOrder;
-         TextView 	SurahAyats;
-         ImageView 	SurahDwnState;
-         ImageView 	SurahPlace;
+         TextView 		SurahTitle;
+         TextView 		SurahOrder;
+         TextView 		SurahAyats;
+         ImageView 		SurahDwnState;
+         ImageView 		SurahPlace;
     }
 	
 	
