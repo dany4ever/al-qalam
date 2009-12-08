@@ -1,5 +1,7 @@
 package com.uzislam.alqalam;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
@@ -13,6 +15,9 @@ import android.widget.AdapterView.OnItemClickListener;
 public class QuranActivity extends Activity {
 	private ListView			SurahList; 	
 	private static String[] 	SurahTitles;
+	private static boolean[]	SurahIsDownloaded;
+	//private static boolean[]	SurahIsAudioDownloaded;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,14 +25,18 @@ public class QuranActivity extends Activity {
         setContentView(R.layout.quran);
         SurahList = (ListView)findViewById(R.id.SurahList);
         SurahTitles = getResources().getStringArray(R.array.SurahTitle);
-        
+        SurahIsDownloaded = new boolean [CONSTANTS.numberOfSurahs];
+                                            
         QuranAdapter		quranAdapter = new QuranAdapter(this);
         QuranIconifiedText	qit;
     	Drawable			stateIcon = getResources().getDrawable(R.drawable.index_sound_get);
     	Drawable			placeIcon = null;
     	
+    	// check which Surah's Arabic Text is already downloaded
+    	checkDownloadedSurahs();
+    	
         for (int i=0; i < CONSTANTS.numberOfSurahs ; i++) {
-        	qit = new QuranIconifiedText(i, SurahTitles[i], i+1, CONSTANTS.SurahNumberOfAyats[i], stateIcon, placeIcon);
+        	qit = new QuranIconifiedText(i, SurahTitles[i], i+1, CONSTANTS.SurahNumberOfAyats[i], SurahIsDownloaded[i] ,stateIcon, placeIcon);
         	quranAdapter.addItem(qit);
         }
         
@@ -38,13 +47,33 @@ public class QuranActivity extends Activity {
         SurahList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					final int arg2, long arg3) {
-					Intent quranIntent = new Intent(QuranActivity.this, SuraActivity.class);
-					quranIntent.putExtra("sNumber", arg2);
-					startActivity(quranIntent);
+			public void onItemClick(AdapterView<?> adapter, View view,
+					final int index, long order) {
+					if (SurahIsDownloaded[index]) {
+						Intent quranIntent = new Intent(QuranActivity.this, SuraActivity.class);
+						quranIntent.putExtra("sNumber", index);
+						startActivity(quranIntent);
+					} 
+					else {
+						// TODO: request file download, and perform download
+					}
 			}
         });
  	}
+	
+	private void checkDownloadedSurahs() {
+		String fileName;//, surahNumber, AyatNumber;
+		
+		for (int i=0; i<CONSTANTS.numberOfSurahs; i++) {
+			fileName = "/sdcard/alQalam/arabic/"+(i+1);
+				SurahIsDownloaded[i] = isFileExists(fileName);
+		}
+
+	}
+	
+	private boolean isFileExists(String _file) {
+		  File file=new File(_file);
+		  return file.exists();
+	}
 
 }

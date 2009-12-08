@@ -3,4 +3,5 @@
 	<string name="app_name">al-Qalam</string>
 	<color name="darkred">#441111</color>
 	<color name="darkblack">#000000</color>
+	<color name="lightblack">#999999</color>
 </resources>
