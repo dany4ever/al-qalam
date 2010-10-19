@@ -38,7 +38,7 @@ public class SuraActivity extends Activity {
         AYATSARABIC = new String [CONSTANTS.SurahNumberOfAyats[surahNumber]];
         
         // get file link to Uzbek translation (in assets)
-        String surahFileLink = "uzbek/" + (surahNumber + 1) + ".txt";
+        String surahFileLink = "uzbek-cyr/" + (surahNumber + 1) + ".txt";
        
         // reads string from file and puts AYATS array, and reads image  to put AYATSARABIC
         readFileToArray(surahFileLink);
@@ -99,7 +99,7 @@ public class SuraActivity extends Activity {
 				
 				AYATS[index] = line;
 				// server : http://al-qalam.googlecode.com/svn/trunk/assets/arabic/1/001000.gdw
-				AYATSARABIC[index]  = "/sdcard/alQalam/arabic/"+(surahNumber+1)+"/"+SNM+ANM+".gdw";
+				AYATSARABIC[index]  = "/sdcard/alqalam/arabic/"+(surahNumber+1)+"/"+SNM+ANM+".gdw";
 				index++;				
 			}
 		}
