@@ -99,7 +99,7 @@ public class SurahActivity extends Activity {
 				
 				AYATS[index] = line;
 				// server : http://al-qalam.googlecode.com/svn/trunk/assets/arabic/1/001000.gdw
-				AYATSARABIC[index]  = "/sdcard/alqalam/arabic/"+(surahNumber+1)+"/"+SNM+ANM+".gdw";
+				AYATSARABIC[index]  = "/sdcard" + CONSTANTS.FOLDER_QURAN_ARABIC +(surahNumber+1)+"/"+SNM+ANM+".gdw";
 				index++;				
 			}
 		}

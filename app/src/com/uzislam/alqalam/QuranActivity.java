@@ -65,7 +65,7 @@ public class QuranActivity extends Activity {
 		String fileName;//, surahNumber, AyatNumber;
 		
 		for (int i=0; i<CONSTANTS.numberOfSurahs; i++) {
-			fileName = "/sdcard/alQalam/arabic/"+(i+1);
+			fileName = "/sdcard" + CONSTANTS.FOLDER_QURAN_ARABIC+(i+1);
 				SurahIsDownloaded[i] = isFileExists(fileName);
 		}
 
