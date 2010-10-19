@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-public class SuraActivity extends Activity {
+public class SurahActivity extends Activity {
 	private static ListView		AyatList; 
 	private static  String []	AYATS ; 
 	private static  String []	AYATSARABIC;

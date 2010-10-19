@@ -50,7 +50,7 @@ public class QuranActivity extends Activity {
 			public void onItemClick(AdapterView<?> adapter, View view,
 					final int index, long order) {
 					if (SurahIsDownloaded[index]) {
-						Intent quranIntent = new Intent(QuranActivity.this, SuraActivity.class);
+						Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
 						quranIntent.putExtra("sNumber", index);
 						startActivity(quranIntent);
 					} 
