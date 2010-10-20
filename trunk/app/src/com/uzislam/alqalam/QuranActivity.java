@@ -35,7 +35,7 @@ public class QuranActivity extends Activity {
     	// check which Surah's Arabic Text is already downloaded
     	checkDownloadedSurahs();
     	
-        for (int i=0; i < CONSTANTS.numberOfSurahs ; i++) {
+        for (int i = 0; i < CONSTANTS.numberOfSurahs ; i++) {
         	qit = new QuranIconifiedText(i, SurahTitles[i], i+1, CONSTANTS.SurahNumberOfAyats[i], SurahIsDownloaded[i] ,stateIcon, placeIcon);
         	quranAdapter.addItem(qit);
         }
@@ -64,15 +64,15 @@ public class QuranActivity extends Activity {
 	private void checkDownloadedSurahs() {
 		String fileName;//, surahNumber, AyatNumber;
 		
-		for (int i=0; i<CONSTANTS.numberOfSurahs; i++) {
-			fileName = "/sdcard" + CONSTANTS.FOLDER_QURAN_ARABIC+(i+1);
-				SurahIsDownloaded[i] = isFileExists(fileName);
+		for (int i = 0; i < CONSTANTS.numberOfSurahs; i++) {
+			fileName = CONSTANTS.FOLDER_QURAN_ARABIC + (i + 1);
+			SurahIsDownloaded[i] = isFileExists(fileName);
 		}
 
 	}
 	
 	private boolean isFileExists(String _file) {
-		  File file=new File(_file);
+		  File file = new File(_file);
 		  return file.exists();
 	}
 
