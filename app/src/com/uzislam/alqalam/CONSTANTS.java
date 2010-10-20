@@ -35,7 +35,7 @@ public class CONSTANTS {
 		R.drawable.sname_105, R.drawable.sname_106, R.drawable.sname_107, R.drawable.sname_108, R.drawable.sname_109, R.drawable.sname_110, 
 		R.drawable.sname_111, R.drawable.sname_112, R.drawable.sname_113, R.drawable.sname_114};
 	
-	public static String FOLDER_QURAN_ARABIC = "/alqalam/arabic/";
+	public static String FOLDER_QURAN_ARABIC = android.os.Environment.getExternalStorageDirectory() + "/alqalam/arabic/";
 	
 }
  
