@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Al-Qalam Data Pack Installer</string>
+    <string name="installing_message">Installing Arabic data pack on SD card...</string>
+    <string name="uninstall_message">The Arabic data pack has been installed successfully. You can now safely remove this installer.</string>
+    <string name="uninstall">Uninstall</string>
+    <string name="retry_message">The Arabic data pack failed to install. Please make sure your SD card is in your device and has at least 10MB of free space. If your card is already in your device, please try removing the card and reinserting it.</string>
+    <string name="retry">Retry</string>
+</resources>
