@@ -1,0 +1,9 @@
+#labels Phase-Requirements,Al-Qalam
+=`[`Al-Qalam`]` Plans for version 2=
+
+=Bug fixes=
+  # Adjust layout to multi-resolution screens
+
+=New features=
+  # Create databases for translations
+  # Impelement search functionality
