@@ -114,9 +114,10 @@ public class QuranActivity extends Activity {
         noArabicPackAlert.setPositiveButton(android.R.string.ok,
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                	Intent marketIntent = new Intent(Intent.ACTION_VIEW,
-                			Uri.parse(ARABIC_DATA_PACK_INSTALLER_MARKET_LINK));
+                    Intent marketIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(ARABIC_DATA_PACK_INSTALLER_MARKET_LINK));
                     startActivity(marketIntent);
+                    finish();
                 }
             });
 
