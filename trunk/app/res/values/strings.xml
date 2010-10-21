@@ -4,4 +4,7 @@
 	<color name="darkred">#441111</color>
 	<color name="darkblack">#000000</color>
 	<color name="lightblack">#999999</color>
+	<string name="android_maket_app_missing">You don not have Android Market on your device. Please download the pack manually.</string>
+	<string name="no_arabic_pack_alert_title">Arabic Pack is missing</string>
+	<string name="no_arabic_pack_alert_message">Tap OK to download Al-Qalam Data Pack Installer from the Android Market.\nYou may also download the pack manually from project\'s homepage http://code.google.com/p/al-qalam/.</string>
 </resources>

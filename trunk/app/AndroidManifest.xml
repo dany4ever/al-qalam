@@ -6,15 +6,14 @@
     <application android:icon="@drawable/icon" android:label="@string/al_qalam">
         <activity android:name=".startQalam"   
         	android:label="@string/al_qalam"
-        	android:configChanges="orientation|keyboardHidden"
-			android:screenOrientation="portrait" >
+        	android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuranActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".QuranActivity" android:configChanges="orientation|keyboardHidden" />
         <activity android:name=".SurahActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
     </application>
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="7" />
 </manifest> 
