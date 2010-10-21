@@ -18,17 +18,14 @@ public class QuranAdapter extends BaseAdapter {
 		this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
-	@Override
 	public int getCount() {
 		return mItems.size();
 	}
 
-	@Override
 	public Object getItem(int arg0) {
 		return mItems.get(arg0);
 	}
 
-	@Override
 	public long getItemId(int arg0) {
 		return mItems.get(arg0).getId();
 	}
