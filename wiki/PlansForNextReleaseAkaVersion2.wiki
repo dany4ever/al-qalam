@@ -7,3 +7,8 @@
 =New features=
   # Create databases for translations
   # Impelement search functionality
+
+
+
+
+`*`_Please leave your suggestions in comments field_
