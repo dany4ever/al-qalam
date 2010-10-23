@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Window;
+import android.util.DisplayMetrics;
 import android.widget.ListView;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
@@ -15,14 +16,17 @@ public class SurahActivity extends Activity {
 	private static  String []	AYATS ; 
 	private static  String []	AYATSARABIC;
 	private static int			surahNumber = 0;
-		
+	
+	public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
+    		
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-       
+        super.onCreate(savedInstanceState);   
         setContentView(R.layout.surah);
         
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        
+       
         Bundle extras = getIntent().getExtras();
         
         if (extras != null) {
@@ -30,7 +34,7 @@ public class SurahActivity extends Activity {
         }
         
         // Set chapter image title 
-        ImageView surahTitle = (ImageView) findViewById(R.id.suraName);
+        ImageView 		surahTitle = (ImageView) findViewById(R.id.suraName);
         surahTitle.setImageResource(CONSTANTS.SurahTitles[surahNumber]);
             	
         // create string arrays for verses
@@ -38,23 +42,24 @@ public class SurahActivity extends Activity {
         AYATSARABIC = new String [CONSTANTS.SurahNumberOfAyats[surahNumber]];
         
         // get file link to Uzbek translation (in assets)
-        String surahFileLink = "uzbek-cyr/" + (surahNumber + 1) + ".txt";
+        String surahFileLink = + (surahNumber + 1) + ".txt";
        
         // reads string from file and puts AYATS array, and reads image  to put AYATSARABIC
         readFileToArray(surahFileLink);
+        
         // create new chapter adapter
-        SurahAdapter surahAdapter = new SurahAdapter(this); 	
-        AyatIconifiedText ait;
-        Drawable iconBismillah = getResources().getDrawable(R.drawable.bismillah);
+        SurahAdapter		surahAdapter = new SurahAdapter(this); 	
+        AyatIconifiedText	ait;
+        Drawable 			iconBismillah = getResources().getDrawable(R.drawable.bismillah);
         
         for (int i=0; i < CONSTANTS.SurahNumberOfAyats[surahNumber] ; i++) {
-        	ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], hasSpecialImage(surahNumber+1, i+1), null, false);
         	
-        	// Show BISMILLAH only once at the top
-        	// But do not show it in سورة الفاتحة and سورة التوبة
-        	if (i == 0 && (surahNumber != 0 || surahNumber != 8))  
-        	     ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], hasSpecialImage(surahNumber+1, i+1), iconBismillah, false);
-        
+        	ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], getSpecialImage(surahNumber+1, i+1), null, getAyatBackgroundColor());
+        	
+        	// check if BISMILLAH must be shown 
+        	if (i == 0 && surahNumber != 0 && surahNumber != 8)  
+        	     ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], getSpecialImage(surahNumber+1, i+1), iconBismillah, getAyatBackgroundColor());
+       
         	surahAdapter.addItem(ait);
         }
         
@@ -63,22 +68,22 @@ public class SurahActivity extends Activity {
         AyatList.setAdapter(surahAdapter);
         AyatList.setCacheColorHint(00000000); 
         AyatList.setDivider(null);
-                
-       ;
  	}
 	
 	public void readFileToArray(String SurahFileName) {
 				
-		BufferedReader dis = null;
-		
+		BufferedReader udis = null;
+		//BufferedReader adis = null;
 		try {
-			dis = new BufferedReader(new InputStreamReader(getAssets().open(SurahFileName))); 
+			udis = new BufferedReader(new InputStreamReader(getAssets().open("uzbek-cyr/"+SurahFileName))); 
+			//adis = new BufferedReader(new InputStreamReader(getAssets().open("arabic/"+SurahFileName), "utf-8"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		int  	index = 0;
-		String  line = "";
+		String  uzLine = ""; 
+		
 		String  SNM, ANM;
 		
 		if (surahNumber+1 < 10 )
@@ -89,7 +94,8 @@ public class SurahActivity extends Activity {
 			SNM = ""+(surahNumber+1);
 		
 		try {
-			while((line = dis.readLine()) != null) {
+			while((uzLine = udis.readLine()) != null) {
+				
 				if (index < 10 )
 					ANM = "00"+index;
 				else if (index < 100)
@@ -97,9 +103,12 @@ public class SurahActivity extends Activity {
 				else 
 					ANM = ""+index;
 				
-				AYATS[index] = line;
+				
+				AYATS[index] = uzLine;
 				// server : http://al-qalam.googlecode.com/svn/trunk/assets/arabic/1/001000.gdw
-				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC +(surahNumber + 1)+"/"+SNM+ANM+".gdw";
+				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC +(surahNumber+1)+"/"+SNM+ANM+".gdw";
+				//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
+
 				index++;				
 			}
 		}
@@ -109,7 +118,7 @@ public class SurahActivity extends Activity {
 		
 	}
 	
-	public Drawable hasSpecialImage(int surah, int ayat) {
+	private Drawable getSpecialImage(int surah, int ayat) {
 		
 		for (int i=0; i <CONSTANTS.numberOfSajdaAyats; i++) {
 			if (CONSTANTS.SajdaAyats[i][0] == surah &&  CONSTANTS.SajdaAyats[i][1] == ayat)
@@ -123,6 +132,12 @@ public class SurahActivity extends Activity {
 				
 		return null;
 		
+	}
+	
+	private int  getAyatBackgroundColor() {
+		//TODO: differentiate the color of bookmarked or playing verse background.
+		
+		return Color.TRANSPARENT;
 	}
 	
 }

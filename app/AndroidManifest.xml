@@ -3,17 +3,27 @@
       package="com.uzislam.alqalam"
       android:versionCode="1"
       android:versionName="1.0">
-    <application android:icon="@drawable/icon" android:label="@string/al_qalam">
-        <activity android:name=".startQalam"   
-        	android:label="@string/al_qalam"
-        	android:configChanges="orientation|keyboardHidden">
+      
+    <supports-screens
+      android:largeScreens="true"
+      android:normalScreens="true"
+      android:smallScreens="false"
+      android:anyDensity="true" />
+          
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name=".startQalam"
+                  android:label="@string/app_name"
+                  android:configChanges="orientation|keyboardHidden"
+				  android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuranActivity" android:configChanges="orientation|keyboardHidden" />
-        <activity android:name=".SurahActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
+ 		<activity android:name=".QuranActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".SuraActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
     </application>
+               
     <uses-sdk android:minSdkVersion="7" />
+
 </manifest> 

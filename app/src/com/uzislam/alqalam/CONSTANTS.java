@@ -1,5 +1,8 @@
 package com.uzislam.alqalam;
 
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
+
 public class CONSTANTS {
 	
 	public static int	numberOfSurahs = 114;
@@ -35,7 +38,12 @@ public class CONSTANTS {
 		R.drawable.sname_105, R.drawable.sname_106, R.drawable.sname_107, R.drawable.sname_108, R.drawable.sname_109, R.drawable.sname_110, 
 		R.drawable.sname_111, R.drawable.sname_112, R.drawable.sname_113, R.drawable.sname_114};
 	
-	public static String FOLDER_QURAN_ARABIC = android.os.Environment.getExternalStorageDirectory() + "/alqalam/arabic/";
+	public static final int		SURAH_DIALOG_DOWNLOAD_REQUEST = 0x01;
+	public static final int		SURAH_DIALOG_DOWNLOAD_PROGRESS = 0x02;
+	public static final int		SURAH_DIALOG_DOWNLOAD_NOCONNECTION = 0x03;
+	public static final int		SURAH_DIALOG_NO_SDCARD = 0x04;
 	
-}
+	public static final String  FOLDER_QURAN_ARABIC ="/sdcard/alQalam/arabic/";
+	
+	}
  

@@ -1,5 +1,6 @@
 package com.uzislam.alqalam;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 public class AyatIconifiedText {
@@ -9,15 +10,15 @@ public class AyatIconifiedText {
 	private String		ayatUzbekText = null;
 	private Drawable	ayatBismillah = null;
 	private Drawable	ayatSpecialImage = null;
-	private Boolean		ayatBookmarked = false;
+	private int			ayatBackground = Color.TRANSPARENT;
 		
-	public AyatIconifiedText(long _id, int _order, String _arabic, String _uzbek, Drawable _spimage, Drawable _bismillah, boolean _isBookmarked) {
+	public AyatIconifiedText(long _id, int _order, String _arabic, String _uzbek, Drawable _spimage, Drawable _bismillah, int _ayatBackground) {
 		this.id = _id;
 		this.ayatOrder = _order;
 		this.ayatArabicText = _arabic;
 		this.ayatUzbekText = _uzbek;
 		this.ayatBismillah  = _bismillah;
-		this.ayatBookmarked = _isBookmarked;
+		this.ayatBackground = _ayatBackground;
 		this.ayatSpecialImage = _spimage;
 	}
 	
@@ -45,8 +46,8 @@ public class AyatIconifiedText {
 		return this.ayatSpecialImage;
 	}
 	
-	public Boolean getAyatBookmarked() {
-		return this.ayatBookmarked;
+	public int getAyatBackground() {
+		return this.ayatBackground;
 	}
 	
 }
