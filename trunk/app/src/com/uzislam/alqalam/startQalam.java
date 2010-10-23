@@ -1,13 +1,12 @@
 package com.uzislam.alqalam;
 
-import com.uzislam.alqalam.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -16,29 +15,26 @@ public class startQalam extends Activity {
 	private Handler aqHandler;
 	private ImageView frontSplash;
 	private LinearLayout mainView;
-	private ImageView tmpImg;
+	private ImageButton tmpImg;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-               
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        
         setContentView(R.layout.main);
         
         frontSplash = (ImageView) findViewById(R.id.splashimage);
         mainView = (LinearLayout) findViewById(R.id.mainview);
         
-        tmpImg = (ImageView) findViewById(R.id.imgQuran);
+        tmpImg = (ImageButton) findViewById(R.id.imgBtnQuran);
         tmpImg.setVisibility(View.GONE);
-        tmpImg = (ImageView) findViewById(R.id.imgBukhari);
+        tmpImg = (ImageButton) findViewById(R.id.imgBtnBukhari);
         tmpImg.setVisibility(View.GONE);
-        tmpImg = (ImageView) findViewById(R.id.imgMuslim);
+        tmpImg = (ImageButton) findViewById(R.id.imgBtnMuslim);
         tmpImg.setVisibility(View.GONE);
-        tmpImg = (ImageView) findViewById(R.id.imgTirmidi);
+        tmpImg = (ImageButton) findViewById(R.id.imgBtnTirmidi);
         tmpImg.setVisibility(View.GONE);
-        tmpImg = (ImageView) findViewById(R.id.imgAbudovud);
+        tmpImg = (ImageButton) findViewById(R.id.imgBtnAbudovud);
         tmpImg.setVisibility(View.GONE);
         
         aqHandler = new Handler ();
@@ -52,29 +48,29 @@ public class startQalam extends Activity {
 	 		frontSplash.setVisibility(View.GONE);
 	 		mainView.setBackgroundResource(R.drawable.background) ;
 	 		
-	 		final ImageView  imgQuran = (ImageView) findViewById(R.id.imgQuran);
-	 		imgQuran.setVisibility(View.VISIBLE);
-	 		imgQuran.setClickable(true);
-	 		imgQuran.setOnClickListener(new OnClickListener() {
+	 		final ImageButton  imgBtnQuran = (ImageButton) findViewById(R.id.imgBtnQuran);
+	 		imgBtnQuran.setVisibility(View.VISIBLE);
+	 		imgBtnQuran.setClickable(true);
+	 		imgBtnQuran.setOnClickListener(new OnClickListener() {
 	    		public void onClick(View v) {
 	    			 startActivity(new Intent(startQalam.this, QuranActivity.class));
 	    		}
 	        });
 	        
-	        final ImageView imgBukhari = (ImageView) findViewById(R.id.imgBukhari);
+	        final ImageButton imgBukhari = (ImageButton) findViewById(R.id.imgBtnBukhari);
 	        imgBukhari.setVisibility(View.VISIBLE);
 	        imgBukhari.setAlpha(80);
 	    	
 	        
-	        final ImageView imgMuslim = (ImageView) findViewById(R.id.imgMuslim);
+	        final ImageButton imgMuslim = (ImageButton) findViewById(R.id.imgBtnMuslim);
 	        imgMuslim.setVisibility(View.VISIBLE);
 	        imgMuslim.setAlpha(80);
 	    		        
-	        final ImageView imgTirmidi = (ImageView) findViewById(R.id.imgTirmidi);
+	        final ImageButton imgTirmidi = (ImageButton) findViewById(R.id.imgBtnTirmidi);
 	        imgTirmidi.setVisibility(View.VISIBLE);
 	        imgTirmidi.setAlpha(80);
 	    		        
-	        final ImageView imgAbudavud  = (ImageView) findViewById(R.id.imgAbudovud);
+	        final ImageButton imgAbudavud  = (ImageButton) findViewById(R.id.imgBtnAbudovud);
 	        imgAbudavud.setVisibility(View.VISIBLE);
 	    	imgAbudavud.setAlpha(80);
 	 	   }
