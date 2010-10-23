@@ -2,6 +2,7 @@ package com.uzislam.alqalam;
 
 import java.io.File;
 
+import android.app
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.net.Uri;
