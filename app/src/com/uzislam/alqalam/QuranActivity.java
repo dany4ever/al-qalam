@@ -110,7 +110,7 @@ public class QuranActivity extends Activity {
 	                             if (which == 2) 
 	                            	 dismissDialog(CONSTANTS.SURAH_DIALOG_DOWNLOAD_REQUEST);
 	                             else 
-	                            	 downloadSurah(which);
+	                            	 downloadSurah();
 	                             
 	                 }
 	             })
@@ -135,8 +135,8 @@ public class QuranActivity extends Activity {
 	}
 	
 	
-	private void downloadSurah(int download_option) {
-		
+	private void downloadSurah() {
+		//TODO: download arabic files;
 	}
 	
 	

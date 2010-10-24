@@ -118,8 +118,7 @@
 	</string-array>
 
 	<string-array name="DownloadOptions">
-        <item>Фақат ушбу сурани тушириб олиш</item>
-        <item>Барча йўқ сураларни тушириб олиш</item>
+        <item>Сураларни тушириб олиш</item>
         <item>Бекор қилиш</item>
     </string-array>
     
