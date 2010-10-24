@@ -102,7 +102,7 @@ public class SurahAdapter extends BaseAdapter {
 		mItems.add(it); 
 	}
 	
-	public void clear(){
+	public void clear() {
 		mItems.clear();
 	}
 
