@@ -7,8 +7,12 @@ import android.app.Dialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
@@ -110,10 +114,7 @@ public class QuranActivity extends Activity {
 	                     switch (which) {
                           case 0:
                         	  dismissDialog(CONSTANTS.SURAH_DIALOG_DOWNLOAD_REQUEST);
-                        	  Intent marketIntent = new Intent(Intent.ACTION_VIEW,
-                                      Uri.parse(ARABIC_DATA_PACK_INSTALLER_MARKET_LINK));
-                              startActivity(marketIntent);
-                              finish();
+                        	  downloadSurah();
                               break;
                               
                           default:
@@ -136,6 +137,22 @@ public class QuranActivity extends Activity {
 		}
 		 
 		return null;
+	}
+	
+	private void downloadSurah() {
+		try {
+			PackageManager pm = getPackageManager();
+			@SuppressWarnings("unused")
+			ApplicationInfo appInfo = pm.getApplicationInfo(/*Android Market*/"com.android.vending", 0);
+		} catch (NameNotFoundException nnfe) {
+			// The user device has no Android Market
+			Toast.makeText(this, R.string.no_android_market, Toast.LENGTH_LONG);
+			return;
+		}
+		Intent marketIntent = new Intent(Intent.ACTION_VIEW,
+				Uri.parse(ARABIC_DATA_PACK_INSTALLER_MARKET_LINK));
+		startActivity(marketIntent);
+		finish();
 	}
 	
 	
