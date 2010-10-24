@@ -6,26 +6,46 @@ import java.io.InputStreamReader;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 public class SurahActivity extends Activity {
-	private static ListView		AyatList; 
-	private static  String []	AYATS ; 
-	private static  String []	AYATSARABIC;
-	private static int			surahNumber = 0;
+
+	private String []		AYATS ; 
+	private String []		AYATSARABIC;
+	private int				surahNumber = 0;
 	
 	public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
-    		
+    
+	private ImageView 			surahTitle;
+	private SurahAdapter 		surahAdapter;
+	private AyatIconifiedText	ait;
+	private Drawable 			iconBismillah;
+	private ListView			ayatList; 
+
+	private final int	MENU_ITEM_PLAY = 0x01;
+	private final int	MENU_ITEM_PAUSE = 0x02;
+	private final int	MENU_ITEM_TRANSLATION = 0x03;
+	private final int	MENU_ITEM_RECITER = 0x04;
+	private final int	MENU_ITEM_HELP = 0x05;
+	
+	private boolean		isAudioPlaying = false;
+
+	
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);   
         setContentView(R.layout.surah);
         
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        
        
         Bundle extras = getIntent().getExtras();
         
@@ -34,9 +54,53 @@ public class SurahActivity extends Activity {
         }
         
         // Set chapter image title 
-        ImageView 		surahTitle = (ImageView) findViewById(R.id.suraName);
-        surahTitle.setImageResource(CONSTANTS.SurahTitles[surahNumber]);
-            	
+        surahTitle = (ImageView) findViewById(R.id.suraName);
+        
+        //get Bismillah image
+        iconBismillah = getResources().getDrawable(R.drawable.bismillah);
+        
+        // create new chapter adapter
+        surahAdapter = new SurahAdapter(this); 	
+        
+        // get AyatList View 
+        ayatList = (ListView)findViewById(R.id.AyaList);  
+        
+        // Display Surah
+        showSurah();
+        
+        final ImageButton  imgBtnPrevious = (ImageButton) findViewById(R.id.headerPrev);
+        final ImageButton  imgBtnNext = (ImageButton) findViewById(R.id.headerNext);
+ 		
+        imgBtnPrevious.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			surahNumber--;
+    			if (surahNumber < 0) {
+    				surahNumber = 0;
+    				return;
+    			}
+    			 showSurah();
+    		}
+        });
+        
+        imgBtnNext.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			surahNumber++;
+    			if (surahNumber > 113) {
+    				surahNumber = 113;
+    				return;
+    			}
+    			 showSurah();
+    		}
+        });
+ 		
+ 	}
+	
+	private void showSurah() {
+		
+		surahAdapter.clear();
+		
+		surahTitle.setImageResource(CONSTANTS.SurahTitles[surahNumber]);
+	  
         // create string arrays for verses
         AYATS = new String[CONSTANTS.SurahNumberOfAyats[surahNumber]];
         AYATSARABIC = new String [CONSTANTS.SurahNumberOfAyats[surahNumber]];
@@ -46,11 +110,6 @@ public class SurahActivity extends Activity {
        
         // reads string from file and puts AYATS array, and reads image  to put AYATSARABIC
         readFileToArray(surahFileLink);
-        
-        // create new chapter adapter
-        SurahAdapter		surahAdapter = new SurahAdapter(this); 	
-        AyatIconifiedText	ait;
-        Drawable 			iconBismillah = getResources().getDrawable(R.drawable.bismillah);
         
         for (int i=0; i < CONSTANTS.SurahNumberOfAyats[surahNumber] ; i++) {
         	
@@ -63,14 +122,13 @@ public class SurahActivity extends Activity {
         	surahAdapter.addItem(ait);
         }
         
-        // make verses appear in list view
-        AyatList = (ListView)findViewById(R.id.AyaList);     
-        AyatList.setAdapter(surahAdapter);
-        AyatList.setCacheColorHint(00000000); 
-        AyatList.setDivider(null);
- 	}
+        // make verses appear in list view   
+        ayatList.setAdapter(surahAdapter);
+        ayatList.setCacheColorHint(00000000); 
+        ayatList.setDivider(null);
+	}
 	
-	public void readFileToArray(String SurahFileName) {
+	private void readFileToArray(String SurahFileName) {
 				
 		BufferedReader udis = null;
 		//BufferedReader adis = null;
@@ -109,7 +167,7 @@ public class SurahActivity extends Activity {
 				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC +(surahNumber+1)+"/"+SNM+ANM+".gdw";
 				//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
 
-				index++;				
+				index++;		
 			}
 		}
 		catch (IOException e) {
@@ -133,6 +191,65 @@ public class SurahActivity extends Activity {
 		return null;
 		
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
+    
+  	
+    	mainMenu.clear();
+    	
+    	MenuItem subitem;
+    	
+		mainMenu.setQwertyMode(true);
+		
+		if (!isAudioPlaying) {
+			subitem = mainMenu.add(0, MENU_ITEM_PLAY, 0 ,"Play");
+			subitem.setIcon(android.R.drawable.ic_media_play);
+		}
+		
+		else {
+			subitem = mainMenu.add(0, MENU_ITEM_PAUSE, 0 ,"Pause");
+			subitem.setIcon(android.R.drawable.ic_media_pause);
+		}
+		
+		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 ,"Translation");
+		subitem.setIcon(android.R.drawable.ic_menu_agenda);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 ,"Reciter");
+		subitem.setIcon(android.R.drawable.ic_menu_recent_history);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Help");
+		subitem.setIcon(android.R.drawable.ic_menu_help);
+		
+    	return true;
+    }	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		
+    	switch (menuItem.getItemId()) {	
+
+    		case MENU_ITEM_PLAY :
+    			return true;
+    			
+    		case MENU_ITEM_PAUSE :
+    			return true;
+    		
+    		case MENU_ITEM_RECITER :
+    			return true;
+    			
+    		case MENU_ITEM_TRANSLATION :
+    			return true;
+    			
+    		case MENU_ITEM_HELP:
+    			//startActivity(new Intent(this, helpActivity.class));
+    			return true;
+
+    	}
+	   
+    	return false;
+   }
+	
 	
 	private int  getAyatBackgroundColor() {
 		//TODO: differentiate the color of bookmarked or playing verse background.

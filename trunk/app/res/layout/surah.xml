@@ -15,11 +15,18 @@
     		android:layout_height="wrap_content"
     		android:src="@drawable/headerabove" />
     		
-    <ImageView android:id="@+id/headerImgLeft"
+    <!--  ImageView android:id="@+id/headerImgLeft"
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
     		android:src="@drawable/header_leftup"
-    		android:layout_alignLeft="@id/headerImg" />
+    		android:layout_alignLeft="@id/headerImg" /-->
+    		
+    <ImageButton android:id="@+id/headerPrev" 
+	     	android:src="@drawable/btn_header_left"
+	     	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:background="@null"
+	    	android:layout_alignLeft="@id/headerImg"  />
     		
     <ImageView android:id="@+id/suraName"
     		android:layout_width="wrap_content" 
@@ -28,11 +35,18 @@
     		android:layout_centerInParent="true"
     		android:layout_centerHorizontal="true"/>
     		
-   	<ImageView android:id="@+id/headerImgRight"
+   	<!--  ImageView android:id="@+id/headerImgRight"
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
     		android:src="@drawable/header_rightup"
-    		android:layout_alignRight="@id/headerImg" />
+    		android:layout_alignRight="@id/headerImg" /-->
+    		
+      <ImageButton android:id="@+id/headerNext" 
+	     	android:src="@drawable/btn_header_right"
+	     	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:background="@null"
+	    	android:layout_alignRight="@id/headerImg"  />
     		
     </RelativeLayout>
    

@@ -19,7 +19,6 @@ public class QuranActivity extends Activity {
 	private ListView			gSurahList; 	
 	private static String[] 	gSurahTitles;
 	private static boolean[]	gSurahIsDownloaded;
-	private int					gSelectSurahIndex ;
 	private String				LOG_MAIN = "Al-Qalam Quran Activity";
 	private static final String ARABIC_DATA_PACK_INSTALLER_MARKET_LINK =
 		"market://search?q=pname:com.uzislam.alqalam.arabicinstaller";
@@ -61,13 +60,11 @@ public class QuranActivity extends Activity {
 						showDialog(CONSTANTS.SURAH_DIALOG_NO_SDCARD);
 					}
 					else if (gSurahIsDownloaded[index]) {
-						gSelectSurahIndex = index;
 						Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
 						quranIntent.putExtra("sNumber", index);
 						startActivity(quranIntent);
 					} 
 					else {
-						gSelectSurahIndex = index;
 						showDialog(CONSTANTS.SURAH_DIALOG_DOWNLOAD_REQUEST);
 					}
 			}
@@ -93,10 +90,10 @@ public class QuranActivity extends Activity {
 		// TODO: differentiate audio icon based on download, playing, or get
 		return getResources().getDrawable(R.drawable.index_sound_get);
 	}
-	
+
 	private Drawable getPlaceIcon() {
 		// TODO: differentiate Surah revealed place: Makkah or Madina 
-		return null;
+		return null; //getResources().getDrawable(R.drawable.mecca);
 	}
 
 	
@@ -142,11 +139,6 @@ public class QuranActivity extends Activity {
 		}
 		 
 		return null;
-	}
-	
-	
-	private void downloadSurah() {
-		//TODO: download arabic files;
 	}
 	
 	
