@@ -4,6 +4,7 @@ import java.io.File;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.content.DialogInterface;
@@ -20,6 +21,8 @@ public class QuranActivity extends Activity {
 	private static boolean[]	gSurahIsDownloaded;
 	private int					gSelectSurahIndex ;
 	private String				LOG_MAIN = "Al-Qalam Quran Activity";
+	private static final String ARABIC_DATA_PACK_INSTALLER_MARKET_LINK =
+		"market://search?q=pname:com.uzislam.alqalam.arabicinstaller";
 	//private static boolean[]	SurahIsAudioDownloaded;
 	
 	@Override
@@ -107,11 +110,18 @@ public class QuranActivity extends Activity {
 	             .setCancelable(false)
 	             .setItems(R.array.DownloadOptions, new DialogInterface.OnClickListener() {
 	                 public void onClick(DialogInterface dialog, int which) {
-	                             if (which == 2) 
-	                            	 dismissDialog(CONSTANTS.SURAH_DIALOG_DOWNLOAD_REQUEST);
-	                             else 
-	                            	 downloadSurah();
-	                             
+	                     switch (which) {
+                          case 0:
+                        	  dismissDialog(CONSTANTS.SURAH_DIALOG_DOWNLOAD_REQUEST);
+                        	  Intent marketIntent = new Intent(Intent.ACTION_VIEW,
+                                      Uri.parse(ARABIC_DATA_PACK_INSTALLER_MARKET_LINK));
+                              startActivity(marketIntent);
+                              finish();
+                              break;
+                              
+                          default:
+                              dismissDialog(CONSTANTS.SURAH_DIALOG_DOWNLOAD_REQUEST);
+	                     }	                             
 	                 }
 	             })
 	             .create();
