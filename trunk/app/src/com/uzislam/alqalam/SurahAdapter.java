@@ -77,7 +77,7 @@ public class SurahAdapter extends BaseAdapter {
      
          Bitmap arabicAyat = BitmapFactory.decodeFile(mItems.get(position).getAyatArabicText());
          
-         if (SurahActivity.displaymetrics.density == DisplayMetrics.DENSITY_HIGH)
+         if (SurahActivity.displaymetrics.densityDpi == DisplayMetrics.DENSITY_HIGH)
         	 arabicAyat.setDensity((int)(SurahActivity.displaymetrics.densityDpi/1.45));
          
          vHolder.AyatArabic.setImageBitmap(arabicAyat);
@@ -91,7 +91,6 @@ public class SurahAdapter extends BaseAdapter {
      static class ViewHolder {
     	 TextView		AyatOrder;
     	 ImageView		AyatBismillah;
-    	 //TextView		AyatArabic;
     	 ImageView		AyatArabic;
          TextView		AyatUzbek;
          ImageView		AyatSpecialImage;

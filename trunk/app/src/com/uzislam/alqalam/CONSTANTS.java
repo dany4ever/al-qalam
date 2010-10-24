@@ -1,8 +1,5 @@
 package com.uzislam.alqalam;
 
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
-
 public class CONSTANTS {
 	
 	public static int	numberOfSurahs = 114;
