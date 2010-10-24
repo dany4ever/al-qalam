@@ -36,17 +36,18 @@
     		android:layout_height="wrap_content"
     		android:paddingLeft="4pt" />
     		
-    	<TextView android:id="@+id/ayatArabicText" 
+    	<!-- TextView android:id="@+id/ayatArabicText" 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content"
     		android:padding="10dip"
     		android:gravity="right"
     		android:textColor="#222222"
-    		android:textSize="12pt"   />
+    		android:textSize="12pt"   /-->
     		
-		<!-- ImageView android:id="@+id/ayatArabicText" 
+		<ImageView android:id="@+id/ayatArabicText" 
     		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content"  /-->
+    		android:layout_height="wrap_content"
+    	 />
     		
     	<TextView android:id="@+id/ayatUzbekText" 
     		android:layout_width="wrap_content" 
