@@ -126,12 +126,9 @@ public class QuranActivity extends Activity {
 			 case CONSTANTS.SURAH_DIALOG_NO_SDCARD:
 				 return new AlertDialog.Builder(QuranActivity.this)
 	                .setIcon(R.drawable.alert_dialog_icon)
-	                .setTitle("Ташқи хотира (sd card) юкланмаган ёки йўқ")
-					.setPositiveButton("Тасдиқ", new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int whichButton) {
-	                    }
-	                })
-	               .create();
+	                .setTitle(R.string.no_sd_card)
+					.setPositiveButton(R.string.btn_confirm, null)
+					.create();
 				 
 			 case CONSTANTS.SURAH_DIALOG_DOWNLOAD_PROGRESS:
 				 return null;
