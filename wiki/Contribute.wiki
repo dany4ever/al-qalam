@@ -1,4 +1,5 @@
 #summary How can one contribute to this project?
+#labels Featured
 
 = How can I contribute to this project? =
  # Use Al-Qalam
