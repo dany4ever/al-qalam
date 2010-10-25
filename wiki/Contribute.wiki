@@ -1,0 +1,18 @@
+#summary How can one contribute to this project?
+
+= How can I contribute to this project? =
+ # Use Al-Qalam
+  * Download Al-Qalam from the Android Market
+  * Manually download & install Al-Qalam from *[http://code.google.com/p/al-qalam/downloads/list Downloads]* section
+ # Suggest [http://code.google.com/p/al-qalam/wiki/PlansForNextReleaseAkaVersion2 new features]
+ # Report bugs
+  * *[http://code.google.com/p/al-qalam/issues/list Report bugs]* you have detected
+ # Commit code
+  * First of all, build your *own* Al-Qalam
+    # checkout the working copy of the project:
+      {{{svn checkout http://al-qalam.googlecode.com/svn/trunk/ al-qalam-read-only}}}
+    # [http://developer.android.com/sdk/index.html Download] and [http://developer.android.com/sdk/installing.html install]
+    # Create new project from existing source, i.e. from checked out Al-Qalam source
+    # Build Al-Qalam and try test runs
+  * Make your changes
+  * Commit your changes
