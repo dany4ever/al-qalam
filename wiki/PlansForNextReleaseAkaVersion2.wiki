@@ -5,10 +5,13 @@
   # Adjust layout to multi-resolution screens
 
 =New features=
-  # Create databases for translations
-  # Impelement search functionality
+  # SQL databases for translations
+  # Search functionality
+  # Multi-language UI
+  # Include Russian translation
+  # Qur'an only view (no translation will be shown)
 
 
 
 ----
-_Please leave your suggestions in comments field_
+_Please leave your suggestion(s) below_
