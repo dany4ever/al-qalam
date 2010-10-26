@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.content.DialogInterface;
@@ -25,7 +26,7 @@ public class QuranActivity extends Activity {
 	private static boolean[]	gSurahIsDownloaded;
 	private String				LOG_MAIN = "Al-Qalam Quran Activity";
 	private static final String ARABIC_DATA_PACK_INSTALLER_MARKET_LINK =
-		"market://search?q=pname:com.uzislam.alqalam.arabicinstaller";
+		"market://details?id=com.uzislam.alqalam.arabicinstaller";
 	//private static boolean[]	SurahIsAudioDownloaded;
 	
 	@Override
@@ -60,7 +61,7 @@ public class QuranActivity extends Activity {
 			public void onItemClick(AdapterView<?> adapter, View view,
 					final int index, long order) {
 				
-					if (isSdCardAccessible() == false) {
+					if (!isSdCardAccessible()) {
 						showDialog(CONSTANTS.SURAH_DIALOG_NO_SDCARD);
 					}
 					else if (gSurahIsDownloaded[index]) {
@@ -157,6 +158,7 @@ public class QuranActivity extends Activity {
 	
 	
 	public static boolean isSdCardAccessible() {  
-	    return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);  
+	    String state = Environment.getExternalStorageState();
+		return Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equalsIgnoreCase(state);  
 	} 
 }
