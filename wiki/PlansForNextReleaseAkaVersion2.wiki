@@ -1,8 +1,9 @@
-#labels Phase-Requirements,Al-Qalam
+#labels Phase-Requirements,Al-Qalam,Featured
 =`[`Al-Qalam`]` Plans for version 2=
 
 =Bug fixes=
   # Adjust layout to multi-resolution screens
+  # Fix/correct typos in translation(s)
 
 =New features=
   # SQL databases for translations
