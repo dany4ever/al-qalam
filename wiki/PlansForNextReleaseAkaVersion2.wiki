@@ -1,11 +1,11 @@
 #labels Phase-Requirements,Al-Qalam,Featured
-=`[`Al-Qalam`]` Plans for version 2=
-
-==Bug fixes==
+=Plans for version 2=
+==Al-Qalam==
+===Bug fixes===
   # Adjust layout to multi-resolution screens
   # Fix/correct typos in translation(s)
 
-==New features==
+===New features===
   # SQL databases for translations
   # Search functionality
   # Multi-language UI
@@ -17,9 +17,11 @@
   # Monotonic background (?)
 
 
-=`[`Al-Qalam Data Pack Installer`]` Plans for version 2=
-==Bug fixes==
-==New features==
+==Data Pack Installer==
+===Bug fixes===
+===New features===
   # Add installation progress bar
+
+
 ----
 _Please leave your suggestion(s) below_
