@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+//import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +22,7 @@ public class SurahActivity extends Activity {
 	private String []		AYATSARABIC;
 	private int				surahNumber = 0;
 	
-	public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
+	//public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
     
 	private ImageView 			surahTitle;
 	private SurahAdapter 		surahAdapter;
@@ -45,7 +45,7 @@ public class SurahActivity extends Activity {
         super.onCreate(savedInstanceState);   
         setContentView(R.layout.surah);
         
-        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        //getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
        
         Bundle extras = getIntent().getExtras();
         
