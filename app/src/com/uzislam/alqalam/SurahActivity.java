@@ -203,22 +203,22 @@ public class SurahActivity extends Activity {
 		mainMenu.setQwertyMode(true);
 		
 		if (!isAudioPlaying) {
-			subitem = mainMenu.add(0, MENU_ITEM_PLAY, 0 ,"Play");
+			subitem = mainMenu.add(0, MENU_ITEM_PLAY, 0 ,"Тинглаш");
 			subitem.setIcon(android.R.drawable.ic_media_play);
 		}
 		
 		else {
-			subitem = mainMenu.add(0, MENU_ITEM_PAUSE, 0 ,"Pause");
+			subitem = mainMenu.add(0, MENU_ITEM_PAUSE, 0 ,"Пауза");
 			subitem.setIcon(android.R.drawable.ic_media_pause);
 		}
 		
-		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 ,"Translation");
+		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 ,"Таржима");
 		subitem.setIcon(android.R.drawable.ic_menu_agenda);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 ,"Reciter");
+		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 ,"Қори");
 		subitem.setIcon(android.R.drawable.ic_menu_recent_history);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Help");
+		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
 		subitem.setIcon(android.R.drawable.ic_menu_help);
 		
     	return true;
@@ -230,9 +230,11 @@ public class SurahActivity extends Activity {
     	switch (menuItem.getItemId()) {	
 
     		case MENU_ITEM_PLAY :
+    			isAudioPlaying = true;
     			return true;
     			
     		case MENU_ITEM_PAUSE :
+    			isAudioPlaying = false;
     			return true;
     		
     		case MENU_ITEM_RECITER :
