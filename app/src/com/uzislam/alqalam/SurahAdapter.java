@@ -5,7 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-//import android.util.DisplayMetrics;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +17,11 @@ import android.widget.TextView;
 public class SurahAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private List<AyatIconifiedText> mItems = new ArrayList<AyatIconifiedText>(); 
-    public SurahAdapter(Context context) {
+    private Context _context;
+	
+	public SurahAdapter(Context context) {
 		this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this._context = context;
 	}
 	
 	@Override
@@ -74,8 +77,8 @@ public class SurahAdapter extends BaseAdapter {
      
          Bitmap arabicAyat = BitmapFactory.decodeFile(mItems.get(position).getAyatArabicText());
          
-         /*if (SurahActivity.displaymetrics.densityDpi == DisplayMetrics.DENSITY_HIGH)
-        	 arabicAyat.setDensity((int)(SurahActivity.displaymetrics.densityDpi/1.45));*/
+         if (SurahActivity.displaymetrics.densityDpi == DisplayMetrics.DENSITY_HIGH)
+        	 arabicAyat.setDensity((int)(SurahActivity.displaymetrics.densityDpi/1.45));
          
          vHolder.AyatArabic.setImageBitmap(arabicAyat);
        	 
