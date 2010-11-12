@@ -16,6 +16,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -25,9 +27,15 @@ public class QuranActivity extends Activity {
 	private static String[] 	gSurahTitles;
 	private static boolean[]	gSurahIsDownloaded;
 	private String				LOG_MAIN = "Al-Qalam Quran Activity";
+
 	private static final String ARABIC_DATA_PACK_INSTALLER_MARKET_LINK =
 		"market://details?id=com.uzislam.alqalam.arabicinstaller";
 	//private static boolean[]	SurahIsAudioDownloaded;
+	
+	private final int	MENU_ITEM_ABOUT = 0x01;
+	private final int	MENU_ITEM_BOOKMARKS = 0x02;
+	private final int	MENU_ITEM_SETTINGS = 0x03;
+	private final int	MENU_ITEM_HELP = 0x05;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -161,4 +169,55 @@ public class QuranActivity extends Activity {
 	    String state = Environment.getExternalStorageState();
 		return Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equalsIgnoreCase(state);  
 	} 
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
+  	
+    	mainMenu.clear();
+    	
+    	MenuItem subitem;
+    	
+		mainMenu.setQwertyMode(true);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_ABOUT, 0 ,"Маълумот");
+		subitem.setIcon(android.R.drawable.ic_menu_info_details);
+				
+		subitem = mainMenu.add(0, MENU_ITEM_BOOKMARKS, 0 ,"Хатчўплар");
+		subitem.setIcon(android.R.drawable.ic_menu_agenda);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
+		subitem.setIcon(android.R.drawable.ic_menu_help);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_SETTINGS, 0 ,"Танловлар");
+		subitem.setIcon(android.R.drawable.ic_menu_preferences);
+		
+		
+		
+    	return true;
+    }	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		
+    	switch (menuItem.getItemId()) {	
+
+    		case MENU_ITEM_ABOUT :
+    			return true;
+    			
+    		case MENU_ITEM_BOOKMARKS :
+    			return true;
+    		
+    		case MENU_ITEM_SETTINGS :
+    			startActivity(new Intent(this, SettingsActivity.class));
+    			return true;
+    			
+    		case MENU_ITEM_HELP:
+    			//startActivity(new Intent(this, helpActivity.class));
+    			return true;
+
+    	}
+	   
+    	return false;
+   }
+
 }
