@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen  
-    xmlns:android="http://schemas.android.com/apk/res/android">  
-    <PreferenceCategory android:title="Қуръон Каримга оид Танловлар">
-		<ListPreference  
-			android:key="TransOption"  
-			android:title="Таржима Тили"  
-			android:summary="Қуръон маъноларининг таржима тилини танланг"  
-			android:entries="@array/TranslationOptions"  
-			android:entryValues="@array/TranslationOptions"  
-			android:dialogTitle="Таржима " /> 	
-	</PreferenceCategory>
+<PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">  
+   <ListPreference  
+		android:key="TransOption"  
+		android:title="Таржима Тили"  
+		android:summary="Қуръон маъноларининг таржима тилини танланг"  
+		android:entries="@array/TranslationOptions"  
+		android:entryValues="@array/TranslationOptions"  
+		android:dialogTitle="Таржима " /> 	
+
+	<ListPreference  
+		android:key="ReciterOption"  
+		android:title="Қорилар Рўйҳати"  
+		android:summary="Қуръон арабча қироатини танланг"  
+		android:entries="@array/ReciterOptions"  
+		android:entryValues="@array/ReciterOptions"  
+		android:dialogTitle="Қорилар" /> 
 </PreferenceScreen>  
