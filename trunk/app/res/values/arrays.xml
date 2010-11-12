@@ -128,5 +128,12 @@
 		<item>Русский</item>
 		<item>Таржимасиз</item>   
 	</string-array>  
+	<string-array name="ReciterOptions">  
+		<item>Ал-Ғомидий</item>
+		<item>Ал-Хусорий</item>
+		<item>Аш-Шатрий</item>
+		<item>Мишарий Ал-Афасий</item>
+		   
+	</string-array>
     
 </resources>
