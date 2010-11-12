@@ -3,9 +3,14 @@ package com.uzislam.alqalam;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Collections;
+
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-//import android.util.DisplayMetrics;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +27,7 @@ public class SurahActivity extends Activity {
 	private String []		AYATSARABIC;
 	private int				surahNumber = 0;
 	
-	//public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
+	public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
     
 	private ImageView 			surahTitle;
 	private SurahAdapter 		surahAdapter;
@@ -38,14 +43,16 @@ public class SurahActivity extends Activity {
 	
 	private boolean		isAudioPlaying = false;
 
-	
+	private SharedPreferences			commonPrefs;
+	private SharedPreferences.Editor 	preferenceEditor = null;
+	private int 						TranslationType = 0;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);   
         setContentView(R.layout.surah);
         
-        //getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
        
         Bundle extras = getIntent().getExtras();
         
@@ -53,6 +60,12 @@ public class SurahActivity extends Activity {
         	surahNumber = extras.getInt("sNumber");
         }
         
+        commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
+        preferenceEditor = commonPrefs.edit();
+        
+		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)
+        TranslationType = commonPrefs.getInt("TransOption", 0);
+		 
         // Set chapter image title 
         surahTitle = (ImageView) findViewById(R.id.suraName);
         
@@ -105,11 +118,22 @@ public class SurahActivity extends Activity {
         AYATS = new String[CONSTANTS.SurahNumberOfAyats[surahNumber]];
         AYATSARABIC = new String [CONSTANTS.SurahNumberOfAyats[surahNumber]];
         
-        // get file link to Uzbek translation (in assets)
-        String surahFileLink = + (surahNumber + 1) + ".txt";
-       
-        // reads string from file and puts AYATS array, and reads image  to put AYATSARABIC
-        readFileToArray(surahFileLink);
+        
+        // if  Surah is shown with translation
+        if (TranslationType != 3) { 
+	    
+        	// get file link to Translation (in assets)
+	        String surahFileLink = + (surahNumber + 1) + ".txt";
+	       
+	        // reads string from file and puts AYATS array, and reads image  to put AYATSARABIC
+	        readFileToArray(surahFileLink);
+
+        }
+        // else {
+        // 	Arrays.fill(AYATS, " ");
+        // }
+        
+        readArabicToArray();
         
         for (int i=0; i < CONSTANTS.SurahNumberOfAyats[surahNumber] ; i++) {
         	
@@ -128,19 +152,7 @@ public class SurahActivity extends Activity {
         ayatList.setDivider(null);
 	}
 	
-	private void readFileToArray(String SurahFileName) {
-				
-		BufferedReader udis = null;
-		//BufferedReader adis = null;
-		try {
-			udis = new BufferedReader(new InputStreamReader(getAssets().open("uzbek-cyr/"+SurahFileName))); 
-			//adis = new BufferedReader(new InputStreamReader(getAssets().open("arabic/"+SurahFileName), "utf-8"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		int  	index = 0;
-		String  uzLine = ""; 
+	private void readArabicToArray() {
 		
 		String  SNM, ANM;
 		
@@ -151,9 +163,8 @@ public class SurahActivity extends Activity {
 		else 
 			SNM = ""+(surahNumber+1);
 		
-		try {
-			while((uzLine = udis.readLine()) != null) {
-				
+		for (int index=0;index<CONSTANTS.SurahNumberOfAyats[surahNumber];index++) {
+		
 				if (index < 10 )
 					ANM = "00"+index;
 				else if (index < 100)
@@ -161,12 +172,35 @@ public class SurahActivity extends Activity {
 				else 
 					ANM = ""+index;
 				
-				
-				AYATS[index] = uzLine;
 				// server : http://al-qalam.googlecode.com/svn/trunk/assets/arabic/1/001000.gdw
 				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC +(surahNumber+1)+"/"+SNM+ANM+".gdw";
 				//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
-
+		}
+	}
+	
+	private void readFileToArray(String SurahFileName) {
+	
+		// Add Language Directory
+		SurahFileName = CONSTANTS.LanguageDirectory[TranslationType] + "/" + SurahFileName;
+		
+		Log.i("al-Qalam SurahActivity", "DIR : "+ SurahFileName + " VAL: " + TranslationType);
+		
+		BufferedReader udis = null;
+		//BufferedReader adis = null;
+		try {
+			udis = new BufferedReader(new InputStreamReader(getAssets().open(SurahFileName))); 
+			//adis = new BufferedReader(new InputStreamReader(getAssets().open("arabic/"+SurahFileName), "utf-8"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int  	index = 0;
+		String  trLine = ""; 
+		
+		try {
+			while((trLine = udis.readLine()) != null) {
+				
+				AYATS[index] = trLine;
 				index++;		
 			}
 		}

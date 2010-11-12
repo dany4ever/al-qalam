@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -16,6 +18,11 @@ public class startQalam extends Activity {
 	private ImageView frontSplash;
 	private LinearLayout mainView;
 	private ImageButton tmpImg;
+	
+	private final int	MENU_ITEM_ABOUT = 0x01;
+	private final int	MENU_ITEM_BOOKMARKS = 0x02;
+	private final int	MENU_ITEM_SETTINGS = 0x03;
+	private final int	MENU_ITEM_HELP = 0x05;
 	
     /** Called when the activity is first created. */
     @Override
@@ -38,8 +45,7 @@ public class startQalam extends Activity {
         tmpImg.setVisibility(View.GONE);
         
         aqHandler = new Handler ();
-        aqHandler.postDelayed(Splash, 2500);
-        
+        aqHandler.postDelayed(Splash, 1500);
         
     }
     
@@ -76,4 +82,54 @@ public class startQalam extends Activity {
 	 	   }
 	};   
     
+	@Override
+	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
+  	
+    	mainMenu.clear();
+    	
+    	MenuItem subitem;
+    	
+		mainMenu.setQwertyMode(true);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_ABOUT, 0 ,"Маълумот");
+		subitem.setIcon(android.R.drawable.ic_menu_info_details);
+				
+		subitem = mainMenu.add(0, MENU_ITEM_BOOKMARKS, 0 ,"Хатчўплар");
+		subitem.setIcon(android.R.drawable.ic_menu_agenda);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
+		subitem.setIcon(android.R.drawable.ic_menu_help);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_SETTINGS, 0 ,"Танловлар");
+		subitem.setIcon(android.R.drawable.ic_menu_preferences);
+		
+		
+		
+    	return true;
+    }	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		
+    	switch (menuItem.getItemId()) {	
+
+    		case MENU_ITEM_ABOUT :
+    			return true;
+    			
+    		case MENU_ITEM_BOOKMARKS :
+    			return true;
+    		
+    		case MENU_ITEM_SETTINGS :
+    			startActivity(new Intent(this, SettingsActivity.class));
+    			return true;
+    			
+    		case MENU_ITEM_HELP:
+    			//startActivity(new Intent(this, helpActivity.class));
+    			return true;
+
+    	}
+	   
+    	return false;
+   }
+	
 }
