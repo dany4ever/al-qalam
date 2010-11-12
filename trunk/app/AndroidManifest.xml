@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.uzislam.alqalam"
       android:versionCode="1"
-      android:versionName="1.0.1">
+      android:versionName="1.0">
       
     <supports-screens
       android:largeScreens="true"
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
  		<activity android:name=".QuranActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
-        <activity android:name=".SurahActivity" android:configChanges="keyboardHidden" />
+        <activity android:name=".SurahActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
         <activity android:name=".SettingsActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
     </application>
                
