@@ -122,4 +122,11 @@
         <item>Бекор қилиш</item>
     </string-array>
     
+    <string-array name="TranslationOptions">  
+		<item>Ўзбекча</item>
+		<item>O\'zbekcha</item>
+		<item>Русский</item>
+		<item>Таржимасиз</item>   
+	</string-array>  
+    
 </resources>
