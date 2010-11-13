@@ -53,18 +53,27 @@ public class QuranUzParser {
 				
 		        for (int j=1;j<list.size();j++) {
 		        	
-		        	/*inputLine = list.elementAt(j).toPlainTextString();
-		        	
+		        	inputLine = list.elementAt(j).toPlainTextString();
+		        
 		        	int startIndex = inputLine.indexOf('.') + 2;
-		        	//int endIndex = inputLine.lastIndexOf('(');
 		        	
-		        	inputLine = inputLine.substring(startIndex);//, endIndex);
+		        	inputLine = inputLine.substring(startIndex);
 
+		        	if (inputLine.charAt(inputLine.length()-1) == ')') {
+		        			int endIndex = inputLine.lastIndexOf('(');
+		        			
+		        			if (endIndex == -1)
+				        		endIndex = inputLine.length() - 1;
+		        			
+		        			inputLine = inputLine.substring(0, endIndex);
+		        	}
+		        	
+		        	//System.out.println("Start : " + startIndex + " End :"+ endIndex);
+		        	
 			        writer.write(inputLine);
 			        
-		        	*/
+		        	//writer.write(list.elementAt(j).toPlainTextString());
 			        
-		        	writer.write(list.elementAt(j).toPlainTextString());
 			        writer.newLine();
 		        }
 
