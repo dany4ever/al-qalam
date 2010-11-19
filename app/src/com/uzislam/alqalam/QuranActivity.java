@@ -180,16 +180,16 @@ public class QuranActivity extends Activity {
 		mainMenu.setQwertyMode(true);
 		
 		subitem = mainMenu.add(0, MENU_ITEM_ABOUT, 0 ,"Маълумот");
-		subitem.setIcon(android.R.drawable.ic_menu_info_details);
+		subitem.setIcon(R.drawable.menu_icon_info);
 				
 		subitem = mainMenu.add(0, MENU_ITEM_BOOKMARKS, 0 ,"Хатчўплар");
-		subitem.setIcon(android.R.drawable.ic_menu_agenda);
+		subitem.setIcon(R.drawable.menu_icon_bookmarks);
 		
 		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
-		subitem.setIcon(android.R.drawable.ic_menu_help);
+		subitem.setIcon(R.drawable.menu_icon_help);
 		
 		subitem = mainMenu.add(0, MENU_ITEM_SETTINGS, 0 ,"Танловлар");
-		subitem.setIcon(android.R.drawable.ic_menu_preferences);
+		subitem.setIcon(R.drawable.menu_icon_settings);
 		
 		
 		
