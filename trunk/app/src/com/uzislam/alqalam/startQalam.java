@@ -13,13 +13,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class startQalam extends Activity {
-	
+
 	private Handler aqHandler;
 	private ImageView frontSplash;
 	private LinearLayout mainView;
 	private ImageButton tmpImg;
 		
-    /** Called when the activity is first created. */
+	private final int	MENU_ITEM_ABOUT = 0x01;
+	private final int	MENU_ITEM_HELP = 0x02;
+	
+	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,5 +80,39 @@ public class startQalam extends Activity {
 	 	   }
 	};   
     
+	@Override
+	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
+  	
+    	mainMenu.clear();
+    	
+    	MenuItem subitem;
+    	
+		mainMenu.setQwertyMode(true);
+		
+		subitem = mainMenu.add(0, MENU_ITEM_ABOUT, 0 ,"Маълумот");
+		subitem.setIcon(R.drawable.menu_icon_info);
+	
+		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
+		subitem.setIcon(R.drawable.menu_icon_help);	
+		
+    	return true;
+    }	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		
+    	switch (menuItem.getItemId()) {	
+
+    		case MENU_ITEM_ABOUT :
+    			return true;
+    			
+    		case MENU_ITEM_HELP:
+    			//startActivity(new Intent(this, helpActivity.class));
+    			return true;
+
+    	}
+	   
+    	return false;
+   }
 		
 }
