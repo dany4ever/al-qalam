@@ -41,9 +41,17 @@ public class CONSTANTS {
 		public static final int		SURAH_DIALOG_NO_SDCARD = 0x04;
 		
 		public static final String  FOLDER_QURAN_ARABIC ="/sdcard/alQalam/arabic/";
+		public static final String  FOLDER_QURAN_AUDIO ="/sdcard/alQalam/audio/";
 		
 		public static final String 	SETTINGS_FILE = "alQalam.set";
 	
 		public static String[] LanguageDirectory = {"uzbek-cyr", "uzbek-lat", "russian"};
+		public static String[] ReciterDirectory =  {"gamidi", "shatri"};
+		
+		public static final int 	AUDIO_NOT_INTIALIZED = 0x01;
+		public static final int 	AUDIO_PLAYING = 0x02;
+		public static final int 	AUDIO_PAUSED = 0x03;
+		public static final int 	AUDIO_STOPPED = 0x04;
+
 	}
  

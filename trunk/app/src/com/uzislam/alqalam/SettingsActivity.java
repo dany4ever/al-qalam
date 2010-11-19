@@ -15,7 +15,7 @@ public class SettingsActivity extends PreferenceActivity {
 	private SharedPreferences		commonPrefs = null;
 	public SharedPreferences.Editor preferenceEditor = null;
 	
-	private ListPreference		translationOption;
+	private ListPreference		translationOption, reciterOption;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,19 @@ public class SettingsActivity extends PreferenceActivity {
 	                int index = translationOption.findIndexOfValue(newValue.toString());  
 	                if (index != -1) {  
 	                	preferenceEditor.putInt("TransOption", index);
+	                	preferenceEditor.commit();
+	                }  
+	                return true;  
+	            }  
+	        });  
+	        
+	        reciterOption = (ListPreference) findPreference("ReciterOption");
+            
+	        reciterOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {  
+	            public boolean onPreferenceChange(Preference preference, Object newValue) {  
+	                int index = reciterOption.findIndexOfValue(newValue.toString());  
+	                if (index != -1) {  
+	                	preferenceEditor.putInt("ReciterOption", index);
 	                	preferenceEditor.commit();
 	                }  
 	                return true;  

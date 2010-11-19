@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -15,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
@@ -24,6 +30,7 @@ public class SurahActivity extends Activity {
 	private String []		AYATS ; 
 	private String []		AYATSARABIC;
 	private int				surahNumber = 0;
+	private int				currentAyat = 0;
 	
 	public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
     
@@ -39,11 +46,19 @@ public class SurahActivity extends Activity {
 	private final int	MENU_ITEM_RECITER = 0x04;
 	private final int	MENU_ITEM_HELP = 0x05;
 	
-	private boolean		isAudioPlaying = false;
+	private final int 	DIALOG_TRANSLATION = 0x01;
+	private final int	DIALOG_RECITER = 0x02;
+	
+	private int			audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
+	
 
 	private SharedPreferences			commonPrefs;
 	private SharedPreferences.Editor 	preferenceEditor = null;
 	private int 						TranslationType = 0;
+	private int							ReciterType = 0;
+	
+	private MediaPlayer					quranPlayer;
+	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +79,8 @@ public class SurahActivity extends Activity {
 		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)
         TranslationType = commonPrefs.getInt("TransOption", 0);
 		 
+        ReciterType = commonPrefs.getInt("ReciterOption", 0);
+        
         // Set chapter image title 
         surahTitle = (ImageView) findViewById(R.id.suraName);
         
@@ -227,52 +244,54 @@ public class SurahActivity extends Activity {
 	@Override
 	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
     
-  	
     	mainMenu.clear();
     	
     	MenuItem subitem;
     	
 		mainMenu.setQwertyMode(true);
 		
-		if (!isAudioPlaying) {
+		if (audioState != CONSTANTS.AUDIO_PLAYING) {
 			subitem = mainMenu.add(0, MENU_ITEM_PLAY, 0 ,"Тинглаш");
-			subitem.setIcon(android.R.drawable.ic_media_play);
+			subitem.setIcon(R.drawable.play);
 		}
 		
 		else {
 			subitem = mainMenu.add(0, MENU_ITEM_PAUSE, 0 ,"Пауза");
-			subitem.setIcon(android.R.drawable.ic_media_pause);
+			subitem.setIcon(R.drawable.pause);
 		}
 		
 		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 ,"Таржима");
-		subitem.setIcon(android.R.drawable.ic_menu_agenda);
+		subitem.setIcon(R.drawable.translation);
 		
 		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 ,"Қори");
-		subitem.setIcon(android.R.drawable.ic_menu_recent_history);
+		subitem.setIcon(R.drawable.reciter);
 		
 		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
-		subitem.setIcon(android.R.drawable.ic_menu_help);
+		subitem.setIcon(R.drawable.help);
 		
     	return true;
     }	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		final int selectedItem;
 		
     	switch (menuItem.getItemId()) {	
 
     		case MENU_ITEM_PLAY :
-    			isAudioPlaying = true;
+    			playAudio();
     			return true;
     			
     		case MENU_ITEM_PAUSE :
-    			isAudioPlaying = false;
+    			pauseAudio();
     			return true;
     		
     		case MENU_ITEM_RECITER :
+    			showDialog(DIALOG_RECITER);
     			return true;
     			
     		case MENU_ITEM_TRANSLATION :
+    			showDialog(DIALOG_TRANSLATION);
     			return true;
     			
     		case MENU_ITEM_HELP:
@@ -284,11 +303,162 @@ public class SurahActivity extends Activity {
     	return false;
    }
 	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		AlertDialog.Builder ab = new AlertDialog.Builder(this);
+		
+		if (id == DIALOG_TRANSLATION){   
+			ab.setTitle("Таржима тили");
+			
+			ab.setSingleChoiceItems(R.array.TranslationOptions, TranslationType , new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int item) {
+	            	Log.i("alQalam", "Item " + item);
+	            	changeTranslation(item);
+	            }
+	        }).setNegativeButton("Бекор қилиш", new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int item) {
+	            	removeDialog(DIALOG_TRANSLATION);
+	            }
+	        });
+			
+		}
+		
+		if (id == DIALOG_RECITER) {
+			ab.setTitle("Қорилар");
+			
+			ab.setSingleChoiceItems(R.array.ReciterOptions, ReciterType , new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int item) {
+	            	Log.i("alQalam", "Item " + item);
+	            	changeReciter(item);
+	            }
+	        })
+	        .setNegativeButton("Бекор қилиш", new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int item) {
+	            	removeDialog(DIALOG_RECITER);
+	            }
+	        });
+		}
+		
+		AlertDialog alert = ab.create();
+
+		return alert;
+		
+	}
 	
+	private void changeTranslation(int lng) {
+		removeDialog(DIALOG_TRANSLATION);
+		TranslationType = lng;
+		preferenceEditor.putInt("TransOption", lng);
+		preferenceEditor.commit();
+		showSurah();
+	}
+	
+	private void changeReciter(int rct) {
+		removeDialog(DIALOG_RECITER);
+		preferenceEditor.putInt("ReciterOption", rct);
+    	preferenceEditor.commit();
+		ReciterType = rct;
+	}
+	
+	private void playAudio() {
+		
+		if (audioState == CONSTANTS.AUDIO_PLAYING )
+			return;
+		else if (audioState == CONSTANTS.AUDIO_PAUSED) {
+			audioState = CONSTANTS.AUDIO_PLAYING;
+			quranPlayer.start();
+			return;
+		}
+		else if (audioState == CONSTANTS.AUDIO_NOT_INTIALIZED) {
+			quranPlayer = new MediaPlayer();
+		}
+						
+		try {
+			
+			if (currentAyat == 0) {
+				Log.i("al-Qalam Surah Activity", CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/bismillah.mp3");
+
+				quranPlayer.setDataSource(CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/bismillah.mp3");
+				quranPlayer.prepare();
+				quranPlayer.start();
+				
+			} else {
+				String  SNM, ANM;
+				
+				if (surahNumber+1 < 10 )
+					SNM = "00"+(surahNumber+1);
+				else if (surahNumber+1 < 100 )
+					SNM = "0"+(surahNumber+1);
+				else 
+					SNM = ""+(surahNumber+1);
+				
+				if (currentAyat < 10 )
+					ANM = "00" + currentAyat;
+				else if (currentAyat < 100)
+					ANM = "0" + currentAyat;
+				else 
+					ANM = "" + currentAyat;
+				
+				Log.i("al-Qalam Surah Activity", CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/" + SNM+"/" + SNM+ANM+".mp3");
+				
+				quranPlayer.setDataSource(CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/" + SNM+"/" + SNM+ANM+".mp3");
+				quranPlayer.prepare();
+				quranPlayer.start();
+				
+				ayatList.setSelectionFromTop(currentAyat - 1, 0);
+				
+			}
+			
+			quranPlayer.setOnCompletionListener(
+					new OnCompletionListener() {
+						 
+                        public void onCompletion(MediaPlayer arg0) {
+                        		audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
+                        		currentAyat++; 
+                        		
+                        		if (currentAyat > CONSTANTS.SurahNumberOfAyats[surahNumber]) {
+                        			currentAyat = 0;
+                        			
+                        			if (quranPlayer != null)
+                        				quranPlayer.stop();
+                        		}
+                        		else {
+                        			playAudio();
+                        		}
+                        }
+ 
+                });
+
+			audioState = CONSTANTS.AUDIO_PLAYING;
+		}
+		catch (Exception e) {
+			Log.e("al-Qalam Surah Activity", e.getMessage());
+		}
+	}
+
+	
+	private void pauseAudio() {
+		audioState = CONSTANTS.AUDIO_PAUSED;
+		quranPlayer.pause();
+	}
+		
+ 		
 	private int  getAyatBackgroundColor() {
 		//TODO: differentiate the color of bookmarked or playing verse background.
 		
 		return Color.TRANSPARENT;
+	}
+	
+	
+	@Override
+	public void onStop() {
+		
+		if ( quranPlayer != null) {
+			quranPlayer.stop();
+			quranPlayer.release();
+		}
+
+		super.onStop();
 	}
 	
 }
