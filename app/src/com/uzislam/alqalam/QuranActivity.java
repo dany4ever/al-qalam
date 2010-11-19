@@ -32,10 +32,8 @@ public class QuranActivity extends Activity {
 		"market://details?id=com.uzislam.alqalam.arabicinstaller";
 	//private static boolean[]	SurahIsAudioDownloaded;
 	
-	private final int	MENU_ITEM_ABOUT = 0x01;
-	private final int	MENU_ITEM_BOOKMARKS = 0x02;
-	private final int	MENU_ITEM_SETTINGS = 0x03;
-	private final int	MENU_ITEM_HELP = 0x05;
+	private final int	MENU_ITEM_BOOKMARKS = 0x01;
+	private final int	MENU_ITEM_SETTINGS = 0x02;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -179,16 +177,10 @@ public class QuranActivity extends Activity {
     	
 		mainMenu.setQwertyMode(true);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_ABOUT, 0 ,"Маълумот");
-		subitem.setIcon(R.drawable.menu_icon_info);
-				
 		subitem = mainMenu.add(0, MENU_ITEM_BOOKMARKS, 0 ,"Хатчўплар");
 		subitem.setIcon(R.drawable.menu_icon_bookmarks);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
-		subitem.setIcon(R.drawable.menu_icon_help);
-		
-		subitem = mainMenu.add(0, MENU_ITEM_SETTINGS, 0 ,"Танловлар");
+		subitem = mainMenu.add(0, MENU_ITEM_SETTINGS, 0 ,"Мосламалар");
 		subitem.setIcon(R.drawable.menu_icon_settings);
 		
 		
@@ -201,18 +193,11 @@ public class QuranActivity extends Activity {
 		
     	switch (menuItem.getItemId()) {	
 
-    		case MENU_ITEM_ABOUT :
-    			return true;
-    			
     		case MENU_ITEM_BOOKMARKS :
     			return true;
     		
     		case MENU_ITEM_SETTINGS :
     			startActivity(new Intent(this, SettingsActivity.class));
-    			return true;
-    			
-    		case MENU_ITEM_HELP:
-    			//startActivity(new Intent(this, helpActivity.class));
     			return true;
 
     	}
