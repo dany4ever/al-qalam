@@ -11,49 +11,55 @@
     	android:layout_height="fill_parent" 
     	android:src="@drawable/frontpage"  />
     
-    <ImageButton android:id="@+id/imgBtnQuran" 
-     	android:src="@drawable/btn_quran"
-     	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content" 
-    	android:layout_margin="1pt"
-    	android:background="@null"  />
-    	
-    <!-- ImageView android:id="@+id/imgQuran"
-    	android:layout_width="200px" 
-    	android:layout_height="50px" 
-    	android:src="@drawable/btn_quran_normal"
-    	android:layout_margin="2px"     /-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+	    android:paddingLeft="15dip"
+	    android:paddingTop="80dip" 
+	    android:gravity="center_horizontal" >
     
-    <ImageButton android:id="@+id/imgBtnBukhari"
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content" 
-    	android:src="@drawable/btn_bukhari"
-    	android:layout_margin="1pt"
-    	android:background="@null"      />
+	    <ImageButton android:id="@+id/imgBtnQuran" 
+	     	android:src="@drawable/btn_quran"
+	     	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_margin="1pt"
+	    	android:background="@null"  />
+	    	
+	    <!-- ImageView android:id="@+id/imgQuran"
+	    	android:layout_width="200px" 
+	    	android:layout_height="50px" 
+	    	android:src="@drawable/btn_quran_normal"
+	    	android:layout_margin="2px"     /-->
+	    
+	    <ImageButton android:id="@+id/imgBtnBukhari"
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:src="@drawable/btn_bukhari"
+	    	android:layout_margin="1pt"
+	    	android:background="@null"      />
+	    	
+	    <ImageButton android:id="@+id/imgBtnMuslim"
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:src="@drawable/btn_muslim" 
+	    	android:layout_margin="1pt"
+	    	android:background="@null"   />	   
+	
+		<ImageButton android:id="@+id/imgBtnTirmidi"
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:src="@drawable/btn_tirmidi"
+	    	android:layout_margin="1pt"
+	    	android:background="@null"     />
+	    	
+		<ImageButton android:id="@+id/imgBtnAbudovud"
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:src="@drawable/btn_abudovud"
+	    	android:layout_margin="1pt"
+	    	android:background="@null"  />
     	
-    <ImageButton android:id="@+id/imgBtnMuslim"
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content" 
-    	android:src="@drawable/btn_muslim" 
-    	android:layout_margin="1pt"
-    	android:background="@null"   />	   
-
-	<ImageButton android:id="@+id/imgBtnTirmidi"
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content" 
-    	android:src="@drawable/btn_tirmidi"
-    	android:layout_margin="1pt"
-    	android:background="@null"     />
-    	
-	<ImageButton android:id="@+id/imgBtnAbudovud"
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content" 
-    	android:src="@drawable/btn_abudovud"
-    	android:layout_margin="1pt"
-    	android:background="@null"  />
-    	
-    <View android:layout_width="fill_parent"
-			  android:layout_height="100dip"
-			 android:background="@null" />
+    </LinearLayout>
 			     
 </LinearLayout>
