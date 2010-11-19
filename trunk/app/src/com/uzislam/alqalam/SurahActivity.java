@@ -106,7 +106,9 @@ public class SurahActivity extends Activity {
     				surahNumber = 0;
     				return;
     			}
-    			 showSurah();
+    			
+    			stopAudioPlay();
+    			showSurah();
     		}
         });
         
@@ -117,7 +119,8 @@ public class SurahActivity extends Activity {
     				surahNumber = 113;
     				return;
     			}
-    			 showSurah();
+    			stopAudioPlay();
+    			showSurah();
     		}
         });
  		
@@ -252,22 +255,22 @@ public class SurahActivity extends Activity {
 		
 		if (audioState != CONSTANTS.AUDIO_PLAYING) {
 			subitem = mainMenu.add(0, MENU_ITEM_PLAY, 0 ,"Тинглаш");
-			subitem.setIcon(R.drawable.play);
+			subitem.setIcon(R.drawable.menu_icon_play);
 		}
 		
 		else {
 			subitem = mainMenu.add(0, MENU_ITEM_PAUSE, 0 ,"Пауза");
-			subitem.setIcon(R.drawable.pause);
+			subitem.setIcon(R.drawable.menu_icon_pause);
 		}
 		
 		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 ,"Таржима");
-		subitem.setIcon(R.drawable.translation);
+		subitem.setIcon(R.drawable.menu_icon_translation);
 		
 		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 ,"Қори");
-		subitem.setIcon(R.drawable.reciter);
+		subitem.setIcon(R.drawable.menu_icon_reciter);
 		
 		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
-		subitem.setIcon(R.drawable.help);
+		subitem.setIcon(R.drawable.menu_icon_help);
 		
     	return true;
     }	
@@ -375,6 +378,9 @@ public class SurahActivity extends Activity {
 						
 		try {
 			
+			if (currentAyat == 0 && (surahNumber == 0 || surahNumber == 8))
+				currentAyat = 1;
+			
 			if (currentAyat == 0) {
 				Log.i("al-Qalam Surah Activity", CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/bismillah.mp3");
 
@@ -449,16 +455,27 @@ public class SurahActivity extends Activity {
 		return Color.TRANSPARENT;
 	}
 	
+	@Override
+	public void onPause() {
+		stopAudioPlay();
+		super.onPause();
+	}
 	
 	@Override
 	public void onStop() {
-		
-		if ( quranPlayer != null) {
-			quranPlayer.stop();
-			quranPlayer.release();
-		}
-
+		stopAudioPlay();
 		super.onStop();
 	}
 	
+	
+	private void stopAudioPlay() {
+		currentAyat = 0;
+		audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
+		
+		if (quranPlayer != null && quranPlayer.isPlaying()) {
+			quranPlayer.stop();
+			quranPlayer.release();
+			quranPlayer = null;
+		}
+	}
 }

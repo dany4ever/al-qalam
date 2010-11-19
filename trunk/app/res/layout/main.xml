@@ -15,7 +15,7 @@
      	android:src="@drawable/btn_quran"
      	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content" 
-    	android:layout_margin="2pt"
+    	android:layout_margin="1pt"
     	android:background="@null"  />
     	
     <!-- ImageView android:id="@+id/imgQuran"
@@ -28,30 +28,32 @@
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content" 
     	android:src="@drawable/btn_bukhari"
-    	android:layout_margin="2pt"
+    	android:layout_margin="1pt"
     	android:background="@null"      />
     	
     <ImageButton android:id="@+id/imgBtnMuslim"
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content" 
     	android:src="@drawable/btn_muslim" 
-    	android:layout_margin="2pt"
+    	android:layout_margin="1pt"
     	android:background="@null"   />	   
 
 	<ImageButton android:id="@+id/imgBtnTirmidi"
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content" 
     	android:src="@drawable/btn_tirmidi"
-    	android:layout_margin="2pt"
+    	android:layout_margin="1pt"
     	android:background="@null"     />
     	
 	<ImageButton android:id="@+id/imgBtnAbudovud"
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content" 
     	android:src="@drawable/btn_abudovud"
-    	android:layout_margin="2pt"
+    	android:layout_margin="1pt"
     	android:background="@null"  />
-     
-   
-     	    
+    	
+    <View android:layout_width="fill_parent"
+			  android:layout_height="100dip"
+			 android:background="@null" />
+			     
 </LinearLayout>
