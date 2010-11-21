@@ -10,9 +10,9 @@
 
 	<ListPreference  
 		android:key="ReciterOption"  
-		android:title="@string/reciter_list"  
-		android:summary="@string/reciter_list_summary"  
+		android:title="@string/reciters_list"  
+		android:summary="@string/reciters_list_summary"  
 		android:entries="@array/ReciterOptions"  
 		android:entryValues="@array/ReciterOptions"  
-		android:dialogTitle="@string/reciter" /> 
+		android:dialogTitle="@string/reciters" /> 
 </PreferenceScreen>  

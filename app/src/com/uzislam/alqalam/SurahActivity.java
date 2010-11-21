@@ -26,8 +26,8 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 public class SurahActivity extends Activity {
-
-	private String []		AYATS ; 
+	private static final String TAG = "SurahActivity";
+	private String []		AYATS; 
 	private String []		AYATSARABIC;
 	private int				surahNumber = 0;
 	private int				currentAyat = 0;
@@ -201,7 +201,7 @@ public class SurahActivity extends Activity {
 		// Add Language Directory
 		SurahFileName = CONSTANTS.LanguageDirectory[TranslationType] + "/" + SurahFileName;
 		
-		Log.i("al-Qalam SurahActivity", "DIR : "+ SurahFileName + " VAL: " + TranslationType);
+		Log.i(TAG, "DIR : "+ SurahFileName + " VAL: " + TranslationType);
 		
 		BufferedReader udis = null;
 		//BufferedReader adis = null;
@@ -266,7 +266,7 @@ public class SurahActivity extends Activity {
 		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 , R.string.translation);
 		subitem.setIcon(R.drawable.menu_icon_translation);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 , R.string.reciter);
+		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 , R.string.reciters);
 		subitem.setIcon(R.drawable.menu_icon_reciter);
 		
 		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, R.string.help);
@@ -277,7 +277,7 @@ public class SurahActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		final int selectedItem;
+		//final int selectedItem;
 		
     	switch (menuItem.getItemId()) {	
 
@@ -311,14 +311,14 @@ public class SurahActivity extends Activity {
 		AlertDialog.Builder ab = new AlertDialog.Builder(this);
 		
 		if (id == DIALOG_TRANSLATION){   
-			ab.setTitle("Таржима тили");
+			ab.setTitle(R.string.translation_language);
 			
 			ab.setSingleChoiceItems(R.array.TranslationOptions, TranslationType , new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int item) {
-	            	Log.i("alQalam", "Item " + item);
+	            	Log.i(TAG, "Item " + item);
 	            	changeTranslation(item);
 	            }
-	        }).setNegativeButton("Бекор қилиш", new DialogInterface.OnClickListener() {
+	        }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int item) {
 	            	removeDialog(DIALOG_TRANSLATION);
 	            }
@@ -327,15 +327,15 @@ public class SurahActivity extends Activity {
 		}
 		
 		if (id == DIALOG_RECITER) {
-			ab.setTitle("Қорилар");
+			ab.setTitle(R.string.reciters);
 			
 			ab.setSingleChoiceItems(R.array.ReciterOptions, ReciterType , new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int item) {
-	            	Log.i("alQalam", "Item " + item);
+	            	Log.i(TAG, "Item " + item);
 	            	changeReciter(item);
 	            }
 	        })
-	        .setNegativeButton("Бекор қилиш", new DialogInterface.OnClickListener() {
+	        .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int item) {
 	            	removeDialog(DIALOG_RECITER);
 	            }
@@ -382,7 +382,7 @@ public class SurahActivity extends Activity {
 				currentAyat = 1;
 			
 			if (currentAyat == 0) {
-				Log.i("al-Qalam Surah Activity", CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/bismillah.mp3");
+				Log.i(TAG, CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/bismillah.mp3");
 
 				quranPlayer.setDataSource(CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/bismillah.mp3");
 				quranPlayer.prepare();
@@ -405,7 +405,7 @@ public class SurahActivity extends Activity {
 				else 
 					ANM = "" + currentAyat;
 				
-				Log.i("al-Qalam Surah Activity", CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/" + SNM+"/" + SNM+ANM+".mp3");
+				Log.i(TAG, CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/" + SNM+"/" + SNM+ANM+".mp3");
 				
 				quranPlayer.setDataSource(CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/" + SNM+"/" + SNM+ANM+".mp3");
 				quranPlayer.prepare();
@@ -438,7 +438,7 @@ public class SurahActivity extends Activity {
 			audioState = CONSTANTS.AUDIO_PLAYING;
 		}
 		catch (Exception e) {
-			Log.e("al-Qalam Surah Activity", e.getMessage());
+			Log.e(TAG, e.getMessage());
 		}
 	}
 
