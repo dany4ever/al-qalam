@@ -89,10 +89,10 @@ public class startQalam extends Activity {
     	
 		mainMenu.setQwertyMode(true);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_ABOUT, 0 ,"Маълумот");
+		subitem = mainMenu.add(0, MENU_ITEM_ABOUT, 0 , R.string.info);
 		subitem.setIcon(R.drawable.menu_icon_info);
 	
-		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
+		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, R.string.help);
 		subitem.setIcon(R.drawable.menu_icon_help);	
 		
     	return true;
