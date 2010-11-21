@@ -26,7 +26,7 @@ public class QuranActivity extends Activity {
 	private ListView			gSurahList; 	
 	private static String[] 	gSurahTitles;
 	private static boolean[]	gSurahIsDownloaded;
-	private String				LOG_MAIN = "Al-Qalam Quran Activity";
+	private static final String	TAG = "QuranActivity";
 
 	private static final String ARABIC_DATA_PACK_INSTALLER_MARKET_LINK =
 		"market://details?id=com.uzislam.alqalam.arabicinstaller";
@@ -110,7 +110,7 @@ public class QuranActivity extends Activity {
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
-		Log.v(LOG_MAIN, "Create Dialog");
+		Log.v(TAG, "Create Dialog");
 		 switch (id) {
 			 case CONSTANTS.SURAH_DIALOG_DOWNLOAD_REQUEST:
 				 return new AlertDialog.Builder(QuranActivity.this)

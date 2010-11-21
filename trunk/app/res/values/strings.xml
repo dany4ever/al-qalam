@@ -5,6 +5,7 @@
 	<string name="sura_need_download">Сура мавжуд эмас</string>
 	<string name="no_sd_card">Ташқи хотира (SD card) юкланмаган ёки йўқ</string>
 	<string name="btn_confirm">Тасдиқ</string>
+	<string name="btn_cancel">Бекор қилиш</string>
 	<string name="no_android_market">Android Market программаси мавжуд эмас.\nСураларни проект веб саҳифасидан сақлаб олинг.</string>
 	<color name="darkred">#441111</color>
 	<color name="darkblack">#000000</color>
@@ -13,9 +14,9 @@
 	<string name="translation">Таржима</string>
 	<string name="translation_language">Таржима тили</string>
 	<string name="translation_language_summary">Қуръон маъноларининг таржима тилини танланг</string>
-	<string name="reciter">Қорилар</string>
-	<string name="reciter_list">Қорилар рўйҳати</string>
-	<string name="reciter_list_summary">Қуръон арабча қироатини танланг</string>
+	<string name="reciters">Қорилар</string>
+	<string name="reciters_list">Қорилар рўйҳати</string>
+	<string name="reciters_list_summary">Қуръон арабча қироатини танланг</string>
 	<string name="play">Тинглаш</string>
 	<string name="pause">Пауза</string>
 	<string name="help">Ёрдам</string>
