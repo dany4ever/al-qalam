@@ -177,10 +177,10 @@ public class QuranActivity extends Activity {
     	
 		mainMenu.setQwertyMode(true);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_BOOKMARKS, 0 ,"Хатчўплар");
+		subitem = mainMenu.add(0, MENU_ITEM_BOOKMARKS, 0 , R.string.bookmarks);
 		subitem.setIcon(R.drawable.menu_icon_bookmarks);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_SETTINGS, 0 ,"Мосламалар");
+		subitem = mainMenu.add(0, MENU_ITEM_SETTINGS, 0 , R.string.settings);
 		subitem.setIcon(R.drawable.menu_icon_settings);
 		
 		

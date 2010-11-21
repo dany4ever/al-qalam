@@ -2,17 +2,17 @@
 <PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">  
    <ListPreference  
 		android:key="TransOption"  
-		android:title="Таржима Тили"  
-		android:summary="Қуръон маъноларининг таржима тилини танланг"  
+		android:title="@string/translation_language"  
+		android:summary="@string/translation_language_summary"  
 		android:entries="@array/TranslationOptions"  
 		android:entryValues="@array/TranslationOptions"  
-		android:dialogTitle="Таржима " /> 	
+		android:dialogTitle="@string/translation" /> 	
 
 	<ListPreference  
 		android:key="ReciterOption"  
-		android:title="Қорилар Рўйҳати"  
-		android:summary="Қуръон арабча қироатини танланг"  
+		android:title="@string/reciter_list"  
+		android:summary="@string/reciter_list_summary"  
 		android:entries="@array/ReciterOptions"  
 		android:entryValues="@array/ReciterOptions"  
-		android:dialogTitle="Қорилар" /> 
+		android:dialogTitle="@string/reciter" /> 
 </PreferenceScreen>  

@@ -254,22 +254,22 @@ public class SurahActivity extends Activity {
 		mainMenu.setQwertyMode(true);
 		
 		if (audioState != CONSTANTS.AUDIO_PLAYING) {
-			subitem = mainMenu.add(0, MENU_ITEM_PLAY, 0 ,"Тинглаш");
+			subitem = mainMenu.add(0, MENU_ITEM_PLAY, 0 , R.string.play);
 			subitem.setIcon(R.drawable.menu_icon_play);
 		}
 		
 		else {
-			subitem = mainMenu.add(0, MENU_ITEM_PAUSE, 0 ,"Пауза");
+			subitem = mainMenu.add(0, MENU_ITEM_PAUSE, 0 , R.string.pause);
 			subitem.setIcon(R.drawable.menu_icon_pause);
 		}
 		
-		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 ,"Таржима");
+		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 , R.string.translation);
 		subitem.setIcon(R.drawable.menu_icon_translation);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 ,"Қори");
+		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 , R.string.reciter);
 		subitem.setIcon(R.drawable.menu_icon_reciter);
 		
-		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, "Ёрдам");
+		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, R.string.help);
 		subitem.setIcon(R.drawable.menu_icon_help);
 		
     	return true;

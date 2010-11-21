@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity {
 
-	private String LOG_SETUP = "al-Qalam Settings";
+	private static final String TAG = "SettingsActivity";
 	private SharedPreferences		commonPrefs = null;
 	public SharedPreferences.Editor preferenceEditor = null;
 	
@@ -21,7 +21,7 @@ public class SettingsActivity extends PreferenceActivity {
     public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        
-	        Log.i(LOG_SETUP, "Creat Settings");
+	        Log.i(TAG, "Create Settings");
 	        
 	        addPreferencesFromResource(R.layout.settings);
 	        
