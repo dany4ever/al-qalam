@@ -19,8 +19,10 @@ public class startQalam extends Activity {
 	private LinearLayout mainView;
 	private ImageButton tmpImg;
 		
+	/*
 	private final int	MENU_ITEM_ABOUT = 0x01;
 	private final int	MENU_ITEM_HELP = 0x02;
+	*/
 	
 	/** Called when the activity is first created. */
     @Override
@@ -81,6 +83,14 @@ public class startQalam extends Activity {
 	};   
     
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	/*
+	@Override
 	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
   	
     	mainMenu.clear();
@@ -96,19 +106,26 @@ public class startQalam extends Activity {
 		subitem.setIcon(R.drawable.menu_icon_help);	
 		
     	return true;
-    }	
+    }
+	*/
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		
     	switch (menuItem.getItemId()) {	
 
-    		case MENU_ITEM_ABOUT :
+    		/*case MENU_ITEM_ABOUT :
     			return true;
     			
     		case MENU_ITEM_HELP:
     			//startActivity(new Intent(this, helpActivity.class));
     			return true;
+    		*/
+    	case R.id.info:
+    		return true;
+    	
+    	case R.id.help:
+    		return true;
 
     	}
 	   
