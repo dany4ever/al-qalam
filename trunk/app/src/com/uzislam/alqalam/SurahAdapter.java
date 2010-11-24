@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,13 @@ public class SurahAdapter extends BaseAdapter {
          vHolder.AyatUzbek.setText(mItems.get(position).getAyatUzbekText());
          //vHolder.AyatArabic.setText(mItems.get(position).getAyatArabicText());
      
-         Bitmap arabicAyat = BitmapFactory.decodeFile(mItems.get(position).getAyatArabicText());
+         Bitmap arabicAyat = null;
+         
+         try {
+        	 arabicAyat = BitmapFactory.decodeFile(mItems.get(position).getAyatArabicText());
+         } catch (Exception e) {
+        	 Log.e("alQalam", "Arabic Text Does not Exist");
+         }
          
          if (SurahActivity.displaymetrics.densityDpi == DisplayMetrics.DENSITY_HIGH)
         	 arabicAyat.setDensity((int)(SurahActivity.displaymetrics.densityDpi/1.45));
