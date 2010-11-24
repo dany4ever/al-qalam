@@ -59,7 +59,6 @@ public class ArabicImageDownloader {
 		int i,j;
 		
 		for (i=1;i<=114;i++) {
-			outputPath = outputPath;
 			boolean result = (new File(outputPath + i)).mkdirs();
 			
 			for (j=1;j<=SurahNumberOfAyats[i-1];j++) {
