@@ -17,9 +17,9 @@ public class startQalam extends Activity {
 	private Handler aqHandler;
 	private ImageView frontSplash;
 	private LinearLayout mainView;
-	private ImageButton tmpImg;
-		
-	/*
+	private LinearLayout btnView;
+	/*private ImageButton tmpImg;
+
 	private final int	MENU_ITEM_ABOUT = 0x01;
 	private final int	MENU_ITEM_HELP = 0x02;
 	*/
@@ -32,7 +32,9 @@ public class startQalam extends Activity {
         
         frontSplash = (ImageView) findViewById(R.id.splashimage);
         mainView = (LinearLayout) findViewById(R.id.mainview);
-        
+        btnView = (LinearLayout) findViewById(R.id.buttons);
+        btnView.setVisibility(View.GONE);
+        /*
         tmpImg = (ImageButton) findViewById(R.id.imgBtnQuran);
         tmpImg.setVisibility(View.GONE);
         tmpImg = (ImageButton) findViewById(R.id.imgBtnBukhari);
@@ -43,7 +45,7 @@ public class startQalam extends Activity {
         tmpImg.setVisibility(View.GONE);
         tmpImg = (ImageButton) findViewById(R.id.imgBtnAbudovud);
         tmpImg.setVisibility(View.GONE);
-        
+        */
         aqHandler = new Handler ();
         aqHandler.postDelayed(Splash, 1500);
         
@@ -52,10 +54,11 @@ public class startQalam extends Activity {
     private Runnable Splash = new Runnable() {
 	 	   public void run() {
 	 		frontSplash.setVisibility(View.GONE);
-	 		mainView.setBackgroundResource(R.drawable.background) ;
+	 		btnView.setVisibility(View.VISIBLE);
+	 		mainView.setBackgroundResource(R.drawable.background);
 	 		
 	 		final ImageButton  imgBtnQuran = (ImageButton) findViewById(R.id.imgBtnQuran);
-	 		imgBtnQuran.setVisibility(View.VISIBLE);
+	 		//imgBtnQuran.setVisibility(View.VISIBLE);
 	 		imgBtnQuran.setClickable(true);
 	 		imgBtnQuran.setOnClickListener(new OnClickListener() {
 	    		public void onClick(View v) {
@@ -64,20 +67,20 @@ public class startQalam extends Activity {
 	        });
 	        
 	        final ImageButton imgBukhari = (ImageButton) findViewById(R.id.imgBtnBukhari);
-	        imgBukhari.setVisibility(View.VISIBLE);
+	        //imgBukhari.setVisibility(View.VISIBLE);
 	        imgBukhari.setAlpha(80);
 	    	
 	        
 	        final ImageButton imgMuslim = (ImageButton) findViewById(R.id.imgBtnMuslim);
-	        imgMuslim.setVisibility(View.VISIBLE);
+	        //imgMuslim.setVisibility(View.VISIBLE);
 	        imgMuslim.setAlpha(80);
 	    		        
 	        final ImageButton imgTirmidi = (ImageButton) findViewById(R.id.imgBtnTirmidi);
-	        imgTirmidi.setVisibility(View.VISIBLE);
+	        //imgTirmidi.setVisibility(View.VISIBLE);
 	        imgTirmidi.setAlpha(80);
 	    		        
 	        final ImageButton imgAbudavud  = (ImageButton) findViewById(R.id.imgBtnAbudovud);
-	        imgAbudavud.setVisibility(View.VISIBLE);
+	        //imgAbudavud.setVisibility(View.VISIBLE);
 	    	imgAbudavud.setAlpha(80);
 	 	   }
 	};   
