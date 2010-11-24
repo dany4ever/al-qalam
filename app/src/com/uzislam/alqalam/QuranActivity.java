@@ -32,8 +32,8 @@ public class QuranActivity extends Activity {
 		"market://details?id=com.uzislam.alqalam.arabicinstaller";
 	//private static boolean[]	SurahIsAudioDownloaded;
 	
-	private final int	MENU_ITEM_BOOKMARKS = 0x01;
-	private final int	MENU_ITEM_SETTINGS = 0x02;
+	/*private final int	MENU_ITEM_BOOKMARKS = 0x01;
+	private final int	MENU_ITEM_SETTINGS = 0x02;*/
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -169,6 +169,13 @@ public class QuranActivity extends Activity {
 	} 
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.quran_activity, menu);
+		
+		return super.onCreateOptionsMenu(menu);
+	}
+	/*
+	@Override
 	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
   	
     	mainMenu.clear();
@@ -186,17 +193,23 @@ public class QuranActivity extends Activity {
 		
 		
     	return true;
-    }	
+    }*/	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		
     	switch (menuItem.getItemId()) {	
 
-    		case MENU_ITEM_BOOKMARKS :
+    		/*case MENU_ITEM_BOOKMARKS :
     			return true;
     		
     		case MENU_ITEM_SETTINGS :
+    			startActivity(new Intent(this, SettingsActivity.class));
+    			return true;*/
+    		case R.id.bookmarks:
+    			return true;
+    		
+    		case R.id.settings:
     			startActivity(new Intent(this, SettingsActivity.class));
     			return true;
 
