@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
@@ -40,11 +39,11 @@ public class SurahActivity extends Activity {
 	private Drawable 			iconBismillah;
 	private ListView			ayatList; 
 
-	private final int	MENU_ITEM_PLAY = 0x01;
+	/*private final int	MENU_ITEM_PLAY = 0x01;
 	private final int	MENU_ITEM_PAUSE = 0x02;
 	private final int	MENU_ITEM_TRANSLATION = 0x03;
 	private final int	MENU_ITEM_RECITER = 0x04;
-	private final int	MENU_ITEM_HELP = 0x05;
+	private final int	MENU_ITEM_HELP = 0x05;*/
 	
 	private final int 	DIALOG_TRANSLATION = 0x01;
 	private final int	DIALOG_RECITER = 0x02;
@@ -245,6 +244,23 @@ public class SurahActivity extends Activity {
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.surah_activity, menu);
+		
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		boolean isAudioPlaying = audioState == CONSTANTS.AUDIO_PLAYING;
+		
+		menu.findItem(R.id.play).setVisible(!isAudioPlaying);
+		menu.findItem(R.id.pause).setVisible(isAudioPlaying);
+		
+		return super.onPrepareOptionsMenu(menu);
+	}
+	/*
+	@Override
 	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
     
     	mainMenu.clear();
@@ -273,7 +289,7 @@ public class SurahActivity extends Activity {
 		subitem.setIcon(R.drawable.menu_icon_help);
 		
     	return true;
-    }	
+    }*/	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -281,23 +297,23 @@ public class SurahActivity extends Activity {
 		
     	switch (menuItem.getItemId()) {	
 
-    		case MENU_ITEM_PLAY :
+    		case R.id.play: //MENU_ITEM_PLAY :
     			playAudio();
     			return true;
     			
-    		case MENU_ITEM_PAUSE :
+    		case R.id.pause: //MENU_ITEM_PAUSE :
     			pauseAudio();
     			return true;
     		
-    		case MENU_ITEM_RECITER :
+    		case R.id.reciters: //MENU_ITEM_RECITER :
     			showDialog(DIALOG_RECITER);
     			return true;
     			
-    		case MENU_ITEM_TRANSLATION :
+    		case R.id.translation: //MENU_ITEM_TRANSLATION :
     			showDialog(DIALOG_TRANSLATION);
     			return true;
     			
-    		case MENU_ITEM_HELP:
+    		case R.id.help: //MENU_ITEM_HELP:
     			//startActivity(new Intent(this, helpActivity.class));
     			return true;
 
