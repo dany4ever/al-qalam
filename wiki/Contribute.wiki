@@ -10,10 +10,15 @@
   * *[http://code.google.com/p/al-qalam/issues/list Report bugs]* you have detected
  # Commit code
   * First of all, build your *own* Al-Qalam
-    # checkout the working copy of the project:
+    # checkout the working copy of the project^1^:
       {{{svn checkout http://al-qalam.googlecode.com/svn/trunk/ al-qalam-read-only}}}
-    # [http://developer.android.com/sdk/index.html Download] and [http://developer.android.com/sdk/installing.html install]
+    # [http://developer.android.com/sdk/index.html Download] and [http://developer.android.com/sdk/installing.html install] Android SDK
     # Create new project from existing source, i.e. from checked out Al-Qalam source
     # Build Al-Qalam and try test runs
   * Make your changes
   * Commit your changes
+
+----
+
+
+^1^ _If you are a Windows user, you may consider using_ [http://tortoisesvn.net/ http://tortoisesvn.net/files/tortoisesvn_logo_hor468x64.png]
