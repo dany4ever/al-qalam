@@ -1,5 +1,7 @@
 package com.uzislam.alqalam;
 
+import com.uzislam.alqalam.database.Helper;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +50,10 @@ public class startQalam extends Activity {
         */
         aqHandler = new Handler ();
         aqHandler.postDelayed(Splash, 1500);
+        
+        // Initialize the database
+        Helper mHelper = new Helper(this);
+        mHelper.getWritableDatabase();
         
     }
     

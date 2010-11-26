@@ -23,6 +23,8 @@
  		<activity android:name=".QuranActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
         <activity android:name=".SurahActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
         <activity android:name=".SettingsActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
+        
+        <provider android:name=".database.Provider" android:authorities="com.uzislam.alqalam" />
     </application>
                
     <uses-sdk android:minSdkVersion="7" />
