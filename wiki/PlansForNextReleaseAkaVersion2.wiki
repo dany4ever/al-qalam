@@ -15,6 +15,7 @@
   # Zoom
   # Landscape mode
   # Monotonic background (?)
+  # Add _Go to surah/ayat_ shortcut
 
 
 ==Data Pack Installer==
