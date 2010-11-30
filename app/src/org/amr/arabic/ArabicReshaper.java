@@ -1,4 +1,4 @@
-package com.uzislam.alqalam;
+package org.amr.arabic;
 /*
  *	Date : 25th of March 2008
  *	the class is Arabic string reshaper, this class is targeting Android platform

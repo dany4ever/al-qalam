@@ -1,4 +1,4 @@
-package com.uzislam.alqalam;
+package org.amr.arabic;
 
 /*
  *	Date : 8th of June 2009
