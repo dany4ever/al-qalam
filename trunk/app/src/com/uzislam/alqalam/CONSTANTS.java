@@ -63,14 +63,34 @@ public class CONSTANTS {
 		public static final String  FOLDER_QURAN_AUDIO ="/sdcard/alQalam/audio/";
 		
 		public static final String 	SETTINGS_FILE = "alQalam.set";
-	
+		public static final String	SETTINGS_TRANLATION_OPTION_TITLE ="TransOption";
+		public static final String	SETTINGS_RECITER_OPTION_TITLE ="ReciterOption";
+		
+		
 		public static String[] LanguageDirectory = {"uzbek-cyr", "uzbek-lat", "russian"};
-		public static String[] ReciterDirectory =  {"gamidi", "shatri"};
+		public static String[] ReciterDirectory =  {"shatri", "gamidi"};
 		
 		public static final int 	AUDIO_NOT_INTIALIZED = 0x01;
 		public static final int 	AUDIO_PLAYING = 0x02;
 		public static final int 	AUDIO_PAUSED = 0x03;
 		public static final int 	AUDIO_STOPPED = 0x04;
+		
+		public static final String		numberToString(int a) {
+			String rTxt;
+			
+			if (a < 10 )
+				rTxt = "00" + a; 
+			else if (a < 100 )
+				rTxt = "0" + a;
+			else 
+				rTxt = "" + a;
+			
+			return rTxt;
+			
+		}
+		
+		public static boolean[]			gSurahIsDownloaded = new boolean [numberOfSurahs];
+		public static boolean[]			gSurahIsAudioDownloaded = new boolean [numberOfSurahs];
 
 	}
  

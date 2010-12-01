@@ -147,11 +147,8 @@
 		<item>Таржимасиз</item>   
 	</string-array>  
 	<string-array name="ReciterOptions">  
-		<item>Ал-Ғомидий</item>
-		<item>Ал-Хусорий</item>
 		<item>Аш-Шатрий</item>
-		<item>Мишарий Ал-Афасий</item>
-		   
+		<item>Ал-Ғомидий</item>
 	</string-array>
     
 </resources>

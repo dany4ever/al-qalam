@@ -71,7 +71,7 @@ public class SurahAdapter extends BaseAdapter {
          	vHolder.AyatGroup = (LinearLayout) convertView.findViewById(R.id.ayatGroup);
          	vHolder.AyatOrder = (TextView) convertView.findViewById(R.id.ayatOrder);
          	vHolder.AyatBismillah = (ImageView)convertView.findViewById(R.id.ayatBismillah);
-        	vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.ayatUzbekText);
+        	vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.ayatTranslationText);
         	vHolder.AyatArabic = (ImageView) convertView.findViewById(R.id.ayatArabicText);
         
         	
