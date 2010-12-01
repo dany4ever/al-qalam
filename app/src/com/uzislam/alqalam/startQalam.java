@@ -19,10 +19,12 @@
 
 package com.uzislam.alqalam;
 
-import com.uzislam.alqalam.database.Helper;
+import java.io.File;
+import com.uzislam.alqalam.*;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -35,15 +37,15 @@ import android.widget.LinearLayout;
 
 public class startQalam extends Activity {
 
-	private Handler aqHandler;
-	private ImageView frontSplash;
-	private LinearLayout mainView;
-	private LinearLayout btnView;
-	/*private ImageButton tmpImg;
+	private Handler 			aqHandler;
+	private ImageView 			frontSplash;
+	private LinearLayout 		mainView;
+	private LinearLayout 		btnView;
+	
+	private SharedPreferences	commonPrefs;
+	private int 				TranslationType = 0;
+	private int					ReciterType = 0;
 
-	private final int	MENU_ITEM_ABOUT = 0x01;
-	private final int	MENU_ITEM_HELP = 0x02;
-	*/
 	
 	/** Called when the activity is first created. */
     @Override
@@ -70,9 +72,18 @@ public class startQalam extends Activity {
         aqHandler = new Handler ();
         aqHandler.postDelayed(Splash, 1500);
         
+        commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
+        
+		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)
+        
+        TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
+        ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
+        
+        checkDownloadedSurahs();
+            
         // Initialize the database
-        Helper mHelper = new Helper(this);
-        mHelper.getWritableDatabase();
+        // Helper mHelper = new Helper(this);
+        // mHelper.getWritableDatabase();
         
     }
     
@@ -117,38 +128,12 @@ public class startQalam extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 	
-	/*
-	@Override
-	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
-  	
-    	mainMenu.clear();
-    	
-    	MenuItem subitem;
-    	
-		mainMenu.setQwertyMode(true);
-		
-		subitem = mainMenu.add(0, MENU_ITEM_ABOUT, 0 , R.string.info);
-		subitem.setIcon(R.drawable.menu_icon_info);
 	
-		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, R.string.help);
-		subitem.setIcon(R.drawable.menu_icon_help);	
-		
-    	return true;
-    }
-	*/
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		
     	switch (menuItem.getItemId()) {	
 
-    		/*case MENU_ITEM_ABOUT :
-    			return true;
-    			
-    		case MENU_ITEM_HELP:
-    			//startActivity(new Intent(this, helpActivity.class));
-    			return true;
-    		*/
     	case R.id.info:
     		return true;
     	
@@ -159,5 +144,21 @@ public class startQalam extends Activity {
 	   
     	return false;
    }
-		
+
+	private boolean isFileExists(String _file) {
+		  File file = new File(_file);
+		  return file.exists();
+	}
+	
+	public void checkDownloadedSurahs() {
+		String arabicFileName, audioFileName;
+				
+		for (int i=0; i<CONSTANTS.numberOfSurahs; i++) {
+				arabicFileName = CONSTANTS.FOLDER_QURAN_ARABIC + (i+1);
+				audioFileName = CONSTANTS.FOLDER_QURAN_AUDIO + CONSTANTS.ReciterDirectory[ReciterType]+ "/" + CONSTANTS.numberToString(i+1) ;
+				CONSTANTS.gSurahIsDownloaded[i] = true; // isFileExists(arabicFileName);
+				
+				//CONSTANTS.gSurahIsAudioDownloaded[i] = isFileExists(audioFileName);
+		}
+	}
 }

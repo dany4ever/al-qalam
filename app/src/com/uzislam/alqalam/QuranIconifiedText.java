@@ -56,7 +56,7 @@ public class QuranIconifiedText {
 		this.surahNumberOfAyats = _ayats;
 	}
 
-	public void setSurahtate(Drawable _state) {
+	public void setSurahState(Drawable _state) {
 		this.surahState = _state;
 	}
 	

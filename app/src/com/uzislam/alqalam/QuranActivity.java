@@ -19,7 +19,6 @@
 
 package com.uzislam.alqalam;
 
-import java.io.File;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -43,35 +42,28 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class QuranActivity extends Activity {
 	private ListView			gSurahList; 	
-	private static String[] 	gSurahTitles;
-	private static boolean[]	gSurahIsDownloaded;
-	private static final String	TAG = "QuranActivity";
+	private String[] 			gSurahTitles;
+		
+	private final String		TAG = "Al-Qalam";
 
-	private static final String ARABIC_DATA_PACK_INSTALLER_MARKET_LINK =
+	private final String ARABIC_DATA_PACK_INSTALLER_MARKET_LINK =
 		"market://details?id=com.uzislam.alqalam.arabicinstaller";
-	//private static boolean[]	SurahIsAudioDownloaded;
-	
-	/*private final int	MENU_ITEM_BOOKMARKS = 0x01;
-	private final int	MENU_ITEM_SETTINGS = 0x02;*/
-	
+		
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quran);
         gSurahList = (ListView)findViewById(R.id.SurahList);
         gSurahTitles = getResources().getStringArray(R.array.SurahTitle);
-        gSurahIsDownloaded = new boolean [CONSTANTS.numberOfSurahs];
-                                            
+                                                  
         QuranAdapter		quranAdapter = new QuranAdapter(this);
         QuranIconifiedText	qit;
-    	Drawable			stateIcon = getAudioIcon();
-    	Drawable			placeIcon = getPlaceIcon();
-    	
+       	        
     	// check which Surah's Arabic Text is already downloaded
-    	checkDownloadedSurahs();
     	
         for (int i=0; i < CONSTANTS.numberOfSurahs ; i++) {
-        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, CONSTANTS.SurahNumberOfAyats[i], gSurahIsDownloaded[i] ,stateIcon, placeIcon);
+        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, CONSTANTS.SurahNumberOfAyats[i], CONSTANTS.gSurahIsDownloaded[i], null, null);
+        	qit.setSurahState(getAudioIcon(i));
         	quranAdapter.addItem(qit);
         }
         
@@ -89,7 +81,7 @@ public class QuranActivity extends Activity {
 					if (!isSdCardAccessible()) {
 						showDialog(CONSTANTS.SURAH_DIALOG_NO_SDCARD);
 					}
-					else if (gSurahIsDownloaded[index]) {
+					else if (CONSTANTS.gSurahIsDownloaded[index]) {
 						Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
 						quranIntent.putExtra("sNumber", index);
 						startActivity(quranIntent);
@@ -101,31 +93,17 @@ public class QuranActivity extends Activity {
         });
  	}
 	
-	private void checkDownloadedSurahs() {
-		String fileName;//, surahNumber, AyatNumber;
-		
-		for (int i=0; i<CONSTANTS.numberOfSurahs; i++) {
-			fileName = CONSTANTS.FOLDER_QURAN_ARABIC +(i+1);
-				gSurahIsDownloaded[i] = isFileExists(fileName);
-		}
-
-	}
-	
-	private boolean isFileExists(String _file) {
-		  File file=new File(_file);
-		  return file.exists();
-	}
-	
-	private Drawable getAudioIcon() {
-		// TODO: differentiate audio icon based on download, playing, or get
-		return getResources().getDrawable(R.drawable.index_sound_get);
+	private Drawable getAudioIcon(int index) {
+	 	if (CONSTANTS.gSurahIsAudioDownloaded[index])
+			return getResources().getDrawable(R.drawable.index_sound);
+		else
+			return getResources().getDrawable(R.drawable.index_sound_get);
 	}
 
 	private Drawable getPlaceIcon() {
 		// TODO: differentiate Surah revealed place: Makkah or Madina 
 		return null; //getResources().getDrawable(R.drawable.mecca);
 	}
-
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
@@ -175,14 +153,14 @@ public class QuranActivity extends Activity {
 			Toast.makeText(this, R.string.no_android_market, Toast.LENGTH_LONG);
 			return;
 		}
+		
 		Intent marketIntent = new Intent(Intent.ACTION_VIEW,
 				Uri.parse(ARABIC_DATA_PACK_INSTALLER_MARKET_LINK));
 		startActivity(marketIntent);
 		finish();
 	}
 	
-	
-	public static boolean isSdCardAccessible() {  
+	public static boolean isSdCardAccessible() {
 	    String state = Environment.getExternalStorageState();
 		return Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equalsIgnoreCase(state);  
 	} 
@@ -193,38 +171,12 @@ public class QuranActivity extends Activity {
 		
 		return super.onCreateOptionsMenu(menu);
 	}
-	/*
-	@Override
-	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
-  	
-    	mainMenu.clear();
-    	
-    	MenuItem subitem;
-    	
-		mainMenu.setQwertyMode(true);
-		
-		subitem = mainMenu.add(0, MENU_ITEM_BOOKMARKS, 0 , R.string.bookmarks);
-		subitem.setIcon(R.drawable.menu_icon_bookmarks);
-		
-		subitem = mainMenu.add(0, MENU_ITEM_SETTINGS, 0 , R.string.settings);
-		subitem.setIcon(R.drawable.menu_icon_settings);
-		
-		
-		
-    	return true;
-    }*/	
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		
-    	switch (menuItem.getItemId()) {	
+    	switch (menuItem.getItemId()) {
 
-    		/*case MENU_ITEM_BOOKMARKS :
-    			return true;
-    		
-    		case MENU_ITEM_SETTINGS :
-    			startActivity(new Intent(this, SettingsActivity.class));
-    			return true;*/
     		case R.id.bookmarks:
     			return true;
     		

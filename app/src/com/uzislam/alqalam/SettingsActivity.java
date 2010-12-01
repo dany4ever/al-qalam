@@ -48,25 +48,31 @@ public class SettingsActivity extends PreferenceActivity {
 	        preferenceEditor = commonPrefs.edit();
 	        
 	        translationOption = (ListPreference) findPreference("TransOption");
-	               
+	        translationOption.setNegativeButtonText(R.string.btn_cancel);
+	        translationOption.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0));
+	        
+	        
+
 	        translationOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {  
 	            public boolean onPreferenceChange(Preference preference, Object newValue) {  
 	                int index = translationOption.findIndexOfValue(newValue.toString());  
 	                if (index != -1) {  
-	                	preferenceEditor.putInt("TransOption", index);
+	                	preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, index);
 	                	preferenceEditor.commit();
 	                }  
 	                return true;  
-	            }  
+	            } 
 	        });  
 	        
 	        reciterOption = (ListPreference) findPreference("ReciterOption");
-            
+	        reciterOption.setNegativeButtonText(R.string.btn_cancel);
+	        reciterOption.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0));
+	        
 	        reciterOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {  
 	            public boolean onPreferenceChange(Preference preference, Object newValue) {  
 	                int index = reciterOption.findIndexOfValue(newValue.toString());  
 	                if (index != -1) {  
-	                	preferenceEditor.putInt("ReciterOption", index);
+	                	preferenceEditor.putInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, index);
 	                	preferenceEditor.commit();
 	                }  
 	                return true;  

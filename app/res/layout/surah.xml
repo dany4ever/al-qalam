@@ -17,13 +17,15 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
  	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:background="@drawable/surabg"  >
+    android:background="@drawable/surabg" >
+    
     <RelativeLayout
+    		android:id="@+id/surahHeader"
     		android:layout_width="fill_parent"
     		android:layout_height="52dip"
     		android:orientation="vertical" >
@@ -50,6 +52,7 @@
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
     		android:src="@drawable/sname_1"
+    		android:clickable="true"
     		android:layout_centerInParent="true"
     		android:layout_centerHorizontal="true"/>
     		
@@ -67,12 +70,39 @@
 	    	android:layout_alignRight="@id/headerImg"  />
     		
     </RelativeLayout>
-   
+
+	<LinearLayout
+		android:id="@+id/audioPlayerControl"
+	 	android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="45dip"
+	    android:gravity="center_vertical"
+	    android:layout_alignParentBottom="true"
+	    android:background="#EE9900" >
+    
+    <ImageView
+  	 	android:id="@+id/playPauseButton"
+ 		android:orientation="horizontal"
+    	android:layout_width="wrap_content"
+    	android:layout_height="35dip"
+    	android:src="@drawable/menu_icon_play" />
+    	
+    <ImageView
+  	 	android:id="@+id/playStopButton"
+ 		android:orientation="horizontal"
+    	android:layout_width="wrap_content"
+    	android:layout_height="35dip"
+    	android:src="@drawable/menu_icon_pause" />
+
+	</LinearLayout>
+	
    <ListView 
 		android:id="@+id/AyaList" 
-		android:orientation="vertical"
-    	android:layout_width="fill_parent"
+		android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-    	android:scrollingCache="true"  >
+    	android:scrollingCache="true"  
+    	android:layout_above="@id/audioPlayerControl"
+    	android:layout_below="@id/surahHeader">
     </ListView>	
-</LinearLayout>
+ 
+</RelativeLayout>

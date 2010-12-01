@@ -22,7 +22,6 @@ package com.uzislam.alqalam;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -36,8 +35,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -57,12 +58,6 @@ public class SurahActivity extends Activity {
 	private AyatIconifiedText	ait;
 	private Drawable 			iconBismillah;
 	private ListView			ayatList; 
-
-	/*private final int	MENU_ITEM_PLAY = 0x01;
-	private final int	MENU_ITEM_PAUSE = 0x02;
-	private final int	MENU_ITEM_TRANSLATION = 0x03;
-	private final int	MENU_ITEM_RECITER = 0x04;
-	private final int	MENU_ITEM_HELP = 0x05;*/
 	
 	private final int 	DIALOG_TRANSLATION = 0x01;
 	private final int	DIALOG_RECITER = 0x02;
@@ -74,9 +69,9 @@ public class SurahActivity extends Activity {
 	private SharedPreferences.Editor 	preferenceEditor = null;
 	private int 						TranslationType = 0;
 	private int							ReciterType = 0;
-	
+	private LinearLayout 				audioControlPanel;
 	private MediaPlayer					quranPlayer;
-	
+	private boolean						isAudioControlShown = false;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,9 +90,9 @@ public class SurahActivity extends Activity {
         preferenceEditor = commonPrefs.edit();
         
 		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)
-        TranslationType = commonPrefs.getInt("TransOption", 0);
+        TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
 		 
-        ReciterType = commonPrefs.getInt("ReciterOption", 0);
+        ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
         
         // Set chapter image title 
         surahTitle = (ImageView) findViewById(R.id.suraName);
@@ -110,9 +105,27 @@ public class SurahActivity extends Activity {
         
         // get AyatList View 
         ayatList = (ListView)findViewById(R.id.AyaList);  
+
+        audioControlPanel = (LinearLayout) findViewById(R.id.audioPlayerControl);
+        audioControlPanel.setVisibility(View.GONE);
         
         // Display Surah
         showSurah();
+        
+        ImageView	surahName = (ImageView) findViewById(R.id.suraName);
+        
+        surahName.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			if (isAudioControlShown) {
+    				isAudioControlShown = true;
+    				audioControlPanel.setVisibility(View.GONE);
+    			}
+    			else {
+    				isAudioControlShown = false;
+    				audioControlPanel.setVisibility(View.VISIBLE);
+    			}
+    		}
+        });
         
         final ImageButton  imgBtnPrevious = (ImageButton) findViewById(R.id.headerPrev);
         final ImageButton  imgBtnNext = (ImageButton) findViewById(R.id.headerNext);
@@ -192,24 +205,15 @@ public class SurahActivity extends Activity {
 		
 		String  SNM, ANM;
 		
-		if (surahNumber+1 < 10 )
-			SNM = "00"+(surahNumber+1);
-		else if (surahNumber+1 < 100 )
-			SNM = "0"+(surahNumber+1);
-		else 
-			SNM = ""+(surahNumber+1);
+		SNM = CONSTANTS.numberToString(surahNumber + 1);
 		
 		for (int index=0;index<CONSTANTS.SurahNumberOfAyats[surahNumber];index++) {
 		
-				if (index < 10 )
-					ANM = "00"+index;
-				else if (index < 100)
-					ANM = "0"+index;
-				else 
-					ANM = ""+index;
+				ANM = CONSTANTS.numberToString(index);
 				
 				// server : http://al-qalam.googlecode.com/svn/trunk/assets/arabic/1/001000.gdw
-				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC +(surahNumber+1)+"/"+SNM+ANM+".gdw";
+				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC +SNM+ANM+".png";
+				// (surahNumber+1)+"/"
 				//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
 		}
 	}
@@ -268,16 +272,7 @@ public class SurahActivity extends Activity {
 		
 		return super.onCreateOptionsMenu(menu);
 	}
-	
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		boolean isAudioPlaying = audioState == CONSTANTS.AUDIO_PLAYING;
 		
-		menu.findItem(R.id.play).setVisible(!isAudioPlaying);
-		menu.findItem(R.id.pause).setVisible(isAudioPlaying);
-		
-		return super.onPrepareOptionsMenu(menu);
-	}
 	/*
 	@Override
 	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
@@ -315,14 +310,6 @@ public class SurahActivity extends Activity {
 		//final int selectedItem;
 		
     	switch (menuItem.getItemId()) {	
-
-    		case R.id.play: //MENU_ITEM_PLAY :
-    			playAudio();
-    			return true;
-    			
-    		case R.id.pause: //MENU_ITEM_PAUSE :
-    			pauseAudio();
-    			return true;
     		
     		case R.id.reciters: //MENU_ITEM_RECITER :
     			showDialog(DIALOG_RECITER);
@@ -386,20 +373,22 @@ public class SurahActivity extends Activity {
 	private void changeTranslation(int lng) {
 		removeDialog(DIALOG_TRANSLATION);
 		TranslationType = lng;
-		preferenceEditor.putInt("TransOption", lng);
+		preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, lng);
 		preferenceEditor.commit();
 		showSurah();
 	}
 	
 	private void changeReciter(int rct) {
 		removeDialog(DIALOG_RECITER);
-		preferenceEditor.putInt("ReciterOption", rct);
+		preferenceEditor.putInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, rct);
     	preferenceEditor.commit();
 		ReciterType = rct;
 	}
 	
 	private void playAudio() {
 		
+		String AudioPath = CONSTANTS.FOLDER_QURAN_AUDIO + CONSTANTS.ReciterDirectory[ReciterType] + "/";
+			
 		if (audioState == CONSTANTS.AUDIO_PLAYING )
 			return;
 		else if (audioState == CONSTANTS.AUDIO_PAUSED) {
@@ -417,32 +406,18 @@ public class SurahActivity extends Activity {
 				currentAyat = 1;
 			
 			if (currentAyat == 0) {
-				Log.i(TAG, CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/bismillah.mp3");
+				Log.i(TAG, AudioPath + "bismillah.mp3");
 
-				quranPlayer.setDataSource(CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/bismillah.mp3");
+				quranPlayer.setDataSource(AudioPath + "bismillah.mp3");
 				quranPlayer.prepare();
 				quranPlayer.start();
 				
 			} else {
-				String  SNM, ANM;
+				final String  SNM = CONSTANTS.numberToString(surahNumber+1), ANM = CONSTANTS.numberToString(currentAyat);
+								
+				Log.i(TAG, AudioPath + SNM+"/" + SNM+ANM+".mp3");
 				
-				if (surahNumber+1 < 10 )
-					SNM = "00"+(surahNumber+1);
-				else if (surahNumber+1 < 100 )
-					SNM = "0"+(surahNumber+1);
-				else 
-					SNM = ""+(surahNumber+1);
-				
-				if (currentAyat < 10 )
-					ANM = "00" + currentAyat;
-				else if (currentAyat < 100)
-					ANM = "0" + currentAyat;
-				else 
-					ANM = "" + currentAyat;
-				
-				Log.i(TAG, CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/" + SNM+"/" + SNM+ANM+".mp3");
-				
-				quranPlayer.setDataSource(CONSTANTS.FOLDER_QURAN_AUDIO+CONSTANTS.ReciterDirectory[1] + "/" + SNM+"/" + SNM+ANM+".mp3");
+				quranPlayer.setDataSource(AudioPath + SNM+"/" + SNM+ANM+".mp3");
 				quranPlayer.prepare();
 				quranPlayer.start();
 				
