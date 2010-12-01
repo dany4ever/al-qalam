@@ -117,11 +117,11 @@ public class SurahActivity extends Activity {
         surahName.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
     			if (isAudioControlShown) {
-    				isAudioControlShown = true;
+    				isAudioControlShown = false;
     				audioControlPanel.setVisibility(View.GONE);
     			}
     			else {
-    				isAudioControlShown = false;
+    				isAudioControlShown = true;
     				audioControlPanel.setVisibility(View.VISIBLE);
     			}
     		}
