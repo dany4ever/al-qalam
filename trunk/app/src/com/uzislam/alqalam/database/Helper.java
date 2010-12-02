@@ -23,6 +23,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import com.uzislam.alqalam.CONSTANTS;
 import com.uzislam.alqalam.R;
 
 import android.content.ContentValues;
@@ -35,9 +37,18 @@ import android.util.Log;
 public class Helper extends SQLiteOpenHelper {
 	
 	private static final String TAG = "Helper";
+	
 	private static final String DATABASE_NAME = "quran.db";
+	private static final String TABLE_SURAHNO_COLUMN = "surah_no";
+	private static final String TABLE_AYATNO_COLUMN = "ayat_no";
+	private static final String TABLE_TRANS_COLUMN = "translation";
+	
+	private static final String UZBEK_CYRILLIC = "uzbek_cyrillic";
+	private static final String UZBEK_LATIN = "uzbek_latin";
+	private static final String RUSSIAN = "russian";
+	private static final String ARABIC = "arabic";
+	
 	private static final int DATABASE_VERSION = 1;
-	public static final String TRANS_COLUMN = "translation";
 	
 	private final Context mContext;
 	
@@ -48,16 +59,11 @@ public class Helper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		createTable(db, "uzbek_cyrillic");
-		//createTable(db, "uzbek_latin");
-		//createTable(db, "russian");
-		
-		try {
-			insertTranslation(db, "uzbek_cyrillic");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// Create Qur'an database
+		createTable(db, UZBEK_CYRILLIC);
+		createTable(db, UZBEK_LATIN);
+		createTable(db, RUSSIAN);
+		//createTable(db, ARABIC);
 	}
 
 	@Override
@@ -69,23 +75,52 @@ public class Helper extends SQLiteOpenHelper {
 	private void createTable(SQLiteDatabase db, String table) {
 		db.execSQL("CREATE TABLE " + table +
 				"(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-				TRANS_COLUMN + " TEXT COLLATE UNICODE);");
+				TABLE_SURAHNO_COLUMN + " INTEGER NOT NULL," +
+				TABLE_AYATNO_COLUMN + " INTEGER NOT NULL," +
+				TABLE_TRANS_COLUMN + " TEXT COLLATE UNICODE);");
+		
+		try {
+			// Insert Qur'an ayats
+			insertAyats(db, table);
+		} catch (IOException e) {
+			Log.e(TAG, "IOException while creating table " + table);
+		}
 	}
 	
-	private void insertTranslation(SQLiteDatabase db, String which) throws IOException {
-		Log.i(TAG, "Inserting translations...");
+	private void insertAyats(SQLiteDatabase db, String which) throws IOException {
+		Log.i(TAG, "Inserting translations... " + which);
 		final Resources resources = mContext.getResources(); 
 		InputStream inputStream = resources.openRawResource(R.raw.uzbek_cyrillic);
+		if (which.equals(UZBEK_LATIN))
+			inputStream = resources.openRawResource(R.raw.uzbek_latin);
+		else if (which.equals(RUSSIAN))
+			inputStream = resources.openRawResource(R.raw.russian);
+		else if (which.equals(ARABIC))
+			inputStream = resources.openRawResource(R.raw.arabic);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		
 		try {
 			String line;
+			int surahNumber = 1;
+			int ayatNumber = 1;
 			while ((line = reader.readLine()) != null) {
-				//db.execSQL("INSERT INTO uzbek_cyrillic('" + TRANS_COLUMN + "') values('" + line + "');");
 				ContentValues values = new ContentValues();
-				Log.i("YAY", "line: " + line);
-				values.put(TRANS_COLUMN, line);
-				db.insert(which, TRANS_COLUMN, values);
+				
+				// Let's collect the values
+				values.put(TABLE_SURAHNO_COLUMN, surahNumber);
+				values.put(TABLE_AYATNO_COLUMN, ayatNumber);
+				values.put(TABLE_TRANS_COLUMN, line);
+				
+				// Now insert the values to the table
+				db.insert(which, TABLE_TRANS_COLUMN, values);
+				
+				// Routine to populate proper surah and ayat numbers
+				if (ayatNumber == CONSTANTS.SurahNumberOfAyats[surahNumber - 1]) {
+					surahNumber++;
+					ayatNumber = 1;
+				} else {
+					ayatNumber++;
+				}
 			}
 		} finally {
 			reader.close();
