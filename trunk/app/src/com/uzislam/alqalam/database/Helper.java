@@ -64,6 +64,14 @@ public class Helper extends SQLiteOpenHelper {
 		createTable(db, UZBEK_LATIN);
 		createTable(db, RUSSIAN);
 		//createTable(db, ARABIC);
+		
+		// Create Bookmarks table
+		db.execSQL("CREATE TABLE bookmarks" +
+				"(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+				TABLE_SURAHNO_COLUMN + " INTEGER NOT NULL," +
+				TABLE_AYATNO_COLUMN + " INTEGER NOT NULL," +
+				"date_col DATE NOT NULL);");
+		
 	}
 
 	@Override
