@@ -41,7 +41,7 @@ public class Helper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "quran.db";
 	private static final String TABLE_SURAHNO_COLUMN = "surah_no";
 	private static final String TABLE_AYATNO_COLUMN = "ayat_no";
-	private static final String TABLE_TRANS_COLUMN = "translation";
+	private static final String TABLE_AYAT_COLUMN = "ayat";
 	
 	private static final String UZBEK_CYRILLIC = "uzbek_cyrillic";
 	private static final String UZBEK_LATIN = "uzbek_latin";
@@ -65,12 +65,15 @@ public class Helper extends SQLiteOpenHelper {
 		createTable(db, RUSSIAN);
 		//createTable(db, ARABIC);
 		
-		// Create Bookmarks table
-		db.execSQL("CREATE TABLE bookmarks" +
-				"(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+		/** CREATE TABLE bookmarks(
+		 *                        _id INTEGER PRIMARY KEY AUTOINCREMENT,
+		 *                        surah_no INTEGER NOT NULL,
+		 *                        ayat_no INTEGER NOT NULL,
+		 *                        date_col DATETIME NOT NULL);
+		 */
+		db.execSQL("CREATE TABLE bookmarks(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 				TABLE_SURAHNO_COLUMN + " INTEGER NOT NULL," +
-				TABLE_AYATNO_COLUMN + " INTEGER NOT NULL," +
-				"date_col DATE NOT NULL);");
+				TABLE_AYATNO_COLUMN + " INTEGER NOT NULL,date_col DATETIME NOT NULL);");
 		
 	}
 
@@ -81,11 +84,17 @@ public class Helper extends SQLiteOpenHelper {
 	}
 	
 	private void createTable(SQLiteDatabase db, String table) {
+		/** CREATE TABLE table(
+		 *                   _id INTEGER PRIMARY KEY AUTOINCREMENT,
+		 *                   surah_no INTEGER NOT NULL,
+		 *                   ayat_no INTEGER NOT NULL,
+		 *                   ayat TEXT COLLATE UNICODE);
+		 */
 		db.execSQL("CREATE TABLE " + table +
 				"(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 				TABLE_SURAHNO_COLUMN + " INTEGER NOT NULL," +
 				TABLE_AYATNO_COLUMN + " INTEGER NOT NULL," +
-				TABLE_TRANS_COLUMN + " TEXT COLLATE UNICODE);");
+				TABLE_AYAT_COLUMN + " TEXT COLLATE UNICODE);");
 		
 		try {
 			// Insert Qur'an ayats
@@ -117,10 +126,10 @@ public class Helper extends SQLiteOpenHelper {
 				// Let's collect the values
 				values.put(TABLE_SURAHNO_COLUMN, surahNumber);
 				values.put(TABLE_AYATNO_COLUMN, ayatNumber);
-				values.put(TABLE_TRANS_COLUMN, line);
+				values.put(TABLE_AYAT_COLUMN, line);
 				
 				// Now insert the values to the table
-				db.insert(which, TABLE_TRANS_COLUMN, values);
+				db.insert(which, TABLE_AYAT_COLUMN, values);
 				
 				// Routine to populate proper surah and ayat numbers
 				if (ayatNumber == CONSTANTS.SurahNumberOfAyats[surahNumber - 1]) {
