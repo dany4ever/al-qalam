@@ -212,8 +212,7 @@ public class SurahActivity extends Activity {
 				ANM = CONSTANTS.numberToString(index);
 				
 				// server : http://al-qalam.googlecode.com/svn/trunk/assets/arabic/1/001000.gdw
-				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC +SNM+ANM+".png";
-				// (surahNumber+1)+"/"
+				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC + (surahNumber+1)+ "/" + SNM + ANM +".img";
 				//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
 		}
 	}
