@@ -103,8 +103,8 @@ public class SurahAdapter extends BaseAdapter {
         	 Log.e("alQalam", "Arabic Text Does not Exist");
          }
          
-        // if (SurahActivity.displaymetrics.densityDpi == DisplayMetrics.DENSITY_HIGH)
-        //	 arabicAyat.setDensity((int)(SurahActivity.displaymetrics.densityDpi/1.45));
+        if (SurahActivity.displaymetrics.densityDpi == DisplayMetrics.DENSITY_MEDIUM)
+        	arabicAyat.setDensity((int)(SurahActivity.displaymetrics.densityDpi*1.45));
          
          vHolder.AyatArabic.setImageBitmap(arabicAyat);
        	 
