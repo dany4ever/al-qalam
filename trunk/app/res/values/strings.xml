@@ -35,10 +35,9 @@
 	<string name="reciters">Қорилар</string>
 	<string name="reciters_list">Қорилар рўйҳати</string>
 	<string name="reciters_list_summary">Қуръон арабча қироатини танланг</string>
-	<string name="play">Тинглаш</string>
-	<string name="pause">Пауза</string>
 	<string name="help">Ёрдам</string>
 	<string name="info">Маълумот</string>
 	<string name="bookmarks">Хатчўплар</string>
 	<string name="settings">Мосламалар</string>
+	<string name="options">Танловлар</string>
 </resources>

@@ -150,5 +150,12 @@
 		<item>Аш-Шатрий</item>
 		<item>Ал-Ғомидий</item>
 	</string-array>
+	
+	<string-array name="AyatClickOptions">
+	    <item>Сурани Тинглаш</item>  
+		<item>Oятни Тинглаш</item>
+		<item>Oятни Хатчўплаш</item>
+	</string-array>
+	
     
 </resources>

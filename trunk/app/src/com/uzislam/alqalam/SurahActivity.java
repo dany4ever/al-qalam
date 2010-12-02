@@ -26,6 +26,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -37,12 +38,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class SurahActivity extends Activity {
 	private static final String TAG = "SurahActivity";
@@ -50,17 +53,17 @@ public class SurahActivity extends Activity {
 	private String []		AYATSARABIC;
 	private int				surahNumber = 0;
 	private int				currentAyat = 0;
+	private int 			selectedAyat = 0;
 	
 	public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
     
 	private ImageView 			surahTitle;
 	private SurahAdapter 		surahAdapter;
-	private AyatIconifiedText	ait;
-	private Drawable 			iconBismillah;
 	private ListView			ayatList; 
 	
 	private final int 	DIALOG_TRANSLATION = 0x01;
 	private final int	DIALOG_RECITER = 0x02;
+	private final int 	DIALOG_AYAT_CLICK_OPTION = 0x03;
 	
 	private int			audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
 	
@@ -96,18 +99,25 @@ public class SurahActivity extends Activity {
         
         // Set chapter image title 
         surahTitle = (ImageView) findViewById(R.id.suraName);
-        
-        //get Bismillah image
-        iconBismillah = getResources().getDrawable(R.drawable.bismillah);
-        
+         
         // create new chapter adapter
         surahAdapter = new SurahAdapter(this); 	
         
         // get AyatList View 
         ayatList = (ListView)findViewById(R.id.AyaList);  
 
+        ayatList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View view, final int index, long order) {
+						selectedAyat = index + 1;	
+						showDialog(DIALOG_AYAT_CLICK_OPTION);
+			}
+        });
+        
         audioControlPanel = (LinearLayout) findViewById(R.id.audioPlayerControl);
         audioControlPanel.setVisibility(View.GONE);
+        
         
         // Display Surah
         showSurah();
@@ -159,6 +169,8 @@ public class SurahActivity extends Activity {
 	
 	private void showSurah() {
 		
+		AyatIconifiedText	ait;
+       
 		surahAdapter.clear();
 		
 		surahTitle.setImageResource(CONSTANTS.SurahTitles[surahNumber]);
@@ -178,20 +190,22 @@ public class SurahActivity extends Activity {
 	        readFileToArray(surahFileLink);
 
         }
-        // else {
-        // 	Arrays.fill(AYATS, " ");
-        // }
         
         readArabicToArray();
         
         for (int i=0; i < CONSTANTS.SurahNumberOfAyats[surahNumber] ; i++) {
-        	
-        	ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], getSpecialImage(surahNumber+1, i+1), null, getAyatBackgroundColor());
-        	
+        
         	// check if BISMILLAH must be shown 
-        	if (i == 0 && surahNumber != 0 && surahNumber != 8)  
-        	     ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], getSpecialImage(surahNumber+1, i+1), iconBismillah, getAyatBackgroundColor());
-       
+        	if (i == 0 && surahNumber != 0 && surahNumber != 8)   {
+        		
+        		//get Bismillah image
+                Drawable  iconBismillah = getResources().getDrawable(R.drawable.bismillah);
+        		ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], getSpecialImage(surahNumber+1, i+1), iconBismillah, getAyatBackgroundColor());
+        	}
+        	else {
+        		ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], getSpecialImage(surahNumber+1, i+1), null, getAyatBackgroundColor());
+        	}
+        	
         	surahAdapter.addItem(ait);
         }
         
@@ -272,38 +286,7 @@ public class SurahActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 		
-	/*
-	@Override
-	public boolean onPrepareOptionsMenu(Menu mainMenu) { 	
-    
-    	mainMenu.clear();
-    	
-    	MenuItem subitem;
-    	
-		mainMenu.setQwertyMode(true);
-		
-		if (audioState != CONSTANTS.AUDIO_PLAYING) {
-			subitem = mainMenu.add(0, MENU_ITEM_PLAY, 0 , R.string.play);
-			subitem.setIcon(R.drawable.menu_icon_play);
-		}
-		
-		else {
-			subitem = mainMenu.add(0, MENU_ITEM_PAUSE, 0 , R.string.pause);
-			subitem.setIcon(R.drawable.menu_icon_pause);
-		}
-		
-		subitem = mainMenu.add(0, MENU_ITEM_TRANSLATION, 0 , R.string.translation);
-		subitem.setIcon(R.drawable.menu_icon_translation);
-		
-		subitem = mainMenu.add(0, MENU_ITEM_RECITER, 0 , R.string.reciters);
-		subitem.setIcon(R.drawable.menu_icon_reciter);
-		
-		subitem = mainMenu.add(0, MENU_ITEM_HELP, 0, R.string.help);
-		subitem.setIcon(R.drawable.menu_icon_help);
-		
-    	return true;
-    }*/	
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		//final int selectedItem;
@@ -318,14 +301,12 @@ public class SurahActivity extends Activity {
     			showDialog(DIALOG_TRANSLATION);
     			return true;
     			
-    		case R.id.help: //MENU_ITEM_HELP:
-    			//startActivity(new Intent(this, helpActivity.class));
-    			return true;
 
     	}
 	   
     	return false;
    }
+	
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
@@ -363,9 +344,48 @@ public class SurahActivity extends Activity {
 	        });
 		}
 		
+		if (id == DIALOG_AYAT_CLICK_OPTION) {
+			
+			ab.setTitle(R.string.options);
+			
+			ab.setSingleChoiceItems(R.array.AyatClickOptions, 0 , new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int item) {
+	            	Log.i(TAG, "Item " + item);
+	            	doAyatClickTask(item);
+	            }
+
+	        })
+	        .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int item) {
+	            	removeDialog(DIALOG_RECITER);
+	            }
+	        });	
+		}
+			
+		
 		AlertDialog alert = ab.create();
 
 		return alert;
+		
+	}
+	
+	private void doAyatClickTask(int item) {
+		removeDialog(DIALOG_AYAT_CLICK_OPTION);
+		
+		if (item == 0) {
+			currentAyat = 0;
+			isAudioControlShown = true;
+			audioControlPanel.setVisibility(View.VISIBLE);
+			playAudio();
+		}
+		else if (item == 1) {
+			isAudioControlShown = true;
+			audioControlPanel.setVisibility(View.VISIBLE);
+			currentAyat = selectedAyat;
+			playAudio();
+		}
+			
+		// TODO Auto-generated method stub
 		
 	}
 	
