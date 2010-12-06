@@ -112,8 +112,10 @@ public class Helper extends SQLiteOpenHelper {
 			inputStream = resources.openRawResource(R.raw.uzbek_latin);
 		else if (which.equals(RUSSIAN))
 			inputStream = resources.openRawResource(R.raw.russian);
+		/* TODO: Enable when Arabic text is supported by Android
 		else if (which.equals(ARABIC))
 			inputStream = resources.openRawResource(R.raw.arabic);
+		*/
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		
 		try {
