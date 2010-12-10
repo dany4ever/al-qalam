@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2010 (c) Al-Qalam Project
+
+   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+
+   Al-Qalam is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   Al-Qalam is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+  <string-array name="SurahTitle">
+    <item name="001">Al-Fatihah</item>
+    <item name="002">Al-Baqarah</item>
+    <item name="003">\'Ali `Imran</item>
+    <item name="004">An-Nisa\'</item>
+    <item name="005">Al-Ma\'idah</item>
+    <item name="006">Al-\'An`am</item>
+    <item name="007">Al-\'A`raf</item>
+    <item name="008">Al-\'Anfal</item>
+    <item name="009">At-Tawbah</item>
+    <item name="010">Yunus</item>
+    <item name="011">Hud</item>
+    <item name="012">Yusuf</item>
+    <item name="013">Ar-Ra`d</item>
+    <item name="014">\'Ibrahim</item>
+    <item name="015">Al-Hijr</item>
+    <item name="016">An-Nahl</item>
+    <item name="017">Al-\'Isra\'</item>
+    <item name="018">Al-Kahf</item>
+    <item name="019">Maryam</item>
+    <item name="020">Taha</item>
+    <item name="021">Al-\'Anbya\'</item>
+    <item name="022">Al-Haj</item>
+    <item name="023">Al-Mu\'minun</item>
+    <item name="024">An-Nur</item>
+    <item name="025">Al-Furqan</item>
+    <item name="026">Ash-Shu`ara\'</item>
+    <item name="027">An-Naml</item>
+    <item name="028">Al-Qasas</item>
+    <item name="029">Al-`Ankabut</item>
+    <item name="030">Ar-Rum</item>
+    <item name="031">Luqman</item>
+    <item name="032">As-Sajdah</item>
+    <item name="033">Al-\'Ahzab</item>
+    <item name="034">Saba\'</item>
+    <item name="035">Fatir</item>
+    <item name="036">Ya-Sin</item>
+    <item name="037">As-Saffat</item>
+    <item name="038">Sad</item>
+    <item name="039">Az-Zumar</item>
+    <item name="040">Ghafir</item>
+    <item name="041">Fussilat</item>
+    <item name="042">Ash-Shuraa</item>
+    <item name="043">Az-Zukhruf</item>
+    <item name="044">Ad-Dukhan</item>
+    <item name="045">Al-Jathiyah</item>
+    <item name="046">Al-\'Ahqaf</item>
+    <item name="047">Muhammad</item>
+    <item name="048">Al-Fath</item>
+    <item name="049">Al-Hujurat</item>
+    <item name="050">Qaf</item>
+    <item name="051">Adh-Dhariyat</item>
+    <item name="052">At-Tur</item>
+    <item name="053">An-Najm</item>
+    <item name="054">Al-Qamar</item>
+    <item name="055">Ar-Rahman</item>
+    <item name="056">Al-Waqi`ah</item>
+    <item name="057">Al-Hadid</item>
+    <item name="058">Al-Mujadila</item>
+    <item name="059">Al-Hashr</item>
+    <item name="060">Al-Mumtahanah</item>
+    <item name="061">As-Saf</item>
+    <item name="062">Al-Jumu`ah</item>
+    <item name="063">Al-Munafiqun</item>
+    <item name="064">At-Taghabun</item>
+    <item name="065">At-Talaq</item>
+    <item name="066">At-Tahrim</item>
+    <item name="067">Al-Mulk</item>
+    <item name="068">Al-Qalam</item>
+    <item name="069">Al-Haqqah</item>
+    <item name="070">Al-Ma`arij</item>
+    <item name="071">Nuh</item>
+    <item name="072">Al-Jinn</item>
+    <item name="073">Al-Muzzammil</item>
+    <item name="074">Al-Muddaththir</item>
+    <item name="075">Al-Qiyamah</item>
+    <item name="076">Al-\'Insan</item>
+    <item name="077">Al-Mursalat</item>
+    <item name="078">An-Naba\'</item>
+    <item name="079">An-Nazi`at</item>
+    <item name="080">`Abasa</item>
+    <item name="081">At-Takwir</item>
+    <item name="082">Al-\'Infitar</item>
+    <item name="083">Al-Mutaffifin</item>
+    <item name="084">Al-\'Inshiqaq</item>
+    <item name="085">Al-Buruj</item>
+    <item name="086">At-Tariq</item>
+    <item name="087">Al-\'A`la</item>
+    <item name="088">Al-Ghashiyah</item>
+    <item name="089">Al-Fajr</item>
+    <item name="090">Al-Balad</item>
+    <item name="091">Ash-Shams</item>
+    <item name="092">Al-Layl</item>
+    <item name="093">Ad-Duhaa</item>
+    <item name="094">Ash-Sharh</item>
+    <item name="095">At-Tin</item>
+    <item name="096">Al-`Alaq</item>
+    <item name="097">Al-Qadr</item>
+    <item name="098">Al-Bayyinah</item>
+    <item name="099">Az-Zalzalah</item>
+    <item name="100">Al-`Adiyat</item>
+    <item name="101">Al-Qari`ah</item>
+    <item name="102">At-Takathur</item>
+    <item name="103">Al-`Asr</item>
+    <item name="104">Al-Humazah</item>
+    <item name="105">Al-Fil</item>
+    <item name="106">Quraysh</item>
+    <item name="107">Al-Ma`un</item>
+    <item name="108">Al-Kawthar</item>
+    <item name="109">Al-Kafirun</item>
+    <item name="110">An-Nasr</item>
+    <item name="111">Al-Masad</item>
+    <item name="112">Al-\'Ikhlas</item>
+    <item name="113">Al-Falaq</item>
+    <item name="114">An-Nas</item>
+  </string-array>
+
+  <string-array name="DownloadOptions">
+    <item>Download surahs</item>
+    <item>Cancel</item>
+  </string-array>
+
+  <string-array name="TranslationOptions">
+    <item>Ўзбекча</item>
+    <item>O\'zbekcha</item>
+    <item>Русский</item>
+    <item>No translation</item>
+  </string-array>
+
+  <string-array name="ReciterOptions">
+    <item>Ash-Shatri</item>
+    <item>Saad al-Ghamdi</item>
+  </string-array>
+
+  <string-array name="AyatClickOptions">
+    <item>Play surah</item>
+    <item>Play ayat</item>
+    <item>Bookmark ayat</item>
+  </string-array>
+
+</resources>
