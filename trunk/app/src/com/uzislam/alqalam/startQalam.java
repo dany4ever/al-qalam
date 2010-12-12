@@ -20,11 +20,13 @@
 package com.uzislam.alqalam;
 
 import java.io.File;
-import com.uzislam.alqalam.*;
+import java.util.Locale;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -45,12 +47,26 @@ public class startQalam extends Activity {
 	private SharedPreferences	commonPrefs;
 	private int 				TranslationType = 0;
 	private int					ReciterType = 0;
+	public startQalam() {
+		
+	}
 
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	/* Initialize interface language
+         * This should be done before setContentView() is called
+         */
+    	commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
+    	String[] availableLocales = getResources().getStringArray(R.array.locale_values);
+    	int index = commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3);
+    	if (index > -1 && index < 4)
+    		updateUiLocale(this, availableLocales[index]);
+    	else 
+    		updateUiLocale(this, null);
+    	
+    	super.onCreate(savedInstanceState);        
         setContentView(R.layout.main);
         
         frontSplash = (ImageView) findViewById(R.id.splashimage);
@@ -72,10 +88,7 @@ public class startQalam extends Activity {
         aqHandler = new Handler ();
         aqHandler.postDelayed(Splash, 1500);
         
-        commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
-        
-		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)
-        
+		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)        
         TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
         ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
         
@@ -160,5 +173,15 @@ public class startQalam extends Activity {
 				// audioFileName = CONSTANTS.FOLDER_QURAN_AUDIO + CONSTANTS.ReciterDirectory[ReciterType]+ "/" + CONSTANTS.numberToString(i+1) ;
 				//CONSTANTS.gSurahIsAudioDownloaded[i] = isFileExists(audioFileName);
 		}
+	}
+	
+	public void updateUiLocale(Context context, String locale) {
+		Configuration config = new Configuration();
+		if (locale != null) {
+			config.locale = new Locale(locale);
+		} else {
+			config.locale = new Locale("uz");
+		}
+		context.getResources().updateConfiguration(config, null);
 	}
 }
