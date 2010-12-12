@@ -41,4 +41,6 @@
     <string name="bookmarks">Хатчўплар</string>
     <string name="settings">Мосламалар</string>
     <string name="options">Танловлар</string>
+    <string name="settings_locale">Тил</string>
+    <string name="settings_locale_summary">Интерфейс тилини танланг</string>
 </resources>

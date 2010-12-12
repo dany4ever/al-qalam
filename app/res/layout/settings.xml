@@ -32,5 +32,13 @@
 		android:summary="@string/reciters_list_summary"  
 		android:entries="@array/ReciterOptions"  
 		android:entryValues="@array/ReciterOptions"  
-		android:dialogTitle="@string/reciters" /> 
+		android:dialogTitle="@string/reciters" />
+	
+	<ListPreference
+		android:key="ui_locale"
+		android:title="@string/settings_locale"
+		android:summary="@string/settings_locale_summary"
+		android:entries="@array/locales"
+		android:entryValues="@array/locale_values"
+		android:dialogTitle="@string/settings_locale" />
 </PreferenceScreen>  

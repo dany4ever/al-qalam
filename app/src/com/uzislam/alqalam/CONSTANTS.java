@@ -65,6 +65,7 @@ public class CONSTANTS {
 		public static final String 	SETTINGS_FILE = "alQalam.set";
 		public static final String	SETTINGS_TRANLATION_OPTION_TITLE ="TransOption";
 		public static final String	SETTINGS_RECITER_OPTION_TITLE ="ReciterOption";
+		public static final String SETTINGS_UI_LOCALE_TITLE = "UiLocale";
 		
 		
 		public static String[] LanguageDirectory = {"uzbek-cyr", "uzbek-lat", "russian"};

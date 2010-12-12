@@ -19,6 +19,7 @@
 
 package com.uzislam.alqalam;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -34,13 +35,16 @@ public class SettingsActivity extends PreferenceActivity {
 	private SharedPreferences		commonPrefs = null;
 	public SharedPreferences.Editor preferenceEditor = null;
 	
-	private ListPreference		translationOption, reciterOption;
+	private ListPreference		translationOption, reciterOption, uiLocale;
+	private startQalam mStartQalam = new startQalam();
+	private Context mContext;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        
 	        Log.i(TAG, "Create Settings");
+	        mContext = getApplicationContext();
 	        
 	        addPreferencesFromResource(R.layout.settings);
 	        
@@ -77,7 +81,26 @@ public class SettingsActivity extends PreferenceActivity {
 	                }  
 	                return true;  
 	            }  
-	        });  
+	        });
+	        
+	        uiLocale = (ListPreference) findPreference("ui_locale");
+	        uiLocale.setNegativeButtonText(R.string.btn_cancel);
+	        // The index of default language is 3 (Uzbek)
+	        uiLocale.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3));
+
+	        uiLocale.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+	            public boolean onPreferenceChange(Preference preference, Object newValue) {
+	            	String locale = newValue.toString();
+	            	int index = uiLocale.findIndexOfValue(locale);
+	                if (index != -1) {
+	                	preferenceEditor.putInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, index);
+	                	preferenceEditor.commit();
+	                	mStartQalam.updateUiLocale(mContext, locale);
+	                }
+	                finish();
+	                return true;
+	            }
+	        });
 	        
 	 }
 
