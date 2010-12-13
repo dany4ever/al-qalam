@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2010 (c) Al-Qalam Project
+
+   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+
+   Al-Qalam is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as 
+   published by the Free Software Foundation, either version 3 of the License, 
+   or (at your option) any later version.
+
+   Al-Qalam is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+    <string name="sura_need_download">Süre yok</string>
+    <string name="no_sd_card">Harici depolama (SD card) monte edilmemiş veya yok</string>
+    <string name="btn_confirm">OK</string>
+    <string name="btn_cancel">İptal</string>
+    <string name="no_android_market">Android Market cihazda yüklü değildir.\nSüreleri projenin ana sayfasından indirebilirsiniz.</string>
+    <string name="translation">Meal</string>
+    <string name="translation_language">Meal dili</string>
+    <string name="translation_language_summary">Kur\'an-ı Kerim meal dilini seçin</string>
+    <string name="reciters">Okuyucular</string>
+    <string name="reciters_list">Okuyucular listesi</string>
+    <string name="reciters_list_summary">Kur\'an-ı Kerim okuyucusunu seçin</string>
+    <string name="help">Yardım</string>
+    <string name="info">Bilgi</string>
+    <string name="bookmarks">İmleri</string>
+    <string name="settings">Ayarlar</string>
+    <string name="options">Seçenekler</string>
+    <string name="settings_locale">Dil</string>
+    <string name="settings_locale_summary">Arayüz dili seçin</string>
+</resources>
