@@ -18,7 +18,7 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-    <!-- Unstranslatable strings; keep them all in this block -->
+    <!-- Untranslatable strings; keep them all in this block -->
     <string name="app_name" translatable="false">Al-Qalam</string>
     <string name="app_description" translatable="false">Al-Qalam Islamic Software</string>
     <color name="darkred" translatable="false">#441111</color>
