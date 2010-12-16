@@ -21,4 +21,4 @@
 ----
 
 
-^1^ _If you are a Windows user, you may consider using_ [http://tortoisesvn.net/ http://tortoisesvn.net/files/tortoisesvn_logo_hor468x64.png]
+^1^ _If you are a Windows user, you may consider using_ [http://tortoisesvn.net/ TortoiseSVN]
