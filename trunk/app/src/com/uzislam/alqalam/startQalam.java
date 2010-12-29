@@ -50,6 +50,7 @@ public class startQalam extends Activity {
 	public startQalam() {
 		
 	}
+	private String[] availableLocales;
 
 	
 	/** Called when the activity is first created. */
@@ -59,7 +60,8 @@ public class startQalam extends Activity {
          * This should be done before setContentView() is called
          */
     	commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
-    	String[] availableLocales = getResources().getStringArray(R.array.locale_values);
+    	//String[] availableLocales = getResources().getStringArray(R.array.locale_values);
+    	availableLocales = getResources().getStringArray(R.array.locale_values);
     	int index = commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3);
     	if (index > -1 && index < 4)
     		updateUiLocale(this, availableLocales[index]);
@@ -98,6 +100,17 @@ public class startQalam extends Activity {
         // Helper mHelper = new Helper(this);
         // mHelper.getWritableDatabase();
         
+    }
+    
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	
+    	int index = commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3);
+    	if (index > -1 && index < 4)
+    		updateUiLocale(this, availableLocales[index]);
+    	else 
+    		updateUiLocale(this, null);
     }
     
     private Runnable Splash = new Runnable() {
@@ -152,6 +165,10 @@ public class startQalam extends Activity {
     	
     	case R.id.help:
     		return true;
+    	
+    	case R.id.settings:
+			startActivity(new Intent(this, SettingsActivity.class));
+			return true;
 
     	}
 	   

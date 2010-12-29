@@ -29,4 +29,9 @@
 		android:title="@string/help"
 		android:icon="@drawable/menu_icon_help">
 	</item>
+	<item
+		android:id="@+id/settings"
+		android:title="@string/settings"
+		android:icon="@drawable/menu_icon_settings">
+	</item>
 </menu>
