@@ -22,6 +22,8 @@ package com.uzislam.alqalam;
 import java.io.File;
 import java.util.Locale;
 
+import com.uzislam.alqalam.database.Helper;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -69,8 +71,10 @@ public class startQalam extends Activity {
         mainView = (LinearLayout) findViewById(R.id.mainview);
         btnView = (LinearLayout) findViewById(R.id.buttons);
         btnView.setVisibility(View.GONE);
+        //Initialize the database
+        initializeDb(this);
 
-        aqHandler = new Handler ();
+        aqHandler = new Handler();
         aqHandler.postDelayed(Splash, 1500);
         
 		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)        
@@ -84,7 +88,7 @@ public class startQalam extends Activity {
         // mHelper.getWritableDatabase();
         
     }
-    
+
     private Runnable Splash = new Runnable() {
 	 	   public void run() {
 	 		frontSplash.setVisibility(View.GONE);
@@ -118,27 +122,27 @@ public class startQalam extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.clear(); // Need to *refresh* menu names when UI locale is changed */
 		getMenuInflater().inflate(R.menu.main, menu);
-		
+
 		return true;		
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		
+
     	switch (menuItem.getItemId()) {	
 
     	case R.id.info:
     		return true;
-    	
+
     	case R.id.help:
     		return true;
-    	
+
     	case R.id.settings:
 			startActivity(new Intent(this, SettingsActivity.class));
 			return true;
 
     	}
-	   
+
     	return false;
    }
 
@@ -146,20 +150,20 @@ public class startQalam extends Activity {
 		  File file = new File(_file);
 		  return file.exists();
 	}
-	
+
 	public void checkDownloadedSurahs() {
 		String arabicFileName;
 		//String audioFileName;
-				
+
 		for (int i=0; i<CONSTANTS.numberOfSurahs; i++) {
 				arabicFileName = CONSTANTS.FOLDER_QURAN_ARABIC + (i+1);
 				CONSTANTS.gSurahIsDownloaded[i] = isFileExists(arabicFileName);
-				
+
 				// audioFileName = CONSTANTS.FOLDER_QURAN_AUDIO + CONSTANTS.ReciterDirectory[ReciterType]+ "/" + CONSTANTS.numberToString(i+1) ;
 				//CONSTANTS.gSurahIsAudioDownloaded[i] = isFileExists(audioFileName);
 		}
 	}
-	
+
 	public void updateUiLocale(Context context, String locale) {
 		Configuration config = new Configuration();
 		if (locale != null) {
@@ -169,4 +173,14 @@ public class startQalam extends Activity {
 		}
 		context.getResources().updateConfiguration(config, null);
 	}
+
+	protected void initializeDb(final Context context) {
+    	Thread mThread = new Thread() {
+    		public void run() {
+    			Helper mHelper = new Helper(context);
+    			mHelper.getWritableDatabase();
+    		}
+    	};
+    	mThread.start();
+    }
 }
