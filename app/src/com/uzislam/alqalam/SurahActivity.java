@@ -26,7 +26,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -36,7 +35,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -93,7 +91,7 @@ public class SurahActivity extends Activity {
         preferenceEditor = commonPrefs.edit();
         
 		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)
-        TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
+        TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, 0);
 		 
         ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
         
@@ -392,7 +390,7 @@ public class SurahActivity extends Activity {
 	private void changeTranslation(int lng) {
 		removeDialog(DIALOG_TRANSLATION);
 		TranslationType = lng;
-		preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, lng);
+		preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, lng);
 		preferenceEditor.commit();
 		showSurah();
 	}
