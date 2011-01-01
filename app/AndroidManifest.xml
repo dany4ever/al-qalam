@@ -19,8 +19,9 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.uzislam.alqalam"
-      android:versionCode="2"
-      android:versionName="1.1">
+      android:versionCode="3"
+      android:versionName="1.2"
+      android:installLocation="auto">
       
     <supports-screens
       android:largeScreens="true"
@@ -45,6 +46,6 @@
         <provider android:name=".database.Provider" android:authorities="com.uzislam.alqalam" />
     </application>
                
-    <uses-sdk android:minSdkVersion="7" />
+    <uses-sdk android:minSdkVersion="8" />
 
 </manifest> 
