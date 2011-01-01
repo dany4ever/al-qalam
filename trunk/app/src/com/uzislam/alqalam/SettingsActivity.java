@@ -48,20 +48,17 @@ public class SettingsActivity extends PreferenceActivity {
 	        
 	        addPreferencesFromResource(R.layout.settings);
 	        
-	        commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
+	        commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, MODE_PRIVATE);
 	        preferenceEditor = commonPrefs.edit();
 	        
 	        translationOption = (ListPreference) findPreference("TransOption");
 	        translationOption.setNegativeButtonText(R.string.btn_cancel);
-	        translationOption.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0));
-	        
-	        
-
+	        translationOption.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, 0));
 	        translationOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {  
 	            public boolean onPreferenceChange(Preference preference, Object newValue) {  
 	                int index = translationOption.findIndexOfValue(newValue.toString());  
 	                if (index != -1) {  
-	                	preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, index);
+	                	preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, index);
 	                	preferenceEditor.commit();
 	                }  
 	                return true;  
@@ -71,7 +68,6 @@ public class SettingsActivity extends PreferenceActivity {
 	        reciterOption = (ListPreference) findPreference("ReciterOption");
 	        reciterOption.setNegativeButtonText(R.string.btn_cancel);
 	        reciterOption.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0));
-	        
 	        reciterOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {  
 	            public boolean onPreferenceChange(Preference preference, Object newValue) {  
 	                int index = reciterOption.findIndexOfValue(newValue.toString());  
@@ -87,7 +83,6 @@ public class SettingsActivity extends PreferenceActivity {
 	        uiLocale.setNegativeButtonText(R.string.btn_cancel);
 	        // The index of default language is 3 (Uzbek)
 	        uiLocale.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3));
-
 	        uiLocale.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 	            public boolean onPreferenceChange(Preference preference, Object newValue) {
 	            	String locale = newValue.toString();

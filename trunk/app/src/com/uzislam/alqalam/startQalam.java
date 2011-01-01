@@ -45,13 +45,11 @@ public class startQalam extends Activity {
 	private LinearLayout 		btnView;
 	
 	private SharedPreferences	commonPrefs;
-	private int 				TranslationType = 0;
-	private int					ReciterType = 0;
+	//private int 				TranslationType = 0;
+	//private int					ReciterType = 0;
 	public startQalam() {
-		
+		// This is here to call updateUiLocale() method
 	}
-	private String[] availableLocales;
-
 	
 	/** Called when the activity is first created. */
     @Override
@@ -59,14 +57,10 @@ public class startQalam extends Activity {
     	/* Initialize interface language
          * This should be done before setContentView() is called
          */
-    	commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
-    	//String[] availableLocales = getResources().getStringArray(R.array.locale_values);
-    	availableLocales = getResources().getStringArray(R.array.locale_values);
+    	commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, MODE_PRIVATE);
+    	String[] availableLocales = getResources().getStringArray(R.array.locale_values);
     	int index = commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3);
-    	if (index > -1 && index < 4)
-    		updateUiLocale(this, availableLocales[index]);
-    	else 
-    		updateUiLocale(this, null);
+    	updateUiLocale(this, availableLocales[index]);
     	
     	super.onCreate(savedInstanceState);        
         setContentView(R.layout.main);
@@ -75,24 +69,13 @@ public class startQalam extends Activity {
         mainView = (LinearLayout) findViewById(R.id.mainview);
         btnView = (LinearLayout) findViewById(R.id.buttons);
         btnView.setVisibility(View.GONE);
-        /*
-        tmpImg = (ImageButton) findViewById(R.id.imgBtnQuran);
-        tmpImg.setVisibility(View.GONE);
-        tmpImg = (ImageButton) findViewById(R.id.imgBtnBukhari);
-        tmpImg.setVisibility(View.GONE);
-        tmpImg = (ImageButton) findViewById(R.id.imgBtnMuslim);
-        tmpImg.setVisibility(View.GONE);
-        tmpImg = (ImageButton) findViewById(R.id.imgBtnTirmidi);
-        tmpImg.setVisibility(View.GONE);
-        tmpImg = (ImageButton) findViewById(R.id.imgBtnAbudovud);
-        tmpImg.setVisibility(View.GONE);
-        */
+
         aqHandler = new Handler ();
         aqHandler.postDelayed(Splash, 1500);
         
 		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)        
-        TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
-        ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
+        //TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
+        //ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
         
         checkDownloadedSurahs();
             
@@ -102,17 +85,6 @@ public class startQalam extends Activity {
         
     }
     
-    @Override
-    protected void onResume() {
-    	super.onResume();
-    	
-    	int index = commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3);
-    	if (index > -1 && index < 4)
-    		updateUiLocale(this, availableLocales[index]);
-    	else 
-    		updateUiLocale(this, null);
-    }
-    
     private Runnable Splash = new Runnable() {
 	 	   public void run() {
 	 		frontSplash.setVisibility(View.GONE);
@@ -120,7 +92,6 @@ public class startQalam extends Activity {
 	 		mainView.setBackgroundResource(R.drawable.background);
 	 		
 	 		final ImageButton  imgBtnQuran = (ImageButton) findViewById(R.id.imgBtnQuran);
-	 		//imgBtnQuran.setVisibility(View.VISIBLE);
 	 		imgBtnQuran.setClickable(true);
 	 		imgBtnQuran.setOnClickListener(new OnClickListener() {
 	    		public void onClick(View v) {
@@ -129,32 +100,28 @@ public class startQalam extends Activity {
 	        });
 	        
 	        final ImageButton imgBukhari = (ImageButton) findViewById(R.id.imgBtnBukhari);
-	        //imgBukhari.setVisibility(View.VISIBLE);
 	        imgBukhari.setAlpha(80);
 	    	
 	        
 	        final ImageButton imgMuslim = (ImageButton) findViewById(R.id.imgBtnMuslim);
-	        //imgMuslim.setVisibility(View.VISIBLE);
 	        imgMuslim.setAlpha(80);
 	    		        
 	        final ImageButton imgTirmidi = (ImageButton) findViewById(R.id.imgBtnTirmidi);
-	        //imgTirmidi.setVisibility(View.VISIBLE);
 	        imgTirmidi.setAlpha(80);
 	    		        
 	        final ImageButton imgAbudavud  = (ImageButton) findViewById(R.id.imgBtnAbudovud);
-	        //imgAbudavud.setVisibility(View.VISIBLE);
 	    	imgAbudavud.setAlpha(80);
 	 	   }
-	};   
-    
+	};
+
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.clear(); // Need to *refresh* menu names when UI locale is changed */
 		getMenuInflater().inflate(R.menu.main, menu);
 		
-		return super.onCreateOptionsMenu(menu);
+		return true;		
 	}
-	
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		
@@ -181,7 +148,8 @@ public class startQalam extends Activity {
 	}
 	
 	public void checkDownloadedSurahs() {
-		String arabicFileName, audioFileName;
+		String arabicFileName;
+		//String audioFileName;
 				
 		for (int i=0; i<CONSTANTS.numberOfSurahs; i++) {
 				arabicFileName = CONSTANTS.FOLDER_QURAN_ARABIC + (i+1);
