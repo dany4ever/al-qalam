@@ -19,6 +19,8 @@
 
 package com.uzislam.alqalam;
 
+import android.net.Uri;
+
 public class CONSTANTS {
 	
 		public static int	numberOfSurahs = 114;
@@ -92,6 +94,11 @@ public class CONSTANTS {
 		
 		public static boolean[]			gSurahIsDownloaded = new boolean [numberOfSurahs];
 		public static boolean[]			gSurahIsAudioDownloaded = new boolean [numberOfSurahs];
+		
+		// The database stuff
+		public static final String DATABASE_NAME = "quran.db";
+		public static final String AUTHORITY = "com.uzislam.alqalam.database.Provider";
+		public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + DATABASE_NAME);
 
 	}
  

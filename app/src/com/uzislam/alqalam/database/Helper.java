@@ -30,40 +30,42 @@ import com.uzislam.alqalam.R;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 public class Helper extends SQLiteOpenHelper {
-	
+
 	private static final String TAG = "Helper";
-	
-	private static final String DATABASE_NAME = "quran.db";
-	private static final String TABLE_SURAHNO_COLUMN = "surah_no";
-	private static final String TABLE_AYATNO_COLUMN = "ayat_no";
-	private static final String TABLE_AYAT_COLUMN = "ayat";
-	
-	private static final String UZBEK_CYRILLIC = "uzbek_cyrillic";
-	private static final String UZBEK_LATIN = "uzbek_latin";
-	private static final String RUSSIAN = "russian";
-	private static final String ARABIC = "arabic";
-	
+
+	private static final String COLUMN_SURAHNO = "surah_no";
+	private static final String COLUMN_AYATNO = "ayat_no";
+	private static final String COLUMN_AYAT = "ayat";
+	//private static final String TABLE_ARABIC = "arabic";
+	private static final String TABLE_RUSSIAN = "russian";
+	private static final String TABLE_TURKISH = "turkish";
+	private static final String TABLE_UZBEK_CYRILLIC = "uzbek_cyrillic";
+	private static final String TABLE_UZBEK_LATIN = "uzbek_latin";
+
 	private static final int DATABASE_VERSION = 1;
-	
+
 	private final Context mContext;
-	
+
 	public Helper (Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		super(context, CONSTANTS.DATABASE_NAME, null, DATABASE_VERSION);
 		mContext = context;
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// Create Qur'an database
-		createTable(db, UZBEK_CYRILLIC);
-		createTable(db, UZBEK_LATIN);
-		createTable(db, RUSSIAN);
-		//createTable(db, ARABIC);
+		//createTable(db, TABLE_ARABIC);
+		createTable(db, TABLE_RUSSIAN);
+		createTable(db, TABLE_TURKISH);
+		createTable(db, TABLE_UZBEK_CYRILLIC);
+		createTable(db, TABLE_UZBEK_LATIN);
 		
 		/** CREATE TABLE bookmarks(
 		 *                        _id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -72,17 +74,15 @@ public class Helper extends SQLiteOpenHelper {
 		 *                        date_col DATETIME NOT NULL);
 		 */
 		db.execSQL("CREATE TABLE bookmarks(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-				TABLE_SURAHNO_COLUMN + " INTEGER NOT NULL," +
-				TABLE_AYATNO_COLUMN + " INTEGER NOT NULL,date_col DATETIME NOT NULL);");
-		
+				COLUMN_SURAHNO + " INTEGER NOT NULL," +
+				COLUMN_AYATNO + " INTEGER NOT NULL,date_col DATETIME NOT NULL);");
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int currentVersion) {
 		// TODO Auto-generated method stub
-		
 	}
-	
+
 	private void createTable(SQLiteDatabase db, String table) {
 		/** CREATE TABLE table(
 		 *                   _id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -92,10 +92,9 @@ public class Helper extends SQLiteOpenHelper {
 		 */
 		db.execSQL("CREATE TABLE " + table +
 				"(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-				TABLE_SURAHNO_COLUMN + " INTEGER NOT NULL," +
-				TABLE_AYATNO_COLUMN + " INTEGER NOT NULL," +
-				TABLE_AYAT_COLUMN + " TEXT COLLATE UNICODE);");
-		
+				COLUMN_SURAHNO + " INTEGER NOT NULL," +
+				COLUMN_AYATNO + " INTEGER NOT NULL," +
+				COLUMN_AYAT + " TEXT COLLATE UNICODE);");
 		try {
 			// Insert Qur'an ayats
 			insertAyats(db, table);
@@ -103,17 +102,19 @@ public class Helper extends SQLiteOpenHelper {
 			Log.e(TAG, "IOException while creating table " + table);
 		}
 	}
-	
+
 	private void insertAyats(SQLiteDatabase db, String which) throws IOException {
 		Log.i(TAG, "Inserting translations... " + which);
 		final Resources resources = mContext.getResources(); 
 		InputStream inputStream = resources.openRawResource(R.raw.uzbek_cyrillic);
-		if (which.equals(UZBEK_LATIN))
+		if (which.equals(TABLE_UZBEK_LATIN))
 			inputStream = resources.openRawResource(R.raw.uzbek_latin);
-		else if (which.equals(RUSSIAN))
+		else if (which.equals(TABLE_RUSSIAN))
 			inputStream = resources.openRawResource(R.raw.russian);
+		else if (which.equals(TABLE_TURKISH))
+			inputStream = resources.openRawResource(R.raw.turkish);
 		/* TODO: Enable when Arabic text is supported by Android
-		else if (which.equals(ARABIC))
+		else if (which.equals(TABLE_ARABIC))
 			inputStream = resources.openRawResource(R.raw.arabic);
 		*/
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -126,12 +127,12 @@ public class Helper extends SQLiteOpenHelper {
 				ContentValues values = new ContentValues();
 				
 				// Let's collect the values
-				values.put(TABLE_SURAHNO_COLUMN, surahNumber);
-				values.put(TABLE_AYATNO_COLUMN, ayatNumber);
-				values.put(TABLE_AYAT_COLUMN, line);
+				values.put(COLUMN_SURAHNO, surahNumber);
+				values.put(COLUMN_AYATNO, ayatNumber);
+				values.put(COLUMN_AYAT, line);
 				
 				// Now insert the values to the table
-				db.insert(which, TABLE_AYAT_COLUMN, values);
+				db.insert(which, COLUMN_AYAT, values);
 				
 				// Routine to populate proper surah and ayat numbers
 				if (ayatNumber == CONSTANTS.SurahNumberOfAyats[surahNumber - 1]) {
@@ -144,5 +145,23 @@ public class Helper extends SQLiteOpenHelper {
 		} finally {
 			reader.close();
 		}
+	}
+	
+	public Cursor getWordMatches(String query, String[] columns) {
+		String selection = COLUMN_AYAT + " MATCH ?";
+		String[] selectionArgs = new String[] {query+"*"};
+		
+		return query(selection, selectionArgs, columns);
+	}
+
+	private Cursor query(String selection, String[] selectionArgs,
+			String[] columns) {
+		SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
+		builder.setTables(/*TABLE_ARABIC
+				+ "," +*/TABLE_RUSSIAN
+				+ "," + TABLE_TURKISH
+				+ "," + TABLE_UZBEK_CYRILLIC
+				+ "," + TABLE_UZBEK_LATIN); 
+		return null;
 	}
 }
