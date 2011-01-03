@@ -104,17 +104,17 @@ public class startQalam extends Activity {
 	        });
 	        
 	        final ImageButton imgBukhari = (ImageButton) findViewById(R.id.imgBtnBukhari);
-	        imgBukhari.setAlpha(80);
+	        //imgBukhari.setAlpha(80);
 	    	
 	        
 	        final ImageButton imgMuslim = (ImageButton) findViewById(R.id.imgBtnMuslim);
-	        imgMuslim.setAlpha(80);
+	        //imgMuslim.setAlpha(80);
 	    		        
 	        final ImageButton imgTirmidi = (ImageButton) findViewById(R.id.imgBtnTirmidi);
-	        imgTirmidi.setAlpha(80);
+	        //imgTirmidi.setAlpha(80);
 	    		        
 	        final ImageButton imgAbudavud  = (ImageButton) findViewById(R.id.imgBtnAbudovud);
-	    	imgAbudavud.setAlpha(80);
+	    	//imgAbudavud.setAlpha(80);
 	 	   }
 	};
 

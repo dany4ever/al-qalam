@@ -82,9 +82,10 @@ public class SurahActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
        
         Bundle extras = getIntent().getExtras();
-        
+                
         if (extras != null) {
         	surahNumber = extras.getInt("sNumber");
+        	currentAyat = extras.getInt("aNumber");
         }
         
         commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
@@ -119,6 +120,12 @@ public class SurahActivity extends Activity {
         
         // Display Surah
         showSurah();
+        
+        // Jump to juzz ayat (if defined);
+        if (currentAyat != 0) {
+        	ayatList.setSelectionFromTop(currentAyat - 1, 0);   	
+        }
+        	
         
         ImageView	surahName = (ImageView) findViewById(R.id.suraName);
         

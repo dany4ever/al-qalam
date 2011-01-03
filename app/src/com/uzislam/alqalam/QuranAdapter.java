@@ -65,9 +65,7 @@ public class QuranAdapter extends BaseAdapter {
          	vHolder.SurahTitle = (TextView) convertView.findViewById(R.id.srTitle);
          	vHolder.SurahOrder = (TextView) convertView.findViewById(R.id.srOrder);
          	vHolder.SurahAyats = (TextView) convertView.findViewById(R.id.srAyats);
-         	vHolder.SurahDwnState = (ImageView) convertView.findViewById(R.id.srDown);
-         	vHolder.SurahPlace = (ImageView) convertView.findViewById(R.id.srPlace);
-             
+         	vHolder.SurahDwnState = (ImageView) convertView.findViewById(R.id.srDown);             
             convertView.setTag(vHolder);
          } else {
          	vHolder = (ViewHolder) convertView.getTag();
@@ -77,7 +75,6 @@ public class QuranAdapter extends BaseAdapter {
          vHolder.SurahOrder.setText(mItems.get(position).getSurahOrder()+ "");
          vHolder.SurahAyats.setText(mItems.get(position).getSurahNumberOfAyats() + "");
        	 vHolder.SurahDwnState.setImageDrawable(mItems.get(position).getSurahState());
-         vHolder.SurahPlace.setImageDrawable(mItems.get(position).getSurahRevelationPlace());
          
          /* if (mItems.get(position).getSurahIsDownloaded() == false) {
         	 vHolder.SurahTitle.setTextColor(R.color.lightblack);
