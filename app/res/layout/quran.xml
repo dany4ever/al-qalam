@@ -19,24 +19,33 @@
    android:gravity="center_vertical|center_horizontal"
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/QuranView"
     android:background="@drawable/indexbg"  >
- 	<ListView 
-		android:id="@+id/SurahList" 
-		android:orientation="vertical"
-    	android:layout_width="275dip"
-    	android:layout_height="wrap_content"
-    	android:scrollingCache="true">
-    </ListView>	
-    <ListView 
-		android:id="@+id/JuzList" 
-		android:orientation="vertical"
-    	android:layout_width="45dip"
-    	android:layout_height="wrap_content"
-    	android:gravity="center_horizontal|center_vertical"
-    	android:scrollingCache="true">
-    </ListView>	
- </LinearLayout>
+    
+    <ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:id="@+id/indexHeader"
+		android:src="@drawable/index_header" />
+		
+ 	<LinearLayout android:id="@+id/IndexGroup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+		<ListView 
+				android:id="@+id/SurahList" 
+				android:orientation="vertical"
+		    	android:layout_width="275dip"
+		    	android:layout_height="wrap_content"
+		    	android:scrollingCache="true">
+		</ListView>	
+	    <ListView 
+			android:id="@+id/JuzList" 
+			android:orientation="vertical"
+	    	android:layout_width="45dip"
+	    	android:layout_height="wrap_content"
+	    	android:gravity="center_horizontal|center_vertical"
+	    	android:scrollingCache="true">
+	    </ListView>	
+ 	</LinearLayout>
+</LinearLayout>
