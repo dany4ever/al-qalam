@@ -31,6 +31,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,15 +42,17 @@ import android.widget.LinearLayout;
 
 public class startQalam extends Activity {
 
+	private static final String TAG = "startQalam";
 	private Handler 			aqHandler;
+	private Helper				mHelper;
 	private ImageView 			frontSplash;
 	private LinearLayout 		mainView;
 	private LinearLayout 		btnView;
-	
+
 	private SharedPreferences	commonPrefs;
 	//private int 				TranslationType = 0;
-	//private int					ReciterType = 0;
-	public startQalam() {
+	//private int				ReciterType = 0;
+	public 						startQalam() {
 		// This is here to call updateUiLocale() method
 	}
 	
@@ -63,30 +66,33 @@ public class startQalam extends Activity {
     	String[] availableLocales = getResources().getStringArray(R.array.locale_values);
     	int index = commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3);
     	updateUiLocale(this, availableLocales[index]);
-    	
+
     	super.onCreate(savedInstanceState);        
         setContentView(R.layout.main);
-        
+
         frontSplash = (ImageView) findViewById(R.id.splashimage);
         mainView = (LinearLayout) findViewById(R.id.mainview);
         btnView = (LinearLayout) findViewById(R.id.buttons);
         btnView.setVisibility(View.GONE);
         //Initialize the database
-        initializeDb(this);
+        mHelper = new Helper(this);
+        initializeDb();
 
         aqHandler = new Handler();
         aqHandler.postDelayed(Splash, 1500);
-        
+
 		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)        
         //TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
         //ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
-        
+
         checkDownloadedSurahs();
-            
-        // Initialize the database
-        // Helper mHelper = new Helper(this);
-        // mHelper.getWritableDatabase();
-        
+    }
+
+    @Override
+    protected void onStop() {
+    	super.onStop();
+
+    	mHelper.close();
     }
 
     private Runnable Splash = new Runnable() {
@@ -174,11 +180,14 @@ public class startQalam extends Activity {
 		context.getResources().updateConfiguration(config, null);
 	}
 
-	protected void initializeDb(final Context context) {
+	protected void initializeDb() {
     	Thread mThread = new Thread() {
     		public void run() {
-    			Helper mHelper = new Helper(context);
-    			mHelper.getWritableDatabase();
+    			try {
+    				mHelper.getWritableDatabase();
+    			} catch (Exception e) {
+    				Log.e(TAG, "Error: " + e.getMessage());
+    			}
     		}
     	};
     	mThread.start();
