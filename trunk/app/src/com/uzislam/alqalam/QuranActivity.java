@@ -19,12 +19,15 @@
 
 package com.uzislam.alqalam;
 
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.content.DialogInterface;
@@ -42,6 +45,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class QuranActivity extends Activity {
 	private ListView			gSurahList; 	
+	private ListView			gJuzzList;
 	private String[] 			gSurahTitles;
 		
 	private final String		TAG = "Al-Qalam";
@@ -54,15 +58,29 @@ public class QuranActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quran);
         gSurahList = (ListView)findViewById(R.id.SurahList);
+        gSurahList.setVerticalScrollBarEnabled(false);
+        gSurahList.setHorizontalScrollBarEnabled(false);
+        
+        gJuzzList = (ListView)findViewById(R.id.JuzList);
+        gJuzzList.setVerticalScrollBarEnabled(false);
+        gJuzzList.setHorizontalScrollBarEnabled(false);
+        String [] juzz_array = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",
+        		"21","22","23","24","25","26","27","28","29","30"};
+                          
+        // By using setAdpater method in listview we an add string array in list.
+        gJuzzList.setAdapter(new ArrayAdapter<String>(this,R.layout.juzz, juzz_array));
+        gJuzzList.setCacheColorHint(00000000); 
+        gJuzzList.setDivider(null);
+                
+        
         gSurahTitles = getResources().getStringArray(R.array.SurahTitle);
-                                                  
         QuranAdapter		quranAdapter = new QuranAdapter(this);
         QuranIconifiedText	qit;
        	        
     	// check which Surah's Arabic Text is already downloaded
     	
         for (int i=0; i < CONSTANTS.numberOfSurahs ; i++) {
-        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, CONSTANTS.SurahNumberOfAyats[i], CONSTANTS.gSurahIsDownloaded[i], null, null);
+        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, CONSTANTS.SurahNumberOfAyats[i], CONSTANTS.gSurahIsDownloaded[i], null);
         	qit.setSurahState(getAudioIcon(i));
         	quranAdapter.addItem(qit);
         }
@@ -84,6 +102,7 @@ public class QuranActivity extends Activity {
 					else if (CONSTANTS.gSurahIsDownloaded[index]) {
 						Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
 						quranIntent.putExtra("sNumber", index);
+						quranIntent.putExtra("aNumber", 0);
 						startActivity(quranIntent);
 					} 
 					else {
@@ -91,6 +110,28 @@ public class QuranActivity extends Activity {
 					}
 			}
         });
+        
+        gJuzzList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View view,
+					final int index, long order) {
+				
+					if (!isSdCardAccessible()) {
+						showDialog(CONSTANTS.SURAH_DIALOG_NO_SDCARD);
+					}
+					else if (CONSTANTS.gSurahIsDownloaded[index]) {
+						Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
+						quranIntent.putExtra("sNumber", CONSTANTS.JuzNumbers[index+1][0]-1);
+						quranIntent.putExtra("aNumber", CONSTANTS.JuzNumbers[index+1][1]);
+						startActivity(quranIntent);
+					} 
+					else {
+						showDialog(CONSTANTS.SURAH_DIALOG_DOWNLOAD_REQUEST);
+					}
+			}
+        });
+        
  	}
 	
 	private Drawable getAudioIcon(int index) {

@@ -16,20 +16,27 @@
 
    You should have received a copy of the GNU Lesser General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>.
+   android:gravity="center_vertical|center_horizontal"
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/QuranView"
-    android:gravity="center_vertical|center_horizontal" 
     android:background="@drawable/indexbg"  >
-    
  	<ListView 
 		android:id="@+id/SurahList" 
 		android:orientation="vertical"
-    	android:layout_width="fill_parent"
+    	android:layout_width="275dip"
     	android:layout_height="wrap_content"
+    	android:scrollingCache="true">
+    </ListView>	
+    <ListView 
+		android:id="@+id/JuzList" 
+		android:orientation="vertical"
+    	android:layout_width="45dip"
+    	android:layout_height="wrap_content"
+    	android:gravity="center_horizontal|center_vertical"
     	android:scrollingCache="true">
     </ListView>	
  </LinearLayout>

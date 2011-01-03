@@ -30,14 +30,13 @@ public class QuranIconifiedText {
 	private Drawable	surahState = null;
 	private Drawable	surahRevelationPlace = null;
 		
-	public QuranIconifiedText(long _id, String _title, int _order, int _numberOfAyats, boolean _downloaded ,Drawable _state, Drawable _place) {
+	public QuranIconifiedText(long _id, String _title, int _order, int _numberOfAyats, boolean _downloaded ,Drawable _state) {
 		this.id = _id;
 		this.surahTitle = _title;
 		this.surahOrder = _order;
 		this.surahNumberOfAyats = _numberOfAyats;
 		this.surahIsDownloaded = _downloaded;
 		this.surahState = _state;
-		this.surahRevelationPlace = _place;
 	}
 	
 	public void setId (long _id) {
@@ -90,10 +89,5 @@ public class QuranIconifiedText {
 	
 	public Drawable getSurahState() {
 		return this.surahState;
-	}
-	
-	public Drawable getSurahRevelationPlace() {
-		return this.surahRevelationPlace;
-	}
-	
+	}	
 }
