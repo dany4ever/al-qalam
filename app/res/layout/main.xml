@@ -35,7 +35,7 @@
 	    android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
 	    android:paddingLeft="15dip"
-	    android:paddingTop="80dip" 
+	    android:paddingTop="90dip" 
 	    android:gravity="center_horizontal" >
     
 	    <ImageButton android:id="@+id/imgBtnQuran" 
@@ -65,19 +65,20 @@
 	    	android:layout_margin="1pt"
 	    	android:background="@null"   />	   
 	
-		<ImageButton android:id="@+id/imgBtnTirmidi"
-	    	android:layout_width="wrap_content" 
-	    	android:layout_height="wrap_content" 
-	    	android:src="@drawable/btn_tirmidi"
-	    	android:layout_margin="1pt"
-	    	android:background="@null"     />
-	    	
 		<ImageButton android:id="@+id/imgBtnAbudovud"
 	    	android:layout_width="wrap_content" 
 	    	android:layout_height="wrap_content" 
 	    	android:src="@drawable/btn_abudovud"
 	    	android:layout_margin="1pt"
 	    	android:background="@null"  />
+	    	
+	    <ImageButton android:id="@+id/imgBtnTirmidi"
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:src="@drawable/btn_tirmidi"
+	    	android:layout_margin="1pt"
+	    	android:background="@null"     />
+	    	
     	
     </LinearLayout>
 			     
