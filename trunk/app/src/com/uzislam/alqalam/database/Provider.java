@@ -19,14 +19,27 @@
 
 package com.uzislam.alqalam.database;
 
+import com.uzislam.alqalam.CONSTANTS;
+
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.BaseColumns;
 
 public class Provider extends ContentProvider {
 	
 	protected Helper mOpenHelper;
+	
+	private static final int SEARCH = 0;
+	private static final int GET_AYATS = 1;
+	private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+	
+	static {
+		sURIMatcher.addURI(CONSTANTS.AUTHORITY, CONSTANTS.DATABASE_NAME, SEARCH);
+		sURIMatcher.addURI(CONSTANTS.AUTHORITY, CONSTANTS.DATABASE_NAME, GET_AYATS);
+	}
 	
 	@Override
 	public boolean onCreate() {
@@ -36,32 +49,62 @@ public class Provider extends ContentProvider {
 
 	@Override
 	public int delete(Uri uri, String where, String[] whereArgs) {
-		// TODO Auto-generated method stub
+		/* This method is intentionally left unimplemented.
+		 * Number of Qur'an Ayats are fixed, hence we do not want to *delete* any Ayat.
+		 */
 		return 0;
 	}
 
 	@Override
 	public String getType(Uri uri) {
-		// TODO Auto-generated method stub
-		return null;
+		int match = sURIMatcher.match(uri);
+		switch(match) {
+		case SEARCH:
+			return "something";
+		case GET_AYATS:
+			return "something else";
+		default:
+			throw new IllegalArgumentException("Unknown Uri: " + uri);
+		}
 	}
 
 	@Override
 	public Uri insert(Uri uri, ContentValues initialValues) {
-		// TODO Auto-generated method stub
+		/* This method is intentionally left unimplemented.
+		 * Number of Qur'an Ayats are fixed, hence we do not want to *insert* any new Ayat.
+		 */
 		return null;
 	}
 
 	@Override
 	public Cursor query(Uri uri, String[] select, String where, String[] whereArgs,
 			String sort) {
-		// TODO Auto-generated method stub
-		return null;
+		switch (sURIMatcher.match(uri)) {
+		case SEARCH:
+			if (whereArgs == null) {
+				throw new IllegalArgumentException("whereArgs must be provided for the Uri: " + uri);
+			}
+			return search(whereArgs[0]);
+		default:
+			throw new IllegalArgumentException("Unknown Uri: " + uri);
+		}
+	}
+	
+	private Cursor search(String query) {
+		query = query.toLowerCase();
+		String[] columns = new String[] {
+				BaseColumns._ID,
+				"surah_no",
+				"ayat_no",
+				"ayat"
+		};
+		
+		return mOpenHelper.getWordMatches(query, columns);
 	}
 
 	@Override
 	public int update(Uri uri, ContentValues initialValues, String where, String[] whereArgs) {
-		// TODO Auto-generated method stub
+		// TODO Should be implemented in the future releases to fix possible typos in translations
 		return 0;
 	}
 
