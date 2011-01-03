@@ -20,13 +20,11 @@
 <resources>
     <!-- Untranslatable arrays; keep them all in this block -->
     <string-array name="locales" translatable="false">
-        <item>English</item>
         <item>Türkçe</item>
         <item>Русский</item>
         <item>Ўзбекча</item><!-- This is the default language -->
     </string-array>
     <string-array name="locale_values" translatable="false">
-        <item>en</item>
         <item>tr</item>
         <item>ru</item>
         <item>uz</item><!-- This is Locale code for default language -->
