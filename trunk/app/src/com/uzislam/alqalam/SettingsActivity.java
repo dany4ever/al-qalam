@@ -81,8 +81,8 @@ public class SettingsActivity extends PreferenceActivity {
 	        
 	        uiLocale = (ListPreference) findPreference("ui_locale");
 	        uiLocale.setNegativeButtonText(R.string.btn_cancel);
-	        // The index of default language is 3 (Uzbek)
-	        uiLocale.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3));
+	        // The index of default language is 2 (Uzbek)
+	        uiLocale.setValueIndex(commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 2));
 	        uiLocale.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 	            public boolean onPreferenceChange(Preference preference, Object newValue) {
 	            	String locale = newValue.toString();

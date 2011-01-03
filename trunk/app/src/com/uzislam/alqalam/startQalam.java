@@ -64,7 +64,8 @@ public class startQalam extends Activity {
          */
     	commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, MODE_PRIVATE);
     	String[] availableLocales = getResources().getStringArray(R.array.locale_values);
-    	int index = commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 3);
+    	// The index of default language is 2 (Uzbek)
+    	int index = commonPrefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 2);
     	updateUiLocale(this, availableLocales[index]);
 
     	super.onCreate(savedInstanceState);        
