@@ -219,9 +219,8 @@ public class QuranActivity extends Activity {
     		case R.id.bookmarks:
     			return true;
     		
-    		/*case R.id.settings:
-    			startActivity(new Intent(this, SettingsActivity.class));
-    			return true;*/
+    		case R.id.search:
+    			return true;
 
     	}
 	   

@@ -35,6 +35,7 @@
     <string name="bookmarks">Закладки</string>
     <string name="settings">Настройки</string>
     <string name="options">Опции</string>
+    <string name="search">Поиск</string>
     <string name="settings_locale">Язык</string>
     <string name="settings_locale_summary">Выберите язык интерфейса</string>
 </resources>
