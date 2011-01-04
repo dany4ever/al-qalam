@@ -58,7 +58,7 @@ public class QuranAdapter extends BaseAdapter {
 		 ViewHolder vHolder;
                
          if (convertView == null) {
-         	convertView = mInflater.inflate(R.layout.surahindex, null);
+         	convertView = mInflater.inflate(R.layout.quran_row, null);
 
          	vHolder = new ViewHolder();
              

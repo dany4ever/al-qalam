@@ -66,7 +66,7 @@ public class QuranActivity extends Activity {
         		"21","22","23","24","25","26","27","28","29","30"};
                           
         // By using setAdpater method in listview we an add string array in list.
-        gJuzzList.setAdapter(new ArrayAdapter<String>(this,R.layout.juzz, juzz_array));
+        gJuzzList.setAdapter(new ArrayAdapter<String>(this,R.layout.quran_juzz, juzz_array));
         gJuzzList.setCacheColorHint(00000000); 
         gJuzzList.setDivider(null);
                 
@@ -217,6 +217,7 @@ public class QuranActivity extends Activity {
     	switch (menuItem.getItemId()) {
 
     		case R.id.bookmarks:
+    			startActivity(new Intent(QuranActivity.this, BookmarksActivity.class));
     			return true;
     		
     		case R.id.search:

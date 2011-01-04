@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Date;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
@@ -13,6 +15,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.text.method.DateTimeKeyListener;
 import android.util.Log;
 
 public class alQalamDatabase {
@@ -21,13 +24,14 @@ public class alQalamDatabase {
 
 	// Database Info
 	private static final String 	DATABASE_NAME = "alQalam.db";
-	private static final int 		DATABASE_VERSION = 1; 		
+	private static final int 		DATABASE_VERSION = 2; 		
 	
 	// Tables
 	private static final String 	TABLE_RUSSIAN = "russian";
 	private static final String 	TABLE_TURKISH = "turkish";
 	private static final String 	TABLE_UZBEK_CYRILLIC = "uzbek_cyrillic";
 	private static final String 	TABLE_UZBEK_LATIN = "uzbek_latin";
+	private static final String 	TABLE_BOOKMARKS = "bookmarks";
 
 	private static final String[] 	TABLES = {"uzbek_cyrillic", "uzbek_latin","russian", "turkish"};
 	
@@ -35,6 +39,7 @@ public class alQalamDatabase {
 	public static final String COLUMN_SURAHNO = "surah_no";
 	public static final String COLUMN_AYATNO = "ayat_no";
 	public static final String COLUMN_AYAT = "ayat";	
+	public static final String COLUMNT_DATE = "date_col";
 	
 	private SQLiteDatabase 		db;
 	private Context 			context;
@@ -108,9 +113,9 @@ public class alQalamDatabase {
 			createTable(db, TABLE_UZBEK_LATIN);
 			
 		
-			db.execSQL("CREATE TABLE bookmarks(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+			db.execSQL("CREATE TABLE " + TABLE_BOOKMARKS +" (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 					COLUMN_SURAHNO + " INTEGER NOT NULL," +
-					COLUMN_AYATNO + " INTEGER NOT NULL,date_col DATETIME NOT NULL);");
+					COLUMN_AYATNO + " INTEGER NOT NULL, date_col DEFAULT CURRENT_TIMESTAMP);");
 		}
 
 		@Override
@@ -196,7 +201,7 @@ public class alQalamDatabase {
 	public Cursor getVerses(int index, int language) {
 		String selection = COLUMN_SURAHNO + "=" + index;
 		String table = TABLES[language];
-
+		
 		Cursor c = db.query(table, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO, COLUMN_AYAT}, selection, null, null, null, null);
 		
 		return c;
@@ -205,9 +210,34 @@ public class alQalamDatabase {
 	public Cursor getWordMatches(String query, int language) {
 		String selection = COLUMN_AYAT + " MATCH ? " + query+"*";
 		String table = TABLES[language];
-		
+				
 		Cursor c = db.query(table, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO, COLUMN_AYAT}, selection, null, null, null, null);
 		
 		return c;
+	}
+	
+	// bookmark or unbookmark the ayat
+	public void bookmarkOperation(int chapter, int verse) {
+		String selection = COLUMN_SURAHNO + "="  + chapter + " AND " + COLUMN_AYATNO + "=" + verse;
+		
+		// aready exist, we have to unbookmark 
+		if (db.delete(TABLE_BOOKMARKS, selection, null) != 0 ){
+			return;
+		}
+		// does not exist, bookmark it;
+		else {
+			ContentValues values = new ContentValues();
+			
+			values.put(COLUMN_SURAHNO, chapter);
+			values.put(COLUMN_AYATNO, verse);			
+			db.insert(TABLE_BOOKMARKS, null, values);
+		}
+	}
+	
+	//get all bookmarks
+	public Cursor getAllBookmarks() {
+	
+		return db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, null, null, null, null, COLUMN_SURAHNO);
+
 	}
 }
