@@ -70,16 +70,13 @@ public class startQalam extends Activity {
         mainView = (LinearLayout) findViewById(R.id.mainview);
         btnView = (LinearLayout) findViewById(R.id.buttons);
         btnView.setVisibility(View.GONE);
-      
+
         //Initialize the database
-        initializeDb();
+        initialize(this);
         
         aqHandler = new Handler();
         aqHandler.postDelayed(Splash, 1500);
-        
-        // Check if arabic is downloaded
-        checkDownloadedSurahs();
-        
+            
         // Get Translation Type from shared preferences, default is 0 (uzbek-cyr)        
         //TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
         //ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
@@ -175,14 +172,17 @@ public class startQalam extends Activity {
 		context.getResources().updateConfiguration(config, null);
 	}
 
-	protected void initializeDb() {
-		final alQalamDatabase db;
-		db = new alQalamDatabase(this);
-		
+	protected void initialize(final Context _context) {		
     	Thread mThread = new Thread() {
     		public void run() {
+    			
+    			// Create Database if it is first time;
+    			alQalamDatabase db = new alQalamDatabase(_context);
     			db.openWritable();
     			db.close();
+
+    			// Check if arabic is downloaded
+    	        checkDownloadedSurahs();
     		}
     	};
     	
