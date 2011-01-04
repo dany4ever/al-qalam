@@ -241,9 +241,9 @@ public class SurahActivity extends Activity {
 		{
 			do
 			{
-				AYATS[index] = cursor.getString(2);
+				AYATS[index] = cursor.getString(cursor.getColumnIndex(alQalamDatabase.COLUMN_AYAT));
 				index++;
-			}while(cursor.moveToNext());
+			} while(cursor.moveToNext());
 		}
 		
 		

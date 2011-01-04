@@ -20,21 +20,21 @@ public class alQalamDatabase {
 	private static final String TAG = "alQalam Database";
 
 	// Database Info
-	public static final String 	DATABASE_NAME = "alQalam.db";
-	public static final int 	DATABASE_VERSION = 1; 		
+	private static final String 	DATABASE_NAME = "alQalam.db";
+	private static final int 		DATABASE_VERSION = 1; 		
 	
 	// Tables
-	private static final String TABLE_RUSSIAN = "russian";
-	private static final String TABLE_TURKISH = "turkish";
-	private static final String TABLE_UZBEK_CYRILLIC = "uzbek_cyrillic";
-	private static final String TABLE_UZBEK_LATIN = "uzbek_latin";
+	private static final String 	TABLE_RUSSIAN = "russian";
+	private static final String 	TABLE_TURKISH = "turkish";
+	private static final String 	TABLE_UZBEK_CYRILLIC = "uzbek_cyrillic";
+	private static final String 	TABLE_UZBEK_LATIN = "uzbek_latin";
 
-	private static final String[] TABLES = {"uzbek_cyrillic", "uzbek_latin","russian", "turkish"};
+	private static final String[] 	TABLES = {"uzbek_cyrillic", "uzbek_latin","russian", "turkish"};
 	
 	
-	private static final String COLUMN_SURAHNO = "surah_no";
-	private static final String COLUMN_AYATNO = "ayat_no";
-	private static final String COLUMN_AYAT = "ayat";	
+	public static final String COLUMN_SURAHNO = "surah_no";
+	public static final String COLUMN_AYATNO = "ayat_no";
+	public static final String COLUMN_AYAT = "ayat";	
 	
 	private SQLiteDatabase 		db;
 	private Context 			context;
