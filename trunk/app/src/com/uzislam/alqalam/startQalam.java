@@ -28,6 +28,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -177,12 +178,17 @@ public class startQalam extends Activity {
     		public void run() {
     			
     			// Create Database if it is first time;
-    			alQalamDatabase db = new alQalamDatabase(_context);
-    			db.openWritable();
-    			db.close();
-
-    			// Check if arabic is downloaded
-    	        checkDownloadedSurahs();
+    			try {
+    				alQalamDatabase db = new alQalamDatabase(_context);
+    				db.openWritable();
+    				db.close();
+    				
+    				// Check if arabic is downloaded
+        	        checkDownloadedSurahs();
+    			}
+    			catch (Exception e) {
+    				Log.e(TAG,"Error : " + e.getMessage());
+    			}   			
     		}
     	};
     	
