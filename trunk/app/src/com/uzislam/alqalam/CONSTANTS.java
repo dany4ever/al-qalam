@@ -96,9 +96,9 @@ public class CONSTANTS {
 		public static boolean[]			gSurahIsAudioDownloaded = new boolean [numberOfSurahs];
 		
 		// The database stuff
-		public static final String DATABASE_NAME = "quran.db";
-		public static final String AUTHORITY = "com.uzislam.alqalam.database.Provider";
-		public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + DATABASE_NAME);
+		// public static final String DATABASE_NAME = "quran.db";
+		// public static final String AUTHORITY = "com.uzislam.alqalam.database.Provider";
+		// public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + DATABASE_NAME);
 
 	}
  
