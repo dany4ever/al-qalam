@@ -19,14 +19,12 @@
 
 package com.uzislam.alqalam;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
@@ -46,7 +44,7 @@ import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class SurahActivity extends Activity {
-	private static final String TAG = "SurahActivity";
+	private static final String TAG = "al-Qalam SurahActivity";
 	private String []		AYATS; 
 	private String []		AYATSARABIC;
 	private int				surahNumber = 0;
@@ -59,11 +57,11 @@ public class SurahActivity extends Activity {
 	private SurahAdapter 		surahAdapter;
 	private ListView			ayatList; 
 	
-	private final int 	DIALOG_TRANSLATION = 0x01;
-	private final int	DIALOG_RECITER = 0x02;
-	private final int 	DIALOG_AYAT_CLICK_OPTION = 0x03;
+	private final int 			DIALOG_TRANSLATION = 0x01;
+	private final int			DIALOG_RECITER = 0x02;
+	private final int 			DIALOG_AYAT_CLICK_OPTION = 0x03;
 	
-	private int			audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
+	private int					audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
 	
 
 	private SharedPreferences			commonPrefs;
@@ -186,14 +184,8 @@ public class SurahActivity extends Activity {
         
         
         // if  Surah is shown with translation
-        if (TranslationType != 3) { 
-	    
-        	// get file link to Translation (in assets)
-	        String surahFileLink = + (surahNumber + 1) + ".txt";
-	       
-	        // reads string from file and puts AYATS array, and reads image  to put AYATSARABIC
-	        readFileToArray(surahFileLink);
-
+        if (TranslationType != 4) { 	        
+	       readDbToArray(surahNumber + 1);
         }
         
         readArabicToArray();
@@ -236,36 +228,27 @@ public class SurahActivity extends Activity {
 		}
 	}
 	
-	private void readFileToArray(String SurahFileName) {
 	
-		// Add Language Directory
-		SurahFileName = CONSTANTS.LanguageDirectory[TranslationType] + "/" + SurahFileName;
+	private void readDbToArray(int surahNumber) {
+		alQalamDatabase db = new alQalamDatabase(this);
+		db.openReadable();
 		
-		Log.i(TAG, "DIR : "+ SurahFileName + " VAL: " + TranslationType);
-		
-		BufferedReader udis = null;
-		//BufferedReader adis = null;
-		try {
-			udis = new BufferedReader(new InputStreamReader(getAssets().open(SurahFileName))); 
-			//adis = new BufferedReader(new InputStreamReader(getAssets().open("arabic/"+SurahFileName), "utf-8"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Cursor 	cursor = db.getVerses(surahNumber, TranslationType);
 		
 		int  	index = 0;
-		String  trLine = ""; 
-		
-		try {
-			while((trLine = udis.readLine()) != null) {
-				
-				AYATS[index] = trLine;
-				index++;		
-			}
-		}
-		catch (IOException e) {
-			e.printStackTrace();
+			
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				AYATS[index] = cursor.getString(2);
+				index++;
+			}while(cursor.moveToNext());
 		}
 		
+		
+		cursor.close();
+		db.close();
 	}
 	
 	private Drawable getSpecialImage(int surah, int ayat) {
