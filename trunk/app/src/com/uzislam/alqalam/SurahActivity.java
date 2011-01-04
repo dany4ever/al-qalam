@@ -22,12 +22,15 @@ package com.uzislam.alqalam;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -72,6 +75,9 @@ public class SurahActivity extends Activity {
 	private MediaPlayer					quranPlayer;
 	private boolean						isAudioControlShown = false;
 	
+	private PowerManager 				powerManager;
+	private WakeLock 					wakeLockPlayMode;
+		
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);   
@@ -168,6 +174,8 @@ public class SurahActivity extends Activity {
     		}
         });
  		
+        powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		wakeLockPlayMode = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
  	}
 	
 	private void showSurah() {
@@ -185,7 +193,7 @@ public class SurahActivity extends Activity {
         
         // if  Surah is shown with translation
         if (TranslationType != 4) { 	        
-	       readDbToArray(surahNumber + 1);
+	       readDbToArray();
         }
         
         readArabicToArray();
@@ -229,14 +237,14 @@ public class SurahActivity extends Activity {
 	}
 	
 	
-	private void readDbToArray(int surahNumber) {
+	private void readDbToArray() {
 		alQalamDatabase db = new alQalamDatabase(this);
 		db.openReadable();
 		
-		Cursor 	cursor = db.getVerses(surahNumber, TranslationType);
+		Cursor 	cursor = db.getVerses(surahNumber + 1, TranslationType);
 		
 		int  	index = 0;
-			
+		
 		if(cursor.moveToFirst())
 		{
 			do
@@ -372,9 +380,12 @@ public class SurahActivity extends Activity {
 			currentAyat = selectedAyat;
 			playAudio();
 		}
-			
-		// TODO Auto-generated method stub
-		
+		else if (item == 2) {
+			alQalamDatabase db = new alQalamDatabase(this);
+			db.openWritable();
+			db.bookmarkOperation(surahNumber + 1, selectedAyat);
+			db.close();
+		}
 	}
 	
 	private void changeTranslation(int lng) {
@@ -405,6 +416,7 @@ public class SurahActivity extends Activity {
 		}
 		else if (audioState == CONSTANTS.AUDIO_NOT_INTIALIZED) {
 			quranPlayer = new MediaPlayer();
+			wakeLockPlayMode.acquire();
 		}
 						
 		try {
@@ -484,10 +496,13 @@ public class SurahActivity extends Activity {
 		super.onStop();
 	}
 	
-	
 	private void stopAudioPlay() {
 		currentAyat = 0;
 		audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
+		
+		if (wakeLockPlayMode.isHeld()) {
+			wakeLockPlayMode.release();
+		}
 		
 		if (quranPlayer != null && quranPlayer.isPlaying()) {
 			quranPlayer.stop();
