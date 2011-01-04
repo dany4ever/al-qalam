@@ -21,9 +21,6 @@ package com.uzislam.alqalam;
 
 import java.io.File;
 import java.util.Locale;
-
-import com.uzislam.alqalam.database.Helper;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +28,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,9 +38,8 @@ import android.widget.LinearLayout;
 
 public class startQalam extends Activity {
 
-	private static final String TAG = "startQalam";
+	private static final String TAG = "al-Qalam startQalam";
 	private Handler 			aqHandler;
-	private Helper				mHelper;
 	private ImageView 			frontSplash;
 	private LinearLayout 		mainView;
 	private LinearLayout 		btnView;
@@ -75,25 +70,24 @@ public class startQalam extends Activity {
         mainView = (LinearLayout) findViewById(R.id.mainview);
         btnView = (LinearLayout) findViewById(R.id.buttons);
         btnView.setVisibility(View.GONE);
+      
         //Initialize the database
-        mHelper = new Helper(this);
         initializeDb();
-
+        
         aqHandler = new Handler();
         aqHandler.postDelayed(Splash, 1500);
-
-		// Get Translation Type from shared preferences, default is 0 (uzbek-cyr)        
+        
+        // Check if arabic is downloaded
+        checkDownloadedSurahs();
+        
+        // Get Translation Type from shared preferences, default is 0 (uzbek-cyr)        
         //TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANLATION_OPTION_TITLE, 0);
         //ReciterType = commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
-
-        checkDownloadedSurahs();
     }
 
     @Override
     protected void onStop() {
     	super.onStop();
-
-    	mHelper.close();
     }
 
     private Runnable Splash = new Runnable() {
@@ -182,15 +176,16 @@ public class startQalam extends Activity {
 	}
 
 	protected void initializeDb() {
+		final alQalamDatabase db;
+		db = new alQalamDatabase(this);
+		
     	Thread mThread = new Thread() {
     		public void run() {
-    			try {
-    				mHelper.getWritableDatabase();
-    			} catch (Exception e) {
-    				Log.e(TAG, "Error: " + e.getMessage());
-    			}
+    			db.openWritable();
+    			db.close();
     		}
     	};
+    	
     	mThread.start();
     }
 }
