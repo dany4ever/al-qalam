@@ -41,6 +41,10 @@
     	<ImageView android:id="@+id/ayatSpecialImage" 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" />
+    		
+    	<ImageView android:id="@+id/ayatBookmarkImage" 
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" />
     	
     </LinearLayout>
     <LinearLayout android:orientation="vertical"

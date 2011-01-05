@@ -73,11 +73,12 @@ public class SurahAdapter extends BaseAdapter {
          	vHolder.AyatBismillah = (ImageView)convertView.findViewById(R.id.ayatBismillah);
         	vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.ayatTranslationText);
         	vHolder.AyatArabic = (ImageView) convertView.findViewById(R.id.ayatArabicText);
-        
+        	       
         	
         	//Typeface tf = Typeface.createFromAsset(_context.getAssets(),"fonts/IslamicFont.ttf");
     	    //vHolder.AyatUzbek.setTypeface(tf);
-    	    
+        	
+        	vHolder.AyatBookmarkImage = (ImageView) convertView.findViewById(R.id.ayatBookmarkImage);
         	vHolder.AyatSpecialImage = (ImageView) convertView.findViewById(R.id.ayatSpecialImage);
              
     	    convertView.setTag(vHolder);
@@ -109,7 +110,8 @@ public class SurahAdapter extends BaseAdapter {
          vHolder.AyatArabic.setImageBitmap(arabicAyat);
        	 
          vHolder.AyatSpecialImage.setImageDrawable(mItems.get(position).getAyatSpecialImage());
-         vHolder.AyatBismillah.setImageDrawable(mItems.get(position).getAyatBismillah());      
+         vHolder.AyatBismillah.setImageDrawable(mItems.get(position).getAyatBismillah());
+         vHolder.AyatBookmarkImage.setImageDrawable(mItems.get(position).getAyatBookmarkImage());
          
          return convertView;
 	}
@@ -120,6 +122,7 @@ public class SurahAdapter extends BaseAdapter {
     	 ImageView		AyatArabic;
          TextView		AyatUzbek;
          ImageView		AyatSpecialImage;
+         ImageView		AyatBookmarkImage;
          LinearLayout	AyatGroup; 
     }
 	

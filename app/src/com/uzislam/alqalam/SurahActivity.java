@@ -200,17 +200,19 @@ public class SurahActivity extends Activity {
         
         for (int i=0; i < CONSTANTS.SurahNumberOfAyats[surahNumber] ; i++) {
         
-        	// check if BISMILLAH must be shown 
-        	if (i == 0 && surahNumber != 0 && surahNumber != 8)   {
-        		
-        		//get Bismillah image
-                Drawable  iconBismillah = getResources().getDrawable(R.drawable.bismillah);
-        		ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], getSpecialImage(surahNumber+1, i+1), iconBismillah, getAyatBackgroundColor());
-        	}
-        	else {
-        		ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i], getSpecialImage(surahNumber+1, i+1), null, getAyatBackgroundColor());
-        	}
+        	Drawable  iconBismillah =  null;
         	
+        	// check if BISMILLAH must be shown 
+        	if (i == 0 && surahNumber != 0 && surahNumber != 8)
+                iconBismillah = getResources().getDrawable(R.drawable.bismillah);
+        	
+        	ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i]);
+    		
+    		ait.setAyatSpecialImage(getSpecialImage(surahNumber+1, i+1));
+    		//ait.setAyatBookmarkImage(getBookmarkImage(surahNumber+1, i+1));
+    		ait.setAyatBismillah(iconBismillah);
+    		ait.setAyatBackground(getAyatBackgroundColor());
+    		
         	surahAdapter.addItem(ait);
         }
         
@@ -235,8 +237,7 @@ public class SurahActivity extends Activity {
 				//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
 		}
 	}
-	
-	
+		
 	private void readDbToArray() {
 		alQalamDatabase db = new alQalamDatabase(this);
 		db.openReadable();
@@ -273,6 +274,17 @@ public class SurahActivity extends Activity {
 				
 		return null;
 		
+	}
+	
+	private Drawable getBookmarkImage (int surah, int ayat) {
+		alQalamDatabase db = new alQalamDatabase(this);
+		db.openReadable();
+		if (db.isInBookmark(surah, ayat))
+			return getResources().getDrawable(R.drawable.bookmark_icon);
+
+		db.close();
+		
+		return null;
 	}
 	
 	@Override
@@ -385,6 +397,11 @@ public class SurahActivity extends Activity {
 			db.openWritable();
 			db.bookmarkOperation(surahNumber + 1, selectedAyat);
 			db.close();
+			
+			// refresh, because we have bookmarked or unbookmarked
+			showSurah();
+			ayatList.setSelectionFromTop(selectedAyat - 1, 0);
+			
 		}
 	}
 	
