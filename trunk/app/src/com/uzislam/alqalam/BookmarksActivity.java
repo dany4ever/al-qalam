@@ -79,6 +79,9 @@ public class BookmarksActivity extends Activity {
 		Cursor cursor = db.getAllBookmarks();
 		
 		List<HashMap<String, Object>> bookmark = new ArrayList<HashMap<String, Object>>();
+
+		String[] from = {"chapter", "verse", "title"};
+		int [] to = {R.id.chapterNumber, R.id.verseNumber, R.id.chapterName};
 		
 		if(cursor.moveToFirst())
 		{
@@ -103,13 +106,10 @@ public class BookmarksActivity extends Activity {
 				index++;
 			} while(cursor.moveToNext());
 			
-			String[] from = {"chapter", "verse", "title"};
-			int [] to = {R.id.chapterNumber, R.id.verseNumber, R.id.chapterName};
-						
-			BookmarkList.setAdapter(new SimpleAdapter(this, bookmark, R.layout.bookmark_row, from, to));
-
 		}
-			
+	
+		BookmarkList.setAdapter(new SimpleAdapter(this, bookmark, R.layout.bookmark_row, from, to));
+		
 		cursor.close();
 		db.close();
 	}

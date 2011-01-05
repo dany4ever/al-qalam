@@ -115,7 +115,7 @@ public class SurahActivity extends Activity {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> adapter, View view, final int index, long order) {
-						currentAyat = index + 1;	
+						currentAyat = index + 1;
 						showDialog(DIALOG_AYAT_CLICK_OPTION);
 						return true;
 			}
@@ -125,8 +125,7 @@ public class SurahActivity extends Activity {
         audioControlPanel.setVisibility(View.GONE);
         
         
-        // Reset Data and Display Surah
-        resetData();
+        // Display Surah
         showData();
         
         ImageView	surahName = (ImageView) findViewById(R.id.suraName);
@@ -158,7 +157,6 @@ public class SurahActivity extends Activity {
     			stopAudioPlay();
       			// we are moving to previous  surah, reset and show;
     			currentAyat = 0;
-    			resetData();
     			showData();
     		}
         });
@@ -174,7 +172,6 @@ public class SurahActivity extends Activity {
     			
     			// we are moving to new next surah, reset and show;
     			currentAyat = 0;
-    			resetData();
     			showData();
     		}
         });
@@ -195,6 +192,7 @@ public class SurahActivity extends Activity {
         
     	alQalamDatabase db = new alQalamDatabase(this);
 		db.openReadable();
+		
 		Cursor 	cursor;
 		
         // if translation is enabled
@@ -212,6 +210,8 @@ public class SurahActivity extends Activity {
 					index++;
 				} while(cursor.moveToNext());
 			}
+			
+			cursor.close();
 			
 		}
 		
@@ -237,8 +237,7 @@ public class SurahActivity extends Activity {
 		
 		cursor.close();
 		db.close();
-		
-		
+
 		// Put Arabic Image Links to Array
 		String  snm, anm;
 		
@@ -261,6 +260,8 @@ public class SurahActivity extends Activity {
 		
 		surahAdapter.clear();
 	
+		resetData();
+		 
         for (int i=0; i < CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber] ; i++) {
 
         	// check if BISMILLAH must be shown 
@@ -420,15 +421,44 @@ public class SurahActivity extends Activity {
 		else if (item == 2) {
 			alQalamDatabase db = new alQalamDatabase(this);
 			db.openWritable();
-			db.bookmarkOperation(surahNumber + 1, currentAyat);
+			
+			AyatIconifiedText ait = (AyatIconifiedText)surahAdapter.getItem(currentAyat-1);
+				
+			if (db.bookmarkOperation(surahNumber + 1, currentAyat)) {
+				ait.setAyatBackground(Color.rgb(243, 255, 140));
+				ait.setAyatBookmarkImage(getResources().getDrawable(R.drawable.bookmark_icon));
+        		
+			} else  {
+				ait.setAyatBackground(Color.TRANSPARENT);
+				ait.setAyatBookmarkImage(null);
+			}
+			
+			surahAdapter.notifyDataSetChanged();
+			
+			// Now read Bookmarked ayats to Array
+			Cursor cursor = db.getBookmarksForSurah(surahNumber+1);
+			
+			int  index = 0;
+			
+			if(cursor.moveToFirst())
+			{
+				Bookmarks = new int [cursor.getCount()];
+				
+				do
+				{
+					Bookmarks[index] = cursor.getInt(cursor.getColumnIndex(alQalamDatabase.COLUMN_AYATNO));
+					index++;
+					
+				} while(cursor.moveToNext());
+			}
+			else {
+				Bookmarks =  null;
+			}
+			
+			cursor.close();
 			db.close();
 			
-			resetData();
-			showData();
-			
-			// getBookmarks();
-			// just refresh, because we have bookmarked or unbookmarked
-			
+		
 		}
 	}
 	
@@ -437,7 +467,6 @@ public class SurahActivity extends Activity {
 		TranslationType = lng;
 		preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, lng);
 		preferenceEditor.commit();
-		resetData();
 		showData();
 	}
 	
