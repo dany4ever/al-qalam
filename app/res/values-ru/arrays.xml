@@ -158,5 +158,11 @@
         <item>Прослушать аят</item>
         <item>Добавить аят в закладки</item>
     </string-array>
+    
+     <string-array name="AyatClickOptions2">
+        <item>Прослушать суру</item>
+        <item>Прослушать аят</item>
+        <item>Удалит закладку</item>
+    </string-array>
 
 </resources>
