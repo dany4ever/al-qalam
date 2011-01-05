@@ -120,8 +120,8 @@ public class QuranActivity extends Activity {
 					}
 					else if (CONSTANTS.gSurahIsDownloaded[index]) {
 						Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
-						quranIntent.putExtra("sNumber", CONSTANTS.JuzNumbers[index+1][0]-1);
-						quranIntent.putExtra("aNumber", CONSTANTS.JuzNumbers[index+1][1]);
+						quranIntent.putExtra("sNumber", CONSTANTS.JuzNumbers[index][0]-1);
+						quranIntent.putExtra("aNumber", CONSTANTS.JuzNumbers[index][1]);
 						startActivity(quranIntent);
 					} 
 					else {

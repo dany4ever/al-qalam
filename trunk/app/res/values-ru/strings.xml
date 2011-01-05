@@ -38,4 +38,5 @@
     <string name="search">Поиск</string>
     <string name="settings_locale">Язык</string>
     <string name="settings_locale_summary">Выберите язык интерфейса</string>
+ 	<string name="delete">Удалить</string>
 </resources>

@@ -234,6 +234,19 @@ public class alQalamDatabase {
 		}
 	}
 	
+	
+	public boolean isInBookmark(int chapter, int verse) {
+		
+		String selection = COLUMN_SURAHNO + "="  + chapter + " AND " + COLUMN_AYATNO + "=" + verse;
+		
+		Cursor c = db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, selection, null, null, null, null);
+		
+		if (c.moveToFirst())
+			return true;
+		else
+			return false;
+	}
+	
 	//get all bookmarks
 	public Cursor getAllBookmarks() {
 	

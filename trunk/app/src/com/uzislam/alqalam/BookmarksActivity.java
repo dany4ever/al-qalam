@@ -19,12 +19,16 @@
 
 package com.uzislam.alqalam;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.content.Intent;
 import android.database.Cursor;
 import android.view.View;
@@ -35,7 +39,6 @@ public class BookmarksActivity extends Activity {
 	private ListView			BookmarkList; 	
 	private String[] 			gSurahTitles;
 	private int[][]				bookmarks;
-	private String[]			bookmarksString;
 		
 	private final String		TAG = "Al-Qalam Bookmarks";
 
@@ -54,28 +57,44 @@ public class BookmarksActivity extends Activity {
 		db.openReadable();
 		Cursor cursor = db.getAllBookmarks();
 		
+		List<HashMap<String, Object>> bookmark = new ArrayList<HashMap<String, Object>>();
+		
 		if(cursor.moveToFirst())
 		{
 			bookmarks = new int[cursor.getCount()][2];
-			bookmarksString = new String[cursor.getCount()];
 			
 			int index = 0, sr = 0, ay = 0;
 			do
 			{
 				sr = cursor.getInt(cursor.getColumnIndex(alQalamDatabase.COLUMN_SURAHNO));
 				ay = cursor.getInt(cursor.getColumnIndex(alQalamDatabase.COLUMN_AYATNO));
+				
+				HashMap<String, Object> map = new HashMap<String, Object>();
+			
+				map.put("chapter", sr);
+				map.put("verse", ay);
+				map.put("title", gSurahTitles[sr-1]);
+				
+				bookmark.add(map);
+				
 				bookmarks[index][0] = sr; 
 				bookmarks[index][1] = ay; 
-				bookmarksString[index] = gSurahTitles[sr-1]  + " : " + ay;
 				index++;
 			} while(cursor.moveToNext());
 			
-			BookmarkList.setAdapter(new ArrayAdapter<String>(this, R.layout.bookmark_row, bookmarksString));
-			
+			String[] from = {"chapter", "verse", "title"};
+			int [] to = {R.id.chapterNumber, R.id.verseNumber, R.id.chapterName};
+						
+			BookmarkList.setAdapter(new SimpleAdapter(this, bookmark, R.layout.bookmark_row, from, to));
+
 		}
 		
+		cursor.close();
 		db.close();
        
+		BookmarkList.setCacheColorHint(00000000); 
+		BookmarkList.setDivider(null);
+	        
         BookmarkList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -83,11 +102,11 @@ public class BookmarksActivity extends Activity {
 					final int index, long order) {
 				
 						Intent quranIntent = new Intent(BookmarksActivity.this, SurahActivity.class);
-						quranIntent.putExtra("sNumber", bookmarks[index][0]);
+						quranIntent.putExtra("sNumber", bookmarks[index][0] - 1);
 						quranIntent.putExtra("aNumber", bookmarks[index][1]);
 						startActivity(quranIntent);
 			}
         });
         
- 	}
+	}
 }

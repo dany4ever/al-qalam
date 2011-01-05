@@ -37,4 +37,5 @@
     <string name="search">Ara</string>
     <string name="settings_locale">Dil</string>
     <string name="settings_locale_summary">Arayüz dili seçin</string>
+    <string name="delete">Silmek</string>
 </resources>

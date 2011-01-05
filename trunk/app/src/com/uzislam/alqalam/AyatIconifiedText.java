@@ -29,16 +29,14 @@ public class AyatIconifiedText {
 	private String		ayatUzbekText = null;
 	private Drawable	ayatBismillah = null;
 	private Drawable	ayatSpecialImage = null;
+	private Drawable	ayatBookmarkImage = null;
 	private int			ayatBackground = Color.TRANSPARENT;
 		
-	public AyatIconifiedText(long _id, int _order, String _arabic, String _uzbek, Drawable _spimage, Drawable _bismillah, int _ayatBackground) {
+	public AyatIconifiedText(long _id, int _order, String _arabic, String _uzbek) {
 		this.id = _id;
 		this.ayatOrder = _order;
 		this.ayatArabicText = _arabic;
 		this.ayatUzbekText = _uzbek;
-		this.ayatBismillah  = _bismillah;
-		this.ayatBackground = _ayatBackground;
-		this.ayatSpecialImage = _spimage;
 	}
 	
 	public long getId () {
@@ -69,4 +67,23 @@ public class AyatIconifiedText {
 		return this.ayatBackground;
 	}
 	
+	public Drawable getAyatBookmarkImage () {
+		return this.ayatBookmarkImage;
+	}
+	
+	public void setAyatBismillah (Drawable img) {
+		this.ayatBismillah  = img;
+	}
+	
+	public void setAyatBackground (int bg) {
+		this.ayatBackground  = bg;
+	}
+	
+	public void setAyatSpecialImage (Drawable img) {
+		this.ayatSpecialImage = img;
+	}
+		
+	public void setAyatBookmarkImage (Drawable img) {
+		this.ayatBookmarkImage = img;
+	}
 }

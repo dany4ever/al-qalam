@@ -44,4 +44,5 @@
     <string name="options">Танловлар</string>
     <string name="settings_locale">Тил</string>
     <string name="settings_locale_summary">Интерфейс тилини танланг</string>
+    <string name="delete">Ўчириш</string>
 </resources>
