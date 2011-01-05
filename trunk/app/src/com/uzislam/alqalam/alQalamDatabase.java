@@ -184,7 +184,7 @@ public class alQalamDatabase {
 					db.insert(which, COLUMN_AYAT, values);
 					
 					// Routine to populate proper surah and ayat numbers
-					if (ayatNumber == CONSTANTS.SurahNumberOfAyats[surahNumber - 1]) {
+					if (ayatNumber == CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber - 1]) {
 						surahNumber++;
 						ayatNumber = 1;
 					} else {
@@ -245,6 +245,14 @@ public class alQalamDatabase {
 			return true;
 		else
 			return false;
+	}
+	
+	//get bookmarks for surah
+	public Cursor getBookmarksForSurah(int chapter) {
+		String selection = COLUMN_SURAHNO + "="  + chapter ;
+
+		return db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, selection, null, null, null, COLUMN_AYATNO);
+
 	}
 	
 	//get all bookmarks

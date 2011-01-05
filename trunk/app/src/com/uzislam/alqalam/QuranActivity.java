@@ -77,8 +77,8 @@ public class QuranActivity extends Activity {
        	        
     	// check which Surah's Arabic Text is already downloaded
     	
-        for (int i=0; i < CONSTANTS.numberOfSurahs ; i++) {
-        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, CONSTANTS.SurahNumberOfAyats[i], CONSTANTS.gSurahIsDownloaded[i], null);
+        for (int i=0; i < CONSTANTS.NUMBER_OF_SURAHS ; i++) {
+        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, CONSTANTS.SURAH_NUMBER_OF_AYATS[i], CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i], null);
         	qit.setSurahState(getAudioIcon(i));
         	quranAdapter.addItem(qit);
         }
@@ -97,7 +97,7 @@ public class QuranActivity extends Activity {
 					if (!isSdCardAccessible()) {
 						showDialog(CONSTANTS.SURAH_DIALOG_NO_SDCARD);
 					}
-					else if (CONSTANTS.gSurahIsDownloaded[index]) {
+					else if (CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[index]) {
 						Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
 						quranIntent.putExtra("sNumber", index);
 						quranIntent.putExtra("aNumber", 0);
@@ -118,10 +118,10 @@ public class QuranActivity extends Activity {
 					if (!isSdCardAccessible()) {
 						showDialog(CONSTANTS.SURAH_DIALOG_NO_SDCARD);
 					}
-					else if (CONSTANTS.gSurahIsDownloaded[index]) {
+					else if (CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[index]) {
 						Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
-						quranIntent.putExtra("sNumber", CONSTANTS.JuzNumbers[index][0]-1);
-						quranIntent.putExtra("aNumber", CONSTANTS.JuzNumbers[index][1]);
+						quranIntent.putExtra("sNumber", CONSTANTS.JUZZ_INDEXES[index][0]-1);
+						quranIntent.putExtra("aNumber", CONSTANTS.JUZZ_INDEXES[index][1]);
 						startActivity(quranIntent);
 					} 
 					else {
@@ -133,7 +133,7 @@ public class QuranActivity extends Activity {
  	}
 	
 	private Drawable getAudioIcon(int index) {
-	 	if (CONSTANTS.gSurahIsAudioDownloaded[index])
+	 	if (CONSTANTS.SURAH_IS_AUDIO_DOWNLOADED[index])
 			return getResources().getDrawable(R.drawable.index_sound);
 		else
 			return getResources().getDrawable(R.drawable.index_sound_get);

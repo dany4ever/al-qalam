@@ -154,9 +154,9 @@ public class startQalam extends Activity {
 		String arabicFileName;
 		//String audioFileName;
 
-		for (int i=0; i<CONSTANTS.numberOfSurahs; i++) {
+		for (int i=0; i<CONSTANTS.NUMBER_OF_SURAHS; i++) {
 				arabicFileName = CONSTANTS.FOLDER_QURAN_ARABIC + (i+1);
-				CONSTANTS.gSurahIsDownloaded[i] = isFileExists(arabicFileName);
+				CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i] = isFileExists(arabicFileName);
 
 				// audioFileName = CONSTANTS.FOLDER_QURAN_AUDIO + CONSTANTS.ReciterDirectory[ReciterType]+ "/" + CONSTANTS.numberToString(i+1) ;
 				//CONSTANTS.gSurahIsAudioDownloaded[i] = isFileExists(audioFileName);
