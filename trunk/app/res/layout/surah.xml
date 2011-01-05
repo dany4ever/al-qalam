@@ -76,24 +76,26 @@
 	 	android:orientation="horizontal"
 	    android:layout_width="fill_parent"
 	    android:layout_height="45dip"
-	    android:gravity="center_vertical"
+	    android:gravity="center_vertical|center_horizontal"
 	    android:layout_alignParentBottom="true"
-	    android:background="#EE9900" >
+	    android:background="#FFF2D2" >
     
     <ImageView
-  	 	android:id="@+id/playPauseButton"
+  	 	android:id="@+id/audioPlayButton"
  		android:orientation="horizontal"
-    	android:layout_width="wrap_content"
-    	android:layout_height="35dip"
-    	android:src="@drawable/menu_icon_play" />
+    	android:layout_width="40dip"
+    	android:layout_height="40dip"
+    	android:src="@drawable/menu_icon_play"
+    	android:clickable="true"  />
     	
     <ImageView
-  	 	android:id="@+id/playStopButton"
+  	 	android:id="@+id/audioPauseButton"
  		android:orientation="horizontal"
-    	android:layout_width="wrap_content"
-    	android:layout_height="35dip"
-    	android:src="@drawable/menu_icon_pause" />
-
+    	android:layout_width="40dip"
+    	android:layout_height="40dip"
+    	android:src="@drawable/menu_icon_pause"
+    	android:clickable="true"  />
+    	
 	</LinearLayout>
 	
    <ListView 
