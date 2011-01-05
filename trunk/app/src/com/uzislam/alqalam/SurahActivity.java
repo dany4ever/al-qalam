@@ -383,7 +383,13 @@ public class SurahActivity extends Activity {
 			
 			ab.setTitle(R.string.options);
 			
-			ab.setSingleChoiceItems(R.array.AyatClickOptions, 0 , new DialogInterface.OnClickListener() {
+			int options = R.array.AyatClickOptions;
+			
+			if (Bookmarks != null && Arrays.binarySearch(Bookmarks, currentAyat) >= 0) {
+				options = R.array.AyatClickOptions2;
+        	}
+        	
+			ab.setSingleChoiceItems(options, 0 , new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int item) {
 	            	Log.i(TAG, "Item " + item);
 	            	doAyatClickTask(item);

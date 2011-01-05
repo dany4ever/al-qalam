@@ -170,5 +170,11 @@
         <item>Oятни тинглаш</item>
         <item>Oятни хатчўплаш</item>
     </string-array>
+    
+    <string-array name="AyatClickOptions2">
+        <item>Сурани тинглаш</item>
+        <item>Oятни тинглаш</item>
+        <item>Хатчўпни ўчириш</item>
+    </string-array>
 
 </resources>

@@ -159,4 +159,9 @@
         <item>İmleriye ekle</item>
     </string-array>
 
+ 	<string-array name="AyatClickOptions2">
+        <item>Süreyi dinle</item>
+        <item>Ayeti dinle</item>
+        <item>İmleride çıkar</item>
+    </string-array>
 </resources>
