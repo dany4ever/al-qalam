@@ -398,7 +398,7 @@ public class SurahActivity extends Activity {
 	        })
 	        .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int item) {
-	            	removeDialog(DIALOG_RECITER);
+	            	removeDialog(DIALOG_AYAT_CLICK_OPTION);
 	            }
 	        });	
 		}
