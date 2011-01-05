@@ -19,6 +19,8 @@
 
 package com.uzislam.alqalam;
 
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -44,16 +46,16 @@ import android.widget.ListView;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 public class SurahActivity extends Activity {
 	private static final String TAG = "al-Qalam SurahActivity";
-	private String []		AYATS; 
+	private String []		AYATSTRANS; 
 	private String []		AYATSARABIC;
+	private int[]			Bookmarks;
 	private int				surahNumber = 0;
 	private int				currentAyat = 0;
-	private int 			selectedAyat = 0;
-	
+		
 	public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
     
 	private ImageView 			surahTitle;
@@ -108,13 +110,14 @@ public class SurahActivity extends Activity {
         
         // get AyatList View 
         ayatList = (ListView)findViewById(R.id.AyaList);  
-
-        ayatList.setOnItemClickListener(new OnItemClickListener() {
+        
+        ayatList.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> adapter, View view, final int index, long order) {
-						selectedAyat = index + 1;	
+			public boolean onItemLongClick(AdapterView<?> adapter, View view, final int index, long order) {
+						currentAyat = index + 1;	
 						showDialog(DIALOG_AYAT_CLICK_OPTION);
+						return true;
 			}
         });
         
@@ -122,14 +125,9 @@ public class SurahActivity extends Activity {
         audioControlPanel.setVisibility(View.GONE);
         
         
-        // Display Surah
-        showSurah();
-        
-        // Jump to juzz ayat (if defined);
-        if (currentAyat != 0) {
-        	ayatList.setSelectionFromTop(currentAyat - 1, 0);   	
-        }
-        	
+        // Reset Data and Display Surah
+        resetData();
+        showData();
         
         ImageView	surahName = (ImageView) findViewById(R.id.suraName);
         
@@ -158,7 +156,10 @@ public class SurahActivity extends Activity {
     			}
     			
     			stopAudioPlay();
-    			showSurah();
+      			// we are moving to previous  surah, reset and show;
+    			currentAyat = 0;
+    			resetData();
+    			showData();
     		}
         });
         
@@ -170,7 +171,11 @@ public class SurahActivity extends Activity {
     				return;
     			}
     			stopAudioPlay();
-    			showSurah();
+    			
+    			// we are moving to new next surah, reset and show;
+    			currentAyat = 0;
+    			resetData();
+    			showData();
     		}
         });
  		
@@ -178,97 +183,102 @@ public class SurahActivity extends Activity {
 		wakeLockPlayMode = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
  	}
 	
-	private void showSurah() {
+	
+	private void resetData() {
+		
+		surahTitle.setImageResource(CONSTANTS.TITLE_OF_SURAHS[surahNumber]);
+		  
+        // create string arrays for verses
+		AYATSTRANS = new String[CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber]];
+        AYATSARABIC = new String [CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber]];
+                 
+        // if translation is enabled
+		if (TranslationType != CONSTANTS.NUMBER_OF_TRANSLATIONS) { 
+			alQalamDatabase db = new alQalamDatabase(this);
+			db.openReadable();
+			
+			Cursor 	cursor = db.getVerses(surahNumber + 1, TranslationType);
+			
+			int  	index = 0;
+			
+			if(cursor.moveToFirst())
+			{
+				do
+				{
+					AYATSTRANS[index] = cursor.getString(cursor.getColumnIndex(alQalamDatabase.COLUMN_AYAT));
+					index++;
+				} while(cursor.moveToNext());
+			}
+			
+			
+			cursor.close();
+			db.close();
+		}
+		
+		String  snm, anm;
+		
+		snm = CONSTANTS.numberToString(surahNumber + 1);
+		
+		for (int index=0;index<CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber];index++) {
+		
+			anm = CONSTANTS.numberToString(index);
+			AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC + (surahNumber+1)+ "/" + snm + anm +".img";
+			//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
+		}
+		
+        //getBookmarks();
+	}
+	
+	private void showData() {
 		
 		AyatIconifiedText	ait;
-       
-		surahAdapter.clear();
+		Drawable  iconBismillah =  null, bookmarkImage = null;
 		
-		surahTitle.setImageResource(CONSTANTS.SurahTitles[surahNumber]);
-	  
-        // create string arrays for verses
-        AYATS = new String[CONSTANTS.SurahNumberOfAyats[surahNumber]];
-        AYATSARABIC = new String [CONSTANTS.SurahNumberOfAyats[surahNumber]];
+		surahAdapter.clear();
+	
+        for (int i=0; i < CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber] ; i++) {
         
-        
-        // if  Surah is shown with translation
-        if (TranslationType != 4) { 	        
-	       readDbToArray();
-        }
-        
-        readArabicToArray();
-        
-        for (int i=0; i < CONSTANTS.SurahNumberOfAyats[surahNumber] ; i++) {
-        
-        	Drawable  iconBismillah =  null;
         	
         	// check if BISMILLAH must be shown 
         	if (i == 0 && surahNumber != 0 && surahNumber != 8)
                 iconBismillah = getResources().getDrawable(R.drawable.bismillah);
         	
-        	ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATS[i]);
-    		
+        	//if (Bookmarks.length > 0 && Arrays.binarySearch(Bookmarks, i+1) >= 0)
+        	//		bookmarkImage = getResources().getDrawable(R.drawable.bookmark_icon);
+        	
+        	ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATSTRANS[i]);
+        	
     		ait.setAyatSpecialImage(getSpecialImage(surahNumber+1, i+1));
-    		//ait.setAyatBookmarkImage(getBookmarkImage(surahNumber+1, i+1));
+    		ait.setAyatBookmarkImage(bookmarkImage);
     		ait.setAyatBismillah(iconBismillah);
     		ait.setAyatBackground(getAyatBackgroundColor());
     		
         	surahAdapter.addItem(ait);
+        	
+        	iconBismillah =  null;
+        	bookmarkImage = null;
         }
         
         // make verses appear in list view   
         ayatList.setAdapter(surahAdapter);
         ayatList.setCacheColorHint(00000000); 
         ayatList.setDivider(null);
-	}
-	
-	private void readArabicToArray() {
-		
-		String  SNM, ANM;
-		
-		SNM = CONSTANTS.numberToString(surahNumber + 1);
-		
-		for (int index=0;index<CONSTANTS.SurahNumberOfAyats[surahNumber];index++) {
-		
-				ANM = CONSTANTS.numberToString(index);
-				
-				// server : http://al-qalam.googlecode.com/svn/trunk/assets/arabic/1/001000.gdw
-				AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC + (surahNumber+1)+ "/" + SNM + ANM +".img";
-				//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
-		}
-	}
-		
-	private void readDbToArray() {
-		alQalamDatabase db = new alQalamDatabase(this);
-		db.openReadable();
-		
-		Cursor 	cursor = db.getVerses(surahNumber + 1, TranslationType);
-		
-		int  	index = 0;
-		
-		if(cursor.moveToFirst())
-		{
-			do
-			{
-				AYATS[index] = cursor.getString(cursor.getColumnIndex(alQalamDatabase.COLUMN_AYAT));
-				index++;
-			} while(cursor.moveToNext());
-		}
-		
-		
-		cursor.close();
-		db.close();
+        
+        // Jump to Specific Ayat (if defined);
+        if (currentAyat != 0) {
+        	ayatList.setSelectionFromTop(currentAyat - 1, 0);   	
+        }
 	}
 	
 	private Drawable getSpecialImage(int surah, int ayat) {
 		
-		for (int i=0; i <CONSTANTS.numberOfSajdaAyats; i++) {
-			if (CONSTANTS.SajdaAyats[i][0] == surah &&  CONSTANTS.SajdaAyats[i][1] == ayat)
+		for (int i=0; i <CONSTANTS.NUMBER_OF_SAJDAS; i++) {
+			if (CONSTANTS.SAJDA_INDEXES[i][0] == surah &&  CONSTANTS.SAJDA_INDEXES[i][1] == ayat)
 				return getResources().getDrawable(R.drawable.sajdah);
 		}
 		
-		for (int i=0; i<= CONSTANTS.numberOfJuzs; i++) {
-			if (CONSTANTS.JuzNumbers[i][0] == surah && CONSTANTS.JuzNumbers[i][1] == ayat)
+		for (int i=0; i<CONSTANTS.NUMBER_OF_JUZZ; i++) {
+			if (CONSTANTS.JUZZ_INDEXES[i][0] == surah && CONSTANTS.JUZZ_INDEXES[i][1] == ayat)
 				return getResources().getDrawable(R.drawable.juzz);
 		}
 				
@@ -276,15 +286,26 @@ public class SurahActivity extends Activity {
 		
 	}
 	
-	private Drawable getBookmarkImage (int surah, int ayat) {
+	private void getBookmarks() {
 		alQalamDatabase db = new alQalamDatabase(this);
 		db.openReadable();
-		if (db.isInBookmark(surah, ayat))
-			return getResources().getDrawable(R.drawable.bookmark_icon);
-
-		db.close();
+		Cursor cursor = db.getBookmarksForSurah(surahNumber+1);
 		
-		return null;
+		int  index = 0;
+		
+		if(cursor.moveToFirst())
+		{
+			Bookmarks = new int [cursor.getCount()];
+			
+			do
+			{
+				Bookmarks[index] = cursor.getInt(cursor.getColumnIndex(alQalamDatabase.COLUMN_AYATNO));
+				index++;
+				
+			} while(cursor.moveToNext());
+		}
+	
+		db.close();
 	}
 	
 	@Override
@@ -389,19 +410,18 @@ public class SurahActivity extends Activity {
 		else if (item == 1) {
 			isAudioControlShown = true;
 			audioControlPanel.setVisibility(View.VISIBLE);
-			currentAyat = selectedAyat;
 			playAudio();
 		}
 		else if (item == 2) {
 			alQalamDatabase db = new alQalamDatabase(this);
 			db.openWritable();
-			db.bookmarkOperation(surahNumber + 1, selectedAyat);
+			db.bookmarkOperation(surahNumber + 1, currentAyat);
 			db.close();
 			
-			// refresh, because we have bookmarked or unbookmarked
-			showSurah();
-			ayatList.setSelectionFromTop(selectedAyat - 1, 0);
-			
+			// getBookmarks();
+
+			// just refresh, because we have bookmarked or unbookmarked
+			// showData();
 		}
 	}
 	
@@ -410,7 +430,8 @@ public class SurahActivity extends Activity {
 		TranslationType = lng;
 		preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, lng);
 		preferenceEditor.commit();
-		showSurah();
+		resetData();
+		showData();
 	}
 	
 	private void changeReciter(int rct) {
@@ -422,7 +443,7 @@ public class SurahActivity extends Activity {
 	
 	private void playAudio() {
 		
-		String AudioPath = CONSTANTS.FOLDER_QURAN_AUDIO + CONSTANTS.ReciterDirectory[ReciterType] + "/";
+		String AudioPath = CONSTANTS.FOLDER_QURAN_AUDIO + CONSTANTS.RECITER_DIRECTORY[ReciterType] + "/";
 			
 		if (audioState == CONSTANTS.AUDIO_PLAYING )
 			return;
@@ -468,7 +489,7 @@ public class SurahActivity extends Activity {
                         		audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
                         		currentAyat++; 
                         		
-                        		if (currentAyat > CONSTANTS.SurahNumberOfAyats[surahNumber]) {
+                        		if (currentAyat > CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber]) {
                         			currentAyat = 0;
                         			
                         			if (quranPlayer != null)
@@ -501,18 +522,6 @@ public class SurahActivity extends Activity {
 		return Color.TRANSPARENT;
 	}
 	
-	@Override
-	public void onPause() {
-		stopAudioPlay();
-		super.onPause();
-	}
-	
-	@Override
-	public void onStop() {
-		stopAudioPlay();
-		super.onStop();
-	}
-	
 	private void stopAudioPlay() {
 		currentAyat = 0;
 		audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
@@ -526,5 +535,17 @@ public class SurahActivity extends Activity {
 			quranPlayer.release();
 			quranPlayer = null;
 		}
+	}
+
+	@Override
+	public void onPause() {
+		stopAudioPlay();
+		super.onPause();
+	}
+	
+	@Override
+	public void onStop() {
+		stopAudioPlay();
+		super.onStop();
 	}
 }
