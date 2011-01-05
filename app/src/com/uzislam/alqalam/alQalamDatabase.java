@@ -217,12 +217,12 @@ public class alQalamDatabase {
 	}
 	
 	// bookmark or unbookmark the ayat
-	public void bookmarkOperation(int chapter, int verse) {
+	public boolean bookmarkOperation(int chapter, int verse) {
 		String selection = COLUMN_SURAHNO + "="  + chapter + " AND " + COLUMN_AYATNO + "=" + verse;
 		
 		// aready exist, we have to unbookmark 
 		if (db.delete(TABLE_BOOKMARKS, selection, null) != 0 ){
-			return;
+			return false;
 		}
 		// does not exist, bookmark it;
 		else {
@@ -231,6 +231,7 @@ public class alQalamDatabase {
 			values.put(COLUMN_SURAHNO, chapter);
 			values.put(COLUMN_AYATNO, verse);			
 			db.insert(TABLE_BOOKMARKS, null, values);
+			return true;
 		}
 	}
 	
