@@ -191,13 +191,16 @@ public class SurahActivity extends Activity {
         // create string arrays for verses
 		AYATSTRANS = new String[CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber]];
         AYATSARABIC = new String [CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber]];
-                 
+            
+        
+    	alQalamDatabase db = new alQalamDatabase(this);
+		db.openReadable();
+		Cursor 	cursor;
+		
         // if translation is enabled
-		if (TranslationType != CONSTANTS.NUMBER_OF_TRANSLATIONS) { 
-			alQalamDatabase db = new alQalamDatabase(this);
-			db.openReadable();
+		if (TranslationType != CONSTANTS.NUMBER_OF_TRANSLATIONS) {
 			
-			Cursor 	cursor = db.getVerses(surahNumber + 1, TranslationType);
+			cursor = db.getVerses(surahNumber + 1, TranslationType);
 			
 			int  	index = 0;
 			
@@ -210,53 +213,77 @@ public class SurahActivity extends Activity {
 				} while(cursor.moveToNext());
 			}
 			
-			
-			cursor.close();
-			db.close();
 		}
 		
+		// Now read Bookmarked ayats to Array
+		cursor = db.getBookmarksForSurah(surahNumber+1);
+		
+		int  index = 0;
+		
+		if(cursor.moveToFirst())
+		{
+			Bookmarks = new int [cursor.getCount()];
+			
+			do
+			{
+				Bookmarks[index] = cursor.getInt(cursor.getColumnIndex(alQalamDatabase.COLUMN_AYATNO));
+				index++;
+				
+			} while(cursor.moveToNext());
+		}
+		else {
+			Bookmarks =  null;
+		}
+		
+		cursor.close();
+		db.close();
+		
+		
+		// Put Arabic Image Links to Array
 		String  snm, anm;
 		
 		snm = CONSTANTS.numberToString(surahNumber + 1);
 		
-		for (int index=0;index<CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber];index++) {
+		for (index=0;index<CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber];index++) {
 		
 			anm = CONSTANTS.numberToString(index);
 			AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC + (surahNumber+1)+ "/" + snm + anm +".img";
 			//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
 		}
 		
-        //getBookmarks();
 	}
 	
 	private void showData() {
 		
 		AyatIconifiedText	ait;
-		Drawable  iconBismillah =  null, bookmarkImage = null;
+		Drawable  			iconBismillah =  null, bookmarkImage = null;
+		int 				AyatBackground = Color.TRANSPARENT;
 		
 		surahAdapter.clear();
 	
         for (int i=0; i < CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber] ; i++) {
-        
-        	
+
         	// check if BISMILLAH must be shown 
         	if (i == 0 && surahNumber != 0 && surahNumber != 8)
                 iconBismillah = getResources().getDrawable(R.drawable.bismillah);
         	
-        	//if (Bookmarks.length > 0 && Arrays.binarySearch(Bookmarks, i+1) >= 0)
-        	//		bookmarkImage = getResources().getDrawable(R.drawable.bookmark_icon);
+        	if (Bookmarks != null && Arrays.binarySearch(Bookmarks, i+1) >= 0) {
+        		bookmarkImage = getResources().getDrawable(R.drawable.bookmark_icon);
+        		AyatBackground = Color.rgb(243, 255, 140);
+        	}
         	
         	ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATSTRANS[i]);
         	
     		ait.setAyatSpecialImage(getSpecialImage(surahNumber+1, i+1));
     		ait.setAyatBookmarkImage(bookmarkImage);
     		ait.setAyatBismillah(iconBismillah);
-    		ait.setAyatBackground(getAyatBackgroundColor());
+    		ait.setAyatBackground(AyatBackground);
     		
         	surahAdapter.addItem(ait);
         	
         	iconBismillah =  null;
         	bookmarkImage = null;
+        	AyatBackground = Color.TRANSPARENT;
         }
         
         // make verses appear in list view   
@@ -284,28 +311,6 @@ public class SurahActivity extends Activity {
 				
 		return null;
 		
-	}
-	
-	private void getBookmarks() {
-		alQalamDatabase db = new alQalamDatabase(this);
-		db.openReadable();
-		Cursor cursor = db.getBookmarksForSurah(surahNumber+1);
-		
-		int  index = 0;
-		
-		if(cursor.moveToFirst())
-		{
-			Bookmarks = new int [cursor.getCount()];
-			
-			do
-			{
-				Bookmarks[index] = cursor.getInt(cursor.getColumnIndex(alQalamDatabase.COLUMN_AYATNO));
-				index++;
-				
-			} while(cursor.moveToNext());
-		}
-	
-		db.close();
 	}
 	
 	@Override
@@ -418,10 +423,12 @@ public class SurahActivity extends Activity {
 			db.bookmarkOperation(surahNumber + 1, currentAyat);
 			db.close();
 			
+			resetData();
+			showData();
+			
 			// getBookmarks();
-
 			// just refresh, because we have bookmarked or unbookmarked
-			// showData();
+			
 		}
 	}
 	
@@ -513,13 +520,6 @@ public class SurahActivity extends Activity {
 	private void pauseAudio() {
 		audioState = CONSTANTS.AUDIO_PAUSED;
 		quranPlayer.pause();
-	}
-		
- 		
-	private int  getAyatBackgroundColor() {
-		//TODO: differentiate the color of bookmarked or playing verse background.
-		
-		return Color.TRANSPARENT;
 	}
 	
 	private void stopAudioPlay() {

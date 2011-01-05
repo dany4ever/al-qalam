@@ -89,9 +89,7 @@ public class SurahAdapter extends BaseAdapter {
          	
          }
        
-         if (mItems.get(position).getAyatBackground() != 0)
-        	 vHolder.AyatGroup.setBackgroundColor(mItems.get(position).getAyatBackground());
-         
+         vHolder.AyatGroup.setBackgroundColor(mItems.get(position).getAyatBackground());
          vHolder.AyatOrder.setText(mItems.get(position).getAyatOrder()+ "");
          vHolder.AyatUzbek.setText(mItems.get(position).getAyatUzbekText());
          //vHolder.AyatArabic.setText(mItems.get(position).getAyatArabicText());

@@ -53,7 +53,28 @@ public class BookmarksActivity extends Activity {
        
         gSurahTitles = getResources().getStringArray(R.array.SurahTitle);
         
-        alQalamDatabase db = new alQalamDatabase(this);
+        prepareBookmarks();
+       
+		BookmarkList.setCacheColorHint(00000000); 
+		BookmarkList.setDivider(null);
+	        
+        BookmarkList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View view,
+					final int index, long order) {
+				
+						Intent quranIntent = new Intent(BookmarksActivity.this, SurahActivity.class);
+						quranIntent.putExtra("sNumber", bookmarks[index][0] - 1);
+						quranIntent.putExtra("aNumber", bookmarks[index][1]);
+						startActivity(quranIntent);
+			}
+        });
+        
+	}
+	
+	private void prepareBookmarks() {
+		alQalamDatabase db = new alQalamDatabase(this);
 		db.openReadable();
 		Cursor cursor = db.getAllBookmarks();
 		
@@ -88,25 +109,20 @@ public class BookmarksActivity extends Activity {
 			BookmarkList.setAdapter(new SimpleAdapter(this, bookmark, R.layout.bookmark_row, from, to));
 
 		}
-		
+			
 		cursor.close();
 		db.close();
-       
-		BookmarkList.setCacheColorHint(00000000); 
-		BookmarkList.setDivider(null);
-	        
-        BookmarkList.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> adapter, View view,
-					final int index, long order) {
-				
-						Intent quranIntent = new Intent(BookmarksActivity.this, SurahActivity.class);
-						quranIntent.putExtra("sNumber", bookmarks[index][0] - 1);
-						quranIntent.putExtra("aNumber", bookmarks[index][1]);
-						startActivity(quranIntent);
-			}
-        });
-        
+	}
+	
+	@Override
+	public void onResume() {
+		prepareBookmarks();
+		super.onResume();
+	}
+	
+	@Override
+	public void onStart() {
+		prepareBookmarks();
+		super.onStart();
 	}
 }
