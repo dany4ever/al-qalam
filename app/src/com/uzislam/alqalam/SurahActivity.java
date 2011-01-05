@@ -55,10 +55,11 @@ public class SurahActivity extends Activity {
 	private int[]			Bookmarks;
 	private int				surahNumber = 0;
 	private int				currentAyat = 0;
+	private int				selectedAyat = 0;
 		
 	public static DisplayMetrics displaymetrics = new DisplayMetrics(); 
     
-	private ImageView 			surahTitle;
+	private ImageView 			surahTitle, playButton, pauseButton;
 	private SurahAdapter 		surahAdapter;
 	private ListView			ayatList; 
 	
@@ -115,7 +116,7 @@ public class SurahActivity extends Activity {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> adapter, View view, final int index, long order) {
-						currentAyat = index + 1;
+						selectedAyat = index + 1;
 						showDialog(DIALOG_AYAT_CLICK_OPTION);
 						return true;
 			}
@@ -125,8 +126,11 @@ public class SurahActivity extends Activity {
         audioControlPanel.setVisibility(View.GONE);
         
         
-        // Display Surah
+        // Display surah
         showData();
+   
+        // Init player controller
+        playerController();
         
         ImageView	surahName = (ImageView) findViewById(R.id.suraName);
         
@@ -154,8 +158,9 @@ public class SurahActivity extends Activity {
     				return;
     			}
     			
-    			stopAudioPlay();
-      			// we are moving to previous  surah, reset and show;
+    			stopAudio();
+
+    			// we are moving to previous  surah, reset and show;
     			currentAyat = 0;
     			showData();
     		}
@@ -168,9 +173,10 @@ public class SurahActivity extends Activity {
     				surahNumber = 113;
     				return;
     			}
-    			stopAudioPlay();
     			
-    			// we are moving to new next surah, reset and show;
+    			stopAudio();
+    			
+    			// we are moving to next surah, reset and show;
     			currentAyat = 0;
     			showData();
     		}
@@ -180,6 +186,30 @@ public class SurahActivity extends Activity {
 		wakeLockPlayMode = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
  	}
 	
+	
+	private void playerController() {
+		playButton = (ImageView) findViewById(R.id.audioPlayButton);
+		pauseButton = (ImageView) findViewById(R.id.audioPauseButton);
+		
+		pauseButton.setVisibility(View.GONE);
+		
+		playButton.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			pauseButton.setVisibility(View.VISIBLE);
+    			playButton.setVisibility(View.GONE);
+    			playAudio();
+    		}
+    	});
+		
+		pauseButton.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			pauseButton.setVisibility(View.GONE);
+    			playButton.setVisibility(View.VISIBLE);
+    			pauseAudio();
+    		}
+    	});
+		
+	}
 	
 	private void resetData() {
 		
@@ -385,7 +415,7 @@ public class SurahActivity extends Activity {
 			
 			int options = R.array.AyatClickOptions;
 			
-			if (Bookmarks != null && Arrays.binarySearch(Bookmarks, currentAyat) >= 0) {
+			if (Bookmarks != null && Arrays.binarySearch(Bookmarks, selectedAyat) >= 0) {
 				options = R.array.AyatClickOptions2;
         	}
         	
@@ -417,20 +447,25 @@ public class SurahActivity extends Activity {
 			currentAyat = 0;
 			isAudioControlShown = true;
 			audioControlPanel.setVisibility(View.VISIBLE);
+			playButton.setVisibility(View.GONE);
+			pauseButton.setVisibility(View.VISIBLE);
 			playAudio();
 		}
 		else if (item == 1) {
+			currentAyat = selectedAyat;
 			isAudioControlShown = true;
 			audioControlPanel.setVisibility(View.VISIBLE);
+			playButton.setVisibility(View.GONE);
+			pauseButton.setVisibility(View.VISIBLE);
 			playAudio();
 		}
 		else if (item == 2) {
 			alQalamDatabase db = new alQalamDatabase(this);
 			db.openWritable();
 			
-			AyatIconifiedText ait = (AyatIconifiedText)surahAdapter.getItem(currentAyat-1);
+			AyatIconifiedText ait = (AyatIconifiedText)surahAdapter.getItem(selectedAyat-1);
 				
-			if (db.bookmarkOperation(surahNumber + 1, currentAyat)) {
+			if (db.bookmarkOperation(surahNumber + 1, selectedAyat)) {
 				ait.setAyatBackground(Color.rgb(243, 255, 140));
 				ait.setAyatBookmarkImage(getResources().getDrawable(R.drawable.bookmark_icon));
         		
@@ -440,6 +475,7 @@ public class SurahActivity extends Activity {
 			}
 			
 			surahAdapter.notifyDataSetChanged();
+			
 			
 			// Now read Bookmarked ayats to Array
 			Cursor cursor = db.getBookmarksForSurah(surahNumber+1);
@@ -473,6 +509,7 @@ public class SurahActivity extends Activity {
 		TranslationType = lng;
 		preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, lng);
 		preferenceEditor.commit();
+		
 		showData();
 	}
 	
@@ -481,6 +518,8 @@ public class SurahActivity extends Activity {
 		preferenceEditor.putInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, rct);
     	preferenceEditor.commit();
 		ReciterType = rct;
+		
+		stopAudio();
 	}
 	
 	private void playAudio() {
@@ -557,8 +596,7 @@ public class SurahActivity extends Activity {
 		quranPlayer.pause();
 	}
 	
-	private void stopAudioPlay() {
-		currentAyat = 0;
+	private void stopAudio() {
 		audioState = CONSTANTS.AUDIO_NOT_INTIALIZED;
 		
 		if (wakeLockPlayMode.isHeld()) {
@@ -574,13 +612,13 @@ public class SurahActivity extends Activity {
 
 	@Override
 	public void onPause() {
-		stopAudioPlay();
+		stopAudio();
 		super.onPause();
 	}
 	
 	@Override
 	public void onStop() {
-		stopAudioPlay();
+		stopAudio();
 		super.onStop();
 	}
 }
