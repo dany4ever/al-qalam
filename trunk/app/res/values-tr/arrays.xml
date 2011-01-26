@@ -156,12 +156,12 @@
     <string-array name="AyatClickOptions">
         <item>Süreyi dinle</item>
         <item>Ayeti dinle</item>
-        <item>İmleriye ekle</item>
+        <item>Yer imlerine ekle</item>
     </string-array>
 
  	<string-array name="AyatClickOptions2">
         <item>Süreyi dinle</item>
         <item>Ayeti dinle</item>
-        <item>İmleride çıkar</item>
+        <item>Yer imlerinden sil</item>
     </string-array>
 </resources>
