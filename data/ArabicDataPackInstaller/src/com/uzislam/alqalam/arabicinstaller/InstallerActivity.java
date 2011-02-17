@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 public class InstallerActivity extends Activity {
     private String rootDirectory = "";
@@ -25,6 +26,7 @@ public class InstallerActivity extends Activity {
     private static boolean sInstallationSuccess = false;
     private static boolean sIsInstalling = false;
     private final static Object sInstallerStateLock = new Object();
+    public ProgressBar mProgress;
 
     /** Called when the activity is first created. */
     @Override
@@ -41,25 +43,27 @@ public class InstallerActivity extends Activity {
         }
     }
 
-    private void runInstaller(){
-        try {
+    private void runInstaller() {
+    	setContentView(R.layout.installing);
+        mProgress = (ProgressBar) findViewById(R.id.progress_bar);
+        mProgress.setMax(6236); // 6236 is the total number of ayats (files)
+    	try {
             Resources res = getResources();
-            AssetFileDescriptor langPackFd = res
-                    .openRawResourceFd(R.raw.arabicpack);
-            InputStream stream = langPackFd.createInputStream();
+            AssetFileDescriptor dataPackFd = res.openRawResourceFd(R.raw.arabicpack);
+            InputStream stream = dataPackFd.createInputStream();
 
             (new Thread(new unzipper(stream))).start();
         } catch (IOException e) {
-            Log.e("PicoLangInstaller", "Unable to open langpack resource.");
+            Log.e("Al-Qalam", "Unable to open data pack resource.");
             e.printStackTrace();
         }
-        setContentView(R.layout.installing);
     }
 
 
-    private boolean unzipLangPack(InputStream stream) {
+    private boolean unzipDataPack(InputStream stream) {
         FileOutputStream out;
         byte buf[] = new byte[16384];
+        int mProgressStatus = 0;
         try {
             ZipInputStream zis = new ZipInputStream(stream);
             ZipEntry entry = zis.getNextEntry();
@@ -68,7 +72,7 @@ public class InstallerActivity extends Activity {
                     File newDir = new File(rootDirectory + entry.getName());
                     newDir.mkdir();
                 } else {
-                    String name = entry.getName();
+                	String name = entry.getName();
                     File outputFile = new File(rootDirectory + name);
                     String outputPath = outputFile.getCanonicalPath();
                     name = outputPath
@@ -80,6 +84,9 @@ public class InstallerActivity extends Activity {
                     outputFile = new File(outputPath, name);
                     outputFile.createNewFile();
                     out = new FileOutputStream(outputFile);
+
+                    // Set the progress
+                    mProgress.setProgress(++mProgressStatus);
 
                     int numread = 0;
                     do {
@@ -109,14 +116,14 @@ public class InstallerActivity extends Activity {
         }
 
         public void run() {
-            boolean result = unzipLangPack(stream);
+            boolean result = unzipDataPack(stream);
             synchronized (sInstallerStateLock) {
                 sInstallationSuccess = result;
                 sIsInstalling = false;
             }
             if (sInstallationSuccess) {
                 // installation completed
-            	runOnUiThread(new installationSuccessful());
+                runOnUiThread(new installationSuccessful());
             } else {
                 // installation failed
                 // signal install error if the activity is finishing (can't ask the user to retry)
@@ -137,8 +144,7 @@ public class InstallerActivity extends Activity {
             uninstallButton.setOnClickListener(new OnClickListener() {
                 public void onClick(View arg0) {
                     // Show Android's native uninstaller activity
-                	Intent intent = new Intent(Intent.ACTION_DELETE, 
-                			Uri.parse("package:com.uzislam.alqalam.arabicinstaller"));
+                    Intent intent = new Intent(Intent.ACTION_DELETE, Uri.parse("package:com.uzislam.alqalam.arabicinstaller"));
                     startActivity(intent);
                     // And finish InstallerActivity
                     self.finish();
@@ -168,3 +174,4 @@ public class InstallerActivity extends Activity {
     }
 
 }
+
