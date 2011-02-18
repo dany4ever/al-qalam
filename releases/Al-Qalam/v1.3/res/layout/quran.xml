@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2010 (c) Al-Qalam Project
+
+   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+
+   Al-Qalam is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as 
+   published by the Free Software Foundation, either version 3 of the License, 
+   or (at your option) any later version.
+
+   Al-Qalam is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+   android:gravity="center_vertical|center_horizontal"
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/QuranView"
+    android:background="@drawable/indexbg"  >
+    
+    <ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:id="@+id/indexHeader"
+		android:src="@drawable/index_header" />
+		
+ 	<LinearLayout android:id="@+id/IndexGroup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+		<ListView 
+				android:id="@+id/SurahList" 
+				android:orientation="vertical"
+		    	android:layout_width="275dip"
+		    	android:layout_height="wrap_content"
+		    	android:scrollingCache="true">
+		</ListView>	
+	    <ListView 
+			android:id="@+id/JuzList" 
+			android:orientation="vertical"
+	    	android:layout_width="45dip"
+	    	android:layout_height="wrap_content"
+	    	android:gravity="center_horizontal|center_vertical"
+	    	android:scrollingCache="true">
+	    </ListView>	
+ 	</LinearLayout>
+</LinearLayout>
