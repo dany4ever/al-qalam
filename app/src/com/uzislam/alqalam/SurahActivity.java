@@ -276,7 +276,7 @@ public class SurahActivity extends Activity {
 		for (index=0;index<CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber];index++) {
 		
 			anm = CONSTANTS.numberToString(index);
-			AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC + (surahNumber+1)+ "/" + snm + anm +".img";
+			AYATSARABIC[index]  = CONSTANTS.FOLDER_QURAN_ARABIC + (surahNumber+1)+ "/" + snm + anm +".jdw";
 			//AYATSARABIC[index]  = ArabicUtilities.reshapeSentence(arLine);
 		}
 		
