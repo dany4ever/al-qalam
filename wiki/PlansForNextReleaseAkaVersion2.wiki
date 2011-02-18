@@ -6,12 +6,12 @@
   # Fix/correct typos in translation(s)
 
 ===New features===
-  # SQL databases for translations
+  # ~~SQL databases for translations~~ *Done (v1.3)*
   # Search functionality
-  # Multi-language UI
+  # ~~Multi-language UI~~ *Done (v1.3)*
   # ~~Include Russian translation~~ *Done (v1.1)*
   # ~~Qur'an only view (no translation will be shown)~~ *Done (v1.1)*
-  # Bookmarks
+  # ~~Bookmarks~~ *Done (v1.3)*
   # Zoom
   # Landscape mode
   # Monotonic background (?)
@@ -21,7 +21,7 @@
 ==Data Pack Installer==
 ===Bug fixes===
 ===New features===
-  # Add installation progress bar
+  # ~~Add installation progress bar~~ *Done (v1.2)*
 
 
 ----
