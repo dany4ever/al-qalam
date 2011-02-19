@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ 	android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="left"
+    android:id="@+id/bookmarkIndexRoot" >
+<TextView 
+		android:id="@+id/chapterNumber"
+		android:layout_width="48dip"
+		android:layout_height="35dip"
+		android:textStyle="normal"
+		android:gravity="center"
+		android:textColor="@color/darkred"  >
+</TextView>
+<TextView 
+		android:id="@+id/verseNumber"
+		android:layout_width="49dip"
+		android:layout_height="35dip"
+		android:textStyle="normal"
+		android:gravity="center"
+		android:textColor="@color/darkred"  >
+</TextView>
+<TextView 
+		android:id="@+id/chapterName"
+		android:layout_width="147dip"
+		android:layout_height="35dip"
+		android:textStyle="normal"
+		android:gravity="center"
+		android:textColor="@color/darkred"  >
+</TextView>
+<!--  CheckBox android:id="@+id/btnDel"
+		  android:gravity="center"
+		  android:layout_height="35dip"
+		  android:layout_width="75dip"
+		  android:textStyle="normal" / -->
+</LinearLayout>
+

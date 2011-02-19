@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2010 (c) Al-Qalam Project
+
+   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+
+   Al-Qalam is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as 
+   published by the Free Software Foundation, either version 3 of the License, 
+   or (at your option) any later version.
+
+   Al-Qalam is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+    <string-array name="SurahTitle">
+        <item name="001">Fatiha</item>
+        <item name="002">Bakara</item>
+        <item name="003">Ali İmran</item>
+        <item name="004">Nisa</item>
+        <item name="005">Maide</item>
+        <item name="006">En\'am</item>
+        <item name="007">A\'raf</item>
+        <item name="008">Enfal</item>
+        <item name="009">Tevbe</item>
+        <item name="010">Yunus</item>
+        <item name="011">Hud</item>
+        <item name="012">Yusuf</item>
+        <item name="013">Ra\'d</item>
+        <item name="014">İbrahim</item>
+        <item name="015">Hicr</item>
+        <item name="016">Nahl</item>
+        <item name="017">İsra</item>
+        <item name="018">Kehf</item>
+        <item name="019">Meryem</item>
+        <item name="020">Taha</item>
+        <item name="021">Enbiya</item>
+        <item name="022">Hac</item>
+        <item name="023">Mü\'minun</item>
+        <item name="024">Nur</item>
+        <item name="025">Furkan</item>
+        <item name="026">Şuara</item>
+        <item name="027">Neml</item>
+        <item name="028">Kasas</item>
+        <item name="029">Ankebut</item>
+        <item name="030">Rum</item>
+        <item name="031">Lokman</item>
+        <item name="032">Secde</item>
+        <item name="033">Ahzab</item>
+        <item name="034">Sebe</item>
+        <item name="035">Fatir</item>
+        <item name="036">Yasin</item>
+        <item name="037">Saffat</item>
+        <item name="038">Sad</item>
+        <item name="039">Zümer</item>
+        <item name="040">Mümin</item>
+        <item name="041">Fussilet</item>
+        <item name="042">Şura</item>
+        <item name="043">Zuhruf</item>
+        <item name="044">Duhan</item>
+        <item name="045">Casiye</item>
+        <item name="046">Ahkaf</item>
+        <item name="047">Muhammed</item>
+        <item name="048">Fetih</item>
+        <item name="049">Hucurat</item>
+        <item name="050">Kaf</item>
+        <item name="051">Zariyat</item>
+        <item name="052">Tur</item>
+        <item name="053">Necm</item>
+        <item name="054">Kamer</item>
+        <item name="055">Rahman</item>
+        <item name="056">Vakia</item>
+        <item name="057">Hadid</item>
+        <item name="058">Mücadele</item>
+        <item name="059">Haşr</item>
+        <item name="060">Mumtahine</item>
+        <item name="061">Saff</item>
+        <item name="062">Cum\'a</item>
+        <item name="063">Münafikun</item>
+        <item name="064">Teğabün</item>
+        <item name="065">Talak</item>
+        <item name="066">Tahrim</item>
+        <item name="067">Mülk</item>
+        <item name="068">Kalem</item>
+        <item name="069">Hakka</item>
+        <item name="070">Mearic</item>
+        <item name="071">Nuh</item>
+        <item name="072">Cin</item>
+        <item name="073">Müzzemmil</item>
+        <item name="074">Müddessir</item>
+        <item name="075">Kıyamet</item>
+        <item name="076">İnsan</item>
+        <item name="077">Mürselad</item>
+        <item name="078">Nebe</item>
+        <item name="079">Naziat</item>
+        <item name="080">Abese</item>
+        <item name="081">Tekvir</item>
+        <item name="082">İnfitar</item>
+        <item name="083">Mutaffifin</item>
+        <item name="084">İnşikak</item>
+        <item name="085">Buruc</item>
+        <item name="086">Tarık</item>
+        <item name="087">A\'la</item>
+        <item name="088">Gaşiye</item>
+        <item name="089">Fecr</item>
+        <item name="090">Beled</item>
+        <item name="091">Şems</item>
+        <item name="092">Leyl</item>
+        <item name="093">Duha</item>
+        <item name="094">İnşirah</item>
+        <item name="095">Tin</item>
+        <item name="096">Alak</item>
+        <item name="097">Kadir</item>
+        <item name="098">Beyyine</item>
+        <item name="099">Zilzal</item>
+        <item name="100">Adiyat</item>
+        <item name="101">Kaaria</item>
+        <item name="102">Tekasür</item>
+        <item name="103">Asr</item>
+        <item name="104">Hümeze</item>
+        <item name="105">Fil</item>
+        <item name="106">Kureyş</item>
+        <item name="107">Maun</item>
+        <item name="108">Kevser</item>
+        <item name="109">Kafirun</item>
+        <item name="110">Nasr</item>
+        <item name="111">Leheb</item>
+        <item name="112">İhlas</item>
+        <item name="113">Felak</item>
+        <item name="114">Nas</item>
+    </string-array>
+
+    <string-array name="DownloadOptions">
+        <item>Süreleri indir</item>
+        <item>İptal et</item>
+    </string-array>
+
+    <string-array name="TranslationOptions">
+        <item>Ўзбекча</item>
+        <item>O\'zbekcha</item>
+        <item>Русский</item>
+        <item>Türkçe</item>
+        <item>Tercümesiz</item>
+    </string-array>
+
+    <string-array name="ReciterOptions">
+        <item>Eş-Şatıri</item>
+        <item>Al-Ghamdi</item>
+    </string-array>
+
+    <string-array name="AyatClickOptions">
+        <item>Süreyi dinle</item>
+        <item>Ayeti dinle</item>
+        <item>Yer imlerine ekle</item>
+    </string-array>
+
+ 	<string-array name="AyatClickOptions2">
+        <item>Süreyi dinle</item>
+        <item>Ayeti dinle</item>
+        <item>Yer imlerinden sil</item>
+    </string-array>
+</resources>
