@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2010 (c) Al-Qalam Project
+
+   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+
+   Al-Qalam is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as 
+   published by the Free Software Foundation, either version 3 of the License, 
+   or (at your option) any later version.
+
+   Al-Qalam is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.uzislam.alqalam"
+      android:versionCode="5" android:versionName="1.3.1">
+      
+    <supports-screens
+      android:largeScreens="true"
+      android:normalScreens="true"
+      android:smallScreens="false"
+      android:anyDensity="true" />
+          
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name=".startQalam"
+                  android:label="@string/app_name"
+                  android:configChanges="orientation|keyboardHidden"
+				  android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+ 		<activity android:name=".QuranActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".SurahActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".SettingsActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
+        <activity android:name=".BookmarksActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait"/>
+    </application>
+     
+    <uses-sdk android:minSdkVersion="7" />
+</manifest> 
