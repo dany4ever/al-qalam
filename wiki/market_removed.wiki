@@ -14,9 +14,9 @@ way or form. >>
 
 Okey, we don't want to argue with them. But, Al-Qalam is open source and free application. We intend to make no money or financial benefit from it. Al-Qalam has only 3 languages which are not available in iQuran lite, and targeted for people from countries who really can't buy iQuran Pro. Therefore, we did not include most languages those are already available in iQuran Pro ($4.88), not to compete with them. 
 
-I just want to say *shame on Guided Ways Technologies (GDW)*. We have done entire coding and preparation of arabic ayat images, translations although we have learned something from iQuran. This does not mean we have ripped off everything from iQuran. It is Quran - Book of Allah, artworks of Quran is not origanally designed by GDW, it is already in hard copy of Quran. For example, juzz or sajda marks. Are they art of GDW? Nope. Then, can we say they have stolen design from hard copy of Quran printed in Saudia Arabia? 
+I just want to say *shame on Guided Ways Technologies (GDW)*. We have done entire coding and preparation of arabic ayat images, translations although we have learned something from iQuran. This does not mean we have ripped off everything from iQuran. It is Quran - Book of Allah, artworks of Quran is not origanally designed by GDW, it is already in hard copy of Quran. For example, juzz or sajda marks. Are they art of GDW? Nope. Then, can we say they have stolen design from hard copy of Quran printed in Saudia Arabia? We got 10% of design hints from GDW, and they say we have stolen everything.
 
-Because we got 10% of design hints from GDW, and they say we have stolen everything. Anyways, we let it go... 
+Lastly, if GDW is working for the cause of Allah, why would they worry about Al-Qalam. If Al-Qalam used their artwork, Allah will definitely give reward for this. Allah knows best.
 
 We, inshallah, will make new design and UI, and include every functionality the iQuran Pro has, and of course it will be open source and free. Maybe, this will make GDW happier?
 
