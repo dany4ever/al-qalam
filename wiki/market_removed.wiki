@@ -2,12 +2,12 @@
 
 Al-Qalam application is removed from Google Market due to the copyright problem. We will redesign and change layout, and come back inshallah. Please be patient... 
 
-= We have received following e-mail from Google : =
+** We have received following e-mail from Google : **
 
 << This is a notification that the application, Al-Qalam with package ID com.uzislam.alqalam has been removed from Android Market due to a violation of the Developer Content Policy. >>
 
 
-= The reason is that Guided Ways Technologies Ltd. complained as follows : = 
+** The reason is that Guided Ways Technologies Ltd. complained as follows : ** 
 
 << The following application (they mean Al-Qalam) has ripped off the whole user interface and its artwork (they mean from iQuran), which is exclusively the property of Guided Ways Technologies Ltd. They have not only stolen our artwork but have also stolen the exact same UI + Layout. We demand they cease delivery of this product immediately unless they *completely* change their UI and use their own artwork. We do not give them permission to steal or use our copyrighted material in any
 way or form. >>
