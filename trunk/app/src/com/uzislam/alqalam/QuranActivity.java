@@ -33,7 +33,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,7 +43,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class QuranActivity extends Activity {
 	private ListView			gSurahList; 	
 	private ListView			gJuzzList;
-	private String[] 			gSurahTitles;
+	private String[] 			gSurahTitles, gSurahInfos;
 		
 	private final String		TAG = "Al-Qalam";
 
@@ -72,14 +71,14 @@ public class QuranActivity extends Activity {
                 
         
         gSurahTitles = getResources().getStringArray(R.array.SurahTitle);
+        gSurahInfos  = getResources().getStringArray(R.array.SurahInfo);
         QuranAdapter		quranAdapter = new QuranAdapter(this);
         QuranIconifiedText	qit;
        	        
     	// check which Surah's Arabic Text is already downloaded
     	
         for (int i=0; i < CONSTANTS.NUMBER_OF_SURAHS ; i++) {
-        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, CONSTANTS.SURAH_NUMBER_OF_AYATS[i], CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i], null);
-        	qit.setSurahState(getAudioIcon(i));
+        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, gSurahInfos[i], CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
         	quranAdapter.addItem(qit);
         }
         
@@ -131,18 +130,6 @@ public class QuranActivity extends Activity {
         });
         
  	}
-	
-	private Drawable getAudioIcon(int index) {
-	 	if (CONSTANTS.SURAH_IS_AUDIO_DOWNLOADED[index])
-			return getResources().getDrawable(R.drawable.index_sound);
-		else
-			return getResources().getDrawable(R.drawable.index_sound_get);
-	}
-
-	private Drawable getPlaceIcon() {
-		// TODO: differentiate Surah revealed place: Makkah or Madina 
-		return null; //getResources().getDrawable(R.drawable.mecca);
-	}
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {

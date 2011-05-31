@@ -19,24 +19,19 @@
 
 package com.uzislam.alqalam;
 
-import android.graphics.drawable.Drawable;
-
 public class QuranIconifiedText {
 	private long		id = -1 ;
 	private String		surahTitle = null;
 	private int			surahOrder = 0;
-	private int			surahNumberOfAyats = 0;
+	private String		surahInfo = null;
 	private boolean		surahIsDownloaded = false;
-	private Drawable	surahState = null;
-	private Drawable	surahRevelationPlace = null;
 		
-	public QuranIconifiedText(long _id, String _title, int _order, int _numberOfAyats, boolean _downloaded ,Drawable _state) {
+	public QuranIconifiedText(long _id, String _title, int _order, String _info, boolean _downloaded) {
 		this.id = _id;
 		this.surahTitle = _title;
 		this.surahOrder = _order;
-		this.surahNumberOfAyats = _numberOfAyats;
+		this.surahInfo = _info;
 		this.surahIsDownloaded = _downloaded;
-		this.surahState = _state;
 	}
 	
 	public void setId (long _id) {
@@ -51,16 +46,8 @@ public class QuranIconifiedText {
 		this.surahOrder = _order;
 	}
 	
-	public void setSurahNumberOfAyats(int _ayats) {
-		this.surahNumberOfAyats = _ayats;
-	}
-
-	public void setSurahState(Drawable _state) {
-		this.surahState = _state;
-	}
-	
-	public void setSurahRevelationPlace(Drawable _place) {
-		this.surahRevelationPlace = _place;
+	public void setSurahInfo(String _info) {
+		this.surahInfo = _info;
 	}
 	
 	public void setSurahIsDownloaded(boolean _downloaded) {
@@ -79,15 +66,12 @@ public class QuranIconifiedText {
 		return this.surahOrder ;
 	}
 	
-	public int getSurahNumberOfAyats() {
-		return this.surahNumberOfAyats ;
+	public String getSurahInfo() {
+		return this.surahInfo ;
 	}
 
 	public boolean getSurahIsDownloaded() {
 		return this.surahIsDownloaded;
 	}
 	
-	public Drawable getSurahState() {
-		return this.surahState;
-	}	
 }
