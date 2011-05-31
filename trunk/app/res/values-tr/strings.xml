@@ -17,7 +17,7 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="sura_need_download">Süre yok</string>
     <string name="no_sd_card">Harici depolama (SD card) monte edilmemiş veya yok</string>
     <string name="btn_confirm">OK</string>
@@ -38,4 +38,6 @@
     <string name="settings_locale">Dil</string>
     <string name="settings_locale_summary">Arayüz dili seçin</string>
     <string name="delete">Sil</string>
+    <string name="surah_makki">Mekkî süre, <xliff:g id="number_of_ayats">%1$s</xliff:g> âyet</string>
+    <string name="surah_madani">Medenî süre, <xliff:g id="number_of_ayats">%1$s</xliff:g> âyet</string>
 </resources>

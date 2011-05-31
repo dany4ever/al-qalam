@@ -76,9 +76,14 @@ public class QuranActivity extends Activity {
         QuranIconifiedText	qit;
        	        
     	// check which Surah's Arabic Text is already downloaded
-    	
+        int j = 0;
         for (int i=0; i < CONSTANTS.NUMBER_OF_SURAHS ; i++) {
-        	qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, gSurahInfos[i], CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
+        	if (i+1 == CONSTANTS.MADANI_SURAH_INDEX[j]) {
+        		qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_madani, CONSTANTS.SURAH_NUMBER_OF_AYATS[i]), CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
+        		j++;
+        	} else {
+        		qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_makki, CONSTANTS.SURAH_NUMBER_OF_AYATS[i]), CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
+        	}
         	quranAdapter.addItem(qit);
         }
         
