@@ -22,11 +22,12 @@ package com.uzislam.alqalam;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class QuranAdapter extends BaseAdapter {
@@ -62,10 +63,11 @@ public class QuranAdapter extends BaseAdapter {
 
          	vHolder = new ViewHolder();
              
-         	vHolder.SurahTitle = (TextView) convertView.findViewById(R.id.srTitle);
-         	vHolder.SurahOrder = (TextView) convertView.findViewById(R.id.srOrder);
-         	vHolder.SurahAyats = (TextView) convertView.findViewById(R.id.srAyats);
-         	vHolder.SurahDwnState = (ImageView) convertView.findViewById(R.id.srDown);             
+         	vHolder.SurahTitle = (TextView) convertView.findViewById(R.id.QuranRow_Title);
+         	vHolder.SurahOrder = (TextView) convertView.findViewById(R.id.QuranRow_Order);
+         	vHolder.SurahInfo = (TextView) convertView.findViewById(R.id.QuranRow_Info);
+         	vHolder.SurahGroup = (LinearLayout) convertView.findViewById(R.id.QuranRow_Group);        
+         	
             convertView.setTag(vHolder);
          } else {
          	vHolder = (ViewHolder) convertView.getTag();
@@ -73,15 +75,14 @@ public class QuranAdapter extends BaseAdapter {
 
          vHolder.SurahTitle.setText(mItems.get(position).getSurahTitle());
          vHolder.SurahOrder.setText(mItems.get(position).getSurahOrder()+ "");
-         vHolder.SurahAyats.setText(mItems.get(position).getSurahNumberOfAyats() + "");
-       	 vHolder.SurahDwnState.setImageDrawable(mItems.get(position).getSurahState());
+         vHolder.SurahInfo.setText(mItems.get(position).getSurahInfo());
          
-         /* if (mItems.get(position).getSurahIsDownloaded() == false) {
-        	 vHolder.SurahTitle.setTextColor(R.color.lightblack);
-        	 vHolder.SurahOrder.setTextColor(R.color.lightblack);
-        	 vHolder.SurahAyats.setTextColor(R.color.lightblack);
-        	 
-         }*/
+         if (position % 2 == 0) {
+        	 vHolder.SurahGroup.setBackgroundColor(Color.WHITE);
+         }
+         else {
+        	 vHolder.SurahGroup.setBackgroundColor(Color.rgb(238, 238, 238));
+         }
 
          return convertView;
 	}
@@ -89,9 +90,8 @@ public class QuranAdapter extends BaseAdapter {
      static class ViewHolder {
          TextView 		SurahTitle;
          TextView 		SurahOrder;
-         TextView 		SurahAyats;
-         ImageView 		SurahDwnState;
-         ImageView 		SurahPlace;
+         TextView 		SurahInfo;
+         LinearLayout 	SurahGroup;
     }
 	
 	

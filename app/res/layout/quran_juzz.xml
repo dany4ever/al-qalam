@@ -5,7 +5,6 @@
 		android:layout_height="35dip"
 		android:textStyle="normal"
 		android:gravity="center"
-		android:textColor="@color/darkred"  >
-		
+		android:textColor="@color/darkblue"  >
 </TextView>
 
