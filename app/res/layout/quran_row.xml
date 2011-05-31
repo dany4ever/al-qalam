@@ -56,7 +56,7 @@
 		 <TextView android:id="@+id/QuranRow_Info"
 			android:layout_width="200dip"
 			android:layout_height="wrap_content"
-			android:text = "Маккий сура, 7 оят"
+			android:text = ""
 			android:textSize="12dip"
 			android:gravity="left|center_vertical"
 			android:paddingLeft="5dip"
