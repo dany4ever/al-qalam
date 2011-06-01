@@ -1,14 +1,13 @@
 <TextView 
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/juzzNumber"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="45dip"
+		android:layout_height="45dip"
 		android:textStyle="normal"
-		android:textSize="18dip"
-		android:gravity="right|center_vertical"
+		android:textSize="16dip"
+		android:gravity="center"
 		android:text="30"
-		android:paddingRight="5dip"
-		android:background="@drawable/juzz_bg"
+		android:paddingTop="2dip"
 		android:textColor="#217dc2"  >
 </TextView>
 <!--  android:background="@drawable/juzz_bg" -->
