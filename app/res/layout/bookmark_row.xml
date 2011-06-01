@@ -1,32 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2010 (c) Al-Qalam Project
+
+   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+
+   Al-Qalam is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   Al-Qalam is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
  	android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="left"
-    android:id="@+id/bookmarkIndexRoot" >
-<TextView 
+    android:id="@+id/bookmarkIndexRoot">
+<TextView
 		android:id="@+id/chapterNumber"
 		android:layout_width="48dip"
 		android:layout_height="35dip"
 		android:textStyle="normal"
 		android:gravity="center"
-		android:textColor="@color/darkred"  >
+		android:textColor="@color/darkred">
 </TextView>
-<TextView 
+<TextView
 		android:id="@+id/verseNumber"
 		android:layout_width="49dip"
 		android:layout_height="35dip"
 		android:textStyle="normal"
 		android:gravity="center"
-		android:textColor="@color/darkred"  >
+		android:textColor="@color/darkred">
 </TextView>
-<TextView 
+<TextView
 		android:id="@+id/chapterName"
 		android:layout_width="147dip"
 		android:layout_height="35dip"
 		android:textStyle="normal"
 		android:gravity="center"
-		android:textColor="@color/darkred"  >
+		android:textColor="@color/darkred">
 </TextView>
 <!--  CheckBox android:id="@+id/btnDel"
 		  android:gravity="center"
@@ -34,4 +54,3 @@
 		  android:layout_width="75dip"
 		  android:textStyle="normal" / -->
 </LinearLayout>
-
