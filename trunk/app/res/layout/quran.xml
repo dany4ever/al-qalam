@@ -33,7 +33,7 @@
 		<ListView 
 				android:id="@+id/SurahList" 
 				android:orientation="vertical"
-		    	android:layout_width="260dip"
+		    	android:layout_width="265dip"
 		    	android:layout_height="wrap_content"
 		    	android:scrollingCache="true">
 		</ListView>

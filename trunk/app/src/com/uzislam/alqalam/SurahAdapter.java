@@ -99,7 +99,7 @@ public class SurahAdapter extends BaseAdapter {
         	 vHolder.AyatRoot.setBackgroundColor(Color.WHITE);
          }
          else {
-        	 vHolder.AyatRoot.setBackgroundColor(Color.rgb(232, 243, 252));
+        	 vHolder.AyatRoot.setBackgroundColor(Color.rgb(232, 243, 248));
          }
          
          Bitmap arabicAyat = null;
