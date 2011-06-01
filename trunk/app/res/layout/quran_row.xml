@@ -24,7 +24,7 @@
     android:layout_height="fill_parent"
     android:gravity="left"
     android:id="@+id/QuranRow_Group"
-    android:background="#EEEEEE"
+    android:background="#DBEDFB"
     android:padding="5dip" >
     	
 	<TextView android:id="@+id/QuranRow_Order"
@@ -33,7 +33,7 @@
 		android:text = "114"
 		android:textStyle="normal"
 		android:gravity="center"
-		android:textColor="@color/darkblue"
+		android:textColor="#217dc2"
 		android:textSize="13dip"
 		android:background="@drawable/surah_number_bg" />
 	
@@ -51,7 +51,7 @@
 			android:textSize="16dip"
 			android:gravity="left|center_vertical"
 			android:paddingLeft="5dip"
-			android:textColor="@color/darkblue"  />
+			android:textColor="#217dc2"  />
 	
 		 <TextView android:id="@+id/QuranRow_Info"
 			android:layout_width="200dip"
@@ -60,7 +60,7 @@
 			android:textSize="12dip"
 			android:gravity="left|center_vertical"
 			android:paddingLeft="5dip"
-			android:textColor="@color/darkblue" />
+			android:textColor="#217dc2" />
 		
 	</LinearLayout>
 

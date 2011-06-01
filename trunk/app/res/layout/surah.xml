@@ -22,12 +22,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:background="@drawable/surabg" >
+    android:background="#FFFFFF" >
     
     <RelativeLayout
     		android:id="@+id/surahHeader"
     		android:layout_width="fill_parent"
-    		android:layout_height="52dip"
+    		android:layout_height="wrap_content"
     		android:orientation="vertical" >
     		
     <ImageView android:id="@+id/headerImg" 
@@ -54,7 +54,7 @@
     		android:src="@drawable/sname_1"
     		android:clickable="true"
     		android:layout_centerInParent="true"
-    		android:layout_centerHorizontal="true"/>
+    		android:layout_centerHorizontal="false"/>
     		
    	<!--  ImageView android:id="@+id/headerImgRight"
     		android:layout_width="wrap_content" 

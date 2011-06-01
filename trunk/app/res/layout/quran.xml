@@ -33,7 +33,7 @@
 		<ListView 
 				android:id="@+id/SurahList" 
 				android:orientation="vertical"
-		    	android:layout_width="265dip"
+		    	android:layout_width="260dip"
 		    	android:layout_height="wrap_content"
 		    	android:scrollingCache="true">
 		</ListView>
@@ -41,13 +41,14 @@
 	    <View android:id="@+id/Quran_SepLine"
 	    	  android:layout_width="1dip"
 	    	  android:layout_height="match_parent"
-	    	  android:background="#555555"
+	    	  android:background="#667788"
 	    	  />
 	    
 	    <ListView 
 			android:id="@+id/JuzList" 
 			android:orientation="vertical"
-	    	android:layout_width="55dip"
+	    	android:padding="5dip"
+	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:gravity="center_horizontal|center_vertical"
 	    	android:scrollingCache="true">

@@ -81,7 +81,7 @@ public class QuranAdapter extends BaseAdapter {
         	 vHolder.SurahGroup.setBackgroundColor(Color.WHITE);
          }
          else {
-        	 vHolder.SurahGroup.setBackgroundColor(Color.rgb(238, 238, 238));
+        	 vHolder.SurahGroup.setBackgroundColor(Color.rgb(232, 243, 252));
          }
 
          return convertView;

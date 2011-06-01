@@ -22,36 +22,14 @@
  	android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center_horizontal|center_vertical"
-    android:paddingTop="10dip" >
-    
+    android:gravity="center_horizontal|center_vertical" >
+ 
     <LinearLayout android:orientation="vertical"
-    	android:layout_width="60dip"
-    	android:layout_height="fill_parent"
-   		android:gravity="center_horizontal"  >
-
-    	<TextView android:id="@+id/ayatOrder" 
-    		android:layout_width="57dip" 
-    		android:layout_height="45dip"
-    		android:background="@drawable/ayah"
-    		android:text="1"
-    		android:textColor="#222222"
-    		android:gravity="center_horizontal|center_vertical" />
-    		
-    	<ImageView android:id="@+id/ayatSpecialImage" 
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" />
-    		
-    	<ImageView android:id="@+id/ayatBookmarkImage" 
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" />
-    	
-    </LinearLayout>
-    <LinearLayout android:orientation="vertical"
-    	android:layout_width="fill_parent"
+    	android:layout_width="260dip"
     	android:layout_height="fill_parent"
    		android:gravity="left|center_vertical" 
-   		android:id="@+id/ayatGroup">
+   		android:id="@+id/ayatGroup" 
+   		android:paddingTop="10dip" >
    		
    		 <ImageView android:id="@+id/ayatBismillah" 
     		android:layout_width="wrap_content" 
@@ -78,8 +56,35 @@
     		android:padding="10dip"
     		android:textColor="#222222"  />
 
-    	<View android:layout_width="fill_parent"
-			  android:layout_height="1dip"
-			 android:background="#99937a" />
+    </LinearLayout>
+    
+     <!--  View android:id="@+id/surahRow_SepLine"
+	    	  android:layout_width="1dip"
+	    	  android:layout_height="match_parent"
+	    	  android:background="#EEEEEE"
+	    	  / -->
+	    	  
+    <LinearLayout android:orientation="vertical"
+    	android:layout_width="60dip"
+    	android:layout_height="fill_parent"
+   		android:gravity="center_horizontal"
+   		android:paddingTop="10dip"   >
+
+    	<TextView android:id="@+id/ayatOrder" 
+    		android:layout_width="45dip" 
+    		android:layout_height="45dip"
+    		android:background="@drawable/ayah"
+    		android:text="286"
+    		android:textColor="#217dc2"
+    		android:gravity="center_horizontal|center_vertical" />
+    		
+    	<ImageView android:id="@+id/ayatSpecialImage" 
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" />
+    		
+    	<ImageView android:id="@+id/ayatBookmarkImage" 
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" />
+    	
     </LinearLayout>
 </LinearLayout>
