@@ -5,8 +5,8 @@
    This file is part of Al-Qalam (com.uzislam.alqalam) package.
 
    Al-Qalam is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as 
-   published by the Free Software Foundation, either version 3 of the License, 
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
    or (at your option) any later version.
 
    Al-Qalam is distributed in the hope that it will be useful,
@@ -17,69 +17,68 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/mainview"
-    android:gravity="center_vertical|center_horizontal" >
-      
+    android:gravity="center_vertical|center_horizontal">
+
 	<ImageView android:id="@+id/splashimage"
-    	android:layout_width="fill_parent" 
-    	android:layout_height="fill_parent" 
-    	android:src="@drawable/frontpage"  />
-    
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:src="@drawable/frontpage" />
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:id="@+id/buttons"
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
 	    android:paddingLeft="15dip"
-	    android:paddingTop="90dip" 
-	    android:gravity="center_horizontal" >
-    
-	    <ImageButton android:id="@+id/imgBtnQuran" 
+	    android:paddingTop="90dip"
+	    android:gravity="center_horizontal">
+
+	    <ImageButton android:id="@+id/imgBtnQuran"
 	     	android:src="@drawable/btn_quran"
-	     	android:layout_width="wrap_content" 
-	    	android:layout_height="wrap_content" 
+	     	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
 	    	android:layout_margin="1pt"
-	    	android:background="@null"  />
-	    	
+	    	android:background="@null" />
+
 	    <!-- ImageView android:id="@+id/imgQuran"
-	    	android:layout_width="200px" 
-	    	android:layout_height="50px" 
+	    	android:layout_width="200px"
+	    	android:layout_height="50px"
 	    	android:src="@drawable/btn_quran_normal"
-	    	android:layout_margin="2px"     /-->
-	    
+	    	android:layout_margin="2px" /-->
+
 	    <ImageButton android:id="@+id/imgBtnBukhari"
-	    	android:layout_width="wrap_content" 
-	    	android:layout_height="wrap_content" 
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
 	    	android:src="@drawable/btn_bukhari"
 	    	android:layout_margin="1pt"
-	    	android:background="@null"      />
-	    	
+	    	android:background="@null" />
+
 	    <ImageButton android:id="@+id/imgBtnMuslim"
-	    	android:layout_width="wrap_content" 
-	    	android:layout_height="wrap_content" 
-	    	android:src="@drawable/btn_muslim" 
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:src="@drawable/btn_muslim"
 	    	android:layout_margin="1pt"
-	    	android:background="@null"   />	   
-	
+	    	android:background="@null" />
+
 		<ImageButton android:id="@+id/imgBtnAbudovud"
-	    	android:layout_width="wrap_content" 
-	    	android:layout_height="wrap_content" 
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
 	    	android:src="@drawable/btn_abudovud"
 	    	android:layout_margin="1pt"
-	    	android:background="@null"  />
-	    	
+	    	android:background="@null" />
+
 	    <ImageButton android:id="@+id/imgBtnTirmidi"
-	    	android:layout_width="wrap_content" 
-	    	android:layout_height="wrap_content" 
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
 	    	android:src="@drawable/btn_tirmidi"
 	    	android:layout_margin="1pt"
-	    	android:background="@null"     />
-	    	
-    	
+	    	android:background="@null" />
+
     </LinearLayout>
-			     
 </LinearLayout>
