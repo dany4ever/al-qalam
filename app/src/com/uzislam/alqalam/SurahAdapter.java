@@ -24,6 +24,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,13 +68,13 @@ public class SurahAdapter extends BaseAdapter {
          	convertView = mInflater.inflate(R.layout.surah_row, null);
 
          	vHolder = new ViewHolder();
-             
+            
+         	vHolder.AyatRoot = (LinearLayout) convertView.findViewById(R.id.ayatRoot);
          	vHolder.AyatGroup = (LinearLayout) convertView.findViewById(R.id.ayatGroup);
          	vHolder.AyatOrder = (TextView) convertView.findViewById(R.id.ayatOrder);
          	vHolder.AyatBismillah = (ImageView)convertView.findViewById(R.id.ayatBismillah);
         	vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.ayatTranslationText);
         	vHolder.AyatArabic = (ImageView) convertView.findViewById(R.id.ayatArabicText);
-        	       
         	
         	//Typeface tf = Typeface.createFromAsset(_context.getAssets(),"fonts/IslamicFont.ttf");
     	    //vHolder.AyatUzbek.setTypeface(tf);
@@ -94,6 +95,13 @@ public class SurahAdapter extends BaseAdapter {
          vHolder.AyatUzbek.setText(mItems.get(position).getAyatUzbekText());
          //vHolder.AyatArabic.setText(mItems.get(position).getAyatArabicText());
      
+         if (position % 2 == 0) {
+        	 vHolder.AyatRoot.setBackgroundColor(Color.WHITE);
+         }
+         else {
+        	 vHolder.AyatRoot.setBackgroundColor(Color.rgb(232, 243, 252));
+         }
+         
          Bitmap arabicAyat = null;
          
          try {
@@ -122,6 +130,7 @@ public class SurahAdapter extends BaseAdapter {
          ImageView		AyatSpecialImage;
          ImageView		AyatBookmarkImage;
          LinearLayout	AyatGroup; 
+         LinearLayout	AyatRoot;
     }
 	
 	
