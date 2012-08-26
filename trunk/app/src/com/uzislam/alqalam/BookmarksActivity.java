@@ -22,11 +22,8 @@ package com.uzislam.alqalam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.content.Intent;
@@ -40,8 +37,6 @@ public class BookmarksActivity extends Activity {
 	private String[] 			gSurahTitles;
 	private int[][]				bookmarks;
 		
-	private final String		TAG = "Al-Qalam Bookmarks";
-
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +59,7 @@ public class BookmarksActivity extends Activity {
 			public void onItemClick(AdapterView<?> adapter, View view,
 					final int index, long order) {
 				
-						Intent quranIntent = new Intent(BookmarksActivity.this, SurahActivity.class);
+						Intent quranIntent = new Intent(getApplicationContext(), SurahActivity.class);
 						quranIntent.putExtra("sNumber", bookmarks[index][0] - 1);
 						quranIntent.putExtra("aNumber", bookmarks[index][1]);
 						startActivity(quranIntent);
@@ -74,6 +69,7 @@ public class BookmarksActivity extends Activity {
 	}
 	
 	private void prepareBookmarks() {
+		BookmarksAdapter mBookmarksAdapter = new BookmarksAdapter (getApplicationContext());
 		alQalamDatabase db = new alQalamDatabase(this);
 		db.openReadable();
 		Cursor cursor = db.getAllBookmarks();
@@ -108,7 +104,7 @@ public class BookmarksActivity extends Activity {
 			
 		}
 	
-		BookmarkList.setAdapter(new SimpleAdapter(this, bookmark, R.layout.bookmark_row, from, to));
+		BookmarkList.setAdapter(new SimpleAdapter(getApplicationContext(), bookmark, R.layout.bookmark_row, from, to));
 		
 		cursor.close();
 		db.close();
