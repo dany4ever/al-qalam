@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2010 (c) Al-Qalam Project
+
+   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+
+   Al-Qalam is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
+   or (at your option) any later version.
+
+   Al-Qalam is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">
+   <ListPreference
+		android:key="TransOption"
+		android:title="@string/translation_language"
+		android:summary="@string/translation_language_summary"
+		android:entries="@array/TranslationOptions"
+		android:entryValues="@array/TranslationOptions"
+		android:dialogTitle="@string/translation" />
+
+	<ListPreference
+		android:key="ReciterOption"
+		android:title="@string/reciters_list"
+		android:summary="@string/reciters_list_summary"
+		android:entries="@array/ReciterOptions"
+		android:entryValues="@array/ReciterOptions"
+		android:dialogTitle="@string/reciters" />
+
+	<ListPreference
+		android:key="ui_locale"
+		android:title="@string/settings_locale"
+		android:summary="@string/settings_locale_summary"
+		android:entries="@array/locales"
+		android:entryValues="@array/locale_values"
+		android:dialogTitle="@string/settings_locale" />
+</PreferenceScreen>
