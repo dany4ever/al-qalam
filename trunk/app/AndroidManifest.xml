@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2010 (c) Al-Qalam Project
+
+   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+
+   Al-Qalam is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as 
+   published by the Free Software Foundation, either version 3 of the License, 
+   or (at your option) any later version.
+
+   Al-Qalam is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.uzislam.alqalam"
+        android:versionCode="6"
+        android:versionName="4.0"
+        android:installLocation="auto">
+    <uses-sdk android:minSdkVersion="15" />
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="false"
+        android:anyDensity="true" />
+    <application android:label="@string/app_name"
+            android:icon="@drawable/icon"
+            android:theme="@android:style/Theme.Holo.Light">
+        <activity android:name=".QuranActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SurahActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SettingsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".BookmarksActivity" android:screenOrientation="portrait" />
+        <!-- provider android:name=".database.Provider" android:authorities="com.uzislam.alqalam" / -->
+    </application>
+</manifest> 
