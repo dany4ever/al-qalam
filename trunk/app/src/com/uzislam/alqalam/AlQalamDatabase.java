@@ -85,207 +85,207 @@ public class AlQalamDatabase {
         return this;
     }
 
-	/* Open database.  */
-	public AlQalamDatabase openWritable() {
-		try {
-			db = dbHelper.getWritableDatabase();
-			Log.i(TAG, "Writable open");
-		}
-		catch (SQLException e){
-			Log.e(TAG, "Can't open database for writing");
-		}
+    /* Open database.  */
+    public AlQalamDatabase openWritable() {
+        try {
+            db = dbHelper.getWritableDatabase();
+            Log.i(TAG, "Writable open");
+        }
+        catch (SQLException e){
+            Log.e(TAG, "Can't open database for writing");
+        }
 
-		return this;
-	}
+        return this;
+    }
 
-	/*  Close database */
-	public void close() {
-		Log.i(TAG, "Close");
-		db.close();
-	}
+    /*  Close database */
+    public void close() {
+        Log.i(TAG, "Close");
+        db.close();
+    }
 
-	/* is database open */
-	public boolean isOpen() {
-		if (db == null || !db.isOpen())
-		{
-			return false;
-		}
-		return true;
-	}
+    /* is database open */
+    public boolean isOpen() {
+        if (db == null || !db.isOpen())
+        {
+            return false;
+        }
+        return true;
+    }
 
-	public class AlQalamDbHelper extends SQLiteOpenHelper {
+    public class AlQalamDbHelper extends SQLiteOpenHelper {
 
-		public AlQalamDbHelper(Context context, String name, CursorFactory factory, int version) {
-			super(context, name, factory, version);
-		}
+        public AlQalamDbHelper(Context context, String name, CursorFactory factory, int version) {
+            super(context, name, factory, version);
+        }
 
-		@Override
-		public void onCreate(SQLiteDatabase db) {
+        @Override
+        public void onCreate(SQLiteDatabase db) {
 
-			// Create Qur'an database
-			createTable(db, TABLE_ARABIC);
-			createTable(db, TABLE_RUSSIAN);
-			createTable(db, TABLE_TURKISH);
-			createTable(db, TABLE_UZBEK_CYRILLIC);
-			createTable(db, TABLE_UZBEK_LATIN);
+            // Create Qur'an database
+            createTable(db, TABLE_ARABIC);
+            createTable(db, TABLE_RUSSIAN);
+            createTable(db, TABLE_TURKISH);
+            createTable(db, TABLE_UZBEK_CYRILLIC);
+            createTable(db, TABLE_UZBEK_LATIN);
 
-			// Bookmarks table
-			db.execSQL("CREATE TABLE " + TABLE_BOOKMARKS +" (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-					COLUMN_SURAHNO + " INTEGER NOT NULL," +
-					COLUMN_AYATNO + " INTEGER NOT NULL, date_col DEFAULT CURRENT_TIMESTAMP);");
-		}
+            // Bookmarks table
+            db.execSQL("CREATE TABLE " + TABLE_BOOKMARKS +" (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    COLUMN_SURAHNO + " INTEGER NOT NULL," +
+                    COLUMN_AYATNO + " INTEGER NOT NULL, date_col DEFAULT CURRENT_TIMESTAMP);");
+        }
 
-		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int currentVersion) {
-			Log.i(TAG, "Upgrade Database");
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int currentVersion) {
+            Log.i(TAG, "Upgrade Database");
 
-			db.execSQL("DROP TABLE IF EXISTS " + TABLE_ARABIC);
-			db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUSSIAN);
-			db.execSQL("DROP TABLE IF EXISTS " + TABLE_TURKISH);
-			db.execSQL("DROP TABLE IF EXISTS " + TABLE_UZBEK_CYRILLIC);
-			db.execSQL("DROP TABLE IF EXISTS " + TABLE_UZBEK_LATIN);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_ARABIC);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUSSIAN);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_TURKISH);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_UZBEK_CYRILLIC);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_UZBEK_LATIN);
 
-			onCreate(db);
+            onCreate(db);
 
-		}
+        }
 
-		private void createTable(SQLiteDatabase db, String table) {
-			/** CREATE TABLE table(
-			 *                   _id INTEGER PRIMARY KEY AUTOINCREMENT,
-			 *                   surah_no INTEGER NOT NULL,
-			 *                   ayat_no INTEGER NOT NULL,
-			 *                   ayat TEXT COLLATE UNICODE);
-			 */
-			db.execSQL("CREATE TABLE " + table +
-					"(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-					COLUMN_SURAHNO + " INTEGER NOT NULL," +
-					COLUMN_AYATNO + " INTEGER NOT NULL," +
-					COLUMN_AYAT + " TEXT COLLATE UNICODE);");
-			try {
-				// Insert Qur'an ayats
-				insertAyats(db, table);
-			} catch (IOException e) {
-				Log.e(TAG, "IOException while creating table " + table);
-			}
-		}
+        private void createTable(SQLiteDatabase db, String table) {
+            /** CREATE TABLE table(
+             *                   _id INTEGER PRIMARY KEY AUTOINCREMENT,
+             *                   surah_no INTEGER NOT NULL,
+             *                   ayat_no INTEGER NOT NULL,
+             *                   ayat TEXT COLLATE UNICODE);
+             */
+            db.execSQL("CREATE TABLE " + table +
+                    "(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    COLUMN_SURAHNO + " INTEGER NOT NULL," +
+                    COLUMN_AYATNO + " INTEGER NOT NULL," +
+                    COLUMN_AYAT + " TEXT COLLATE UNICODE);");
+            try {
+                // Insert Qur'an ayats
+                insertAyats(db, table);
+            } catch (IOException e) {
+                Log.e(TAG, "IOException while creating table " + table);
+            }
+        }
 
         private void insertAyats(SQLiteDatabase db, String which) throws IOException {
-        	Log.i(TAG, "Inserting translations... " + which);
+            Log.i(TAG, "Inserting translations... " + which);
 
-			final Resources resources = mContext.getResources();
-			InputStream inputStream = null;
-			if (TABLE_UZBEK_LATIN.equals(which)) {
-				inputStream = resources.openRawResource(R.raw.uzbek_latin);
-			} else if (TABLE_RUSSIAN.equals(which)) {
-				inputStream = resources.openRawResource(R.raw.russian);
-			} else if (TABLE_TURKISH.equals(which)) {
-				inputStream = resources.openRawResource(R.raw.turkish);
-			} else if (TABLE_ARABIC.equals(which)) {
-				inputStream = resources.openRawResource(R.raw.quran);
-			} else {
-				inputStream = resources.openRawResource(R.raw.uzbek_cyrillic);
-			}
+            final Resources resources = mContext.getResources();
+            InputStream inputStream = null;
+            if (TABLE_UZBEK_LATIN.equals(which)) {
+                inputStream = resources.openRawResource(R.raw.uzbek_latin);
+            } else if (TABLE_RUSSIAN.equals(which)) {
+                inputStream = resources.openRawResource(R.raw.russian);
+            } else if (TABLE_TURKISH.equals(which)) {
+                inputStream = resources.openRawResource(R.raw.turkish);
+            } else if (TABLE_ARABIC.equals(which)) {
+                inputStream = resources.openRawResource(R.raw.quran);
+            } else {
+                inputStream = resources.openRawResource(R.raw.uzbek_cyrillic);
+            }
 
-			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-			try {
-				String line;
-				int surahNumber = 1;
-				int ayatNumber = 1;
-				while ((line = reader.readLine()) != null) {
-					ContentValues values = new ContentValues();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            try {
+                String line;
+                int surahNumber = 1;
+                int ayatNumber = 1;
+                while ((line = reader.readLine()) != null) {
+                    ContentValues values = new ContentValues();
 
-					// Let's collect the values
-					values.put(COLUMN_SURAHNO, surahNumber);
-					values.put(COLUMN_AYATNO, ayatNumber);
-					values.put(COLUMN_AYAT, line);
+                    // Let's collect the values
+                    values.put(COLUMN_SURAHNO, surahNumber);
+                    values.put(COLUMN_AYATNO, ayatNumber);
+                    values.put(COLUMN_AYAT, line);
 
-					// Now insert the values to the table
-					db.insert(which, COLUMN_AYAT, values);
+                    // Now insert the values to the table
+                    db.insert(which, COLUMN_AYAT, values);
 
-					// Routine to populate proper surah and ayat numbers
-					if (ayatNumber == CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber - 1]) {
-						surahNumber++;
-						ayatNumber = 1;
-					} else {
-						ayatNumber++;
-					}
-				}
-			}
-			finally {
-				reader.close();
-			}
-		}
-	}
+                    // Routine to populate proper surah and ayat numbers
+                    if (ayatNumber == CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber - 1]) {
+                        surahNumber++;
+                        ayatNumber = 1;
+                    } else {
+                        ayatNumber++;
+                    }
+                }
+            }
+            finally {
+                reader.close();
+            }
+        }
+    }
 
-	public Cursor getArabicVerses(int index) {
-		String selection = COLUMN_SURAHNO + "=" + index;
-		Cursor c = db.query(TABLE_ARABIC, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO, COLUMN_AYAT}, selection, null, null, null, null);
+    public Cursor getArabicVerses(int index) {
+        String selection = COLUMN_SURAHNO + "=" + index;
+        Cursor c = db.query(TABLE_ARABIC, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO, COLUMN_AYAT}, selection, null, null, null, null);
 
-		return c;
-	}
+        return c;
+    }
 
-	public Cursor getVerses(int index, int language) {
-		String selection = COLUMN_SURAHNO + "=" + index;
-		String table = TRANSLATION_TABLES[language];
+    public Cursor getVerses(int index, int language) {
+        String selection = COLUMN_SURAHNO + "=" + index;
+        String table = TRANSLATION_TABLES[language];
 
-		Cursor c = db.query(table, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO, COLUMN_AYAT}, selection, null, null, null, null);
+        Cursor c = db.query(table, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO, COLUMN_AYAT}, selection, null, null, null, null);
 
-		return c;
-	}
+        return c;
+    }
 
-	public Cursor getWordMatches(String query, int language) {
-		String selection = COLUMN_AYAT + " MATCH ? " + query+"*";
-		String table = TRANSLATION_TABLES[language];
+    public Cursor getWordMatches(String query, int language) {
+        String selection = COLUMN_AYAT + " MATCH ? " + query+"*";
+        String table = TRANSLATION_TABLES[language];
 
-		Cursor c = db.query(table, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO, COLUMN_AYAT}, selection, null, null, null, null);
+        Cursor c = db.query(table, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO, COLUMN_AYAT}, selection, null, null, null, null);
 
-		return c;
-	}
+        return c;
+    }
 
-	// bookmark or unbookmark the ayat
-	public boolean bookmarkOperation(int chapter, int verse) {
-		String selection = COLUMN_SURAHNO + "="  + chapter + " AND " + COLUMN_AYATNO + "=" + verse;
+    // bookmark or unbookmark the ayat
+    public boolean bookmarkOperation(int chapter, int verse) {
+        String selection = COLUMN_SURAHNO + "="  + chapter + " AND " + COLUMN_AYATNO + "=" + verse;
 
-		// aready exist, we have to unbookmark
-		if (db.delete(TABLE_BOOKMARKS, selection, null) != 0 ){
-			return false;
-		}
-		// does not exist, bookmark it;
-		else {
-			ContentValues values = new ContentValues();
+        // aready exist, we have to unbookmark
+        if (db.delete(TABLE_BOOKMARKS, selection, null) != 0 ){
+            return false;
+        }
+        // does not exist, bookmark it;
+        else {
+            ContentValues values = new ContentValues();
 
-			values.put(COLUMN_SURAHNO, chapter);
-			values.put(COLUMN_AYATNO, verse);
-			db.insert(TABLE_BOOKMARKS, null, values);
-			return true;
-		}
-	}
+            values.put(COLUMN_SURAHNO, chapter);
+            values.put(COLUMN_AYATNO, verse);
+            db.insert(TABLE_BOOKMARKS, null, values);
+            return true;
+        }
+    }
 
 
-	public boolean isInBookmark(int chapter, int verse) {
+    public boolean isInBookmark(int chapter, int verse) {
 
-		String selection = COLUMN_SURAHNO + "="  + chapter + " AND " + COLUMN_AYATNO + "=" + verse;
+        String selection = COLUMN_SURAHNO + "="  + chapter + " AND " + COLUMN_AYATNO + "=" + verse;
 
-		Cursor c = db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, selection, null, null, null, null);
+        Cursor c = db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, selection, null, null, null, null);
 
-		if (c.moveToFirst())
-			return true;
-		else
-			return false;
-	}
+        if (c.moveToFirst())
+            return true;
+        else
+            return false;
+    }
 
-	//get bookmarks for surah
-	public Cursor getBookmarksForSurah(int chapter) {
-		String selection = COLUMN_SURAHNO + "="  + chapter ;
+    //get bookmarks for surah
+    public Cursor getBookmarksForSurah(int chapter) {
+        String selection = COLUMN_SURAHNO + "="  + chapter ;
 
-		return db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, selection, null, null, null, COLUMN_AYATNO);
+        return db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, selection, null, null, null, COLUMN_AYATNO);
 
-	}
+    }
 
-	//get all bookmarks
-	public Cursor getAllBookmarks() {
+    //get all bookmarks
+    public Cursor getAllBookmarks() {
 
-		return db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, null, null, null, null, COLUMN_SURAHNO);
+        return db.query(TABLE_BOOKMARKS, new String[] {COLUMN_SURAHNO, COLUMN_AYATNO}, null, null, null, null, COLUMN_SURAHNO);
 
-	}
+    }
 }

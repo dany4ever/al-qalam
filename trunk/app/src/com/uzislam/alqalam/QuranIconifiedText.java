@@ -20,58 +20,58 @@
 package com.uzislam.alqalam;
 
 public class QuranIconifiedText {
-	private long		id = -1 ;
-	private String		surahTitle = null;
-	private int			surahOrder = 0;
-	private String		surahInfo = null;
-	private boolean		surahIsDownloaded = false;
-		
-	public QuranIconifiedText(long _id, String _title, int _order, String _info, boolean _downloaded) {
-		this.id = _id;
-		this.surahTitle = _title;
-		this.surahOrder = _order;
-		this.surahInfo = _info;
-		this.surahIsDownloaded = _downloaded;
-	}
-	
-	public void setId (long _id) {
-		this.id = _id;
-	}
-	
-	public void setSurahTitle(String _title) {
-		this.surahTitle = _title;
-	}
-	
-	public void setSurahOrder(int _order) {
-		this.surahOrder = _order;
-	}
-	
-	public void setSurahInfo(String _info) {
-		this.surahInfo = _info;
-	}
-	
-	public void setSurahIsDownloaded(boolean _downloaded) {
-		this.surahIsDownloaded = _downloaded;
-	}
-	
-	public long getId () {
-		return this.id;
-	}
-	
-	public String getSurahTitle() {
-		return this.surahTitle ;
-	}
-	
-	public int getSurahOrder() {
-		return this.surahOrder ;
-	}
-	
-	public String getSurahInfo() {
-		return this.surahInfo ;
-	}
+    private long        id = -1 ;
+    private String      surahTitle = null;
+    private int         surahOrder = 0;
+    private String      surahInfo = null;
+    private boolean     surahIsDownloaded = false;
+        
+    public QuranIconifiedText(long _id, String _title, int _order, String _info, boolean _downloaded) {
+        this.id = _id;
+        this.surahTitle = _title;
+        this.surahOrder = _order;
+        this.surahInfo = _info;
+        this.surahIsDownloaded = _downloaded;
+    }
+    
+    public void setId (long _id) {
+        this.id = _id;
+    }
+    
+    public void setSurahTitle(String _title) {
+        this.surahTitle = _title;
+    }
+    
+    public void setSurahOrder(int _order) {
+        this.surahOrder = _order;
+    }
+    
+    public void setSurahInfo(String _info) {
+        this.surahInfo = _info;
+    }
+    
+    public void setSurahIsDownloaded(boolean _downloaded) {
+        this.surahIsDownloaded = _downloaded;
+    }
+    
+    public long getId () {
+        return this.id;
+    }
+    
+    public String getSurahTitle() {
+        return this.surahTitle ;
+    }
+    
+    public int getSurahOrder() {
+        return this.surahOrder ;
+    }
+    
+    public String getSurahInfo() {
+        return this.surahInfo ;
+    }
 
-	public boolean getSurahIsDownloaded() {
-		return this.surahIsDownloaded;
-	}
-	
+    public boolean getSurahIsDownloaded() {
+        return this.surahIsDownloaded;
+    }
+    
 }

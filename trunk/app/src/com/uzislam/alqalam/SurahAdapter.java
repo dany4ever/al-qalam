@@ -32,55 +32,55 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SurahAdapter extends BaseAdapter {
-	private LayoutInflater mInflater;
-	private List<AyatIconifiedText> mItems = new ArrayList<AyatIconifiedText>(); 
+    private LayoutInflater mInflater;
+    private List<AyatIconifiedText> mItems = new ArrayList<AyatIconifiedText>(); 
     public SurahAdapter(Context context) {
-		this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
-	
-	@Override
-	public int getCount() {
-		return mItems.size();
-	}
+        this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+    
+    @Override
+    public int getCount() {
+        return mItems.size();
+    }
 
-	@Override
-	public Object getItem(int arg0) {
-		return mItems.get(arg0);
-	}
+    @Override
+    public Object getItem(int arg0) {
+        return mItems.get(arg0);
+    }
 
-	@Override
-	public long getItemId(int arg0) {
-		return mItems.get(arg0).getId();
-	}
+    @Override
+    public long getItemId(int arg0) {
+        return mItems.get(arg0).getId();
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		 ViewHolder vHolder;
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+         ViewHolder vHolder;
                
          if (convertView == null) {        
-         	convertView = mInflater.inflate(R.layout.surah_row, null);
+            convertView = mInflater.inflate(R.layout.surah_row, null);
 
-         	vHolder = new ViewHolder();
+            vHolder = new ViewHolder();
             
-         	vHolder.AyatRoot = (LinearLayout) convertView.findViewById(R.id.ayatRoot);
-         	vHolder.AyatGroup = (LinearLayout) convertView.findViewById(R.id.ayatGroup);
-         	vHolder.AyatOrder = (TextView) convertView.findViewById(R.id.ayatOrder);
-         	vHolder.AyatBismillah = (ImageView)convertView.findViewById(R.id.ayatBismillah);
-        	vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.ayatTranslationText);
-        	vHolder.AyatArabic = (TextView) convertView.findViewById(R.id.ayatArabicText);
-        	
-        	//Typeface tf = Typeface.createFromAsset(_context.getAssets(),"fonts/IslamicFont.ttf");
-    	    //vHolder.AyatUzbek.setTypeface(tf);
-        	
-        	vHolder.AyatBookmarkImage = (ImageView) convertView.findViewById(R.id.ayatBookmarkImage);
-        	vHolder.AyatSpecialImage = (ImageView) convertView.findViewById(R.id.ayatSpecialImage);
+            vHolder.AyatRoot = (LinearLayout) convertView.findViewById(R.id.ayatRoot);
+            vHolder.AyatGroup = (LinearLayout) convertView.findViewById(R.id.ayatGroup);
+            vHolder.AyatOrder = (TextView) convertView.findViewById(R.id.ayatOrder);
+            vHolder.AyatBismillah = (ImageView)convertView.findViewById(R.id.ayatBismillah);
+            vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.ayatTranslationText);
+            vHolder.AyatArabic = (TextView) convertView.findViewById(R.id.ayatArabicText);
+            
+            //Typeface tf = Typeface.createFromAsset(_context.getAssets(),"fonts/IslamicFont.ttf");
+            //vHolder.AyatUzbek.setTypeface(tf);
+            
+            vHolder.AyatBookmarkImage = (ImageView) convertView.findViewById(R.id.ayatBookmarkImage);
+            vHolder.AyatSpecialImage = (ImageView) convertView.findViewById(R.id.ayatSpecialImage);
              
-    	    convertView.setTag(vHolder);
+            convertView.setTag(vHolder);
             
          } else {
-        	 
-         	vHolder = (ViewHolder) convertView.getTag();
-         	
+             
+            vHolder = (ViewHolder) convertView.getTag();
+            
          }
        
          vHolder.AyatGroup.setBackgroundColor(mItems.get(position).getAyatBackground());
@@ -89,36 +89,36 @@ public class SurahAdapter extends BaseAdapter {
          vHolder.AyatArabic.setText(mItems.get(position).getAyatArabicText());
      
          if (position % 2 == 0) {
-        	 vHolder.AyatRoot.setBackgroundColor(Color.WHITE);
+             vHolder.AyatRoot.setBackgroundColor(Color.WHITE);
          }
          else {
-        	 vHolder.AyatRoot.setBackgroundColor(Color.rgb(232, 243, 248));
+             vHolder.AyatRoot.setBackgroundColor(Color.rgb(232, 243, 248));
          }
          vHolder.AyatSpecialImage.setImageDrawable(mItems.get(position).getAyatSpecialImage());
          vHolder.AyatBismillah.setImageDrawable(mItems.get(position).getAyatBismillah());
          vHolder.AyatBookmarkImage.setImageDrawable(mItems.get(position).getAyatBookmarkImage());
          
          return convertView;
-	}
-	
-     static class ViewHolder {
-    	 TextView		AyatOrder;
-    	 ImageView		AyatBismillah;
-    	 TextView		AyatArabic;
-         TextView		AyatUzbek;
-         ImageView		AyatSpecialImage;
-         ImageView		AyatBookmarkImage;
-         LinearLayout	AyatGroup; 
-         LinearLayout	AyatRoot;
     }
-	
-	
-	public void addItem(AyatIconifiedText it) {
-		mItems.add(it); 
-	}
-	
-	public void clear() {
-		mItems.clear();
-	}
+    
+     static class ViewHolder {
+         TextView       AyatOrder;
+         ImageView      AyatBismillah;
+         TextView       AyatArabic;
+         TextView       AyatUzbek;
+         ImageView      AyatSpecialImage;
+         ImageView      AyatBookmarkImage;
+         LinearLayout   AyatGroup; 
+         LinearLayout   AyatRoot;
+    }
+    
+    
+    public void addItem(AyatIconifiedText it) {
+        mItems.add(it); 
+    }
+    
+    public void clear() {
+        mItems.clear();
+    }
 
 }
