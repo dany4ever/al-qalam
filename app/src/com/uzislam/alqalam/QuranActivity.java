@@ -32,11 +32,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class QuranActivity extends Activity {
-	private ListView			gSurahList;
-	private ListView			gJuzzList;
-	private String[] 			gSurahTitles;
+    private ListView            gSurahList;
+    private ListView            gJuzzList;
+    private String[]            gSurahTitles;
 
-	@Override
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         initialize();
         SharedPreferences prefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, MODE_PRIVATE);
@@ -70,19 +70,19 @@ public class QuranActivity extends Activity {
 
         gSurahTitles = getResources().getStringArray(R.array.SurahTitle);
         getResources().getStringArray(R.array.SurahInfo);
-        QuranAdapter		quranAdapter = new QuranAdapter(this);
-        QuranIconifiedText	qit;
+        QuranAdapter        quranAdapter = new QuranAdapter(this);
+        QuranIconifiedText  qit;
 
-    	// check which Surah's Arabic Text is already downloaded
+        // check which Surah's Arabic Text is already downloaded
         int j = 0;
         for (int i=0; i < CONSTANTS.NUMBER_OF_SURAHS ; i++) {
-        	if (i+1 == CONSTANTS.MADANI_SURAH_INDEX[j]) {
-        		qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_madani, CONSTANTS.SURAH_NUMBER_OF_AYATS[i]), CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
-        		j++;
-        	} else {
-        		qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_makki, CONSTANTS.SURAH_NUMBER_OF_AYATS[i]), CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
-        	}
-        	quranAdapter.addItem(qit);
+            if (i+1 == CONSTANTS.MADANI_SURAH_INDEX[j]) {
+                qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_madani, CONSTANTS.SURAH_NUMBER_OF_AYATS[i]), CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
+                j++;
+            } else {
+                qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_makki, CONSTANTS.SURAH_NUMBER_OF_AYATS[i]), CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
+            }
+            quranAdapter.addItem(qit);
         }
 
         gSurahList = (ListView)findViewById(R.id.SurahList);
@@ -101,32 +101,32 @@ public class QuranActivity extends Activity {
                 startActivity(quranIntent);
             }
         });
- 	}
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.quran_activity, menu);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.quran_activity, menu);
 
-		return super.onCreateOptionsMenu(menu);
-	}
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		Log.i(Utils.GTAG, "onOptionsItemSelected: " + menuItem);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        Log.i(Utils.GTAG, "onOptionsItemSelected: " + menuItem);
 
-    	switch (menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
 
-    		case R.id.bookmarks:
-    			startActivity(new Intent(this, BookmarksActivity.class));
-    			return true;
+            case R.id.bookmarks:
+                startActivity(new Intent(this, BookmarksActivity.class));
+                return true;
 
-    		case R.id.settings:
-    			startActivity(new Intent(this, SettingsActivity.class));
-    			return true;
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
 
-    	}
+        }
 
-    	return false;
+        return false;
    }
 
    private void initialize() {

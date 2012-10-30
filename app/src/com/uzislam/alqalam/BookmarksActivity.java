@@ -33,11 +33,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class BookmarksActivity extends Activity {
-	private ListView			BookmarkList; 	
-	private String[] 			gSurahTitles;
-	private int[][]				bookmarks;
-		
-	@Override
+    private ListView            BookmarkList;   
+    private String[]            gSurahTitles;
+    private int[][]             bookmarks;
+        
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookmarks);
@@ -50,74 +50,74 @@ public class BookmarksActivity extends Activity {
         
         prepareBookmarks();
        
-		BookmarkList.setCacheColorHint(00000000); 
-		BookmarkList.setDivider(null);
-	        
+        BookmarkList.setCacheColorHint(00000000); 
+        BookmarkList.setDivider(null);
+            
         BookmarkList.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> adapter, View view,
-					final int index, long order) {
-				
-						Intent quranIntent = new Intent(getApplicationContext(), SurahActivity.class);
-						quranIntent.putExtra("sNumber", bookmarks[index][0] - 1);
-						quranIntent.putExtra("aNumber", bookmarks[index][1]);
-						startActivity(quranIntent);
-			}
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view,
+                    final int index, long order) {
+                
+                        Intent quranIntent = new Intent(getApplicationContext(), SurahActivity.class);
+                        quranIntent.putExtra("sNumber", bookmarks[index][0] - 1);
+                        quranIntent.putExtra("aNumber", bookmarks[index][1]);
+                        startActivity(quranIntent);
+            }
         });
         
-	}
-	
-	private void prepareBookmarks() {
-		AlQalamDatabase db = new AlQalamDatabase(this);
-		db.openReadable();
-		Cursor cursor = db.getAllBookmarks();
-		
-		List<HashMap<String, Object>> bookmark = new ArrayList<HashMap<String, Object>>();
+    }
+    
+    private void prepareBookmarks() {
+        AlQalamDatabase db = new AlQalamDatabase(this);
+        db.openReadable();
+        Cursor cursor = db.getAllBookmarks();
+        
+        List<HashMap<String, Object>> bookmark = new ArrayList<HashMap<String, Object>>();
 
-		String[] from = {"chapter", "verse", "title"};
-		int [] to = {R.id.chapterNumber, R.id.verseNumber, R.id.chapterName};
-		
-		if(cursor.moveToFirst())
-		{
-			bookmarks = new int[cursor.getCount()][2];
-			
-			int index = 0, sr = 0, ay = 0;
-			do
-			{
-				sr = cursor.getInt(cursor.getColumnIndex(AlQalamDatabase.COLUMN_SURAHNO));
-				ay = cursor.getInt(cursor.getColumnIndex(AlQalamDatabase.COLUMN_AYATNO));
-				
-				HashMap<String, Object> map = new HashMap<String, Object>();
-			
-				map.put("chapter", sr);
-				map.put("verse", ay);
-				map.put("title", gSurahTitles[sr-1]);
-				
-				bookmark.add(map);
-				
-				bookmarks[index][0] = sr; 
-				bookmarks[index][1] = ay; 
-				index++;
-			} while(cursor.moveToNext());
-			
-		}
-	
-		BookmarkList.setAdapter(new SimpleAdapter(getApplicationContext(), bookmark, R.layout.bookmark_row, from, to));
-		
-		cursor.close();
-		db.close();
-	}
-	
-	@Override
-	public void onResume() {
-		prepareBookmarks();
-		super.onResume();
-	}
-	
-	@Override
-	public void onStart() {
-		prepareBookmarks();
-		super.onStart();
-	}
+        String[] from = {"chapter", "verse", "title"};
+        int [] to = {R.id.chapterNumber, R.id.verseNumber, R.id.chapterName};
+        
+        if(cursor.moveToFirst())
+        {
+            bookmarks = new int[cursor.getCount()][2];
+            
+            int index = 0, sr = 0, ay = 0;
+            do
+            {
+                sr = cursor.getInt(cursor.getColumnIndex(AlQalamDatabase.COLUMN_SURAHNO));
+                ay = cursor.getInt(cursor.getColumnIndex(AlQalamDatabase.COLUMN_AYATNO));
+                
+                HashMap<String, Object> map = new HashMap<String, Object>();
+            
+                map.put("chapter", sr);
+                map.put("verse", ay);
+                map.put("title", gSurahTitles[sr-1]);
+                
+                bookmark.add(map);
+                
+                bookmarks[index][0] = sr; 
+                bookmarks[index][1] = ay; 
+                index++;
+            } while(cursor.moveToNext());
+            
+        }
+    
+        BookmarkList.setAdapter(new SimpleAdapter(getApplicationContext(), bookmark, R.layout.bookmark_row, from, to));
+        
+        cursor.close();
+        db.close();
+    }
+    
+    @Override
+    public void onResume() {
+        prepareBookmarks();
+        super.onResume();
+    }
+    
+    @Override
+    public void onStart() {
+        prepareBookmarks();
+        super.onStart();
+    }
 }

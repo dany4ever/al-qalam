@@ -31,46 +31,46 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class BookmarksAdapter extends BaseAdapter {
-	private LayoutInflater mInflater;
-	private List<QuranIconifiedText> mItems = new ArrayList<QuranIconifiedText>(); 
+    private LayoutInflater mInflater;
+    private List<QuranIconifiedText> mItems = new ArrayList<QuranIconifiedText>(); 
     
-	public BookmarksAdapter(Context context) {
-		this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
-	
-	@Override
-	public int getCount() {
-		return mItems.size();
-	}
+    public BookmarksAdapter(Context context) {
+        this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+    
+    @Override
+    public int getCount() {
+        return mItems.size();
+    }
 
-	@Override
-	public Object getItem(int arg0) {
-		return mItems.get(arg0);
-	}
+    @Override
+    public Object getItem(int arg0) {
+        return mItems.get(arg0);
+    }
 
-	@Override
-	public long getItemId(int arg0) {
-		return mItems.get(arg0).getId();
-	}
-	
+    @Override
+    public long getItemId(int arg0) {
+        return mItems.get(arg0).getId();
+    }
+    
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		 ViewHolder vHolder;
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+         ViewHolder vHolder;
                
          if (convertView == null) {
-         	convertView = mInflater.inflate(R.layout.bookmark_row, null);
+            convertView = mInflater.inflate(R.layout.bookmark_row, null);
 
-         	vHolder = new ViewHolder();
+            vHolder = new ViewHolder();
              
-         	//vHolder.SurahTitle = (TextView) convertView.findViewById(R.id.QuranRow_Title);
-         	//vHolder.SurahOrder = (TextView) convertView.findViewById(R.id.QuranRow_Order);
-         	//vHolder.SurahInfo = (TextView) convertView.findViewById(R.id.QuranRow_Info);
-         	vHolder.BookmarkRow = (LinearLayout) convertView.findViewById(R.id.QuranRow_Group);        
-         	
+            //vHolder.SurahTitle = (TextView) convertView.findViewById(R.id.QuranRow_Title);
+            //vHolder.SurahOrder = (TextView) convertView.findViewById(R.id.QuranRow_Order);
+            //vHolder.SurahInfo = (TextView) convertView.findViewById(R.id.QuranRow_Info);
+            vHolder.BookmarkRow = (LinearLayout) convertView.findViewById(R.id.QuranRow_Group);        
+            
             convertView.setTag(vHolder);
          } else {
-         	vHolder = (ViewHolder) convertView.getTag();
+            vHolder = (ViewHolder) convertView.getTag();
          }
 
          vHolder.SurahTitle.setText(mItems.get(position).getSurahTitle());
@@ -78,26 +78,26 @@ public class BookmarksAdapter extends BaseAdapter {
          vHolder.SurahInfo.setText(mItems.get(position).getSurahInfo());
          
          if (position % 2 == 0) {
-        	 vHolder.BookmarkRow.setBackgroundColor(Color.WHITE);
+             vHolder.BookmarkRow.setBackgroundColor(Color.WHITE);
          }
 
          return convertView;
-	}
-	
-     static class ViewHolder {
-         TextView 		SurahTitle;
-         TextView 		SurahOrder;
-         TextView 		SurahInfo;
-         LinearLayout 	BookmarkRow;
     }
-	
-	
-	public void addItem(QuranIconifiedText it) {
-		mItems.add(it); 
-	}
-	
-	public void clear(){
-		mItems.clear();
-	}
+    
+     static class ViewHolder {
+         TextView       SurahTitle;
+         TextView       SurahOrder;
+         TextView       SurahInfo;
+         LinearLayout   BookmarkRow;
+    }
+    
+    
+    public void addItem(QuranIconifiedText it) {
+        mItems.add(it); 
+    }
+    
+    public void clear(){
+        mItems.clear();
+    }
 
 }
