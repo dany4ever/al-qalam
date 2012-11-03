@@ -32,17 +32,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 public class SurahActivity extends Activity {
-    private static final String TAG = "al-Qalam SurahActivity";
+    private static final String TAG = "SurahActivity";
     private String []       AYATSTRANS;
     private String []       AYATSARABIC;
     private int[]           Bookmarks;
@@ -50,7 +47,7 @@ public class SurahActivity extends Activity {
     private int             currentAyat = 0;
     private int             selectedAyat = 0;
 
-    private ImageView           surahTitle;
+    private String[] mTitles;
     private SurahAdapter        surahAdapter;
     private ListView            ayatList;
 
@@ -71,6 +68,8 @@ public class SurahActivity extends Activity {
             surahNumber = extras.getInt("sNumber");
             currentAyat = extras.getInt("aNumber");
         }
+        // TODO: Use Arabic titles
+        mTitles = getResources().getStringArray(R.array.SurahTitle);
 
         commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
         preferenceEditor = commonPrefs.edit();
@@ -79,9 +78,6 @@ public class SurahActivity extends Activity {
         TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, 0);
 
         commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
-
-        // Set chapter image title
-        surahTitle = (ImageView) findViewById(R.id.suraName);
 
         // create new chapter adapter
         surahAdapter = new SurahAdapter(this);
@@ -101,40 +97,11 @@ public class SurahActivity extends Activity {
         });
         // Display surah
         showData();
-
-        final ImageButton  imgBtnPrevious = (ImageButton) findViewById(R.id.headerPrev);
-        final ImageButton  imgBtnNext = (ImageButton) findViewById(R.id.headerNext);
-
-        imgBtnPrevious.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                surahNumber--;
-                if (surahNumber < 0) {
-                    surahNumber = 0;
-                    return;
-                }
-                // we are moving to previous  surah, reset and show;
-                currentAyat = 0;
-                showData();
-            }
-        });
-
-        imgBtnNext.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                surahNumber++;
-                if (surahNumber > 113) {
-                    surahNumber = 113;
-                    return;
-                }
-                // we are moving to next surah, reset and show;
-                currentAyat = 0;
-                showData();
-            }
-        });
     }
 
     private void resetData() {
 
-        surahTitle.setImageResource(CONSTANTS.TITLE_OF_SURAHS[surahNumber]);
+    	setTitle(mTitles[surahNumber]);
 
         // create string arrays for verses
         AYATSTRANS = new String[CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber]];
