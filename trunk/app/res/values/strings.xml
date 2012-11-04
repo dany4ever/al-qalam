@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2010 (c) Al-Qalam Project
+   Copyright 2012 (c) Al-Qalam Project
 
    This file is part of Al-Qalam (com.uzislam.alqalam) package.
 
    Al-Qalam is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as 
-   published by the Free Software Foundation, either version 3 of the License, 
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
    or (at your option) any later version.
 
    Al-Qalam is distributed in the hope that it will be useful,
@@ -24,25 +24,17 @@
     <color name="dark_red" translatable="false">#004b54</color>
     <color name="light_blue" translatable="false">#e8f3f8</color>
 
-    <string name="sura_need_download">Сура мавжуд эмас</string>
-    <string name="no_sd_card">Ташқи хотира (SD card) юкланмаган ёки йўқ</string>
     <string name="btn_confirm">Тасдиқ</string>
     <string name="btn_cancel">Бекор қилиш</string>
-    <string name="no_android_market">Android Market программаси мавжуд эмас.\nСураларни проект веб саҳифасидан сақлаб олинг.</string>
     <string name="translation">Таржима</string>
     <string name="translation_language">Таржима тили</string>
     <string name="translation_language_summary">Қуръон маъноларининг таржима тилини танланг</string>
-    <string name="reciters">Қорилар</string>
-    <string name="reciters_list">Қорилар рўйҳати</string>
-    <string name="reciters_list_summary">Қуръон арабча қироатини танланг</string>
     <string name="help">Ёрдам</string>
     <string name="info">Маълумот</string>
     <string name="bookmarks">Хатчўплар</string>
     <string name="settings">Мосламалар</string>
     <string name="search">Излаш</string>
     <string name="options">Танловлар</string>
-    <string name="settings_locale">Тил</string>
-    <string name="settings_locale_summary">Интерфейс тилини танланг</string>
     <string name="delete">Ўчириш</string>
     <string name="surah_makki">Маккий сура, <xliff:g id="number_of_ayats">%1$s</xliff:g> оят</string>
     <string name="surah_madani">Маданий сура, <xliff:g id="number_of_ayats">%1$s</xliff:g> оят</string>
