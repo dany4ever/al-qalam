@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package com.uzislam.alqalam;
 
 import java.io.BufferedReader;
@@ -203,7 +203,7 @@ public class AlQalamDatabase {
                     db.insert(which, COLUMN_AYAT, values);
 
                     // Routine to populate proper surah and ayat numbers
-                    if (ayatNumber == CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber - 1]) {
+                    if (ayatNumber == Utils.SURAH_NUMBER_OF_AYATS[surahNumber - 1]) {
                         surahNumber++;
                         ayatNumber = 1;
                     } else {
