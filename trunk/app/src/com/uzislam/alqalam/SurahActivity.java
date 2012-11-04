@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.uzislam.alqalam;
 
 import java.util.Arrays;
@@ -185,7 +184,7 @@ public class SurahActivity extends Activity {
 
             ait.setAyatSpecialImage(getSpecialImage(surahNumber+1, i+1));
             ait.setAyatBookmarkImage(bookmarkImage);
-            ait.setAyatBismillah(iconBismillah);
+            ait.setBismillahImage(iconBismillah);
             ait.setAyatBackground(AyatBackground);
 
             surahAdapter.addItem(ait);

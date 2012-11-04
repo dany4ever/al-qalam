@@ -30,7 +30,7 @@
 		android:layout_height="35dip"
 		android:textStyle="normal"
 		android:gravity="center"
-		android:textColor="@color/darkred">
+		android:textColor="@color/dark_red">
 </TextView>
 <TextView
 		android:id="@+id/verseNumber"
@@ -38,7 +38,7 @@
 		android:layout_height="35dip"
 		android:textStyle="normal"
 		android:gravity="center"
-		android:textColor="@color/darkred">
+		android:textColor="@color/dark_red">
 </TextView>
 <TextView
 		android:id="@+id/chapterName"
@@ -46,7 +46,7 @@
 		android:layout_height="35dip"
 		android:textStyle="normal"
 		android:gravity="center"
-		android:textColor="@color/darkred">
+		android:textColor="@color/dark_red">
 </TextView>
 <!--  CheckBox android:id="@+id/btnDel"
 		  android:gravity="center"

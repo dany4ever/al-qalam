@@ -21,9 +21,8 @@
     <!-- Untranslatable strings; keep them all in this block -->
     <string name="app_name" translatable="false">Al-Qalam</string>
     <string name="app_description" translatable="false">Al-Qalam Islamic Software</string>
-    <color name="darkred" translatable="false">#004b54</color>
-    <color name="darkblack" translatable="false">#000000</color>
-    <color name="lightblack" translatable="false">#999999</color>
+    <color name="dark_red" translatable="false">#004b54</color>
+    <color name="light_blue" translatable="false">#e8f3f8</color>
 
     <string name="sura_need_download">Сура мавжуд эмас</string>
     <string name="no_sd_card">Ташқи хотира (SD card) юкланмаган ёки йўқ</string>
