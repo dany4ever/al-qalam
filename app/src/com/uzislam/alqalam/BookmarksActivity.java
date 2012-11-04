@@ -46,7 +46,7 @@ public class BookmarksActivity extends Activity {
         BookmarkList.setVerticalScrollBarEnabled(false);
         BookmarkList.setHorizontalScrollBarEnabled(false);
        
-        gSurahTitles = getResources().getStringArray(R.array.SurahTitle);
+        gSurahTitles = getResources().getStringArray(R.array.surah_titles);
         
         prepareBookmarks();
        

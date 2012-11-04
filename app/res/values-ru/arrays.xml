@@ -18,7 +18,7 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-    <string-array name="SurahTitle">
+    <string-array name="surah_titles">
         <item name="001">Аль-Фатиха</item>
 		<item name="002">Аль-Бакара</item>
 		<item name="003">Али Имран</item>
@@ -135,12 +135,7 @@
 		<item name="114">Ан-Нас</item>
     </string-array>
 
-    <string-array name="DownloadOptions">
-        <item>Скачать суры</item>
-        <item>Отмена</item>
-    </string-array>
-
-    <string-array name="TranslationOptions">
+    <string-array name="translation_options">
         <item>Ўзбекча</item>
         <item>O\'zbekcha</item>
         <item>Русский</item>
@@ -148,21 +143,11 @@
         <item>Без перевода</item>
     </string-array>
 
-    <string-array name="ReciterOptions">
-        <item>Аш-Шатрий</item>
-        <item>Аль-Гамидий</item>
-    </string-array>
-
-    <string-array name="AyatClickOptions">
-        <item>Прослушать суру</item>
-        <item>Прослушать аят</item>
+    <string-array name="ayat_click_options_add">
         <item>Добавить аят в закладки</item>
     </string-array>
-    
-     <string-array name="AyatClickOptions2">
-        <item>Прослушать суру</item>
-        <item>Прослушать аят</item>
+
+     <string-array name="ayat_click_options_del">
         <item>Удалит закладку</item>
     </string-array>
-
 </resources>

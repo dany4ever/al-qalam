@@ -5,8 +5,8 @@
    This file is part of Al-Qalam (com.uzislam.alqalam) package.
 
    Al-Qalam is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as 
-   published by the Free Software Foundation, either version 3 of the License, 
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
    or (at your option) any later version.
 
    Al-Qalam is distributed in the hope that it will be useful,
@@ -30,7 +30,7 @@
         <item>uz</item><!-- This is Locale code for default language -->
     </string-array>
 
-    <string-array name="SurahTitle">
+    <string-array name="surah_titles">
         <item name="001">Фотиҳа</item>
         <item name="002">Бақара</item>
         <item name="003">Оли Имрон</item>
@@ -146,129 +146,8 @@
         <item name="113">Фалақ</item>
         <item name="114">Нос</item>
     </string-array>
-    <string-array name="SurahInfo">
-        <item name="001">Маккий сура, 7 оят</item>
-        <item name="002">Маданий сура, 286 оят</item>
-        <item name="003">Маданий сура, 200 оят</item>
-        <item name="004">Маданий сура, 176 оят</item>
-        <item name="005">Маккий</item>
-        <item name="006">Маккий</item>
-        <item name="007">Маккий</item>
-        <item name="008">Маккий</item>
-        <item name="009">Маккий</item>
-        <item name="010">Маккий</item>
-        <item name="011">Маккий</item>
-        <item name="012">Маккий</item>
-        <item name="013">Маккий</item>
-        <item name="014">Маккий</item>
-        <item name="015">Маккий</item>
-        <item name="016">Маккий</item>
-        <item name="017">Маккий</item>
-        <item name="018">Маккий</item>
-        <item name="019">Маккий</item>
-        <item name="020">Маккий</item>
-        <item name="021">Маккий</item>
-        <item name="022">Маккий</item>
-        <item name="023">Маккий</item>
-        <item name="024">Маккий</item>
-        <item name="025">Маккий</item>
-        <item name="026">Маккий</item>
-        <item name="027">Маккий</item>
-        <item name="028">Маккий</item>
-        <item name="029">Маккий</item>
-        <item name="030">Маккий</item>
-        <item name="031">Маккий</item>
-        <item name="032">Маккий</item>
-        <item name="033">Маккий</item>
-        <item name="034">Маккий</item>
-        <item name="035">Маккий</item>
-        <item name="036">Маккий</item>
-        <item name="037">Маккий</item>
-        <item name="038">Маккий</item>
-        <item name="039">Маккий</item>
-        <item name="040">Маккий</item>
-        <item name="041">Маккий</item>
-        <item name="042">Маккий</item>
-        <item name="043">Маккий</item>
-        <item name="044">Маккий</item>
-        <item name="045">Маккий</item>
-        <item name="046">Маккий</item>
-        <item name="047">Маккий</item>
-        <item name="048">Маккий</item>
-        <item name="049">Маккий</item>
-        <item name="050">Маккий</item>
-        <item name="051">Маккий</item>
-        <item name="052">Маккий</item>
-        <item name="053">Маккий</item>
-        <item name="054">Маккий</item>
-        <item name="055">Маккий</item>
-        <item name="056">Маккий</item>
-        <item name="057">Маккий</item>
-        <item name="058">Маккий</item>
-        <item name="059">Маккий</item>
-        <item name="060">Маккий</item>
-        <item name="061">Маккий</item>
-        <item name="062">Маккий</item>
-        <item name="063">Маккий</item>
-        <item name="064">Маккий</item>
-        <item name="065">Маккий</item>
-        <item name="066">Маккий</item>
-        <item name="067">Маккий</item>
-        <item name="068">Маккий</item>
-        <item name="069">Маккий</item>
-        <item name="070">Маккий</item>
-        <item name="071">Маккий</item>
-        <item name="072">Маккий</item>
-        <item name="073">Маккий</item>
-        <item name="074">Маккий</item>
-        <item name="075">Маккий</item>
-        <item name="076">Маккий</item>
-        <item name="077">Маккий</item>
-        <item name="078">Маккий</item>
-        <item name="079">Маккий</item>
-        <item name="080">Маккий</item>
-        <item name="081">Маккий</item>
-        <item name="082">Маккий</item>
-        <item name="083">Маккий</item>
-        <item name="084">Маккий</item>
-        <item name="085">Маккий</item>
-        <item name="086">Маккий</item>
-        <item name="087">Маккий</item>
-        <item name="088">Маккий</item>
-        <item name="089">Маккий</item>
-        <item name="090">Маккий</item>
-        <item name="091">Маккий</item>
-        <item name="092">Маккий</item>
-        <item name="093">Маккий</item>
-        <item name="094">Маккий</item>
-        <item name="095">Маккий</item>
-        <item name="096">Маккий</item>
-        <item name="097">Маккий</item>
-        <item name="098">Маккий</item>
-        <item name="099">Маккий</item>
-        <item name="100">Маккий</item>
-        <item name="101">Маккий</item>
-        <item name="102">Маккий</item>
-        <item name="103">Маккий</item>
-        <item name="104">Маккий</item>
-        <item name="105">Маккий</item>
-        <item name="106">Маккий</item>
-        <item name="107">Маккий</item>
-        <item name="108">Маккий</item>
-        <item name="109">Маккий</item>
-        <item name="110">Маккий</item>
-        <item name="111">Маккий</item>
-        <item name="112">Маккий</item>
-        <item name="113">Маккий</item>
-        <item name="114">Маккий</item>
-    </string-array>
 
-    <string-array name="DownloadOptions">
-        <item>Сураларни тушириб олиш</item>
-        <item>Бекор қилиш</item>
-    </string-array>
-
-    <string-array name="TranslationOptions">
+    <string-array name="translation_options">
         <item>Ўзбекча</item>
         <item>O\'zbekcha</item>
         <item>Русский</item>
@@ -276,21 +155,11 @@
         <item>Таржимасиз</item>
     </string-array>
 
-    <string-array name="ReciterOptions">
-        <item>Аш-Шатрий</item>
-        <item>Ал-Ғомидий</item>
-    </string-array>
-
-    <string-array name="AyatClickOptions">
-        <item>Сурани тинглаш</item>
-        <item>Oятни тинглаш</item>
+    <string-array name="ayat_click_options_add">
         <item>Oятни хатчўплаш</item>
     </string-array>
-    
-    <string-array name="AyatClickOptions2">
-        <item>Сурани тинглаш</item>
-        <item>Oятни тинглаш</item>
+
+    <string-array name="ayat_click_options_del">
         <item>Хатчўпни ўчириш</item>
     </string-array>
-
 </resources>

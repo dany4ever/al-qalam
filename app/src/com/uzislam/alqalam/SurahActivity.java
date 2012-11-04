@@ -69,7 +69,7 @@ public class SurahActivity extends Activity {
             currentAyat = extras.getInt("aNumber");
         }
         // TODO: Use Arabic titles
-        mTitles = getResources().getStringArray(R.array.SurahTitle);
+        mTitles = getResources().getStringArray(R.array.surah_titles);
 
         commonPrefs = getSharedPreferences(Utils.SETTINGS_FILE, 0);
         preferenceEditor = commonPrefs.edit();
@@ -221,9 +221,9 @@ public class SurahActivity extends Activity {
 
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.surah_activity, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -232,7 +232,6 @@ public class SurahActivity extends Activity {
     @SuppressWarnings("deprecation")
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        //final int selectedItem;
 
         switch (menuItem.getItemId()) {
             case R.id.translation: //MENU_ITEM_TRANSLATION :
@@ -251,7 +250,7 @@ public class SurahActivity extends Activity {
         if (id == DIALOG_TRANSLATION){
             ab.setTitle(R.string.translation_language);
 
-            ab.setSingleChoiceItems(R.array.TranslationOptions, TranslationType , new DialogInterface.OnClickListener() {
+            ab.setSingleChoiceItems(R.array.translation_options, TranslationType , new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int item) {
                     Log.i(TAG, "Item " + item);
                     changeTranslation(item);
@@ -267,10 +266,10 @@ public class SurahActivity extends Activity {
 
             ab.setTitle(R.string.options);
 
-            int options = R.array.AyatClickOptions;
+            int options = R.array.ayat_click_options_add;
 
             if (Bookmarks != null && Arrays.binarySearch(Bookmarks, selectedAyat) >= 0) {
-                options = R.array.AyatClickOptions2;
+                options = R.array.ayat_click_options_del;
             }
 
             ab.setSingleChoiceItems(options, 0 , new DialogInterface.OnClickListener() {
@@ -351,5 +350,5 @@ public class SurahActivity extends Activity {
         preferenceEditor.commit();
 
         showData();
-    }
+    }*/
 }

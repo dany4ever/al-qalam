@@ -5,8 +5,8 @@
    This file is part of Al-Qalam (com.uzislam.alqalam) package.
 
    Al-Qalam is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as 
-   published by the Free Software Foundation, either version 3 of the License, 
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
    or (at your option) any later version.
 
    Al-Qalam is distributed in the hope that it will be useful,
@@ -18,7 +18,7 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-    <string-array name="SurahTitle">
+    <string-array name="surah_titles">
         <item name="001">Fatiha</item>
         <item name="002">Bakara</item>
         <item name="003">Ali İmran</item>
@@ -135,12 +135,7 @@
         <item name="114">Nas</item>
     </string-array>
 
-    <string-array name="DownloadOptions">
-        <item>Süreleri indir</item>
-        <item>İptal et</item>
-    </string-array>
-
-    <string-array name="TranslationOptions">
+    <string-array name="translation_options">
         <item>Ўзбекча</item>
         <item>O\'zbekcha</item>
         <item>Русский</item>
@@ -148,20 +143,11 @@
         <item>Tercümesiz</item>
     </string-array>
 
-    <string-array name="ReciterOptions">
-        <item>Eş-Şatıri</item>
-        <item>Al-Ghamdi</item>
-    </string-array>
-
-    <string-array name="AyatClickOptions">
-        <item>Süreyi dinle</item>
-        <item>Ayeti dinle</item>
+    <string-array name="ayat_click_options_add">
         <item>Yer imlerine ekle</item>
     </string-array>
 
- 	<string-array name="AyatClickOptions2">
-        <item>Süreyi dinle</item>
-        <item>Ayeti dinle</item>
+ 	<string-array name="ayat_click_options_del">
         <item>Yer imlerinden sil</item>
     </string-array>
 </resources>

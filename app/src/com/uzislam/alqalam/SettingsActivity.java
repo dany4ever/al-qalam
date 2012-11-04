@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 (c) Al-Qalam Project
+ * Copyright 2012 (c) Al-Qalam Project
  *
  * This file is part of Al-Qalam (com.uzislam.alqalam) package.
  *
@@ -47,7 +47,7 @@ public class SettingsActivity extends PreferenceActivity {
             commonPrefs = getSharedPreferences(Utils.SETTINGS_FILE, MODE_PRIVATE);
             preferenceEditor = commonPrefs.edit();
 
-            translationOption = (ListPreference) findPreference("TransOption");
+            translationOption = (ListPreference) findPreference("key_translations");
             translationOption.setNegativeButtonText(R.string.btn_cancel);
             translationOption.setValueIndex(commonPrefs.getInt(Utils.SETTINGS_TRANSLATION_OPTION_TITLE, 0));
             translationOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -61,7 +61,7 @@ public class SettingsActivity extends PreferenceActivity {
                 }
             });
 
-            uiLocale = (ListPreference) findPreference("ui_locale");
+            /*uiLocale = (ListPreference) findPreference("ui_locale");
             uiLocale.setNegativeButtonText(R.string.btn_cancel);
             // The index of default language is 2 (Uzbek)
             uiLocale.setValueIndex(commonPrefs.getInt(Utils.SETTINGS_UI_LOCALE_TITLE, 2));
@@ -77,7 +77,7 @@ public class SettingsActivity extends PreferenceActivity {
                     finish();
                     return true;
                 }
-            });
+            });*/
 
      }
 

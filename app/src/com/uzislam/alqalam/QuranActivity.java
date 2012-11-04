@@ -68,8 +68,7 @@ public class QuranActivity extends Activity {
             }
         });
 
-        gSurahTitles = getResources().getStringArray(R.array.SurahTitle);
-        getResources().getStringArray(R.array.SurahInfo);
+        gSurahTitles = getResources().getStringArray(R.array.surah_titles);
         QuranAdapter        quranAdapter = new QuranAdapter(this);
         QuranIconifiedText  qit;
 
@@ -103,9 +102,9 @@ public class QuranActivity extends Activity {
         });
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.quran_activity, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -127,18 +126,19 @@ public class QuranActivity extends Activity {
         }
 
         return false;
-   }
+   }*/
 
    private void initialize() {
         Log.i(Utils.GTAG, "initialize the db...");
         Thread thread = new Thread() {
             public void run() {
                 new AlQalamDatabase(getApplicationContext());
-                /*// Creates the DB if it is the first time
+                /*AlQalamDatabase db = new AlQalamDatabase(getApplicationContext());
+                // Creates the DB if it is the first time
                 try {
                     db.openWritable();
                 } catch (Exception e) {
-                    Log.e(Utils.TAG, "Exception while trying to open Al-Qalam database");
+                    Log.e(Utils.GTAG, "Exception while trying to open Al-Qalam database");
                 } finally {
                     if (db != null) {
                         db.close();

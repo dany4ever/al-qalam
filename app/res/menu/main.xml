@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2010 (c) Al-Qalam Project
+   Copyright 2012 (c) Al-Qalam Project
 
    This file is part of Al-Qalam (com.uzislam.alqalam) package.
 
    Al-Qalam is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as 
-   published by the Free Software Foundation, either version 3 of the License, 
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
    or (at your option) any later version.
 
    Al-Qalam is distributed in the hope that it will be useful,
@@ -17,21 +17,16 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-	<item
-		android:id="@+id/info"
-		android:title="@string/info"
-		android:icon="@drawable/menu_icon_info">
-	</item>
-	<item
-		android:id="@+id/help"
-		android:title="@string/help"
-		android:icon="@drawable/menu_icon_help">
-	</item>
-	<item
-		android:id="@+id/settings"
-		android:title="@string/settings"
-		android:icon="@drawable/menu_icon_settings">
-	</item>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/settings"
+            android:title="@string/settings"
+            android:icon="@drawable/menu_icon_settings" />
+
+    <item android:id="@+id/bookmarks"
+            android:title="@string/bookmarks"
+            android:icon="@drawable/menu_icon_bookmarks" />
+
+    <item android:id="@+id/translation"
+            android:title="@string/translation"
+            android:icon="@drawable/menu_icon_translation" />
 </menu>
