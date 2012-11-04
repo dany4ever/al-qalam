@@ -1,11 +1,11 @@
 /*
- * Copyright 2010 (c) Al-Qalam Project
+ * Copyright 2012 (c) Al-Qalam Project
  *
  * This file is part of Al-Qalam (com.uzislam.alqalam) package.
  *
  * Al-Qalam is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 3 of the License, 
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the License,
  * or (at your option) any later version.
  *
  * Al-Qalam is distributed in the hope that it will be useful,
@@ -15,75 +15,74 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
-
+ */
 package com.uzislam.alqalam;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 public class AyatIconifiedText {
-    private long        id = -1 ;
-    private int         ayatOrder = 0;
-    private String      ayatArabicText = null;
-    private String      ayatUzbekText = null;
-    private Drawable    ayatBismillah = null;
-    private Drawable    ayatSpecialImage = null;
-    private Drawable    ayatBookmarkImage = null;
-    private int         ayatBackground = Color.TRANSPARENT;
-        
-    public AyatIconifiedText(long _id, int _order, String _arabic, String _uzbek) {
-        this.id = _id;
-        this.ayatOrder = _order;
-        this.ayatArabicText = _arabic;
-        this.ayatUzbekText = _uzbek;
+    private long mId = -1 ;
+    private int mOrder = 0;
+    private String mArabicText = null;
+    private String mTranslationText = null;
+    private Drawable mBismillahImage = null;
+    private Drawable mSpecialImage = null;
+    private Drawable mBookmarkImage = null;
+    private int mBackgroundColor = Color.TRANSPARENT;
+
+    public AyatIconifiedText(long id, int order, String arabic, String translation) {
+        mId = id;
+        mOrder = order;
+        mArabicText = arabic;
+        mTranslationText = translation;
     }
-    
+
     public long getId () {
-        return this.id;
+        return mId;
     }
-    
+
     public int getAyatOrder() {
-        return this.ayatOrder;
+        return mOrder;
     }
-    
+
     public String getAyatUzbekText() {
-        return this.ayatUzbekText ;
+        return mTranslationText ;
     }
-    
+
     public String getAyatArabicText() {
-        return this.ayatArabicText ;
+        return mArabicText ;
     }
-    
-    public Drawable getAyatBismillah() {
-        return this.ayatBismillah ;
+
+    public Drawable getBismillahImage() {
+        return mBismillahImage;
+    }
+
+    public void setBismillahImage (Drawable img) {
+        mBismillahImage  = img;
     }
 
     public Drawable getAyatSpecialImage() {
-        return this.ayatSpecialImage;
+        return mSpecialImage;
     }
-    
+
     public int getAyatBackground() {
-        return this.ayatBackground;
+        return mBackgroundColor;
     }
-    
+
     public Drawable getAyatBookmarkImage () {
-        return this.ayatBookmarkImage;
+        return mBookmarkImage;
     }
-    
-    public void setAyatBismillah (Drawable img) {
-        this.ayatBismillah  = img;
+
+    public void setAyatBackground (int color) {
+        mBackgroundColor  = color;
     }
-    
-    public void setAyatBackground (int bg) {
-        this.ayatBackground  = bg;
-    }
-    
+
     public void setAyatSpecialImage (Drawable img) {
-        this.ayatSpecialImage = img;
+        mSpecialImage = img;
     }
-        
+
     public void setAyatBookmarkImage (Drawable img) {
-        this.ayatBookmarkImage = img;
+        mBookmarkImage = img;
     }
 }
