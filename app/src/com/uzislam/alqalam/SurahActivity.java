@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 (c) Al-Qalam Project
+ * Copyright 2012 (c) Al-Qalam Project
  *
  * This file is part of Al-Qalam (com.uzislam.alqalam) package.
  *
@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.uzislam.alqalam;
 
@@ -40,23 +40,24 @@ import android.widget.AdapterView.OnItemLongClickListener;
 
 public class SurahActivity extends Activity {
     private static final String TAG = "SurahActivity";
-    private String []       AYATSTRANS;
-    private String []       AYATSARABIC;
-    private int[]           Bookmarks;
-    private int             surahNumber = 0;
-    private int             currentAyat = 0;
-    private int             selectedAyat = 0;
+    private String [] AYATSTRANS;
+    private String [] AYATSARABIC;
+    private int[] Bookmarks;
+    private int surahNumber = 0;
+    private int currentAyat = 0;
+    private int selectedAyat = 0;
 
     private String[] mTitles;
-    private SurahAdapter        surahAdapter;
-    private ListView            ayatList;
+    private SurahAdapter surahAdapter;
+    private ListView ayatList;
 
-    private final int           DIALOG_TRANSLATION = 0x01;
-    private final int           DIALOG_AYAT_CLICK_OPTION = 0x03;
+    private final int DIALOG_TRANSLATION = 0x01;
+    private final int DIALOG_AYAT_CLICK_OPTION = 0x03;
 
-    private SharedPreferences           commonPrefs;
-    private SharedPreferences.Editor    preferenceEditor = null;
-    private int                         TranslationType = 0;
+    private SharedPreferences commonPrefs;
+    private SharedPreferences.Editor preferenceEditor;
+    private int TranslationType = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,13 +72,11 @@ public class SurahActivity extends Activity {
         // TODO: Use Arabic titles
         mTitles = getResources().getStringArray(R.array.SurahTitle);
 
-        commonPrefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, 0);
+        commonPrefs = getSharedPreferences(Utils.SETTINGS_FILE, 0);
         preferenceEditor = commonPrefs.edit();
 
         // Get Translation Type from shared preferences, default is 0 (uzbek-cyr)
-        TranslationType = commonPrefs.getInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, 0);
-
-        commonPrefs.getInt(CONSTANTS.SETTINGS_RECITER_OPTION_TITLE, 0);
+        TranslationType = commonPrefs.getInt(Utils.SETTINGS_TRANSLATION_OPTION_TITLE, 0);
 
         // create new chapter adapter
         surahAdapter = new SurahAdapter(this);
@@ -104,8 +103,8 @@ public class SurahActivity extends Activity {
     	setTitle(mTitles[surahNumber]);
 
         // create string arrays for verses
-        AYATSTRANS = new String[CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber]];
-        AYATSARABIC = new String [CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber]];
+        AYATSTRANS = new String[Utils.SURAH_NUMBER_OF_AYATS[surahNumber]];
+        AYATSARABIC = new String [Utils.SURAH_NUMBER_OF_AYATS[surahNumber]];
 
 
         AlQalamDatabase db = new AlQalamDatabase(this);
@@ -115,7 +114,7 @@ public class SurahActivity extends Activity {
         int index = 0;
 
         // if translation is enabled
-        if (TranslationType != CONSTANTS.NUMBER_OF_TRANSLATIONS) {
+        if (TranslationType != Utils.NUMBER_OF_TRANSLATIONS) {
             cursor = db.getVerses(surahNumber + 1, TranslationType);
             index = 0;
             if (cursor.moveToFirst()) {
@@ -164,14 +163,14 @@ public class SurahActivity extends Activity {
     private void showData() {
 
         AyatIconifiedText   ait;
-        Drawable            iconBismillah =  null, bookmarkImage = null;
-        int                 AyatBackground = Color.TRANSPARENT;
+        Drawable iconBismillah =  null, bookmarkImage = null;
+        int AyatBackground = Color.TRANSPARENT;
 
         surahAdapter.clear();
 
         resetData();
 
-        for (int i=0; i < CONSTANTS.SURAH_NUMBER_OF_AYATS[surahNumber] ; i++) {
+        for (int i=0; i < Utils.SURAH_NUMBER_OF_AYATS[surahNumber] ; i++) {
 
             // check if BISMILLAH must be shown
             if (i == 0 && surahNumber != 0 && surahNumber != 8)
@@ -209,13 +208,13 @@ public class SurahActivity extends Activity {
 
     private Drawable getSpecialImage(int surah, int ayat) {
 
-        for (int i=0; i <CONSTANTS.NUMBER_OF_SAJDAS; i++) {
-            if (CONSTANTS.SAJDA_INDEXES[i][0] == surah &&  CONSTANTS.SAJDA_INDEXES[i][1] == ayat)
+        for (int i=0; i <Utils.NUMBER_OF_SAJDAS; i++) {
+            if (Utils.SAJDA_INDEXES[i][0] == surah &&  Utils.SAJDA_INDEXES[i][1] == ayat)
                 return getResources().getDrawable(R.drawable.sajdah);
         }
 
-        for (int i=0; i<CONSTANTS.NUMBER_OF_JUZZ; i++) {
-            if (CONSTANTS.JUZZ_INDEXES[i][0] == surah && CONSTANTS.JUZZ_INDEXES[i][1] == ayat)
+        for (int i=0; i<Utils.NUMBER_OF_JUZZ; i++) {
+            if (Utils.JUZZ_INDEXES[i][0] == surah && Utils.JUZZ_INDEXES[i][1] == ayat)
                 return getResources().getDrawable(R.drawable.juzz);
         }
 
@@ -349,7 +348,7 @@ public class SurahActivity extends Activity {
     private void changeTranslation(int lng) {
         removeDialog(DIALOG_TRANSLATION);
         TranslationType = lng;
-        preferenceEditor.putInt(CONSTANTS.SETTINGS_TRANSLATION_OPTION_TITLE, lng);
+        preferenceEditor.putInt(Utils.SETTINGS_TRANSLATION_OPTION_TITLE, lng);
         preferenceEditor.commit();
 
         showData();

@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package com.uzislam.alqalam;
 
 import android.app.Activity;
@@ -39,10 +39,10 @@ public class QuranActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         initialize();
-        SharedPreferences prefs = getSharedPreferences(CONSTANTS.SETTINGS_FILE, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(Utils.SETTINGS_FILE, MODE_PRIVATE);
         String[] availableLocales = getResources().getStringArray(R.array.locale_values);
         // The index of default language is 2 (Uzbek)
-        int index = prefs.getInt(CONSTANTS.SETTINGS_UI_LOCALE_TITLE, 2);
+        int index = prefs.getInt(Utils.SETTINGS_UI_LOCALE_TITLE, 2);
         Utils.updateUiLocale(this, availableLocales[index]);
         super.onCreate(savedInstanceState);
 
@@ -62,8 +62,8 @@ public class QuranActivity extends Activity {
             public void onItemClick(AdapterView<?> adapter, View view,
                     final int index, long order) {
                 Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
-                quranIntent.putExtra("sNumber", CONSTANTS.JUZZ_INDEXES[index][0]-1);
-                quranIntent.putExtra("aNumber", CONSTANTS.JUZZ_INDEXES[index][1]);
+                quranIntent.putExtra("sNumber", Utils.JUZZ_INDEXES[index][0]-1);
+                quranIntent.putExtra("aNumber", Utils.JUZZ_INDEXES[index][1]);
                 startActivity(quranIntent);
             }
         });
@@ -75,12 +75,12 @@ public class QuranActivity extends Activity {
 
         // check which Surah's Arabic Text is already downloaded
         int j = 0;
-        for (int i=0; i < CONSTANTS.NUMBER_OF_SURAHS ; i++) {
-            if (i+1 == CONSTANTS.MADANI_SURAH_INDEX[j]) {
-                qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_madani, CONSTANTS.SURAH_NUMBER_OF_AYATS[i]), CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
+        for (int i=0; i < Utils.NUMBER_OF_SURAHS ; i++) {
+            if (i+1 == Utils.MADANI_SURAH_INDEX[j]) {
+                qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_madani, Utils.SURAH_NUMBER_OF_AYATS[i]));
                 j++;
             } else {
-                qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_makki, CONSTANTS.SURAH_NUMBER_OF_AYATS[i]), CONSTANTS.SURAH_IS_ARABIC_DOWNLOADED[i]);
+                qit = new QuranIconifiedText(i, gSurahTitles[i], i+1, /*gSurahInfos[i]*/getString(R.string.surah_makki, Utils.SURAH_NUMBER_OF_AYATS[i]));
             }
             quranAdapter.addItem(qit);
         }
