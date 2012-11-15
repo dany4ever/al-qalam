@@ -2,11 +2,11 @@
 <!--
    Copyright 2010 (c) Al-Qalam Project
 
-   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+   This file is part of Al-Qalam (uz.efir.alqalam) package.
 
    Al-Qalam is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as 
-   published by the Free Software Foundation, either version 3 of the License, 
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
    or (at your option) any later version.
 
    Al-Qalam is distributed in the hope that it will be useful,
@@ -18,7 +18,7 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<TextView 
+<TextView
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/juzzNumber"
 		android:layout_width="45dip"

@@ -2,11 +2,11 @@
 <!--
    Copyright 2010 (c) Al-Qalam Project
 
-   This file is part of Al-Qalam (com.uzislam.alqalam) package.
+   This file is part of Al-Qalam (uz.efir.alqalam) package.
 
    Al-Qalam is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as 
-   published by the Free Software Foundation, either version 3 of the License, 
+   it under the terms of the GNU Lesser General Public License as
+   published by the Free Software Foundation, either version 3 of the License,
    or (at your option) any later version.
 
    Al-Qalam is distributed in the hope that it will be useful,
@@ -18,7 +18,7 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.uzislam.alqalam"
+        package="uz.efir.alqalam"
         android:versionCode="6"
         android:versionName="4.0"
         android:installLocation="auto">
@@ -40,6 +40,6 @@
         <activity android:name=".SurahActivity" android:screenOrientation="portrait" />
         <activity android:name=".SettingsActivity" android:screenOrientation="portrait" />
         <activity android:name=".BookmarksActivity" android:screenOrientation="portrait" />
-        <!-- provider android:name=".database.Provider" android:authorities="com.uzislam.alqalam" / -->
+        <!-- provider android:name=".database.Provider" android:authorities="uz.efir.alqalam" / -->
     </application>
-</manifest> 
+</manifest>

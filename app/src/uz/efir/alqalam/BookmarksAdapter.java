@@ -1,11 +1,11 @@
 /*
  * Copyright 2010 (c) Al-Qalam Project
  *
- * This file is part of Al-Qalam (com.uzislam.alqalam) package.
+ * This file is part of Al-Qalam (uz.efir.alqalam) package.
  *
  * Al-Qalam is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 3 of the License, 
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the License,
  * or (at your option) any later version.
  *
  * Al-Qalam is distributed in the hope that it will be useful,
@@ -17,7 +17,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.uzislam.alqalam;
+package uz.efir.alqalam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +32,12 @@ import android.widget.TextView;
 
 public class BookmarksAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<QuranIconifiedText> mItems = new ArrayList<QuranIconifiedText>(); 
-    
+    private List<QuranIconifiedText> mItems = new ArrayList<QuranIconifiedText>();
+
     public BookmarksAdapter(Context context) {
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-    
+
     @Override
     public int getCount() {
         return mItems.size();
@@ -52,22 +52,22 @@ public class BookmarksAdapter extends BaseAdapter {
     public long getItemId(int arg0) {
         return mItems.get(arg0).getId();
     }
-    
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
          ViewHolder vHolder;
-               
+
          if (convertView == null) {
             convertView = mInflater.inflate(R.layout.bookmark_row, null);
 
             vHolder = new ViewHolder();
-             
+
             //vHolder.SurahTitle = (TextView) convertView.findViewById(R.id.QuranRow_Title);
             //vHolder.SurahOrder = (TextView) convertView.findViewById(R.id.QuranRow_Order);
             //vHolder.SurahInfo = (TextView) convertView.findViewById(R.id.QuranRow_Info);
-            vHolder.BookmarkRow = (LinearLayout) convertView.findViewById(R.id.QuranRow_Group);        
-            
+            vHolder.BookmarkRow = (LinearLayout) convertView.findViewById(R.id.QuranRow_Group);
+
             convertView.setTag(vHolder);
          } else {
             vHolder = (ViewHolder) convertView.getTag();
@@ -76,26 +76,26 @@ public class BookmarksAdapter extends BaseAdapter {
          vHolder.SurahTitle.setText(mItems.get(position).getSurahTitle());
          vHolder.SurahOrder.setText(mItems.get(position).getSurahOrder()+ "");
          vHolder.SurahInfo.setText(mItems.get(position).getSurahInfo());
-         
+
          if (position % 2 == 0) {
              vHolder.BookmarkRow.setBackgroundColor(Color.WHITE);
          }
 
          return convertView;
     }
-    
+
      static class ViewHolder {
          TextView       SurahTitle;
          TextView       SurahOrder;
          TextView       SurahInfo;
          LinearLayout   BookmarkRow;
     }
-    
-    
+
+
     public void addItem(QuranIconifiedText it) {
-        mItems.add(it); 
+        mItems.add(it);
     }
-    
+
     public void clear(){
         mItems.clear();
     }
