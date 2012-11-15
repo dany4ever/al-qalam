@@ -1,7 +1,7 @@
 /*
  * Copyright 2012 (c) Al-Qalam Project
  *
- * This file is part of Al-Qalam (com.uzislam.alqalam) package.
+ * This file is part of Al-Qalam (uz.efir.alqalam) package.
  *
  * Al-Qalam is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.uzislam.alqalam;
+package uz.efir.alqalam;
 
 import java.util.ArrayList;
 import java.util.List;
