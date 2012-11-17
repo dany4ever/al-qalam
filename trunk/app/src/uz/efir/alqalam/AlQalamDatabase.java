@@ -124,10 +124,10 @@ public class AlQalamDatabase {
 
             // Create Qur'an database
             createTable(db, TABLE_ARABIC);
-            createTable(db, TABLE_RUSSIAN);
-            createTable(db, TABLE_TURKISH);
             createTable(db, TABLE_UZBEK_CYRILLIC);
-            createTable(db, TABLE_UZBEK_LATIN);
+            //createTable(db, TABLE_RUSSIAN);
+            //createTable(db, TABLE_TURKISH);
+            //createTable(db, TABLE_UZBEK_LATIN);
 
             // Bookmarks table
             db.execSQL("CREATE TABLE " + TABLE_BOOKMARKS +" (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -174,13 +174,13 @@ public class AlQalamDatabase {
 
             final Resources resources = mContext.getResources();
             InputStream inputStream = null;
-            if (TABLE_UZBEK_LATIN.equals(which)) {
+            /*if (TABLE_UZBEK_LATIN.equals(which)) {
                 inputStream = resources.openRawResource(R.raw.uzbek_latin);
             } else if (TABLE_RUSSIAN.equals(which)) {
                 inputStream = resources.openRawResource(R.raw.russian);
             } else if (TABLE_TURKISH.equals(which)) {
                 inputStream = resources.openRawResource(R.raw.turkish);
-            } else if (TABLE_ARABIC.equals(which)) {
+            } else */if (TABLE_ARABIC.equals(which)) {
                 inputStream = resources.openRawResource(R.raw.quran);
             } else {
                 inputStream = resources.openRawResource(R.raw.uzbek_cyrillic);

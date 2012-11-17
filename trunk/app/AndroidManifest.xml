@@ -19,18 +19,15 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="uz.efir.alqalam"
-        android:versionCode="6"
+        android:versionCode="1"
         android:versionName="4.0"
         android:installLocation="auto">
-    <uses-sdk android:minSdkVersion="15" />
-    <supports-screens
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:smallScreens="false"
-        android:anyDensity="true" />
+    <uses-sdk android:minSdkVersion="15"
+        android:targetSdkVersion="17" />
     <application android:label="@string/app_name"
             android:icon="@drawable/icon"
-            android:theme="@android:style/Theme.Holo.Light">
+            android:theme="@android:style/Theme.Holo.Light"
+            android:allowBackup="false"><!-- TODO: allow users to backup their settings and bookmarks -->
         <activity android:name=".QuranActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,8 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SurahActivity" android:screenOrientation="portrait" />
-        <activity android:name=".SettingsActivity" android:screenOrientation="portrait" />
-        <activity android:name=".BookmarksActivity" android:screenOrientation="portrait" />
-        <!-- provider android:name=".database.Provider" android:authorities="uz.efir.alqalam" / -->
+        <!-- activity android:name=".SettingsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".BookmarksActivity" android:screenOrientation="portrait" /-->
     </application>
 </manifest>
