@@ -24,6 +24,7 @@
     <color name="dark_red" translatable="false">#004b54</color>
     <color name="light_blue" translatable="false">#e8f3f8</color>
 
+    <string name="initializing_database">Қуръон матни юкланмоқда\u2026</string>
     <string name="btn_confirm">Тасдиқ</string>
     <string name="btn_cancel">Бекор қилиш</string>
     <string name="translation">Таржима</string>

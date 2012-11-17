@@ -18,12 +18,6 @@
  */
 package uz.efir.alqalam;
 
-import java.util.Locale;
-
-import android.content.Context;
-import android.content.res.Configuration;
-import android.text.TextUtils;
-
 public class Utils {
     // Global application log tag
     public static final String GTAG = "Al-Qalam";
@@ -56,7 +50,7 @@ public class Utils {
             {58, 1}, {67, 1}, {78, 1}
         };
 
-    public static final String SETTINGS_FILE = "alQalam.set";
+    public static final String SETTINGS_FILE = "alqalam_settings";
     public static final String SETTINGS_TRANSLATION_OPTION_TITLE ="TransOption";
     public static final String SETTINGS_UI_LOCALE_TITLE = "UiLocale";
     public static final int NUMBER_OF_TRANSLATIONS = 4;
@@ -75,7 +69,7 @@ public class Utils {
     }
 
     // Overrides the system locale and sets user selected one
-    public static void updateUiLocale(Context context, String locale) {
+    /*public static void updateUiLocale(Context context, String locale) {
         Configuration config = new Configuration();
         if (TextUtils.isEmpty(locale)) {
             config.locale = new Locale("uz");
@@ -83,5 +77,5 @@ public class Utils {
             config.locale = new Locale(locale);
         }
         context.getResources().updateConfiguration(config, null);
-    }
+    }*/
 }
