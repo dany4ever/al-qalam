@@ -76,7 +76,7 @@
     		android:layout_height="45dip"
     		android:background="@drawable/ayah"
     		android:text="286"
-    		android:textColor="#217dc2"
+    		android:textColor="@color/default_text"
     		android:gravity="center_horizontal|center_vertical" />
 
     	<ImageView android:id="@+id/ayatSpecialImage"

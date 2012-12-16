@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2010 (c) Al-Qalam Project
+   Copyright 2012 (c) Al-Qalam Project
 
    This file is part of Al-Qalam (uz.efir.alqalam) package.
 
@@ -17,25 +17,23 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- 	android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="left"
     android:id="@+id/QuranRow_Group"
-    android:background="#DBEDFB"
-    android:padding="5dip">
+    android:background="@color/default_background"
+    android:padding="@dimen/padding_default">
 
-	<TextView android:id="@+id/QuranRow_Order"
-		android:layout_width="48dip"
-		android:layout_height="48dip"
-		android:text = "114"
-		android:textStyle="normal"
-		android:gravity="center"
-		android:textColor="#217dc2"
-		android:textSize="13dip"
-		android:background="@drawable/surah_number_bg" />
+    <TextView android:id="@+id/QuranRow_Order"
+        android:layout_width="48dip"
+        android:layout_height="48dip"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:textColor="@color/default_text"
+        android:textSize="13dip"
+        android:background="@drawable/surah_number_bg" />
 
 	<LinearLayout
  		android:orientation="vertical"
@@ -51,7 +49,7 @@
 			android:textSize="16dip"
 			android:gravity="left|center_vertical"
 			android:paddingLeft="5dip"
-			android:textColor="#217dc2" />
+			android:textColor="@color/default_text" />
 
 		 <TextView android:id="@+id/QuranRow_Info"
 			android:layout_width="200dip"
@@ -60,7 +58,7 @@
 			android:textSize="12dip"
 			android:gravity="left|center_vertical"
 			android:paddingLeft="5dip"
-			android:textColor="#217dc2" />
+			android:textColor="@color/default_text" />
 
 	</LinearLayout>
 </LinearLayout>

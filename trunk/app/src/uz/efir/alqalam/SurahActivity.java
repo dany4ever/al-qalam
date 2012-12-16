@@ -21,40 +21,32 @@ package uz.efir.alqalam;
 import java.util.Arrays;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 public class SurahActivity extends Activity {
-    private static final String TAG = "SurahActivity";
+    //private static final String TAG = "SurahActivity";
     private String [] AYATSTRANS;
     private String [] AYATSARABIC;
-    private int[] Bookmarks;
-    private int surahNumber = 0;
-    private int currentAyat = 0;
-    private int selectedAyat = 0;
+    private int[] mBookmarks;
+    private int mSurahNumber;
+    private int mCurrentAyat;
+    //private int selectedAyat = 0;
 
     private String[] mTitles;
     private SurahAdapter surahAdapter;
     private ListView ayatList;
 
-    private final int DIALOG_TRANSLATION = 0x01;
-    private final int DIALOG_AYAT_CLICK_OPTION = 0x03;
+    //private final int DIALOG_TRANSLATION = 0x01;
+    //private final int DIALOG_AYAT_CLICK_OPTION = 0x03;
 
-    private SharedPreferences commonPrefs;
-    private SharedPreferences.Editor preferenceEditor;
+    private SharedPreferences mSharedPrefs;
+    //private SharedPreferences.Editor preferenceEditor;
     private int TranslationType = 0;
 
     @Override
@@ -62,28 +54,24 @@ public class SurahActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.surah);
 
-        Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-            surahNumber = extras.getInt("sNumber");
-            currentAyat = extras.getInt("aNumber");
-        }
+        Intent intent = getIntent();
+        mSurahNumber = intent.getIntExtra("sNumber", 0);
+        mCurrentAyat = intent.getIntExtra("aNumber", 0);
         // TODO: Use Arabic titles
         mTitles = getResources().getStringArray(R.array.surah_titles);
 
-        commonPrefs = getSharedPreferences(Utils.SETTINGS_FILE, 0);
-        preferenceEditor = commonPrefs.edit();
+        mSharedPrefs = getSharedPreferences(Utils.SETTINGS_FILE, 0);
+        //preferenceEditor = mSharedPrefs.edit();
 
         // Get Translation Type from shared preferences, default is 0 (uzbek-cyr)
-        TranslationType = commonPrefs.getInt(Utils.SETTINGS_TRANSLATION_OPTION_TITLE, 0);
+        TranslationType = mSharedPrefs.getInt(Utils.SETTINGS_TRANSLATION_OPTION_TITLE, 0);
 
         // create new chapter adapter
         surahAdapter = new SurahAdapter(this);
 
         // get AyatList View
         ayatList = (ListView)findViewById(R.id.AyaList);
-
-        ayatList.setOnItemLongClickListener(new OnItemLongClickListener() {
+        /*ayatList.setOnItemLongClickListener(new OnItemLongClickListener() {
 
             @SuppressWarnings("deprecation")
             @Override
@@ -92,18 +80,17 @@ public class SurahActivity extends Activity {
                         showDialog(DIALOG_AYAT_CLICK_OPTION);
                         return true;
             }
-        });
+        });*/
         // Display surah
         showData();
     }
 
     private void resetData() {
-
-    	setTitle(mTitles[surahNumber]);
+        setTitle(mTitles[mSurahNumber]);
 
         // create string arrays for verses
-        AYATSTRANS = new String[Utils.SURAH_NUMBER_OF_AYATS[surahNumber]];
-        AYATSARABIC = new String [Utils.SURAH_NUMBER_OF_AYATS[surahNumber]];
+        AYATSTRANS = new String[Utils.SURAH_NUMBER_OF_AYATS[mSurahNumber]];
+        AYATSARABIC = new String [Utils.SURAH_NUMBER_OF_AYATS[mSurahNumber]];
 
 
         AlQalamDatabase db = new AlQalamDatabase(this);
@@ -114,40 +101,33 @@ public class SurahActivity extends Activity {
 
         // if translation is enabled
         if (TranslationType != Utils.NUMBER_OF_TRANSLATIONS) {
-            cursor = db.getVerses(surahNumber + 1, TranslationType);
+            cursor = db.getVerses(mSurahNumber + 1, TranslationType);
             index = 0;
             if (cursor.moveToFirst()) {
-                do
-                {
+                do {
                     AYATSTRANS[index] = cursor.getString(cursor.getColumnIndex(AlQalamDatabase.COLUMN_AYAT));
                     index++;
                 } while(cursor.moveToNext());
             }
-
             cursor.close();
-
         }
 
         // Now read Bookmarked ayats to Array
-        cursor = db.getBookmarksForSurah(surahNumber+1);
-        if(cursor.moveToFirst())
-        {
-            Bookmarks = new int [cursor.getCount()];
-
-            do
-            {
-                Bookmarks[index] = cursor.getInt(cursor.getColumnIndex(AlQalamDatabase.COLUMN_AYATNO));
+        cursor = db.getBookmarksForSurah(mSurahNumber+1);
+        if (cursor.moveToFirst()) {
+            mBookmarks = new int [cursor.getCount()];
+            do {
+                mBookmarks[index] = cursor.getInt(cursor.getColumnIndex(AlQalamDatabase.COLUMN_AYATNO));
                 index++;
 
             } while(cursor.moveToNext());
-        }
-        else {
-            Bookmarks =  null;
+        } else {
+            mBookmarks =  null;
         }
         cursor.close();
 
         // Put verses
-        cursor = db.getArabicVerses(surahNumber + 1);
+        cursor = db.getArabicVerses(mSurahNumber + 1);
         index = 0;
         if (cursor.moveToFirst()) {
             do {
@@ -160,59 +140,47 @@ public class SurahActivity extends Activity {
     }
 
     private void showData() {
-
-        AyatIconifiedText   ait;
-        Drawable iconBismillah =  null, bookmarkImage = null;
-        int AyatBackground = Color.TRANSPARENT;
+        AyatIconifiedText ait;
+        final Drawable iconBismillah = getResources().getDrawable(R.drawable.bismillah);
+        final Drawable bookmarkImage = getResources().getDrawable(R.drawable.bookmark_icon);
 
         surahAdapter.clear();
-
         resetData();
 
-        for (int i=0; i < Utils.SURAH_NUMBER_OF_AYATS[surahNumber] ; i++) {
-
-            // check if BISMILLAH must be shown
-            if (i == 0 && surahNumber != 0 && surahNumber != 8)
-                iconBismillah = getResources().getDrawable(R.drawable.bismillah);
-
-            if (Bookmarks != null && Arrays.binarySearch(Bookmarks, i+1) >= 0) {
-                bookmarkImage = getResources().getDrawable(R.drawable.bookmark_icon);
-                AyatBackground = Color.rgb(243, 255, 140);
-            }
-
+        for (int i = 0; i < Utils.SURAH_NUMBER_OF_AYATS[mSurahNumber]; i++) {
             ait = new AyatIconifiedText(i, i+1, AYATSARABIC[i], AYATSTRANS[i]);
-
-            ait.setAyatSpecialImage(getSpecialImage(surahNumber+1, i+1));
-            ait.setAyatBookmarkImage(bookmarkImage);
-            ait.setBismillahImage(iconBismillah);
-            ait.setAyatBackground(AyatBackground);
-
+            // check if BISMILLAH must be shown
+            if (i == 0 && mSurahNumber != 0 && mSurahNumber != 8) {
+                ait.setBismillahImage(iconBismillah);
+            }
+            // Put bookmarks
+            if (mBookmarks != null && Arrays.binarySearch(mBookmarks, i + 1) >= 0) {
+                ait.setAyatBookmarkImage(bookmarkImage);
+                ait.setAyatBackground(Color.rgb(243, 255, 140));
+            }
+            // Put juzz and/or sajda icons
+            ait.setAyatSpecialImage(getSpecialImage(mSurahNumber + 1, i + 1));
             surahAdapter.addItem(ait);
-
-            iconBismillah =  null;
-            bookmarkImage = null;
-            AyatBackground = Color.TRANSPARENT;
         }
 
         // make verses appear in list view
         ayatList.setAdapter(surahAdapter);
-        ayatList.setCacheColorHint(00000000);
         ayatList.setDivider(null);
 
-        // Jump to Specific Ayat (if defined);
-        if (currentAyat != 0) {
-            ayatList.setSelectionFromTop(currentAyat - 1, 0);
+        // Jump to specific Ayat (if defined);
+        if (mCurrentAyat > 0) {
+            ayatList.setSelectionFromTop(mCurrentAyat - 1, 0);
         }
     }
 
     private Drawable getSpecialImage(int surah, int ayat) {
-
-        for (int i=0; i <Utils.NUMBER_OF_SAJDAS; i++) {
+        // Sajda icon
+        for (int i = 0; i < Utils.NUMBER_OF_SAJDAS; i++) {
             if (Utils.SAJDA_INDEXES[i][0] == surah &&  Utils.SAJDA_INDEXES[i][1] == ayat)
                 return getResources().getDrawable(R.drawable.sajdah);
         }
-
-        for (int i=0; i<Utils.NUMBER_OF_JUZZ; i++) {
+        // Juzz icon
+        for (int i = 0; i < Utils.NUMBER_OF_JUZZ; i++) {
             if (Utils.JUZZ_INDEXES[i][0] == surah && Utils.JUZZ_INDEXES[i][1] == ayat)
                 return getResources().getDrawable(R.drawable.juzz);
         }
