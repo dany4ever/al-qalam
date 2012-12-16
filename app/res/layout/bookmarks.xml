@@ -18,20 +18,17 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
    android:gravity="center_vertical|center_horizontal"
 -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:id="@+id/bookmarkView"
-    android:background="#DBEDFB">
+    android:background="@color/default_background">
 
- 	<ListView
-		android:id="@+id/BookmarkList"
-		android:orientation="vertical"
-	   	android:layout_height="wrap_content"
-	   	android:layout_width="fill_parent"
-	   	android:scrollingCache="true">
-	</ListView>
-
+    <ListView
+        android:id="@+id/BookmarkList"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:scrollingCache="true" />
 </LinearLayout>

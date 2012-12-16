@@ -19,11 +19,8 @@
 package uz.efir.alqalam;
 
 public class Utils {
-    // Global application log tag
-    public static final String GTAG = "Al-Qalam";
 
     public static final int NUMBER_OF_SURAHS = 114;
-    public static final int NUMBER_OF_JUZZ = 30;
     public static final int[] SURAH_NUMBER_OF_AYATS = new int[] {7,286,200,176,120,165,206,75,129,
             109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,
             83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,
@@ -40,9 +37,10 @@ public class Utils {
 
     public static final int NUMBER_OF_SAJDAS = 14;
     public static final int [][] SAJDA_INDEXES = new int [][] {
-            {7,206}, {13, 15}, {16, 50}, {17,109}, {19, 58}, {22, 18}, {25, 60},
+            {7, 206}, {13, 15}, {16, 50}, {17,109}, {19, 58}, {22, 18}, {25, 60},
             {27, 26}, {32, 15}, {38, 24}, {41,38}, {53, 62}, {84,21}, {96, 19}
         };
+    public static final int NUMBER_OF_JUZZ = 30;
     public static final int [][] JUZZ_INDEXES = new int [][] {
             {1, 1}, {2, 142}, {2, 253}, {3, 93}, {4, 24}, {4, 148}, {5, 82}, {6,111}, {7, 88},
             {8, 41}, {9, 93}, {11, 6}, {12, 53}, {15, 1}, {17, 1}, {18, 75}, {21, 1}, {23, 1},
@@ -55,7 +53,7 @@ public class Utils {
     public static final String SETTINGS_UI_LOCALE_TITLE = "UiLocale";
     public static final int NUMBER_OF_TRANSLATIONS = 4;
 
-    public static final String numberToString(int a) {
+    /*public static final String numberToString(int a) {
         String rTxt;
         if (a < 10) {
             rTxt = "00" + a;
@@ -66,10 +64,10 @@ public class Utils {
         }
 
         return rTxt;
-    }
+    }*/
 
-    // Overrides the system locale and sets user selected one
-    /*public static void updateUiLocale(Context context, String locale) {
+    /*// Overrides the system locale and sets user selected one
+    public static void updateUiLocale(Context context, String locale) {
         Configuration config = new Configuration();
         if (TextUtils.isEmpty(locale)) {
             config.locale = new Locale("uz");

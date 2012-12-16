@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 (c) Al-Qalam Project
+ * Copyright 2012 (c) Al-Qalam Project
  *
  * This file is part of Al-Qalam (uz.efir.alqalam) package.
  *
@@ -48,15 +48,13 @@ public class QuranActivity extends Activity {
         gJuzzList.setHorizontalScrollBarEnabled(false);
         String [] juzz_array = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15",
                 "16","17","18","19","20", "21","22","23","24","25","26","27","28","29","30"};
-        // By using setAdpater method in ListView we can add string array in list.
-        gJuzzList.setAdapter(new ArrayAdapter<String>(this,R.layout.quran_juzz, juzz_array));
-        gJuzzList.setCacheColorHint(00000000);
+        gJuzzList.setAdapter(new ArrayAdapter<String>(mActivity, R.layout.quran_juzz, juzz_array));
         gJuzzList.setDivider(null);
         gJuzzList.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view,
                     final int index, long order) {
-                Intent quranIntent = new Intent(QuranActivity.this, SurahActivity.class);
+                Intent quranIntent = new Intent(mActivity, SurahActivity.class);
                 quranIntent.putExtra("sNumber", Utils.JUZZ_INDEXES[index][0]-1);
                 quranIntent.putExtra("aNumber", Utils.JUZZ_INDEXES[index][1]);
                 startActivity(quranIntent);
@@ -64,7 +62,7 @@ public class QuranActivity extends Activity {
         });
 
         gSurahTitles = getResources().getStringArray(R.array.surah_titles);
-        QuranAdapter quranAdapter = new QuranAdapter(this);
+        QuranAdapter quranAdapter = new QuranAdapter(mActivity);
         QuranIconifiedText qit;
 
         // check which Surah's Arabic Text is already downloaded
@@ -116,10 +114,10 @@ public class QuranActivity extends Activity {
         Log.i(Utils.GTAG, "onOptionsItemSelected: " + menuItem);
         switch (menuItem.getItemId()) {
             case R.id.bookmarks:
-                startActivity(new Intent(this, BookmarksActivity.class));
+                startActivity(new Intent(mActivity, BookmarksActivity.class));
                 return true;
             case R.id.settings:
-                startActivity(new Intent(this, SettingsActivity.class));
+                startActivity(new Intent(mActivity, SettingsActivity.class));
                 return true;
         }
 
