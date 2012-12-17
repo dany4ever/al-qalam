@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -83,6 +84,8 @@ public class SurahActivity extends Activity {
         });*/
         // Display surah
         showData();
+
+        getActionBar().setHomeButtonEnabled(true);
     }
 
     private void resetData() {
@@ -186,7 +189,18 @@ public class SurahActivity extends Activity {
         }
 
         return null;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(this, QuranActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /*@Override

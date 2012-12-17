@@ -20,28 +20,31 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/QuranView"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/QuranView">
+    android:weightSum="1.0">
 
         <ListView
             android:id="@+id/SurahList"
             android:orientation="vertical"
-            android:layout_width="@dimen/width_surah_list"
+            android:layout_width="@dimen/width_zero_dp"
             android:layout_height="wrap_content"
-            android:scrollingCache="true" />
+            android:scrollingCache="true"
+            android:layout_weight="0.872" />
 
-        <View android:layout_width="@dimen/width_serparator"
+        <View android:layout_width="@dimen/width_zero_dp"
             android:layout_height="match_parent"
-            android:background="@color/separator" />
+            android:background="@color/separator"
+            android:layout_weight="0.003" />
 
         <ListView
             android:id="@+id/JuzList"
             android:orientation="vertical"
-            android:padding="@dimen/padding_default"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/width_zero_dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
-            android:scrollingCache="true" />
+            android:scrollingCache="true"
+            android:layout_weight="0.125" />
 </LinearLayout>
