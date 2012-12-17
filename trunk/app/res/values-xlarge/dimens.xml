@@ -18,12 +18,9 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-    <dimen name="padding_default">20dp</dimen>
+    <dimen name="text_arabic">26sp</dimen>
+    <dimen name="text_primary">22sp</dimen>
+    <dimen name="text_secondary">20sp</dimen>
 
-    <dimen name="text_arabic">24sp</dimen>
-    <dimen name="text_primary">20sp</dimen>
-    <dimen name="text_secondary">18sp</dimen>
-
-    <dimen name="width_surah_list">700dp</dimen>
     <dimen name="width_surah_number">64dp</dimen>
 </resources>

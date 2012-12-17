@@ -23,8 +23,7 @@
     android:layout_height="match_parent"
     android:gravity="left"
     android:id="@+id/QuranRow_Group"
-    android:background="@color/default_background"
-    android:padding="@dimen/padding_default">
+    android:background="@color/default_background">
 
     <TextView android:id="@+id/QuranRow_Order"
         android:layout_width="@dimen/width_surah_number"
@@ -47,15 +46,13 @@
             android:textStyle="bold"
             android:textColor="@color/default_text"
             android:textSize="@dimen/text_primary"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="@dimen/padding_default" />
+            android:gravity="left|center_vertical" />
 
         <TextView android:id="@+id/QuranRow_Info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/default_text"
             android:textSize="@dimen/text_secondary"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="@dimen/padding_default" />
+            android:gravity="left|center_vertical" />
     </LinearLayout>
 </LinearLayout>

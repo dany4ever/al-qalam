@@ -19,17 +19,19 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ayatRoot"
+    android:baselineAligned="false"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal|center_vertical">
+    android:gravity="center_horizontal|center_vertical"
+    android:weightSum="1.0">
 
     <LinearLayout android:id="@+id/ayatGroup"
         android:orientation="vertical"
-        android:layout_width="@dimen/width_surah_list"
+        android:layout_width="@dimen/width_zero_dp"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:paddingTop="@dimen/padding_default">
+        android:gravity="right|center_vertical"
+        android:layout_weight="0.85">
 
         <ImageView android:id="@+id/ayatBismillah"
             android:contentDescription="@string/basmala"
@@ -41,24 +43,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="@dimen/text_arabic"
-            android:gravity="right"
-            android:paddingLeft="@dimen/padding_default"
-            android:paddingRight="@dimen/padding_default" />
+            android:textSize="@dimen/text_arabic" />
 
         <TextView android:id="@+id/ayatTranslationText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textSize="@dimen/text_secondary"
-            android:padding="@dimen/padding_default" />
+            android:textSize="@dimen/text_secondary" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="@dimen/width_surah_number"
+        android:layout_width="@dimen/width_zero_dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="0.15">
 
         <TextView android:id="@+id/ayatOrder"
             android:layout_width="wrap_content"

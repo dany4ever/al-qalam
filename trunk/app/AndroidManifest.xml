@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2010 (c) Al-Qalam Project
+   Copyright 2012 (c) Al-Qalam Project
 
    This file is part of Al-Qalam (uz.efir.alqalam) package.
 
@@ -26,13 +26,13 @@
             android:icon="@drawable/icon"
             android:theme="@android:style/Theme.Holo.Light"
             android:allowBackup="false"><!-- TODO: allow users to backup their settings and bookmarks -->
-        <activity android:name=".QuranActivity" android:screenOrientation="portrait">
+        <activity android:name=".QuranActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SurahActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SurahActivity"/>
         <!-- activity android:name=".SettingsActivity" android:screenOrientation="portrait" />
         <activity android:name=".BookmarksActivity" android:screenOrientation="portrait" /-->
     </application>
