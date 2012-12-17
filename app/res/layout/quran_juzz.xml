@@ -19,10 +19,8 @@
 -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/juzzNumber"
-    android:layout_width="48dip"
-    android:layout_height="48dip"
-    android:textStyle="normal"
-    android:textSize="@dimen/text_juzz_number"
-    android:gravity="center"
-    android:paddingTop="2dip"
-    android:textColor="@color/default_text"  />
+    android:layout_width="@dimen/width_surah_number"
+    android:layout_height="@dimen/width_surah_number"
+    android:textColor="@color/default_text"
+    android:textSize="@dimen/text_primary"
+    android:gravity="center" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2010 (c) Al-Qalam Project
+   Copyright 2012 (c) Al-Qalam Project
 
    This file is part of Al-Qalam (uz.efir.alqalam) package.
 
@@ -17,75 +17,65 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/ayatRoot"
- 	android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:id="@+id/ayatRoot"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center_horizontal|center_vertical">
 
-    <LinearLayout android:orientation="vertical"
-    	android:layout_width="260dip"
-    	android:layout_height="fill_parent"
-   		android:gravity="left|center_vertical"
-   		android:id="@+id/ayatGroup"
-   		android:paddingTop="10dip">
+    <LinearLayout android:id="@+id/ayatGroup"
+        android:orientation="vertical"
+        android:layout_width="@dimen/width_surah_list"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/padding_default">
 
-   		 <ImageView android:id="@+id/ayatBismillah"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:paddingLeft="4pt" />
+        <ImageView android:id="@+id/ayatBismillah"
+            android:contentDescription="@string/basmala"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    	<!-- TextView android:id="@+id/ayatArabicText"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:padding="10dip"
-    		android:gravity="right"
-    		android:textColor="#222222"
-    		android:textSize="12pt" /-->
+        <TextView
+            android:id="@+id/ayatArabicText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_arabic"
+            android:gravity="right"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default" />
 
-		<TextView android:id="@+id/ayatArabicText"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    	 />
-
-    	<TextView android:id="@+id/ayatTranslationText"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:gravity="left"
-    		android:padding="10dip"
-    		android:textColor="#222222" />
-
+        <TextView android:id="@+id/ayatTranslationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/text_secondary"
+            android:padding="@dimen/padding_default" />
     </LinearLayout>
 
-     <!--  View android:id="@+id/surahRow_SepLine"
-	    	  android:layout_width="1dip"
-	    	  android:layout_height="match_parent"
-	    	  android:background="#EEEEEE"
-	    	  / -->
+    <LinearLayout
+        android:layout_width="@dimen/width_surah_number"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
 
-    <LinearLayout android:orientation="vertical"
-    	android:layout_width="60dip"
-    	android:layout_height="fill_parent"
-   		android:gravity="center_horizontal"
-   		android:paddingTop="10dip">
+        <TextView android:id="@+id/ayatOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ayah"
+            android:textColor="@color/default_text"
+            android:textSize="@dimen/text_primary"
+            android:gravity="center_horizontal|center_vertical" />
 
-    	<TextView android:id="@+id/ayatOrder"
-    		android:layout_width="45dip"
-    		android:layout_height="45dip"
-    		android:background="@drawable/ayah"
-    		android:text="286"
-    		android:textColor="@color/default_text"
-    		android:gravity="center_horizontal|center_vertical" />
+        <ImageView android:id="@+id/ayatSpecialImage"
+            android:contentDescription="@string/basmala"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    	<ImageView android:id="@+id/ayatSpecialImage"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content" />
-
-    	<ImageView android:id="@+id/ayatBookmarkImage"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content" />
-
+        <ImageView android:id="@+id/ayatBookmarkImage"
+            android:contentDescription="@string/bookmarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>
