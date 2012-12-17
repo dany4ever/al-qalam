@@ -18,7 +18,6 @@
  */
 package uz.efir.alqalam;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -30,22 +29,21 @@ import android.preference.Preference.OnPreferenceChangeListener;
 public class SettingsActivity extends PreferenceActivity {
 
     private SharedPreferences commonPrefs;
-    private SharedPreferences.Editor preferenceEditor;
 
-    private ListPreference translationOption, uiLocale;
-    private Context mContext;
+    private ListPreference translationOption;
+    //private ListPreference uiLocale;
+    //private Context mContext;
 
     @SuppressWarnings("deprecation")
     @Override
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            mContext = getApplicationContext();
+            //mContext = getApplicationContext();
 
             addPreferencesFromResource(R.layout.settings);
 
             commonPrefs = getSharedPreferences(Utils.SETTINGS_FILE, MODE_PRIVATE);
-            preferenceEditor = commonPrefs.edit();
 
             translationOption = (ListPreference) findPreference("key_translations");
             translationOption.setNegativeButtonText(R.string.btn_cancel);
@@ -54,8 +52,9 @@ public class SettingsActivity extends PreferenceActivity {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     int index = translationOption.findIndexOfValue(newValue.toString());
                     if (index != -1) {
-                        preferenceEditor.putInt(Utils.SETTINGS_TRANSLATION_OPTION_TITLE, index);
-                        preferenceEditor.commit();
+                        SharedPreferences.Editor editor = commonPrefs.edit();
+                        editor.putInt(Utils.SETTINGS_TRANSLATION_OPTION_TITLE, index);
+                        editor.commit();
                     }
                     return true;
                 }
@@ -70,8 +69,9 @@ public class SettingsActivity extends PreferenceActivity {
                     String locale = newValue.toString();
                     int index = uiLocale.findIndexOfValue(locale);
                     if (index != -1) {
-                        preferenceEditor.putInt(Utils.SETTINGS_UI_LOCALE_TITLE, index);
-                        preferenceEditor.commit();
+                        SharedPreferences.Editor editor = commonPrefs.edit();
+                        editor.putInt(Utils.SETTINGS_UI_LOCALE_TITLE, index);
+                        editor.commit();
                         Utils.updateUiLocale(mContext, locale);
                     }
                     finish();

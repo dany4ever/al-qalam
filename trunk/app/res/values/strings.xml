@@ -21,9 +21,8 @@
     <!-- Untranslatable strings; keep them all in this block -->
     <string name="app_name" translatable="false">Al-Qalam</string>
     <string name="app_description" translatable="false">Al-Qalam Islamic Software</string>
-    <color name="dark_red" translatable="false">#004b54</color>
-    <color name="light_blue" translatable="false">#e8f3f8</color>
 
+    <string name="basmala">Бисмиллаҳир роҳманир роҳим</string>
     <string name="initializing_database">Қуръон матни юкланмоқда\u2026</string>
     <string name="btn_confirm">Тасдиқ</string>
     <string name="btn_cancel">Бекор қилиш</string>
