@@ -30,6 +30,7 @@
         android:orientation="vertical"
         android:layout_width="@dimen/width_zero_dp"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/padding_default"
         android:gravity="right|center_vertical"
         android:layout_weight="0.85">
 
@@ -54,7 +55,7 @@
     <LinearLayout
         android:layout_width="@dimen/width_zero_dp"
         android:layout_height="match_parent"
-        android:gravity="center_vertical|center_horizontal"
+        android:gravity="center"
         android:orientation="vertical"
         android:layout_weight="0.15">
 
@@ -64,7 +65,7 @@
             android:background="@drawable/ayah"
             android:textColor="@color/default_text"
             android:textSize="@dimen/text_primary"
-            android:gravity="center_horizontal|center_vertical" />
+            android:gravity="center" />
 
         <ImageView android:id="@+id/ayatSpecialImage"
             android:contentDescription="@string/basmala"
