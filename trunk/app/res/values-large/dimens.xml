@@ -18,6 +18,8 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
+    <dimen name="padding_default">10dp</dimen>
+
     <dimen name="text_arabic">22sp</dimen>
     <dimen name="text_primary">18sp</dimen>
     <dimen name="text_secondary">16sp</dimen>

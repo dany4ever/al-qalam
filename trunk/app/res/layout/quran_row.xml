@@ -28,7 +28,8 @@
     <TextView android:id="@+id/QuranRow_Order"
         android:layout_width="@dimen/width_surah_number"
         android:layout_height="@dimen/width_surah_number"
-        android:textStyle="normal"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/default_text"
         android:textSize="@dimen/text_primary"
@@ -38,6 +39,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/padding_default"
         android:gravity="left">
 
         <TextView android:id="@+id/QuranRow_Title"
