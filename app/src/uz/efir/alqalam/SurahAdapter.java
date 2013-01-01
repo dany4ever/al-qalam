@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,9 +70,9 @@ public class SurahAdapter extends BaseAdapter {
             vHolder.AyatBismillah = (ImageView)convertView.findViewById(R.id.ayatBismillah);
             vHolder.AyatUzbek = (TextView) convertView.findViewById(R.id.ayatTranslationText);
             vHolder.AyatArabic = (TextView) convertView.findViewById(R.id.ayatArabicText);
-            // TODO: Add special font to Qur'an text
-            // Typeface tf = Typeface.createFromAsset(mContext.getAssets(),"fonts/IslamicFont.ttf");
-            // vHolder.AyatArabic.setTypeface(tf);
+            // TODO: Enable users to select preferred font.
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "me_quran_volt_newmet.ttf");
+            vHolder.AyatArabic.setTypeface(tf);
             vHolder.AyatBookmarkImage = (ImageView) convertView.findViewById(R.id.ayatBookmarkImage);
             vHolder.AyatSpecialImage = (ImageView) convertView.findViewById(R.id.ayatSpecialImage);
 
