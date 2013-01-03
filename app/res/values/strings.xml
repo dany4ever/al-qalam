@@ -29,6 +29,8 @@
     <string name="translation">Таржима</string>
     <string name="translation_language">Таржима тили</string>
     <string name="translation_language_summary">Қуръон маъноларининг таржима тилини танланг</string>
+    <string name="settings_full_screen">Тўлиқ экран режими</string>
+    <string name="settings_keep_screen_on">Экранни доим ёқиқ сақлаш</string>
     <string name="help">Ёрдам</string>
     <string name="info">Маълумот</string>
     <string name="bookmarks">Хатчўплар</string>

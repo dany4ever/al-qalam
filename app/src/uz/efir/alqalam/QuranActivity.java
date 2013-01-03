@@ -18,10 +18,16 @@
  */
 package uz.efir.alqalam;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -30,7 +36,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 
-public class QuranActivity extends Activity {
+public class QuranActivity extends AbstractSherlockFragmentActivity {
     private static final String IS_DB_INITIALIZED = "is_database_initialized";
     private Activity mActivity;
     private ListView gSurahList;
@@ -101,28 +107,28 @@ public class QuranActivity extends Activity {
         if (!prefs.getBoolean(IS_DB_INITIALIZED, false)) {
             new AsyncInitDatabase().execute();
         }
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(false);
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        MenuInflater menuInflater = getSupportMenuInflater();
+        menuInflater.inflate(R.menu.main, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        Log.i(Utils.GTAG, "onOptionsItemSelected: " + menuItem);
-        switch (menuItem.getItemId()) {
-            case R.id.bookmarks:
-                startActivity(new Intent(mActivity, BookmarksActivity.class));
-                return true;
-            case R.id.settings:
-                startActivity(new Intent(mActivity, SettingsActivity.class));
-                return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
         }
-
-        return false;
-    }*/
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * Initializes the Qur'an database in the background
@@ -149,7 +155,7 @@ public class QuranActivity extends Activity {
         @Override
         protected void onPostExecute(Void params){
             mAlQalamDatabase.close();
-            SharedPreferences prefs = getSharedPreferences(Utils.SETTINGS_FILE, MODE_PRIVATE);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             prefs.edit().putBoolean(IS_DB_INITIALIZED, true).commit();
             mProgressDialog.dismiss();
         }
