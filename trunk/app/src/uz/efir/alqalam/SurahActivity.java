@@ -18,20 +18,21 @@
  */
 package uz.efir.alqalam;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import java.util.Arrays;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.ListView;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
-public class SurahActivity extends Activity {
+public class SurahActivity extends AbstractSherlockFragmentActivity {
     //private static final String TAG = "SurahActivity";
     private String [] AYATSTRANS;
     private String [] AYATSARABIC;
@@ -85,12 +86,13 @@ public class SurahActivity extends Activity {
         });*/
         // Display surah
         showData();
-
-        getActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP, ActionBar.DISPLAY_HOME_AS_UP);
     }
 
     private void resetData() {
-        setTitle(mTitles[mSurahNumber]);
+        // Reset the action bar title
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(mTitles[mSurahNumber]);
 
         // create string arrays for verses
         AYATSTRANS = new String[Utils.SURAH_NUMBER_OF_AYATS[mSurahNumber]];
@@ -193,6 +195,14 @@ public class SurahActivity extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getSupportMenuInflater();
+        menuInflater.inflate(R.menu.main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case android.R.id.home:
@@ -200,33 +210,14 @@ public class SurahActivity extends Activity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
+            case R.id.menu_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-
-        switch (menuItem.getItemId()) {
-            case R.id.translation: //MENU_ITEM_TRANSLATION :
-                showDialog(DIALOG_TRANSLATION);
-                return true;
-        }
-
-        return false;
-   }
-
-
-    @Override
     protected Dialog onCreateDialog(int id) {
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
 

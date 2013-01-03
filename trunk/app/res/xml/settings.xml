@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2010 (c) Al-Qalam Project
+   Copyright 2013 (c) Al-Qalam Project
 
    This file is part of Al-Qalam (uz.efir.alqalam) package.
 
@@ -17,13 +17,13 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">
-   <ListPreference
-		android:key="key_translations"
-		android:title="@string/translation_language"
-		android:summary="@string/translation_language_summary"
-		android:entries="@array/translation_options"
-		android:entryValues="@array/translation_options"
-		android:dialogTitle="@string/translation" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="full_screen_enabled"
+        android:title="@string/settings_full_screen"
+        android:defaultValue="false" />
+    <CheckBoxPreference
+        android:key="keep_screen_on"
+        android:title="@string/settings_keep_screen_on"
+        android:defaultValue="false" />
 </PreferenceScreen>
