@@ -42,6 +42,7 @@
         <TextView android:id="@+id/ayatArabicText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:layout_marginBottom="@dimen/padding_default"
             android:layout_marginTop="@dimen/padding_default"
             android:textSize="@dimen/text_arabic" />
